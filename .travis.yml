@@ -7,4 +7,5 @@ install:
   - haxelib list
 script:
   - haxelib run munit
+  - haxelib run lime build html5
   - cd test ; haxelib run lime test neko
