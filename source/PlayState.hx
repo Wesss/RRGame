@@ -17,6 +17,6 @@ class PlayState extends FlxState
 	//TODO THIS IS FOR TESTING THE TEST FRAMEWORK, DELETE ME LATER
 	public function getTrue():Bool
 	{
-		return false;
+		return true;
 	}
 }
