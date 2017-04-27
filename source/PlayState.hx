@@ -13,4 +13,10 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 	}
+
+	//TODO THIS IS FOR TESTING THE TEST FRAMEWORK, DELETE ME LATER
+	public function getTrue():Bool
+	{
+		return false;
+	}
 }

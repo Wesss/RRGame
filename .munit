@@ -1,0 +1,6 @@
+version=2.1.2
+src=test
+bin=build
+report=report
+hxml=TESTING_USING_MUNIT_DIRECTLY_IS_DISABLED.hxml
+classPaths=source
