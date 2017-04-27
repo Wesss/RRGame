@@ -7,4 +7,4 @@ install:
   - haxelib list
 script:
   - haxelib run munit
-  - cd test ; lime test neko
+  - cd test ; haxelib run lime test neko
