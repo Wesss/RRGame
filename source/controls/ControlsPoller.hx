@@ -1,4 +1,6 @@
 package controls;
+import domain.VerticalDisplacement;
+import domain.HorizontalDisplacement;
 import flixel.FlxG;
 
 /**
@@ -12,6 +14,6 @@ class ControlsPoller {
 
     public function getMovementDirection():ControlsInput {
         // TODO
-        return null;
+        return new ControlsInput(HorizontalDisplacement.NONE, VerticalDisplacement.NONE);
     }
 }
