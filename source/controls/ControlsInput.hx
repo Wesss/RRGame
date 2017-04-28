@@ -14,4 +14,8 @@ class ControlsInput {
         this.horizontalDisplacement = horizontal;
         this.verticalDisplacement = vertical;
     }
+
+    public function toString():String {
+        return horizontalDisplacement + ", " + verticalDisplacement;
+    }
 }

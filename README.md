@@ -21,8 +21,10 @@ Everything else:
 The directory manual_test/ is for tests that cannot be verified programmatically (ie. painting)
 
 Each folder in this directory is its own haxe flixel game that interfaces with the component under test.
-As such, they each must contain a sym link to the original Project.xml in the root directory, the assets/ directory,
-and the source/AssetPaths.hx haxe class. Its Main can then be edited to run a Test as a flixel game.
+Each manual test has a symlink to a Project.xml that lives in manual_test/ . This Project.xml is a copy of the original
+Project.xml but with its Main class rerouted to TestMain. As such, **_ALL CHANGES MADE TO THE ORIGINAL Project.xml FILE
+MUST BE MADE TO manual_test/Project.xml_**. Sym links have also been made to assets/, source/, and AssetPaths to ensure
+compilation is identical to the original game.
 
 Create new test:
 1. copy the new-test-template directory and change its CHANGEME hex class to a new test.
