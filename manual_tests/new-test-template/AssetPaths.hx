@@ -1,0 +1,1 @@
+../../source/AssetPaths.hx

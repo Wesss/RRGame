@@ -1,7 +1,7 @@
 # RRGame
 A rhythm reaction game for the UW Games Capstone course.
 
-# Testing
+# Unit Testing
 We are testing using munit, configured to support flixel
 https://ashes999.github.io/learnhaxe/integration-testing-in-munit-with-haxeflixel.html
 
