@@ -13,7 +13,43 @@ class ControlsPoller {
     }
 
     public function getMovementDirection():ControlsInput {
-        // TODO
-        return new ControlsInput(HorizontalDisplacement.NONE, VerticalDisplacement.NONE);
+        var rightDisplacement = 0;
+        var downDisplacement = 0;
+        if (FlxG.keys.anyPressed([LEFT, A]))
+        {
+            rightDisplacement--;
+        }
+        if (FlxG.keys.anyPressed([RIGHT, D]))
+        {
+            rightDisplacement++;
+        }
+        if (FlxG.keys.anyPressed([UP, W]))
+        {
+            downDisplacement--;
+        }
+        if (FlxG.keys.anyPressed([DOWN, S]))
+        {
+            downDisplacement++;
+        }
+
+        var horDisplacement = null;
+        if (rightDisplacement == -1) {
+            horDisplacement = HorizontalDisplacement.LEFT;
+        } else if (rightDisplacement == 0) {
+            horDisplacement = HorizontalDisplacement.NONE;
+        } else if (rightDisplacement == 1) {
+            horDisplacement = HorizontalDisplacement.RIGHT;
+        }
+
+        var verDisplacement = null;
+        if (downDisplacement == -1) {
+            verDisplacement = VerticalDisplacement.UP;
+        } else if (downDisplacement == 0) {
+            verDisplacement = VerticalDisplacement.NONE;
+        } else if (downDisplacement == 1) {
+            verDisplacement = VerticalDisplacement.DOWN;
+        }
+
+        return new ControlsInput(horDisplacement, verDisplacement);
     }
 }
