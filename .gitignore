@@ -62,3 +62,4 @@ tests/unit/src/TestSuite.hx
 dump
 .vscode
 tests/RunTravis.n
+manual_test/manual_test_export
