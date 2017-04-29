@@ -31,8 +31,8 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export" />
-	<classpath name="source" />
-	<assets path="assets" />
+	<classpath name="../../source" />
+	<assets path="../../assets" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
