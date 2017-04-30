@@ -1,6 +1,6 @@
 package controls;
-import domain.VerticalDisplacement;
 import domain.HorizontalDisplacement;
+import domain.VerticalDisplacement;
 import flixel.FlxG;
 
 /**
