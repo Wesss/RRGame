@@ -1,5 +1,8 @@
 package start_menu;
 
+import flixel.FlxG;
+import hubworld.HubWorldState;
+import flixel.ui.FlxButton;
 import flixel.FlxState;
 
 /**
@@ -7,16 +10,23 @@ import flixel.FlxState;
  **/
 class StartMenuState extends FlxState
 {
+    private var startButton:FlxButton;
+
     override public function create():Void
     {
         super.create();
-        var text = new flixel.text.FlxText(0, 0, 0, "TODO start menu", 18);
-        text.screenCenter();
-        add(text);
+        startButton = new FlxButton(0, 0, "START", startGame);
+        startButton.screenCenter();
+        add(startButton);
     }
 
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
+    }
+
+    private function startGame()
+    {
+        FlxG.switchState(new HubWorldState());
     }
 }
