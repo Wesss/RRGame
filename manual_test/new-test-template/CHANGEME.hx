@@ -7,8 +7,6 @@ import flixel.FlxState;
 **/
 class CHANGEME extends FlxState
 {
-    // TODO write test
-
 	override public function create():Void
 	{
 		super.create();
