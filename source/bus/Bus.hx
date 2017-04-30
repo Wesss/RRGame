@@ -33,7 +33,6 @@ class Bus<T> {
     public function broadcast(event : T) {
         for (subscriber in subscribers) {
             subscriber.receive(event);
-            subscriber.
         }
     }
 
