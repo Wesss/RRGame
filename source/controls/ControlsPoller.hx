@@ -12,7 +12,7 @@ class ControlsPoller {
 
     }
 
-    public function getMovementDirection():ControlsInput {
+    public function getControlsInput():ControlsInput {
         var rightDisplacement = 0;
         var downDisplacement = 0;
         if (FlxG.keys.anyPressed([LEFT, A]))
