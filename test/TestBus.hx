@@ -24,6 +24,10 @@ class TestBus
 
 		Assert.areEqual(null, receiver.messageReceived);
 
+		bus.broadcast(0);
+
+		Assert.areEqual(10, receiver.messageReceived);
+
 		bus.subscribe(receiver);
 		bus.broadcast(10);
 
