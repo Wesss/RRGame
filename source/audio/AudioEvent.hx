@@ -1,5 +1,5 @@
 package audio;
-class MusicPlayer {
+class AudioEvent {
     public function new() {
     }
 }
