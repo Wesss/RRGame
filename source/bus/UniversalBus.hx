@@ -1,5 +1,7 @@
 package bus;
 
+import controls.ControlsInput;
+
 /**
  *  UniversalBus is a collection of different buses that are going to be used.
  *  The different buses are exposed via read-only properties of an instance of this class.
@@ -7,6 +9,8 @@ package bus;
 class UniversalBus {
     // Add different bus as properties to this class. See below for an example
     // public var intEvents(default, null):Bus<Int> = new Bus<Int>();
+
+    public var controlsEvents(default, null):Bus<ControlsInput> = new Bus<ControlsInput>();
 
     public function new() {
     }

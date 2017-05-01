@@ -15,6 +15,14 @@ class ControlsInput {
         this.verticalDisplacement = vertical;
     }
 
+    public function equals(other : ControlsInput) {
+        if (other == null) {
+            return false;
+        }
+
+        return other.horizontalDisplacement == horizontalDisplacement && other.verticalDisplacement == verticalDisplacement;
+    }
+
     public function toString():String {
         return horizontalDisplacement + ", " + verticalDisplacement;
     }
