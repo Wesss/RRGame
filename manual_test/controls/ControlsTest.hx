@@ -44,6 +44,7 @@ class TestControlsReceiver implements bus.Receiver<ControlsInput> {
     }
 
     public function receive(event : ControlsInput) {
+        trace(event);
         outputText.text = event.toString();
     }
 }
