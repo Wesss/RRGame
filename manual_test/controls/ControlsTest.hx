@@ -1,9 +1,9 @@
 package;
 
-import controls.ControlsInput;
 import bus.Bus.Receiver;
 import bus.UniversalBus;
 import controls.ControlsSystemTop;
+import domain.Displacement;
 import flixel.text.FlxText;
 import flixel.FlxState;
 
@@ -35,7 +35,7 @@ class ControlsTest extends FlxState
     }
 }
 
-class TestControlsReceiver implements bus.Receiver<ControlsInput> {
+class TestControlsReceiver implements Receiver<Displacement> {
 
     private var outputText:FlxText;
 
@@ -43,7 +43,7 @@ class TestControlsReceiver implements bus.Receiver<ControlsInput> {
         this.outputText = outputText;
     }
 
-    public function receive(event : ControlsInput) {
+    public function receive(event : Displacement) {
         trace(event);
         outputText.text = event.toString();
     }

@@ -2,6 +2,7 @@ package controls;
 
 import bus.Bus;
 import bus.UniversalBus;
+import domain.Displacement;
 import flixel.FlxBasic;
 
 /**
@@ -9,9 +10,9 @@ import flixel.FlxBasic;
  **/
 class ControlsSystemTop extends FlxBasic {
 
-    private var controlsBus:Bus<ControlsInput>;
+    private var controlsBus:Bus<Displacement>;
     private var controlsPoller:ControlsPoller;
-    private var previousPolledInput:ControlsInput;
+    private var previousPolledInput:Displacement;
 
     public function new(universalBus:UniversalBus) {
         super();

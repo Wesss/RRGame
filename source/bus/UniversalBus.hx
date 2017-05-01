@@ -1,6 +1,6 @@
 package bus;
 
-import controls.ControlsInput;
+import domain.Displacement;
 
 /**
  *  UniversalBus is a collection of different buses that are going to be used.
@@ -10,7 +10,7 @@ class UniversalBus {
     // Add different bus as properties to this class. See below for an example
     // public var intEvents(default, null):Bus<Int> = new Bus<Int>();
 
-    public var controlsEvents(default, null):Bus<ControlsInput> = new Bus<ControlsInput>();
+    public var controlsEvents(default, null):Bus<Displacement> = new Bus<Displacement>();
 
     public function new() {
     }
