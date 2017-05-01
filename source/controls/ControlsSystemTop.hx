@@ -11,15 +11,21 @@ class ControlsSystemTop extends FlxBasic {
 
     private var controlsBus:Bus<ControlsInput>;
     private var controlsPoller:ControlsPoller;
+    private var previousPolledInput:ControlsInput;
 
     public function new(universalBus:UniversalBus) {
         super();
         controlsBus = universalBus.controlsEvents;
         controlsPoller = new ControlsPoller();
+        previousPolledInput = null;
     }
 
     override public function update(elapsed:Float):Void {
         super.update(elapsed);
-        controlsBus.broadcast(controlsPoller.getControlsInput());
+        var newPolledInput = controlsPoller.getControlsInput();
+        if (!newPolledInput.equals(previousPolledInput)) {
+            controlsBus.broadcast(newPolledInput);
+            previousPolledInput = newPolledInput;
+        }
     }
 }
