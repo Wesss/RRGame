@@ -1,6 +1,7 @@
 package controls;
-import domain.VerticalDisplacement;
 import domain.HorizontalDisplacement;
+import domain.VerticalDisplacement;
+import domain.Displacement;
 import flixel.FlxG;
 
 /**
@@ -12,7 +13,7 @@ class ControlsPoller {
 
     }
 
-    public function getMovementDirection():ControlsInput {
+    public function getControlsInput() : Displacement {
         var rightDisplacement = 0;
         var downDisplacement = 0;
         if (FlxG.keys.anyPressed([LEFT, A]))
@@ -50,6 +51,6 @@ class ControlsPoller {
             verDisplacement = VerticalDisplacement.DOWN;
         }
 
-        return new ControlsInput(horDisplacement, verDisplacement);
+        return new Displacement(horDisplacement, verDisplacement);
     }
 }
