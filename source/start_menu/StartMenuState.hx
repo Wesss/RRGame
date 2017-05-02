@@ -1,6 +1,5 @@
 package start_menu;
 
-import flixel.util.FlxAxes;
 import flixel.FlxG;
 import hubworld.HubWorldState;
 import flixel.ui.FlxButton;
