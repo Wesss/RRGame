@@ -4,6 +4,4 @@
 	<include path="../Project.xml" />
 	<app title="RRGame" file="RRGame" main="TestMain" version="0.0.1" company="HaxeFlixel" />
 	<set name="BUILD_DIR" value="../manual_test_export" />
-	<classpath name="../source" />
-	<assets path="../assets" />
 </project>
