@@ -1,8 +1,7 @@
 package;
 
-import audio.MusicTrack;
-import audio.PlayMusicEvent;
 import audio.AudioEvent;
+import audio.MusicTrack;
 import flixel.FlxG;
 import flixel.text.FlxText;
 import audio.AudioSystemTop;
@@ -35,7 +34,7 @@ class AudioTest extends FlxState {
 
 		if (FlxG.keys.anyJustPressed([A])) {
 			// TODO broadcast an appropriate audio event
-			universalBus.audioEvents.broadcast(new PlayMusicEvent(MusicTrack.TEST_TRACK));
+			universalBus.audioEvents.broadcast(AudioEvent.newMusicEvent(MusicTrack.TEST_TRACK));
 		}
 	}
 }

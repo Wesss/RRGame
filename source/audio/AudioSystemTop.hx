@@ -14,7 +14,17 @@ class AudioSystemTop implements Receiver<AudioEvent> {
     }
 
     public function receive(event:AudioEvent) {
-        // TODO music must be in .ogg format
-        FlxG.sound.playMusic(AssetPaths.TestTrack__ogg, 1, true);
+        var soundAsset = null;
+        if (event.isMusicTrack()) {
+            switch (event.musicTrack) {
+                case MusicTrack.TEST_TRACK : soundAsset = AssetPaths.TestTrack__ogg;
+            }
+        } else if (event.isSoundEffect()) {
+            switch (event.soundEffect) {
+                default : //TODO delete after adding sound effects
+            }
+        }
+
+        FlxG.sound.playMusic(soundAsset, 1, true);
     }
 }
