@@ -1,7 +1,6 @@
 package;
 
-import audio.AudioEvent;
-import audio.MusicTrack;
+import domain.Displacement;
 import flixel.FlxG;
 import flixel.text.FlxText;
 import audio.AudioSystemTop;
@@ -23,7 +22,7 @@ class AudioTest extends FlxState {
 
 		audioSystemTop = new AudioSystemTop(universalBus);
 
-		var outputText = new FlxText(0, 0, 0, "Press A to play music", 20);
+		var outputText = new FlxText(0, 0, 0, "Press A to play player move sound-effect", 20);
 		outputText.screenCenter();
 		add(outputText);
 	}
@@ -33,8 +32,7 @@ class AudioTest extends FlxState {
 		super.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A])) {
-			// TODO broadcast an appropriate audio event
-			universalBus.audioEvents.broadcast(AudioEvent.newMusicEvent(MusicTrack.TEST_TRACK));
+			universalBus.controlsEvents.broadcast(new Displacement(NONE, NONE));
 		}
 	}
 }
