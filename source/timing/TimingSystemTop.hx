@@ -1,0 +1,18 @@
+package timing;
+
+import bus.Bus;
+import bus.UniversalBus;
+
+/**
+ * Responsible for the coordination between music playing and broadcasting when its beats occur
+ **/
+class TimingSystemTop {
+    // TODO may have to use flash/nme.events.SampleDataEvent for precise timing
+
+    private var beatEventBus:Bus<BeatEvent>;
+
+    public function new(universalBus:UniversalBus) {
+        beatEventBus = universalBus.beatEvents;
+        // TODO hook up to bus once level system is more fleshed out
+    }
+}

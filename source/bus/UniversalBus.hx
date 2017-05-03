@@ -1,5 +1,6 @@
 package bus;
 
+import timing.BeatEvent;
 import domain.Displacement;
 
 /**
@@ -9,6 +10,8 @@ import domain.Displacement;
 class UniversalBus {
 
     public var controlsEvents(default, null):Bus<Displacement> = new Bus<Displacement>();
+
+    public var beatEvents(default, null):Bus<BeatEvent> = new Bus<BeatEvent>();
 
     public function new() {}
 }
