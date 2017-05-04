@@ -16,7 +16,6 @@ class TimingSystemTop extends FlxBasic {
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
     private var songStartTimeMilis:Float;
-    private var nextBeatBroadcast:Int;
 
     public function new(universalBus:UniversalBus) {
         super();
@@ -24,7 +23,6 @@ class TimingSystemTop extends FlxBasic {
         milisecondsPerBeat = null;
         offsetMilis = null;
         songStartTimeMilis = null;
-        nextBeatBroadcast = -1;
         // TODO hook up to bus once level system is more fleshed out
     }
 
@@ -48,23 +46,15 @@ class TimingSystemTop extends FlxBasic {
      * If a song is playing, update our time and release beat events as appropriate
      **/
     override public function update(elapsed:Float):Void {
+        super.update(elapsed);
+
         // if song hasnt started, nothing to do
         if (songStartTimeMilis == null) {
             return;
         }
 
         var songTime = getCurrentTimeMilis() - songStartTimeMilis;
-        if (songTime >= milisecondsPerBeat * nextBeatBroadcast) {
-            beatEventBus.broadcast(new BeatEvent(nextBeatBroadcast));
-            nextBeatBroadcast++;
-        }
-    }
-
-    /**
-     * re-align the timing when we know for sure our place in the music
-     **/
-    public function updateMusicPlayhead():Void {
-
+        beatEventBus.broadcast(new BeatEvent(songTime / milisecondsPerBeat));
     }
 
     private static function getCurrentTimeMilis():Float {
