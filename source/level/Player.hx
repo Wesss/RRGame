@@ -15,9 +15,6 @@ class Player extends FlxSprite {
     public function controlEventHandler(event : domain.Displacement) {
         var targetX = (BoardCoordinates.displacementToX(event.horizontalDisplacement)) - width / 2;
         var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement)) - width / 2;
-        var distanceX = x - targetX;
-        var distanceY = y - targetY;
-        var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
         if (tween == null || tween.finished ) {
             tween = FlxTween.tween(this, {

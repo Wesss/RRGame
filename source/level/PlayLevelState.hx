@@ -1,7 +1,6 @@
 package level;
 
 import flixel.FlxState;
-import domain.*;
 
 class PlayLevelState extends FlxState
 {
