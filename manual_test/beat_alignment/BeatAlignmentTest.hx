@@ -26,6 +26,8 @@ class BeatAlignmentTest extends FlxState
 		audioSystemTop = new AudioSystemTop(universalBus);
 		timingSystemTop = new TimingSystemTop(universalBus);
 
+		universalBus.beatEvents.subscribe(this, receiveBeatEvent);
+
 		var message = "Press A to play music";
 		var outputText = new FlxText(0, 0, 0, message, 20);
 		outputMsg = new FlxText(50, 300, 0, "Music not started", 16);
@@ -42,11 +44,15 @@ class BeatAlignmentTest extends FlxState
 		if (FlxG.keys.anyJustPressed([A])) {
 			// TODO construct appropriate level and broadcast on an appropriate bus
 			audioSystemTop.loadMusicForLevel(null);
+			timingSystemTop.loadMusicInformation(135, 0);
 			audioSystemTop.playMusicForLevel(null);
+			timingSystemTop.trackSongStart();
 		}
 	}
 
 	public function receiveBeatEvent(event:BeatEvent):Void {
-		outputMsg.text = "" + event.beat;
+		outputMsg.text =
+				"beat: " + event.beat + "\n" +
+				"of 4: " + event.beat % 4;
 	}
 }
