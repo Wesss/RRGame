@@ -1,5 +1,6 @@
 package;
 
+import start_menu.StartMenuState;
 import flixel.FlxGame;
 import openfl.display.Sprite;
 import start_menu.StartMenuState;
