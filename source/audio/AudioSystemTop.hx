@@ -13,7 +13,7 @@ class AudioSystemTop {
     private var moveSound = FlxG.sound.load(AssetPaths.NFFsquirt02__wav);
 
     public function new(universalBus:UniversalBus) {
-        universalBus.controlsEvents.subscribe(playMovementSounds);
+        universalBus.controlsEvents.subscribe(this, playMovementSounds);
     }
 
     public function playMovementSounds(event:Displacement):Void {
