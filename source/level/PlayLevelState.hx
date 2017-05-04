@@ -1,6 +1,7 @@
 package level;
 
 import flixel.FlxState;
+import flixel.FlxG;
 
 class PlayLevelState extends FlxState
 {
@@ -17,8 +18,7 @@ class PlayLevelState extends FlxState
 		var player = new Player(unibus);
 		add(player);
 
-		flixel.FlxG.camera.focusOn(new flixel.math.FlxPoint(0, 0));
-
+		FlxG.camera.focusOn(new flixel.math.FlxPoint(0, 0));
 		super.create();
 	}
 
