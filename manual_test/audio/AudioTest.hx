@@ -33,6 +33,7 @@ class AudioTest extends FlxState {
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		audioSystemTop.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A])) {
 			universalBus.controlsEvents.broadcast(new Displacement(NONE, NONE));
