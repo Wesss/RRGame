@@ -7,6 +7,8 @@ A rhythm reaction game for the UW Games Capstone course.
 
 Here is our Trello: https://trello.com/b/iIid3sMX
 
+Here is our Wikipage: https://cubist.cs.washington.edu/GamesCapstone/index.php/RRGrid
+
 # Unit Testing
 We are testing using munit, configured to support flixel
 https://ashes999.github.io/learnhaxe/integration-testing-in-munit-with-haxeflixel.html
