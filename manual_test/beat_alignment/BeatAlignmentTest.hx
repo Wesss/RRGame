@@ -37,6 +37,7 @@ class BeatAlignmentTest extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		timingSystemTop.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A])) {
 			// TODO construct appropriate level and broadcast on an appropriate bus
