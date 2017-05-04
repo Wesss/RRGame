@@ -5,46 +5,37 @@ package bus;
  */
 @:generic
 class Bus<T> {
-    var subscribers = new Array<Receiver<T>>();
+    var subscribers = new Map<{}, (T) -> Void>();
 
     public function new() {
     }
     
     /**
-     *  Subscribes the given receiver to this bus.
-     *  Subscribers will receive all messages broadcasted on this bus.
+     *  Subscribes the given subscriber to this bus
+     *  Subscribers will be called through the callback for each message broadcasted on this bus.
      */
-    public function subscribe(receiver : Receiver<T>) {
-        subscribers.push(receiver);
+    public function subscribe(subscriber, callback : (T) -> Void) {
+        subscribers[subscriber] = callback;
     }
 
     /**
-     *  Removes the given subscriber from this bus.
-     *  The given subscriber will stop receiving all messages broadcasted on this bus.
+     *  Unsubscribes the given subscriber from this bus
+     *  The given subscriber won't be notified of events broadcasted on this bus anymore.
      */
-    public function unsubscribe(subscriber : Receiver<T>) {
+    public function unsubscribe(subscriber) {
         subscribers.remove(subscriber);
     }
 
     /**
-     *  Send the given event to all subscribers.
-     *  Has the effect of calling receive(event) on every subscriber
+     *  Send the given event to all subscribed functions.
      */
     public function broadcast(event : T) {
         for (subscriber in subscribers) {
-            subscriber.receive(event);
+            subscriber(event);
         }
     }
 
     public function toString():String {
         return "[" + Type.getClassName(Type.getClass(this)) + " Subscribers = " + subscribers + "]";
     }
-}
-
-@:generic
-interface Receiver<T> {
-    /**
-     *  Receive and handle the given event
-     */
-    public function receive(event : T):Void;
 }

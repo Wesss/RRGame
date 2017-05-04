@@ -28,7 +28,7 @@ class TestBus
 
 		Assert.areEqual(null, receiver.messageReceived);
 
-		bus.subscribe(receiver);
+		bus.subscribe(receiver, receiver.receive);
 		bus.broadcast(10);
 
 		Assert.areEqual(10, receiver.messageReceived);
@@ -41,7 +41,6 @@ class TestBus
 		bus.broadcast(30);
 
 		Assert.areEqual(20, receiver.messageReceived);
-		trace(bus);
 	}
 
 	@Test
@@ -53,13 +52,13 @@ class TestBus
 		Assert.areEqual(null, receiver1.messageReceived);
 		Assert.areEqual(null, receiver2.messageReceived);
 
-		bus.subscribe(receiver1);
+		bus.subscribe(receiver1, receiver1.receive);
 		bus.broadcast(10);
 
 		Assert.areEqual(10, receiver1.messageReceived);
 		Assert.areEqual(null, receiver2.messageReceived);
 
-		bus.subscribe(receiver2);
+		bus.subscribe(receiver2, receiver2.receive);
 		bus.broadcast(20);
 
 		Assert.areEqual(20, receiver1.messageReceived);
@@ -70,13 +69,12 @@ class TestBus
 
 		Assert.areEqual(20, receiver1.messageReceived);
 		Assert.areEqual(30, receiver2.messageReceived);
-		trace(bus);
 	}
 
 }
 
 @:generic
-class TestReceiver<T> implements Receiver<T> {
+class TestReceiver<T> {
 	public var messageReceived(default, null):Null<T>;
 
 	public function new() {
