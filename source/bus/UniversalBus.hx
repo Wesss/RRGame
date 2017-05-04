@@ -8,9 +8,10 @@ import domain.Displacement;
  */
 class UniversalBus {
     // Add different bus as properties to this class. See below for an example
-    // public var intEvents(default, null):Bus<Int> = new Bus<Int>();
+    // public var intEvents(default, null) = new Bus<Int>();
 
-    public var controlsEvents(default, null):Bus<Displacement> = new Bus<Displacement>();
+    public var controlsEvents(default, null) = new Bus<Displacement>();
+    public var playerMovedEvents(default, null) = new Bus<Displacement>();
 
     public function new() {
     }

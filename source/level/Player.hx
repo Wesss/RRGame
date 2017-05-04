@@ -1,34 +1,40 @@
 package level;
 
+import bus.UniversalBus;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
 class Player extends FlxSprite {
     var tween : FlxTween;
+    var targetX : Float;
+    var targetY : Float;
+    var uniBus : UniversalBus;
 
-    public function new(bus : bus.UniversalBus) {
+    public function new(bus : UniversalBus) {
         super(-150, -150, AssetPaths.Player__png);
-        bus.controlsEvents.subscribe(this, controlEventHandler);
+        targetX = 0;
+        targetY = 0;
+        uniBus = bus;
+        uniBus.controlsEvents.subscribe(this, controlEventHandler);
     }
 
     public function controlEventHandler(event : domain.Displacement) {
         var targetX = (BoardCoordinates.displacementToX(event.horizontalDisplacement)) - width / 2;
         var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement)) - width / 2;
 
-        if (tween == null || tween.finished ) {
-            tween = FlxTween.tween(this, {
-                x : targetX,
-                y : targetY
-            }, 0.1, { ease: FlxEase.quadInOut });
-        } else {
-            tween.then(FlxTween.tween(this, {
-                x : targetX,
-                y : targetY
-            }, 0.1, { ease: FlxEase.quadInOut }));
+        if (tween != null) {
+            tween.cancel();
         }
-        
-        
-        
+    
+        tween = FlxTween.tween(this, {
+            x : targetX,
+            y : targetY
+        }, 0.05, {
+            ease: FlxEase.quadInOut,
+            onComplete: function(tween) {
+                uniBus.playerMovedEvents.broadcast(event);
+            }
+        });
     }
 }
