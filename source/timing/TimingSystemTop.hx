@@ -41,7 +41,7 @@ class TimingSystemTop extends FlxBasic {
      * Start releasing beat events as a song starts playing
      **/
     public function trackSongStart():Void {
-        songStartTimeMilis = Date.now().getTime() + offsetMilis;
+        songStartTimeMilis = getCurrentTimeMilis() + offsetMilis;
     }
 
     /**
@@ -53,7 +53,7 @@ class TimingSystemTop extends FlxBasic {
             return;
         }
 
-        var songTime = Date.now().getTime() - songStartTimeMilis;
+        var songTime = getCurrentTimeMilis() - songStartTimeMilis;
         if (songTime >= milisecondsPerBeat * nextBeatBroadcast) {
             beatEventBus.broadcast(new BeatEvent(nextBeatBroadcast));
             nextBeatBroadcast++;
@@ -65,5 +65,9 @@ class TimingSystemTop extends FlxBasic {
      **/
     public function updateMusicPlayhead():Void {
 
+    }
+
+    private static function getCurrentTimeMilis():Float {
+        return haxe.Timer.stamp() * 1000;
     }
 }

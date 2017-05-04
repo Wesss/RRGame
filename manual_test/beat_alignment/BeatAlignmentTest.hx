@@ -44,7 +44,7 @@ class BeatAlignmentTest extends FlxState
 		if (FlxG.keys.anyJustPressed([A])) {
 			// TODO construct appropriate level and broadcast on an appropriate bus
 			audioSystemTop.loadMusicForLevel(null);
-			timingSystemTop.loadMusicInformation(135, 0);
+			timingSystemTop.loadMusicInformation(135, 444);
 			audioSystemTop.playMusicForLevel(null);
 			timingSystemTop.trackSongStart();
 		}
