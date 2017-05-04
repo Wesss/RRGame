@@ -19,6 +19,8 @@ class PlayLevelState extends FlxState
 		add(player);
 
 		FlxG.camera.focusOn(new flixel.math.FlxPoint(0, 0));
+		unibus.playerMovedEvents.subscribe(this, function(displacement) {FlxG.camera.shake(0.01, 0.1);});
+
 		super.create();
 	}
 
