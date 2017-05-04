@@ -6,8 +6,6 @@ import massive.munit.Assert;
 class TestBus
 {
 	private var bus:Bus<Int>;
-	private var method1LastReceivedInt:Int;
-	private var method2LastReceivedInt:Int;
 
 	public function new() 
 	{
@@ -17,55 +15,72 @@ class TestBus
 	public function setup():Void
 	{
 		bus = new Bus<Int>();
-		method1LastReceivedInt = null;
-		method2LastReceivedInt = null;
-	}
-
-	private function subscribeMethod1(event:Int):Void
-	{
-		method1LastReceivedInt = event;
-	}
-
-	private function subscribeMethod2(event:Int):Void
-	{
-		method2LastReceivedInt = event;
 	}
 	
 	@Test
 	public function testSingleReceiver():Void
 	{
-		Assert.areEqual(null, method1LastReceivedInt);
+		var receiver:TestReceiver<Int> = new TestReceiver<Int>();
+
+		Assert.areEqual(null, receiver.messageReceived);
 
 		bus.broadcast(0);
 
-		Assert.areEqual(null, method1LastReceivedInt);
+		Assert.areEqual(null, receiver.messageReceived);
 
-		bus.subscribe(subscribeMethod1);
+		bus.subscribe(receiver, receiver.receive);
 		bus.broadcast(10);
 
-		Assert.areEqual(10, method1LastReceivedInt);
+		Assert.areEqual(10, receiver.messageReceived);
 
 		bus.broadcast(20);
 
-		Assert.areEqual(20, method1LastReceivedInt);
+		Assert.areEqual(20, receiver.messageReceived);
+
+		bus.unsubscribe(receiver);
+		bus.broadcast(30);
+
+		Assert.areEqual(20, receiver.messageReceived);
 	}
 
 	@Test
 	public function testMultipleReceiver():Void
 	{
-		Assert.areEqual(null, method1LastReceivedInt);
-		Assert.areEqual(null, method2LastReceivedInt);
+		var receiver1 = new TestReceiver<Int>();
+		var receiver2 = new TestReceiver<Int>();
 
-		bus.subscribe(subscribeMethod1);
+		Assert.areEqual(null, receiver1.messageReceived);
+		Assert.areEqual(null, receiver2.messageReceived);
+
+		bus.subscribe(receiver1, receiver1.receive);
 		bus.broadcast(10);
 
-		Assert.areEqual(10, method1LastReceivedInt);
-		Assert.areEqual(null, method2LastReceivedInt);
+		Assert.areEqual(10, receiver1.messageReceived);
+		Assert.areEqual(null, receiver2.messageReceived);
 
-		bus.subscribe(subscribeMethod2);
+		bus.subscribe(receiver2, receiver2.receive);
 		bus.broadcast(20);
 
-		Assert.areEqual(20, method1LastReceivedInt);
-		Assert.areEqual(20, method2LastReceivedInt);
+		Assert.areEqual(20, receiver1.messageReceived);
+		Assert.areEqual(20, receiver2.messageReceived);
+
+		bus.unsubscribe(receiver1);
+		bus.broadcast(30);
+
+		Assert.areEqual(20, receiver1.messageReceived);
+		Assert.areEqual(30, receiver2.messageReceived);
+	}
+
+}
+
+@:generic
+class TestReceiver<T> {
+	public var messageReceived(default, null):Null<T>;
+
+	public function new() {
+	}
+
+	public function receive(event) {
+		messageReceived = event;
 	}
 }
