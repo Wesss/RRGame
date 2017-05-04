@@ -23,8 +23,8 @@ class AudioTest extends FlxState {
 		audioSystemTop = new AudioSystemTop(universalBus);
 
 		var message = "Press A to play player move sound-effect\n" +
-						"Press L to load level music\n" +
-						"Press M to play level music";
+		"Press L to load level music\n" +
+		"Press M to play level music";
 		var outputText = new FlxText(0, 0, 0, message, 20);
 		outputText.screenCenter();
 		add(outputText);
@@ -33,7 +33,6 @@ class AudioTest extends FlxState {
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		audioSystemTop.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A])) {
 			universalBus.controlsEvents.broadcast(new Displacement(NONE, NONE));

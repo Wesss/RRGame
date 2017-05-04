@@ -10,17 +10,16 @@ import bus.UniversalBus;
  * Top level module for controlling audio. Responsible for loading/playing of sounds.
  * This class is NOT responsible for any sort of precise timing or coordination
  **/
-class AudioSystemTop extends FlxBasic{
+class AudioSystemTop {
 
     private var moveSound = FlxG.sound.load(AssetPaths.NFFsquirt02__wav);
     private var musicForLevel:FlxSound;
     private var isPlayingMusic:Bool;
 
     public function new(universalBus:UniversalBus) {
-        super();
         musicForLevel = null;
         isPlayingMusic = false;
-        universalBus.controlsEvents.subscribe(playMovementSounds);
+        universalBus.controlsEvents.subscribe(this, playMovementSounds);
         // TODO hook up music loading/playing to appropriate busses
     }
 
@@ -56,9 +55,5 @@ class AudioSystemTop extends FlxBasic{
         }
         musicForLevel.play();
         isPlayingMusic = true;
-    }
-
-    override public function update(elapsed:Float):Void {
-        super.update(elapsed);
     }
 }
