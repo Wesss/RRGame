@@ -4,15 +4,15 @@ import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
-class Player extends FlxSprite implements bus.Bus.Receiver<domain.Displacement> {
+class Player extends FlxSprite {
     var tween : FlxTween;
 
     public function new(bus : bus.UniversalBus) {
         super(-150, -150, AssetPaths.Player__png);
-        bus.controlsEvents.subscribe(this);
+        bus.controlsEvents.subscribe(this, controlEventHandler);
     }
 
-    public function receive(event : domain.Displacement) {
+    public function controlEventHandler(event : domain.Displacement) {
         var targetX = (BoardCoordinates.displacementToX(event.horizontalDisplacement)) - width / 2;
         var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement)) - width / 2;
         var distanceX = x - targetX;
