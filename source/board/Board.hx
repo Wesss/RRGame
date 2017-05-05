@@ -4,7 +4,7 @@ import flixel.group.FlxSpriteGroup;
 import domain.*;
 
 class Board extends FlxSpriteGroup {
-    function new(xCenter : Float, yCenter : FLoat) {
+    function new(xCenter : Float, yCenter : Float) {
         super(xCenter, yCenter);
 
         for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
