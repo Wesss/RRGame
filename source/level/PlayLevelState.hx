@@ -1,6 +1,7 @@
 package level;
 
 import audio.AudioSystemTop;
+import bus.UniversalBus;
 import board.BoardSystemTop;
 import controls.ControlsSystemTop;
 import flixel.FlxState;
@@ -8,25 +9,36 @@ import flixel.FlxG;
 import flixel.math.FlxPoint;
 import timing.TimingSystemTop;
 
-class PlayLevelState extends FlxState
-{
-	override public function create():Void
-	{
-		var unibus = new bus.UniversalBus();
+class PlayLevelState extends FlxState {
+	private var levelData:LevelData;
 
-		var audioSystem = new AudioSystemTop(unibus);
-		add(new ControlsSystemTop(unibus));
-		add(new BoardSystemTop(0, 0, unibus));
-		add(new TimingSystemTop(unibus));
-
-		FlxG.camera.focusOn(new FlxPoint(0, 0));
-		unibus.playerMoved.subscribe(this, function(displacement) {FlxG.camera.shake(0.01, 0.1);});
-
-		super.create();
+	public function new(levelData:LevelData) {
+		super();
+		this.levelData = levelData;
 	}
 
-	override public function update(elapsed:Float):Void
-	{
+	override public function create():Void {
+		super.create();
+
+		var universalBus = new bus.UniversalBus();
+
+		// System initialization
+		var audioSystem = new AudioSystemTop(universalBus);
+		add(new ControlsSystemTop(universalBus));
+		add(new BoardSystemTop(0, 0, universalBus));
+		add(new TimingSystemTop(unibus));
+
+		var levelRunner = new LevelRunner(universalBus);
+
+		// Camera and camera shake
+		FlxG.camera.focusOn(new FlxPoint(0, 0));
+	 	universalBus.playerMoved.subscribe(this, function(displacement) {FlxG.camera.shake(0.01, 0.1);});
+		
+		levelRunner.runLevel(levelData);
+		// TODO hook up timing subsystems
+	}
+
+	override public function update(elapsed:Float):Void {
 		super.update(elapsed);
 	}
 }

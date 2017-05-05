@@ -1,5 +1,7 @@
 package;
 
+import level.LevelData;
+import level.LevelEvent;
 import domain.Displacement;
 import flixel.FlxG;
 import flixel.text.FlxText;
@@ -14,6 +16,7 @@ class AudioTest extends FlxState {
 
 	private var universalBus : UniversalBus;
 	private var audioSystemTop : AudioSystemTop;
+	private var mockLevelData : LevelData;
 
 	override public function create():Void
 	{
@@ -21,6 +24,8 @@ class AudioTest extends FlxState {
 		universalBus = new UniversalBus();
 
 		audioSystemTop = new AudioSystemTop(universalBus);
+
+		mockLevelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, null, null, null);
 
 		var message = "Press A to play player move sound-effect\n" +
 		"Press L to load level music\n" +
@@ -38,12 +43,12 @@ class AudioTest extends FlxState {
 			universalBus.controlsEvents.broadcast(new Displacement(NONE, NONE));
 		}
 		if (FlxG.keys.anyJustPressed([L])) {
-			// TODO switch to broadcasting appropriate message on bus
-			audioSystemTop.loadMusicForLevel(null);
+			// TODO pass in actual level object with music to test
+			universalBus.levelEvents.broadcast(new LevelEvent(LOAD, mockLevelData));
 		}
 		if (FlxG.keys.anyJustPressed([M])) {
-			// TODO switch to broadcasting appropriate message on bus
-			audioSystemTop.playMusicForLevel(null);
+			// TODO pass in actual level object with music to test
+			universalBus.levelEvents.broadcast(new LevelEvent(START, mockLevelData));
 		}
 	}
 }
