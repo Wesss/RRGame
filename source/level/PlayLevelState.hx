@@ -1,5 +1,6 @@
 package level;
 
+import audio.AudioSystemTop;
 import board.BoardSystemTop;
 import controls.ControlsSystemTop;
 import flixel.FlxState;
@@ -12,6 +13,7 @@ class PlayLevelState extends FlxState
 	{
 		var unibus = new bus.UniversalBus();
 
+		var audioSystem = new AudioSystemTop(unibus);
 		add(new ControlsSystemTop(unibus));
 		add(new BoardSystemTop(0, 0, unibus));
 
