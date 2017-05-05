@@ -11,7 +11,8 @@ class UniversalBus {
     // public var intEvents(default, null) = new Bus<Int>();
 
     public var controlsEvents(default, null) = new Bus<Displacement>();
-    public var playerMovedEvents(default, null) = new Bus<Displacement>();
+    public var playerStartMove(default, null) = new Bus<Displacement>();
+    public var playerMoved(default, null) = new Bus<Displacement>();
 
     public function new() {
     }

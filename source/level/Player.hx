@@ -20,6 +20,8 @@ class Player extends FlxSprite {
     }
 
     public function controlEventHandler(event : domain.Displacement) {
+        uniBus.playerStartMove.broadcast(event);
+
         var targetX = (BoardCoordinates.displacementToX(event.horizontalDisplacement)) - width / 2;
         var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement)) - width / 2;
 
@@ -33,7 +35,7 @@ class Player extends FlxSprite {
         }, 0.05, {
             ease: FlxEase.quadInOut,
             onComplete: function(tween) {
-                uniBus.playerMovedEvents.broadcast(event);
+                uniBus.playerMoved.broadcast(event);
             }
         });
     }
