@@ -13,6 +13,10 @@ class LevelData {
     public var songStartOffsetMilis(default, null):Int;
     public var trackActions(default, null):List<TrackAction>;
 
-    public function new() {
+    public function new(musicTrackAsset, bpm, songStartoffsetMilis, trackActions) {
+        this.musicTrack = musicTrackAsset;
+        this.bpm = bpm;
+        this.songStartOffsetMilis = songStartoffsetMilis;
+        this.trackActions = trackActions;
     }
 }
