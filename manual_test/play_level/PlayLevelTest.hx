@@ -1,9 +1,11 @@
 package;
 
+import domain.*;
 import level.LevelData;
 import level.PlayLevelState;
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.group.FlxSpriteGroup;
 
 /**
  * A manual test for verifying level playing functionality
@@ -14,8 +16,11 @@ class PlayLevelTest extends FlxState
 	{
 		super.create();
 		// TODO create level data and pass in to run the level
-		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, 135, 444, null);
-		FlxG.switchState(new PlayLevelState(levelData));
+		var trackGroup = new FlxSpriteGroup();
+		var slider = new track_action.SliderThreat(10, 135, new Displacement(HorizontalDisplacement.RIGHT, VerticalDisplacement.DOWN));
+		trackGroup.add(slider);
+		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, 135, 444, [slider]);
+		FlxG.switchState(new PlayLevelState(levelData, trackGroup));
 	}
 
 	override public function update(elapsed:Float):Void

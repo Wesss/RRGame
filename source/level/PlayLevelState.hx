@@ -7,14 +7,17 @@ import controls.ControlsSystemTop;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.group.FlxSpriteGroup;
 import timing.TimingSystemTop;
 
 class PlayLevelState extends FlxState {
 	private var levelData:LevelData;
+	private var trackGroup:FlxSpriteGroup;
 
-	public function new(levelData:LevelData) {
+	public function new(levelData:LevelData, trackGroup:FlxSpriteGroup) {
 		super();
 		this.levelData = levelData;
+		this.trackGroup = trackGroup;
 	}
 
 	override public function create():Void {
@@ -27,6 +30,9 @@ class PlayLevelState extends FlxState {
 		add(new ControlsSystemTop(universalBus));
 		add(new BoardSystemTop(0, 0, universalBus));
 		add(new TimingSystemTop(universalBus));
+		
+		add(trackGroup);
+		//universalBus.beat.subscribe({}, function(beat) {trace(beat.beat); });
 
 		var levelRunner = new LevelRunner(universalBus);
 

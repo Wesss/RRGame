@@ -20,6 +20,7 @@ class LevelRunner {
     public function new(universalBus:UniversalBus):Void {
         this.levelEventBus = universalBus.level;
         universalBus.beat.subscribe(this, beatHandler);
+        actions = [];
     }
 
     /**
