@@ -18,7 +18,7 @@ class AudioSystemTop {
     public function new(universalBus:UniversalBus) {
         musicForLevel = null;
         isPlayingMusic = false;
-        universalBus.controlsEvents.subscribe(this, playMovementSounds);
+        universalBus.controls.subscribe(this, playMovementSounds);
         // TODO hook up music loading/playing to appropriate busses
     }
 
