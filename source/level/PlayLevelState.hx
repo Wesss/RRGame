@@ -1,15 +1,24 @@
 package level;
 
+import board.BoardSystemTop;
+import controls.ControlsSystemTop;
 import flixel.FlxState;
+import flixel.FlxG;
+import flixel.math.FlxPoint;
 
 class PlayLevelState extends FlxState
 {
 	override public function create():Void
 	{
+		var unibus = new bus.UniversalBus();
+
+		add(new ControlsSystemTop(unibus));
+		add(new BoardSystemTop(0, 0, unibus));
+
+		FlxG.camera.focusOn(new FlxPoint(0, 0));
+		unibus.playerMoved.subscribe(this, function(displacement) {FlxG.camera.shake(0.01, 0.1);});
+
 		super.create();
-		var text = new flixel.text.FlxText(0, 0, 0, "TODO level state", 18);
-		text.screenCenter();
-		add(text);
 	}
 
 	override public function update(elapsed:Float):Void
