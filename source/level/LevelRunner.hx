@@ -19,6 +19,12 @@ class LevelRunner {
      * starts executing the given level
      **/
     public function runLevel(levelData:LevelData) {
-        // TODO
+        if (isRunningLevel) {
+            throw "Error: a level is currently running";
+        }
+
+        isRunningLevel = true;
+        levelEventBus.broadcast(new LevelEvent(LOAD, levelData));
+        levelEventBus.broadcast(new LevelEvent(START, levelData));
     }
 }

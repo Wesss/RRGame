@@ -1,5 +1,7 @@
 package level;
 
+import track_action.TrackAction;
+
 /**
  * Represents all of the data needed to run a level of the game
  **/
