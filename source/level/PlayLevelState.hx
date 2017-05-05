@@ -11,6 +11,7 @@ import timing.TimingSystemTop;
 
 class PlayLevelState extends FlxState {
 	private var levelData:LevelData;
+	private var timingSystemTop:TimingSystemTop;
 
 	public function new(levelData:LevelData) {
 		super();
@@ -23,10 +24,11 @@ class PlayLevelState extends FlxState {
 		var universalBus = new bus.UniversalBus();
 
 		// System initialization
-		var audioSystem = new AudioSystemTop(universalBus);
+		new AudioSystemTop(universalBus);
 		add(new ControlsSystemTop(universalBus));
 		add(new BoardSystemTop(0, 0, universalBus));
-		add(new TimingSystemTop(universalBus));
+		timingSystemTop = new TimingSystemTop(universalBus);
+		add(timingSystemTop);
 
 		var levelRunner = new LevelRunner(universalBus);
 
@@ -35,10 +37,17 @@ class PlayLevelState extends FlxState {
 	 	universalBus.playerMoved.subscribe(this, function(displacement) {FlxG.camera.shake(0.01, 0.1);});
 		
 		levelRunner.runLevel(levelData);
-		// TODO hook up timing subsystems
 	}
 
 	override public function update(elapsed:Float):Void {
 		super.update(elapsed);
+	}
+
+	override public function onFocus() {
+//		timingSystemTop.onPause();
+	}
+
+	override public function onFocusLost() {
+//		timingSystemTop.onResume();
 	}
 }

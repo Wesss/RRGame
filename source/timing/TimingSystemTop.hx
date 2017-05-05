@@ -18,6 +18,7 @@ class TimingSystemTop extends FlxBasic {
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
     private var songStartTimeMilis:Float;
+    private var pauseTimeMilis:Float;
 
     public function new(universalBus:UniversalBus) {
         super();
@@ -25,6 +26,7 @@ class TimingSystemTop extends FlxBasic {
         milisecondsPerBeat = null;
         offsetMilis = null;
         songStartTimeMilis = null;
+        pauseTimeMilis = null;
 
         universalBus.level.subscribe(this, switchLevelState);
     }
@@ -67,6 +69,14 @@ class TimingSystemTop extends FlxBasic {
 
         var songTime = getCurrentTimeMilis() - songStartTimeMilis;
         beatEventBus.broadcast(new BeatEvent(songTime / milisecondsPerBeat));
+    }
+
+    public function pause():Void {
+        pauseTimeMilis = getCurrentTimeMilis();
+    }
+
+    public function resume():Void {
+        songStartTimeMilis += getCurrentTimeMilis() - pauseTimeMilis;
     }
 
     private static function getCurrentTimeMilis():Float {
