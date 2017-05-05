@@ -1,12 +1,12 @@
 package timing;
 
-import flixel.system.FlxSound;
-import flixel.FlxG;
-import level.LevelData;
-import level.LevelEvent;
-import flixel.FlxBasic;
+import haxe.Timer;
 import bus.Bus;
 import bus.UniversalBus;
+import flixel.FlxBasic;
+import flixel.system.FlxSound;
+import level.LevelData;
+import level.LevelEvent;
 
 /**
  * Responsible for the coordination between music playing and broadcasting when its beats occur
@@ -20,6 +20,8 @@ class TimingSystemTop extends FlxBasic {
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
     private var music:FlxSound;
+    private var prevMusicHead:Float;
+    private var prevMusicStamp:Float;
 
     public function new(universalBus:UniversalBus) {
         super();
@@ -27,6 +29,8 @@ class TimingSystemTop extends FlxBasic {
         milisecondsPerBeat = null;
         offsetMilis = null;
         music = null;
+        prevMusicHead = 0;
+        prevMusicStamp = 0;
 
         universalBus.level.subscribe(this, switchLevelState);
         universalBus.musicStart.subscribe(this, trackSongStart);
@@ -55,6 +59,7 @@ class TimingSystemTop extends FlxBasic {
      **/
     public function trackSongStart(music:FlxSound):Void {
         this.music = music;
+        this.prevMusicHead = null;
     }
 
     /**
@@ -68,8 +73,15 @@ class TimingSystemTop extends FlxBasic {
             return;
         }
 
-        var songTime = music.time;
-        beatEventBus.broadcast(new BeatEvent(songTime / milisecondsPerBeat));
+        var curStamp = haxe.Timer.stamp() * 1000;
+        if (prevMusicHead != music.time) {
+            prevMusicHead = music.time;
+            prevMusicStamp = curStamp;
+        }
+
+        var curBeat = (prevMusicHead + ((curStamp) - prevMusicStamp) - offsetMilis) / milisecondsPerBeat;
+        trace(curBeat);
+        beatEventBus.broadcast(new BeatEvent(curBeat));
     }
 
     public function pause():Void {
