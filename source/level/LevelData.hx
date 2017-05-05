@@ -11,7 +11,7 @@ class LevelData {
     public var musicTrack(default, null):FlxSoundAsset;
     public var bpm(default, null):Int;
     public var songStartOffsetMilis(default, null):Int;
-    public var trackActions(default, null):List<TrackAction>;
+    public var trackActions(default, null):Array<TrackAction>;
 
     public function new(musicTrackAsset, bpm, songStartoffsetMilis, trackActions) {
         this.musicTrack = musicTrackAsset;
