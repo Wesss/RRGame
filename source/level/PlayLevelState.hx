@@ -9,6 +9,7 @@ class PlayLevelState extends FlxState
 	private var levelData:LevelData;
 
 	public function new(levelData:LevelData) {
+		super();
 		this.levelData = levelData;
 	}
 
