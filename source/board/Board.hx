@@ -1,4 +1,4 @@
-package level;
+package board;
 
 import flixel.group.FlxSpriteGroup;
 import domain.*;
