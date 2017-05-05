@@ -16,7 +16,7 @@ class ControlsSystemTop extends FlxBasic {
 
     public function new(universalBus:UniversalBus) {
         super();
-        controlsBus = universalBus.controlsEvents;
+        controlsBus = universalBus.controls;
         controlsPoller = new ControlsPoller();
         previousPolledInput = null;
     }

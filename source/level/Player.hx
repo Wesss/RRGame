@@ -16,7 +16,7 @@ class Player extends FlxSprite {
         targetX = 0;
         targetY = 0;
         uniBus = bus;
-        uniBus.controlsEvents.subscribe(this, controlEventHandler);
+        uniBus.controls.subscribe(this, controlEventHandler);
     }
 
     public function controlEventHandler(event : domain.Displacement) {
