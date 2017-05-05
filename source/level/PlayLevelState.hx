@@ -6,6 +6,7 @@ import controls.ControlsSystemTop;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import timing.TimingSystemTop;
 
 class PlayLevelState extends FlxState
 {
@@ -16,6 +17,7 @@ class PlayLevelState extends FlxState
 		var audioSystem = new AudioSystemTop(unibus);
 		add(new ControlsSystemTop(unibus));
 		add(new BoardSystemTop(0, 0, unibus));
+		add(new TimingSystemTop(unibus));
 
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
 		unibus.playerMoved.subscribe(this, function(displacement) {FlxG.camera.shake(0.01, 0.1);});

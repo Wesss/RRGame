@@ -19,7 +19,7 @@ class TimingSystemTop extends FlxBasic {
 
     public function new(universalBus:UniversalBus) {
         super();
-        beatEventBus = universalBus.beatEvents;
+        beatEventBus = universalBus.beat;
         milisecondsPerBeat = null;
         offsetMilis = null;
         songStartTimeMilis = null;

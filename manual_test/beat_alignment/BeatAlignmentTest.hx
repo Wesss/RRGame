@@ -26,7 +26,7 @@ class BeatAlignmentTest extends FlxState
 		audioSystemTop = new AudioSystemTop(universalBus);
 		timingSystemTop = new TimingSystemTop(universalBus);
 
-		universalBus.beatEvents.subscribe(this, receiveBeatEvent);
+		universalBus.beat.subscribe(this, receiveBeatEvent);
 
 		var message = "Press A to play music";
 		var outputText = new FlxText(0, 0, 0, message, 20);
@@ -48,6 +48,16 @@ class BeatAlignmentTest extends FlxState
 			audioSystemTop.playMusicForLevel(null);
 			timingSystemTop.trackSongStart();
 		}
+	}
+
+	override public function onFocus():Void {
+		super.onFocus();
+		trace("Focus get!");
+	}
+
+	override public function onFocusLost():Void {
+		super.onFocusLost();
+		trace("Focus lost!");
 	}
 
 	public function receiveBeatEvent(event:BeatEvent):Void {
