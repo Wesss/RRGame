@@ -12,7 +12,7 @@ class LevelRunner {
     private var isRunningLevel = false;
 
     public function new(universalBus:UniversalBus):Void {
-        this.levelEventBus = universalBus.levelEvents;
+        this.levelEventBus = universalBus.level;
     }
 
     /**

@@ -8,10 +8,14 @@ import domain.Displacement;
  *  The different buses are exposed via read-only properties of an instance of this class.
  */
 class UniversalBus {
+    // Add different bus as properties to this class. See below for an example
+    // public var intEvents(default, null) = new Bus<Int>();
 
-    public var controlsEvents(default, null):Bus<Displacement> = new Bus<Displacement>();
+    public var controls(default, null) = new Bus<Displacement>();
+    public var playerStartMove(default, null) = new Bus<Displacement>();
+    public var playerMoved(default, null) = new Bus<Displacement>();
 
-    public var levelEvents(default, null):Bus<LevelEvent> = new Bus<LevelEvent>();
+    public var level(default, null):Bus<LevelEvent> = new Bus<LevelEvent>();
 
     public function new() {}
 }

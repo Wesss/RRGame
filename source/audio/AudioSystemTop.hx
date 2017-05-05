@@ -20,8 +20,9 @@ class AudioSystemTop {
     public function new(universalBus:UniversalBus) {
         musicForLevel = null;
         isPlayingMusic = false;
-        universalBus.controlsEvents.subscribe(this, playMovementSounds);
-        universalBus.levelEvents.subscribe(this, switchLevelState);
+
+        universalBus.controls.subscribe(this, playMovementSounds);
+        universalBus.level.subscribe(this, switchLevelState);
     }
 
     public function playMovementSounds(event:Displacement):Void {
