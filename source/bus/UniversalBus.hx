@@ -1,5 +1,6 @@
 package bus;
 
+import timing.BeatEvent;
 import domain.Displacement;
 
 /**
@@ -13,6 +14,8 @@ class UniversalBus {
     public var controls(default, null) = new Bus<Displacement>();
     public var playerStartMove(default, null) = new Bus<Displacement>();
     public var playerMoved(default, null) = new Bus<Displacement>();
+
+    public var beatEvents(default, null):Bus<BeatEvent> = new Bus<BeatEvent>();
 
     public function new() {}
 }

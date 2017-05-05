@@ -1,6 +1,7 @@
 package audio;
 
 import flixel.system.FlxSound;
+import flixel.FlxBasic;
 import flixel.FlxG;
 import domain.Displacement;
 import bus.UniversalBus;
