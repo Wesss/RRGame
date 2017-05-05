@@ -1,5 +1,7 @@
 package timing;
 
+import flixel.system.FlxSound;
+import flixel.FlxG;
 import level.LevelData;
 import level.LevelEvent;
 import flixel.FlxBasic;
@@ -17,24 +19,23 @@ class TimingSystemTop extends FlxBasic {
     private var beatEventBus:Bus<BeatEvent>;
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
-    private var songStartTimeMilis:Float;
-    private var pauseTimeMilis:Float;
+    private var music:FlxSound;
 
     public function new(universalBus:UniversalBus) {
         super();
         beatEventBus = universalBus.beat;
         milisecondsPerBeat = null;
         offsetMilis = null;
-        songStartTimeMilis = null;
-        pauseTimeMilis = null;
+        music = null;
 
         universalBus.level.subscribe(this, switchLevelState);
+        universalBus.musicStart.subscribe(this, trackSongStart);
     }
 
     public function switchLevelState(event:LevelEvent):Void {
         switch (event.levelState) {
             case LOAD: loadMusicInformation(event.levelData);
-            case START: trackSongStart(event.levelData);
+            case START:
             case WIN:
             case LOSE:
         }
@@ -52,8 +53,8 @@ class TimingSystemTop extends FlxBasic {
     /**
      * Start releasing beat events as a song starts playing
      **/
-    public function trackSongStart(levelData):Void {
-        songStartTimeMilis = getCurrentTimeMilis() + offsetMilis;
+    public function trackSongStart(music:FlxSound):Void {
+        this.music = music;
     }
 
     /**
@@ -63,23 +64,19 @@ class TimingSystemTop extends FlxBasic {
         super.update(elapsed);
 
         // if song hasnt started, nothing to do
-        if (songStartTimeMilis == null) {
+        if (music == null) {
             return;
         }
 
-        var songTime = getCurrentTimeMilis() - songStartTimeMilis;
+        var songTime = music.time;
         beatEventBus.broadcast(new BeatEvent(songTime / milisecondsPerBeat));
     }
 
     public function pause():Void {
-        pauseTimeMilis = getCurrentTimeMilis();
+        trace("pause");
     }
 
     public function resume():Void {
-        songStartTimeMilis += getCurrentTimeMilis() - pauseTimeMilis;
-    }
-
-    private static function getCurrentTimeMilis():Float {
-        return haxe.Timer.stamp() * 1000;
+        trace("resume");
     }
 }

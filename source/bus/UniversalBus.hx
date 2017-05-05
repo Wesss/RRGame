@@ -1,5 +1,6 @@
 package bus;
 
+import flixel.system.FlxSound;
 import timing.BeatEvent;
 import level.LevelEvent;
 import domain.Displacement;
@@ -16,8 +17,8 @@ class UniversalBus {
     public var playerStartMove(default, null) = new Bus<Displacement>();
     public var playerMoved(default, null) = new Bus<Displacement>();
     public var beat(default, null):Bus<BeatEvent> = new Bus<BeatEvent>();
-
     public var level(default, null):Bus<LevelEvent> = new Bus<LevelEvent>();
+    public var musicStart(default, null):Bus<FlxSound> = new Bus<FlxSound>();
 
     public function new() {}
 }

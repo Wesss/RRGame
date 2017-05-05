@@ -1,5 +1,6 @@
 package audio;
 
+import bus.Bus;
 import level.LevelData;
 import level.LevelEvent;
 import flixel.system.FlxSound;
@@ -14,11 +15,13 @@ import bus.UniversalBus;
  **/
 class AudioSystemTop {
 
+    private var musicBus:Bus<FlxSound>;
     private var moveSound = FlxG.sound.load(AssetPaths.NFFsquirt02__wav);
     private var musicForLevel:FlxSound;
     private var isPlayingMusic:Bool;
 
     public function new(universalBus:UniversalBus) {
+        musicBus = universalBus.musicStart;
         musicForLevel = null;
         isPlayingMusic = false;
 
@@ -67,5 +70,6 @@ class AudioSystemTop {
         }
         musicForLevel.play();
         isPlayingMusic = true;
+        musicBus.broadcast(musicForLevel);
     }
 }
