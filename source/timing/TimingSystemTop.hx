@@ -1,5 +1,7 @@
 package timing;
 
+import level.LevelData;
+import level.LevelEvent;
 import flixel.FlxBasic;
 import bus.Bus;
 import bus.UniversalBus;
@@ -23,22 +25,32 @@ class TimingSystemTop extends FlxBasic {
         milisecondsPerBeat = null;
         offsetMilis = null;
         songStartTimeMilis = null;
-        // TODO hook up to bus once level system is more fleshed out
+
+        universalBus.level.subscribe(this, switchLevelState);
+    }
+
+    public function switchLevelState(event:LevelEvent):Void {
+        switch (event.levelState) {
+            case LOAD: loadMusicInformation(event.levelData);
+            case START: trackSongStart(event.levelData);
+            case WIN:
+            case LOSE:
+        }
     }
 
     /**
      * Save information on the music that is about to be played
      **/
-    public function loadMusicInformation(bpm:Int, offsetMilis:Float):Void {
+    public function loadMusicInformation(levelData:LevelData):Void {
         // TODO change to take in level load event and hook up to bus
-        this.milisecondsPerBeat = MILISECONDS_PER_MINUTE / bpm;
-        this.offsetMilis = offsetMilis;
+        this.milisecondsPerBeat = MILISECONDS_PER_MINUTE / levelData.bpm;
+        this.offsetMilis = levelData.songStartOffsetMilis;
     }
 
     /**
      * Start releasing beat events as a song starts playing
      **/
-    public function trackSongStart():Void {
+    public function trackSongStart(levelData):Void {
         songStartTimeMilis = getCurrentTimeMilis() + offsetMilis;
     }
 

@@ -1,5 +1,7 @@
 package;
 
+import level.LevelData;
+import level.LevelEvent;
 import timing.BeatEvent;
 import flixel.FlxG;
 import flixel.text.FlxText;
@@ -42,11 +44,9 @@ class BeatAlignmentTest extends FlxState
 		timingSystemTop.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A])) {
-			// TODO construct appropriate level and broadcast on an appropriate bus
-			audioSystemTop.loadMusicForLevel(null);
-			timingSystemTop.loadMusicInformation(135, 444);
-			audioSystemTop.playMusicForLevel(null);
-			timingSystemTop.trackSongStart();
+			var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, 135, 444, null);
+			universalBus.level.broadcast(new LevelEvent(LOAD, levelData));
+			universalBus.level.broadcast(new LevelEvent(START, levelData));
 		}
 	}
 
