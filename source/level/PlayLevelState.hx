@@ -26,7 +26,7 @@ class PlayLevelState extends FlxState {
 		var audioSystem = new AudioSystemTop(universalBus);
 		add(new ControlsSystemTop(universalBus));
 		add(new BoardSystemTop(0, 0, universalBus));
-		add(new TimingSystemTop(unibus));
+		add(new TimingSystemTop(universalBus));
 
 		var levelRunner = new LevelRunner(universalBus);
 
