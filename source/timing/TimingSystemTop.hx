@@ -12,7 +12,6 @@ import level.LevelEvent;
  * Responsible for the coordination between music playing and broadcasting when its beats occur
  **/
 class TimingSystemTop extends FlxBasic {
-    // TODO may have to use flash/nme.events.SampleDataEvent for precise timing
 
     public static inline var MILISECONDS_PER_MINUTE = 60000.0;
 
@@ -22,7 +21,7 @@ class TimingSystemTop extends FlxBasic {
     private var music:FlxSound;
     private var prevMusicHead:Float;
     private var prevMusicStamp:Float;
-//    private var wasPaused:Float;
+    private var wasPausedSinceLastMusicHeadUpdate:Bool;
 
     public function new(universalBus:UniversalBus) {
         super();
@@ -32,6 +31,7 @@ class TimingSystemTop extends FlxBasic {
         music = null;
         prevMusicHead = 0;
         prevMusicStamp = 0;
+        wasPausedSinceLastMusicHeadUpdate = false;
 
         universalBus.level.subscribe(this, switchLevelState);
         universalBus.musicStart.subscribe(this, trackSongStart);
@@ -78,14 +78,17 @@ class TimingSystemTop extends FlxBasic {
         if (prevMusicHead != music.time) {
             prevMusicHead = music.time;
             prevMusicStamp = curStamp;
+            wasPausedSinceLastMusicHeadUpdate = false;
         }
 
-        var curBeat = (prevMusicHead + ((curStamp) - prevMusicStamp) - offsetMilis) / milisecondsPerBeat;
-        trace(curBeat);
-        beatEventBus.broadcast(new BeatEvent(curBeat));
+        if (!wasPausedSinceLastMusicHeadUpdate) {
+            var curBeat = (prevMusicHead + ((curStamp) - prevMusicStamp) - offsetMilis) / milisecondsPerBeat;
+            trace(curBeat);
+            beatEventBus.broadcast(new BeatEvent(curBeat));
+        }
     }
 
     public function pause():Void {
-        trace("pause");
+        wasPausedSinceLastMusicHeadUpdate = true;
     }
 }
