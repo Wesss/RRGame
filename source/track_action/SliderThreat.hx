@@ -21,7 +21,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
               AssetPaths.BoardSquare__png);
 
         visible = false;
-        triggerBeats = [-2, 0, 1];
+        triggerBeats = [-2, 0, 0.1, 1];
         this.beatOffset = beatOffset;
         this.bpm = bpm;
         this.position = position;
@@ -55,12 +55,16 @@ class SliderThreat extends FlxSprite implements TrackAction {
                 }
             });
         } else if (beatIndex == 1) {
-            // Threat collision
-            killBus.broadcast(position);
+            // Threat about to collide
             
             // Animate threat disappearing:
             set_color(flixel.util.FlxColor.PURPLE);
         } else if (beatIndex == 2) {
+            // Threat collision - a tenth of a beat after landing for tolerance
+
+            killBus.broadcast(position);
+            set_color(flixel.util.FlxColor.PINK);
+        } else if (beatIndex == 3) {
             // Threat disappear
             visible = false;
         }
