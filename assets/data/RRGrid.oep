@@ -5,18 +5,18 @@
   <BackgroundColor A="255" R="128" G="128" B="128" />
   <GridColor A="255" R="255" G="255" B="255" />
   <LevelDefaultSize>
-    <Width>640</Width>
-    <Height>640</Height>
+    <Width>512</Width>
+    <Height>2048</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
-    <Width>640</Width>
-    <Height>640</Height>
+    <Width>64</Width>
+    <Height>64</Height>
   </LevelMinimumSize>
   <LevelMaximumSize>
-    <Width>640</Width>
-    <Height>640</Height>
+    <Width>99999999</Width>
+    <Height>99999999</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\Wesley Cox\Dropbox\temp-transfer\New Project.oep</Filename>
+  <Filename>C:\Users\Wesley Cox\Desktop\workspace\school\games-capstone\RRGame\assets\data\RRGrid.oep</Filename>
   <AngleMode>Radians</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>
