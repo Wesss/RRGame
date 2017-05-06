@@ -1,6 +1,7 @@
 package track_action;
 
 import board.BoardCoordinates;
+import bus.*;
 import domain.Displacement;
 import flixel.FlxSprite;
 import flixel.tweens.*;
@@ -11,16 +12,20 @@ class SliderThreat extends FlxSprite implements TrackAction {
     public var triggerBeats:Array<Float>;
 
     private var bpm : Int;
+    private var position : Displacement;
+    private var killBus : Bus<Displacement>;
 
-    public function new(beatOffset : Float, bpm : Int, position : Displacement) {
+    public function new(beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus) {
         super(BoardCoordinates.displacementToX(position.horizontalDisplacement),
               BoardCoordinates.displacementToY(position.verticalDisplacement),
               AssetPaths.BoardSquare__png);
 
         visible = false;
-        triggerBeats = [-3, 0];
+        triggerBeats = [-2, 0, 1];
         this.beatOffset = beatOffset;
         this.bpm = bpm;
+        this.position = position;
+        this.killBus = universalBus.threatKillSquare;
     }
 
     /**
@@ -34,20 +39,30 @@ class SliderThreat extends FlxSprite implements TrackAction {
      * @param beatIndex - The index of the beat triggered within this.triggerBeats
      **/
     public function triggerBeat(beatIndex:Int):Void {
-        trace(beatIndex);
         visible = true;
         if (beatIndex == 0) {
+            // Warning phase of threat
+
+            // Show threat:
             set_color(flixel.util.FlxColor.RED);
+
+            // Animate threat to target square:
             FlxTween.tween(this, {
                 x : x - width / 2,
                 y : y - height / 2
-            }, 3 / bpm * 60, {
-                ease: FlxEase.quintIn,
+            }, 2 / bpm * 60, {
                 onComplete: function(tween) {
                 }
             });
         } else if (beatIndex == 1) {
-            set_color(flixel.util.FlxColor.GREEN);
+            // Threat collision
+            killBus.broadcast(position);
+            
+            // Animate threat disappearing:
+            set_color(flixel.util.FlxColor.PURPLE);
+        } else if (beatIndex == 2) {
+            // Threat disappear
+            visible = false;
         }
     }
 }

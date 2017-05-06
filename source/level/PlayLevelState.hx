@@ -14,19 +14,21 @@ class PlayLevelState extends FlxState {
 	private var levelData:LevelData;
 	private var timingSystemTop:TimingSystemTop;
 	private var trackGroup:FlxSpriteGroup;
+	private var universalBus:UniversalBus;
 
-	public function new(levelData:LevelData, trackGroup:FlxSpriteGroup) {
+	public function new(levelData:LevelData, trackGroup:FlxSpriteGroup, universalBus:UniversalBus) {
 		super();
 		this.levelData = levelData;
 		this.trackGroup = trackGroup;
+		this.universalBus = universalBus;
 	}
 
 	override public function create():Void {
 		super.create();
 
-		var universalBus = new bus.UniversalBus();
 
 		// System initialization
+		new Referee(universalBus);
 		new AudioSystemTop(universalBus);
 		add(new ControlsSystemTop(universalBus));
 		add(new BoardSystemTop(0, 0, universalBus));
