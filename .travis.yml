@@ -9,3 +9,4 @@ script:
   - haxelib run munit
   - haxelib run lime build html5
   - cd test ; haxelib run lime test neko
+# TODO fix to adhere to new unit test setup

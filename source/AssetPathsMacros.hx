@@ -7,24 +7,33 @@ using flixel.util.FlxArrayUtil;
 using StringTools;
 
 class AssetPathsMacros {
-public static function buildManualTestAssets():Array<haxe.macro.Expr.Field>
-	{			
+	public static function buildManualTestAssets():Array<haxe.macro.Expr.Field> {
 		var fileReferences:Array<FileReference> = getFileReferences("../../assets/", true);
 		
+		return buildTestAssets(fileReferences);
+	}
+
+	public static function buildUnitTestAssets():Array<haxe.macro.Expr.Field> {
+		var fileReferences:Array<FileReference> = getFileReferences("../assets/", true);
+
+		return buildTestAssets(fileReferences);
+	}
+
+	private static function buildTestAssets(fileReferences:Array<FileReference>):Array<haxe.macro.Expr.Field> {
 		var fields:Array<haxe.macro.Expr.Field> = Context.getBuildFields();
-			
+
 		for (fileRef in fileReferences)
 		{
 			// create new field based on file references!
-            fileRef.value = fileRef.value.replace("../", "");
-            trace(fileRef.value);
-			fields.push({
-				name: fileRef.name,
-				doc: fileRef.documentation,
-				access: [Access.APublic, Access.AStatic, Access.AInline],
-				kind: FieldType.FVar(macro:String, macro $v{ fileRef.value }),
-				pos: Context.currentPos()
-			});
+		fileRef.value = fileRef.value.replace("../", "");
+		trace(fileRef.value);
+		fields.push({
+		name: fileRef.name,
+		doc: fileRef.documentation,
+		access: [Access.APublic, Access.AStatic, Access.AInline],
+		kind: FieldType.FVar(macro:String, macro $v{ fileRef.value }),
+		pos: Context.currentPos()
+		});
 		}
 		return fields;
 	}

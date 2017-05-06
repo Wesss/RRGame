@@ -8,7 +8,7 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 class LevelDataLoader {
 
     public static function loadLevelData(levelDataAsset:Dynamic):LevelData {
-        var loader = new FlxOgmoLoader(levelDataAsset);
+        var loader = new FlxOgmoLoader(AssetPaths.testLevel__oel);
 
         return null;
     }
