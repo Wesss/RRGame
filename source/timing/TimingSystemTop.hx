@@ -1,5 +1,6 @@
 package timing;
 
+import flixel.math.FlxMath;
 import haxe.Timer;
 import bus.Bus;
 import bus.UniversalBus;
@@ -19,19 +20,21 @@ class TimingSystemTop extends FlxBasic {
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
     private var music:FlxSound;
-    private var prevMusicHead:Float;
-    private var prevMusicStamp:Float;
+    private var prevMusicHeadPlayTime:Float;
+    private var prevMusicTimeStamp:Float;
     private var wasPausedSinceLastMusicHeadUpdate:Bool;
+    private var lastBeatBroadcasted:Float;
 
     public function new(universalBus:UniversalBus) {
         super();
         beatEventBus = universalBus.beat;
-        milisecondsPerBeat = null;
-        offsetMilis = null;
+        milisecondsPerBeat = 0;
+        offsetMilis = 0;
         music = null;
-        prevMusicHead = 0;
-        prevMusicStamp = 0;
+        prevMusicHeadPlayTime = 0;
+        prevMusicTimeStamp = 0;
         wasPausedSinceLastMusicHeadUpdate = false;
+        lastBeatBroadcasted = FlxMath.MIN_VALUE_FLOAT;
 
         universalBus.level.subscribe(this, switchLevelState);
         universalBus.musicStart.subscribe(this, trackSongStart);
@@ -60,7 +63,7 @@ class TimingSystemTop extends FlxBasic {
      **/
     public function trackSongStart(music:FlxSound):Void {
         this.music = music;
-        this.prevMusicHead = null;
+        this.prevMusicHeadPlayTime = null;
     }
 
     /**
@@ -75,16 +78,18 @@ class TimingSystemTop extends FlxBasic {
         }
 
         var curStamp = haxe.Timer.stamp() * 1000;
-        if (prevMusicHead != music.time) {
-            prevMusicHead = music.time;
-            prevMusicStamp = curStamp;
+        if (prevMusicHeadPlayTime != music.time) {
+            prevMusicHeadPlayTime = music.time;
+            prevMusicTimeStamp = curStamp;
             wasPausedSinceLastMusicHeadUpdate = false;
         }
 
         if (!wasPausedSinceLastMusicHeadUpdate) {
-            var curBeat = (prevMusicHead + ((curStamp) - prevMusicStamp) - offsetMilis) / milisecondsPerBeat;
-            trace(curBeat);
-            beatEventBus.broadcast(new BeatEvent(curBeat));
+            var curBeat = (prevMusicHeadPlayTime + ((curStamp) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
+
+            if (curBeat > lastBeatBroadcasted) {
+                beatEventBus.broadcast(new BeatEvent(curBeat));
+            }
         }
     }
 
