@@ -46,12 +46,4 @@ class PlayLevelState extends FlxState {
 	override public function update(elapsed:Float):Void {
 		super.update(elapsed);
 	}
-
-	override public function onFocus() {
-//		timingSystemTop.onPause();
-	}
-
-	override public function onFocusLost() {
-//		timingSystemTop.onResume();
-	}
 }

@@ -22,6 +22,7 @@ class TimingSystemTop extends FlxBasic {
     private var music:FlxSound;
     private var prevMusicHead:Float;
     private var prevMusicStamp:Float;
+//    private var wasPaused:Float;
 
     public function new(universalBus:UniversalBus) {
         super();
@@ -86,9 +87,5 @@ class TimingSystemTop extends FlxBasic {
 
     public function pause():Void {
         trace("pause");
-    }
-
-    public function resume():Void {
-        trace("resume");
     }
 }

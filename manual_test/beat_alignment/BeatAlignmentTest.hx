@@ -53,7 +53,6 @@ class BeatAlignmentTest extends FlxState
 	override public function onFocus():Void {
 		super.onFocus();
 		trace("Focus get!");
-		timingSystemTop.resume();
 	}
 
 	override public function onFocusLost():Void {
