@@ -8,14 +8,17 @@ class Referee {
     private var logicalPlayerPosition : Displacement;
 
     public function new(universalBus : UniversalBus) {
-        universalBus.playerMoved.subscribe({}, function(displacement) {
-            logicalPlayerPosition = displacement;
-        });
+        universalBus.playerMoved.subscribe(this, handlePlayerMove);
+        universalBus.threatKillSquare.subscribe(this, handleThreatKillingSquare);
+    }
 
-        universalBus.threatKillSquare.subscribe({}, function(displacement) {
-            if (displacement.equals(logicalPlayerPosition)) {
-                trace("Player hit!");
-            }
-        });
+    public function handlePlayerMove(displacement : Displacement) {
+        logicalPlayerPosition = displacement;
+    }
+
+    public function handleThreatKillingSquare(displacement : Displacement) {
+        if (displacement.equals(logicalPlayerPosition)) {
+            universalBus.playerHit.broadcast(displacement);
+        }
     }
 }
