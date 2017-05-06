@@ -17,7 +17,6 @@ public static function buildManualTestAssets():Array<haxe.macro.Expr.Field>
 		{
 			// create new field based on file references!
             fileRef.value = fileRef.value.replace("../", "");
-            trace(fileRef.value);
 			fields.push({
 				name: fileRef.name,
 				doc: fileRef.documentation,
