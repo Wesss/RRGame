@@ -13,5 +13,6 @@ class TestSuite extends massive.munit.TestSuite
 	{
 		super();
 		add(TestBus);
+		add(TestLevelDataLoader);
 	}
 }
