@@ -48,7 +48,6 @@ class Player extends FlxSprite {
         }
         scale = newScale;
         angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
-        trace(speed);
     }
 
     public function controlEventHandler(event : Displacement) {
