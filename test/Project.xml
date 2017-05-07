@@ -5,7 +5,7 @@
 
 	<set name="SWF_VERSION" value="11.8" />
 	<source path="../source" />
-	<assets path="../assets" />
+	<assets path="testAssets" />
 
 	<set name="no-custom-backend" />
 	<set name="unit-test" />
@@ -16,6 +16,4 @@
 	<haxelib name="flixel-addons" />
 
 	<haxedef name="FLX_UNIT_TEST" />
-
-	<!--TODO cleanup here?-->
 </project>

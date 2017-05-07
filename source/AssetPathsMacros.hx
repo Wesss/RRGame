@@ -13,12 +13,6 @@ class AssetPathsMacros {
 		return buildTestAssets(fileReferences);
 	}
 
-	public static function buildUnitTestAssets():Array<haxe.macro.Expr.Field> {
-		var fileReferences:Array<FileReference> = getFileReferences("../assets/", true);
-
-		return buildTestAssets(fileReferences);
-	}
-
 	private static function buildTestAssets(fileReferences:Array<FileReference>):Array<haxe.macro.Expr.Field> {
 		var fields:Array<haxe.macro.Expr.Field> = Context.getBuildFields();
 
