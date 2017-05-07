@@ -3,10 +3,13 @@ package board;
 import bus.UniversalBus;
 import domain.Displacement;
 import flixel.FlxSprite;
+import flixel.group.FlxSpriteGroup;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
-class Player extends FlxSprite {
+class Player extends FlxSpriteGroup {
+    var playerSprite : FlxSprite;
+    var hpIndicators : Array<FlxSprite>;
     var tween : FlxTween;
     var targetX : Float;
     var targetY : Float;
@@ -19,7 +22,24 @@ class Player extends FlxSprite {
     var oldY : Float;
 
     public function new(bus : UniversalBus) {
-        super(-92 / 2, -91 / 2, AssetPaths.Player__png);
+        super();
+        //super(-92 / 2, -91 / 2, AssetPaths.Player__png);
+        playerSprite = new FlxSprite(-72 / 2, -72 / 2, AssetPaths.Player__png);
+
+        hpIndicators = [
+            new FlxSprite(-78 / 2, -78 / 2, AssetPaths.HPIndicator__png),
+            new FlxSprite(-78 / 2, -78 / 2, AssetPaths.HPIndicator__png),
+            new FlxSprite(-78 / 2, -78 / 2, AssetPaths.HPIndicator__png)
+        ];
+
+        for (hpIndicatorIdx in 0...hpIndicators.length) {
+            add(hpIndicators[hpIndicatorIdx]);
+            hpIndicators[hpIndicatorIdx].angle = 120 * hpIndicatorIdx;
+            hpIndicators[hpIndicatorIdx].angularVelocity = 90;
+        }
+
+        add(playerSprite);
+
         targetX = 0;
         targetY = 0;
         uniBus = bus;
@@ -44,17 +64,25 @@ class Player extends FlxSprite {
         // adjust scale on speed and rotation based on direction
         var newScale = new flixel.math.FlxPoint(1 - speed / 100, 1 + speed / 100);
         if (newScale.x < 0.5) {
-            newScale = new flixel.math.FlxPoint(0.5, 1.5);
+            newScale.x = 0.5;
+            newScale.y = 1.5;
         }
-        scale = newScale;
-        angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+        playerSprite.scale = newScale;
+
+        var newAngle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+        var dA = newAngle - angle;
+        angle = newAngle;
+
+        for (hpIndicator in hpIndicators) {
+            hpIndicator.angle -= dA;
+        }
     }
 
     public function controlEventHandler(event : Displacement) {
         uniBus.playerStartMove.broadcast(event);
 
-        var targetX = (BoardCoordinates.displacementToX(event.horizontalDisplacement)) - width / 2;
-        var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement)) - height / 2;
+        var targetX = (BoardCoordinates.displacementToX(event.horizontalDisplacement));
+        var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement));
 
         if (tween != null) {
             tween.cancel();
@@ -77,8 +105,19 @@ class Player extends FlxSprite {
         if (hp <= 0) {
             uniBus.playerDie.broadcast(whichSquareHit);
             uniBus.controls.unsubscribe(this);
-            trace("Player died");
+        } else {
+            // Remove indicators
+            var indicator = hpIndicators[3 - hp];
+            FlxTween.tween(indicator.scale, {
+                x : 1.1,
+                y : 1.1
+            }, 1, {
+                ease : FlxEase.quadIn
+            });
+
+            FlxTween.tween(indicator, {
+                alpha : 0
+            }, 1);
         }
-        trace("Current hp: " + hp);
     }
 }
