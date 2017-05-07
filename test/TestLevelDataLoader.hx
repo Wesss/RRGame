@@ -1,5 +1,6 @@
 package ;
 
+import bus.UniversalBus;
 import domain.Displacement;
 import flixel.math.FlxMath;
 import track_action.SliderThreat;
@@ -14,7 +15,7 @@ class TestLevelDataLoader {
 
 	@Test
 	public function metaLevelDataIsLoadedCorrectly():Void {
-		var levelData = LevelDataLoader.loadLevelData(AssetPaths.testLevel__oel);
+		var levelData = LevelDataLoader.loadLevelData(AssetPaths.testLevel__oel, new UniversalBus());
 
 		Assert.isTrue(levelData != null);
 
@@ -25,7 +26,7 @@ class TestLevelDataLoader {
 
 	@Test
 	public function trackActionLevelDataIsLoadedCorrectly():Void {
-		var levelData = LevelDataLoader.loadLevelData(AssetPaths.testLevel__oel);
+		var levelData = LevelDataLoader.loadLevelData(AssetPaths.testLevel__oel, new UniversalBus());
 		Assert.isTrue(levelData != null);
 		var trackActions = levelData.trackActions;
 
