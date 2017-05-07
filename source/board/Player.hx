@@ -19,7 +19,7 @@ class Player extends FlxSprite {
     var oldY : Float;
 
     public function new(bus : UniversalBus) {
-        super(-92, -91, AssetPaths.Player__png);
+        super(-92 / 2, -91 / 2, AssetPaths.Player__png);
         targetX = 0;
         targetY = 0;
         uniBus = bus;
@@ -55,7 +55,7 @@ class Player extends FlxSprite {
         uniBus.playerStartMove.broadcast(event);
 
         var targetX = (BoardCoordinates.displacementToX(event.horizontalDisplacement)) - width / 2;
-        var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement)) - width / 2;
+        var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement)) - height / 2;
 
         if (tween != null) {
             tween.cancel();
