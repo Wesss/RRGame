@@ -44,7 +44,7 @@ class BoardCoordinates {
 
     private static function initializeConstants() {
         if (!INIT) {
-            var square = new BoardSquare(0, 0);
+            var square = new BoardSquare(0, 0, null);
             BOARD_SQUARE_WIDTH = cast (square.width, Int);
             BOARD_SQUARE_HEIGHT = cast (square.height, Int);
             INIT = true;
