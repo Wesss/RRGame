@@ -9,7 +9,7 @@ class BoardCoordinates {
     public static var BOARD_SQUARE_WIDTH(default, null) : Int;
     public static var BOARD_SQUARE_HEIGHT(default, null) : Int;
 
-    public static var MARGIN = 50;
+    public static var MARGIN = 15;
 
     // This variable is used to lazily initialize the constants
     // We need Flixel to set itself up so we can compute some constants which means
@@ -44,7 +44,7 @@ class BoardCoordinates {
 
     private static function initializeConstants() {
         if (!INIT) {
-            var square = new BoardSquare(0, 0);
+            var square = new BoardSquare(0, 0, null);
             BOARD_SQUARE_WIDTH = cast (square.width, Int);
             BOARD_SQUARE_HEIGHT = cast (square.height, Int);
             INIT = true;

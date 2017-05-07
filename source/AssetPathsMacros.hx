@@ -19,15 +19,14 @@ class AssetPathsMacros {
 		for (fileRef in fileReferences)
 		{
 			// create new field based on file references!
-		fileRef.value = fileRef.value.replace("../", "");
-		trace(fileRef.value);
-		fields.push({
-		name: fileRef.name,
-		doc: fileRef.documentation,
-		access: [Access.APublic, Access.AStatic, Access.AInline],
-		kind: FieldType.FVar(macro:String, macro $v{ fileRef.value }),
-		pos: Context.currentPos()
-		});
+            fileRef.value = fileRef.value.replace("../", "");
+			fields.push({
+				name: fileRef.name,
+				doc: fileRef.documentation,
+				access: [Access.APublic, Access.AStatic, Access.AInline],
+				kind: FieldType.FVar(macro:String, macro $v{ fileRef.value }),
+				pos: Context.currentPos()
+			});
 		}
 		return fields;
 	}

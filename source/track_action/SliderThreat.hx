@@ -1,6 +1,7 @@
 package track_action;
 
 import board.BoardCoordinates;
+import bus.*;
 import domain.Displacement;
 import flixel.FlxSprite;
 import flixel.tweens.*;
@@ -10,17 +11,30 @@ class SliderThreat extends FlxSprite implements TrackAction {
     // an array of beats relative the the offset defined above
     public var triggerBeats:Array<Float>;
 
+    private var beatWarnTime : Float;
     private var bpm : Int;
+    private var position : Displacement;
+    private var killBus : Bus<Displacement>;
 
-    public function new(beatOffset : Float, bpm : Int, position : Displacement) {
+    private var target : Displacement;
+    private var warningTween : FlxTween;
+
+    public function new(beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus, beatWarnTime = 2.0) {
         super(BoardCoordinates.displacementToX(position.horizontalDisplacement),
-              BoardCoordinates.displacementToY(position.verticalDisplacement),
-              AssetPaths.BoardSquare__png);
+              BoardCoordinates.displacementToY(position.verticalDisplacement));
+        
+        loadGraphic(AssetPaths.RedSliderThreat__png, true, 112, 112);
+        animation.add("warning", [0]);
+        animation.add("hit", [1]);
 
         visible = false;
-        triggerBeats = [-3, 0];
+        triggerBeats = [-beatWarnTime, 0, 0.2, 1];
         this.beatOffset = beatOffset;
+        this.beatWarnTime = beatWarnTime;
         this.bpm = bpm;
+        this.position = position;
+        this.killBus = universalBus.threatKillSquare;
+        this.target = position;
     }
 
     /**
@@ -34,20 +48,61 @@ class SliderThreat extends FlxSprite implements TrackAction {
      * @param beatIndex - The index of the beat triggered within this.triggerBeats
      **/
     public function triggerBeat(beatIndex:Int):Void {
-        trace(beatIndex);
-        visible = true;
         if (beatIndex == 0) {
-            set_color(flixel.util.FlxColor.RED);
-            FlxTween.tween(this, {
-                x : x - width / 2,
-                y : y - height / 2
-            }, 3 / bpm * 60, {
-                ease: FlxEase.quintIn,
-                onComplete: function(tween) {
-                }
+            // Warning phase of threat
+
+            // Show threat:
+            visible = true;
+
+            scale.y = 0;
+            x -= width / 4;
+            y -= height / 4;
+
+            // Flash open the threat square
+            FlxTween.tween(this.scale, {
+                y : 1
+            }, 0.1, {
+                ease: FlxEase.quartIn
             });
+
+            // Animate threat to target square:
+            warningTween = FlxTween.tween(this, {
+                x : BoardCoordinates.displacementToX(target.horizontalDisplacement) - width / 2,
+                y : BoardCoordinates.displacementToY(target.verticalDisplacement) - height / 2
+            }, beatWarnTime / bpm * 60, {
+                ease: FlxEase.quartIn
+            });
+
+            animation.play("warning");
         } else if (beatIndex == 1) {
-            set_color(flixel.util.FlxColor.GREEN);
+            // Threat about to collide
+            warningTween.cancel(); // In case timing discrepency between beats timing and timer
+            x = BoardCoordinates.displacementToX(target.horizontalDisplacement) - width / 2;
+            y = BoardCoordinates.displacementToY(target.verticalDisplacement) - height / 2;
+
+            animation.play("hit");
+        } else if (beatIndex == 2) {
+            // Threat collision - a tenth of a beat after landing for tolerance
+
+            // Fade and scale out
+            FlxTween.tween(this, {
+                alpha: 0
+            }, 1 / bpm * 60, {
+                ease: FlxEase.quadOut
+            });
+
+            FlxTween.tween(this.scale, {
+                x : 1.2,
+                y : 1.2
+            }, 1 / bpm * 60, {
+                ease: FlxEase.quadOut
+            });
+
+
+            killBus.broadcast(position);
+        } else if (beatIndex == 3) {
+            // Threat disappear
+            visible = false;
         }
     }
 }
