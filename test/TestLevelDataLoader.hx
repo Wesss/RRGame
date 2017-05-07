@@ -1,5 +1,7 @@
 package ;
 
+import flixel.math.FlxMath;
+import track_action.SliderThreat;
 import level.LevelDataLoader;
 import massive.munit.Assert;
 
@@ -18,6 +20,88 @@ class TestLevelDataLoader {
 		Assert.isTrue(levelData.musicTrack == AssetPaths.testTrack__ogg);
 		Assert.isTrue(levelData.bpm == 135);
 		Assert.isTrue(levelData.songStartOffsetMilis == 444);
-		// TODO assert trackaction array correctness
+	}
+
+	@Test
+	public function trackActionLevelDataIsLoadedCorrectly():Void {
+		var levelData = LevelDataLoader.loadLevelData(AssetPaths.testLevel__oel);
+		Assert.isTrue(levelData != null);
+		var trackActions = levelData.trackActions;
+
+		// convert to instantiated types
+		var sliderThreats = new Array<SliderThreat>();
+		for (trackAction in trackActions) {
+			if (Std.is(trackAction, SliderThreat)) {
+				sliderThreats.push(cast trackAction);
+			} else {
+				throw "Track Action of Unknown Type Given";
+			}
+		}
+
+		// generate expectation
+		var expectedSliderThreats = new Array<Dynamic>();
+		expectedSliderThreats.push(getExpectedSliderThreat(0.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(8.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(16.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(24.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(24.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(24.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(32.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(32.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(32.0));
+
+		// test
+		for (sliderThreat in sliderThreats) {
+			var isSliderExpected = checkForAndRemoveExpectedSliderThread(sliderThreat, expectedSliderThreats);
+			Assert.isTrue(isSliderExpected);
+		}
+		Assert.isTrue(expectedSliderThreats.length == 0);
+	}
+
+	/**
+	 * Returns an anonymous structure with info given
+     **/
+	private function getExpectedSliderThreat(beatOffset:Float) {
+		// TODO construct displacement positions and check for those
+		return {beatOffset : beatOffset};
+	}
+
+	/**
+	 * If given track action is represented by an expected action in given array, then matching expected
+	 * action is removed from the given array and true is returned.
+	 * Otherwise false is returned.
+     **/
+	private function checkForAndRemoveExpectedSliderThread(sliderThreat:SliderThreat,
+														   expectedSliderThreats:Array<Dynamic>):Bool {
+		for (expectedSliderThreat in expectedSliderThreats) {
+			if (nearlyEqual(sliderThreat.beatOffset, expectedSliderThreat.beatOffset)) {
+				// TODO construct beat positions and check for those
+				// TODO this would be concurrent modification exception. is this okay here?
+				expectedSliderThreats.remove(expectedSliderThreat);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * compares for almost equality between floats.
+	 * Copied from http://stackoverflow.com/questions/4915462/how-should-i-do-floating-point-comparison
+     **/
+	private static function nearlyEqual(a:Float, b:Float):Bool {
+		var epsilon = 0.001;
+		var absA = Math.abs(a);
+		var absB = Math.abs(b);
+		var diff = Math.abs(a - b);
+
+		if (a == b) { // shortcut, handles infinities
+			return true;
+		} else if (a == 0 || b == 0 || diff < FlxMath.MIN_VALUE_FLOAT) {
+			// a or b is zero or both are extremely close to it
+			// relative error is less meaningful here
+			return diff < (epsilon * FlxMath.MIN_VALUE_FLOAT);
+		} else { // use relative error
+			return diff / (absA + absB) < epsilon;
+		}
 	}
 }
