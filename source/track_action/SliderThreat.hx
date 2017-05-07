@@ -13,7 +13,8 @@ class SliderThreat extends FlxSprite implements TrackAction {
 
     private var beatWarnTime : Float;
     private var bpm : Int;
-    private var position : Displacement;
+    // PUBLIC FOR TESTING
+    public var position(default, null) : Displacement;
     private var killBus : Bus<Displacement>;
 
     private var target : Displacement;

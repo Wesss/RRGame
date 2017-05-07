@@ -1,5 +1,6 @@
 package ;
 
+import domain.Displacement;
 import flixel.math.FlxMath;
 import track_action.SliderThreat;
 import level.LevelDataLoader;
@@ -40,15 +41,15 @@ class TestLevelDataLoader {
 
 		// generate expectation
 		var expectedSliderThreats = new Array<Dynamic>();
-		expectedSliderThreats.push(getExpectedSliderThreat(0.0));
-		expectedSliderThreats.push(getExpectedSliderThreat(8.0));
-		expectedSliderThreats.push(getExpectedSliderThreat(16.0));
-		expectedSliderThreats.push(getExpectedSliderThreat(24.0));
-		expectedSliderThreats.push(getExpectedSliderThreat(24.0));
-		expectedSliderThreats.push(getExpectedSliderThreat(24.0));
-		expectedSliderThreats.push(getExpectedSliderThreat(32.0));
-		expectedSliderThreats.push(getExpectedSliderThreat(32.0));
-		expectedSliderThreats.push(getExpectedSliderThreat(32.0));
+		expectedSliderThreats.push(getExpectedSliderThreat(0.0, new Displacement(LEFT, UP)));
+		expectedSliderThreats.push(getExpectedSliderThreat(4.0, new Displacement(LEFT, NONE)));
+		expectedSliderThreats.push(getExpectedSliderThreat(8.0, new Displacement(LEFT, DOWN)));
+		expectedSliderThreats.push(getExpectedSliderThreat(12.0, new Displacement(NONE, UP)));
+		expectedSliderThreats.push(getExpectedSliderThreat(12.0, new Displacement(NONE, NONE)));
+		expectedSliderThreats.push(getExpectedSliderThreat(12.0, new Displacement(NONE, DOWN)));
+		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(RIGHT, UP)));
+		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(RIGHT, NONE)));
+		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(RIGHT, DOWN)));
 
 		// test
 		for (sliderThreat in sliderThreats) {
@@ -61,9 +62,10 @@ class TestLevelDataLoader {
 	/**
 	 * Returns an anonymous structure with info given
      **/
-	private function getExpectedSliderThreat(beatOffset:Float) {
+	private function getExpectedSliderThreat(beatOffset:Float, position:Displacement) {
 		// TODO construct displacement positions and check for those
-		return {beatOffset : beatOffset};
+		return {beatOffset: beatOffset, position: position};
+		//beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus, beatWarnTime = 2.0) {
 	}
 
 	/**
@@ -74,9 +76,8 @@ class TestLevelDataLoader {
 	private function checkForAndRemoveExpectedSliderThread(sliderThreat:SliderThreat,
 														   expectedSliderThreats:Array<Dynamic>):Bool {
 		for (expectedSliderThreat in expectedSliderThreats) {
-			if (nearlyEqual(sliderThreat.beatOffset, expectedSliderThreat.beatOffset)) {
-				// TODO construct beat positions and check for those
-				// TODO this would be concurrent modification exception. is this okay here?
+			if (nearlyEqual(sliderThreat.beatOffset, expectedSliderThreat.beatOffset) &&
+					sliderThreat.position.equals(expectedSliderThreat.position)) {
 				expectedSliderThreats.remove(expectedSliderThreat);
 				return true;
 			}

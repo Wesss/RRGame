@@ -1,4 +1,4 @@
-<level width="512" height="2048" BPM="135" MusicTrack="testTrack.ogg" MusicStartOffset="444" BeatsPerPhrase="8">
+<level width="512" height="2048" BPM="135" MusicTrack="testTrack.ogg" MusicStartOffset="444" BeatsPerPhrase="4">
   <BoardDisplayLayer>
     <Board id="26" x="0" y="256" />
     <Board id="0" x="0" y="192" />
