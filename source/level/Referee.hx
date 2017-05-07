@@ -8,6 +8,7 @@ class Referee {
     private var logicalPlayerPosition : Displacement;
 
     public function new(universalBus : UniversalBus) {
+        this.universalBus = universalBus;
         universalBus.playerMoved.subscribe(this, handlePlayerMove);
         universalBus.threatKillSquare.subscribe(this, handleThreatKillingSquare);
     }

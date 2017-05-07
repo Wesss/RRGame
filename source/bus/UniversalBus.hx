@@ -22,6 +22,7 @@ class UniversalBus {
     public var threatKillSquare(default, null) = new Bus<Displacement>();
     public var playerHit(default, null) = new Bus<Displacement>();
     public var playerHPChange(default, null) = new Bus<Int>();
+    public var playerDie(default, null) = new Bus<Displacement>();
 
     public function new() {}
 }
