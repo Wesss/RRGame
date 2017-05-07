@@ -5,7 +5,7 @@
 
 	<set name="SWF_VERSION" value="11.8" />
 	<source path="../source" />
-	<assets path="testAssets" />
+	<assets path="assets" />
 
 	<set name="no-custom-backend" />
 	<set name="unit-test" />

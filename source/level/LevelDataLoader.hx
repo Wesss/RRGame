@@ -10,6 +10,9 @@ class LevelDataLoader {
     public static function loadLevelData(levelDataAsset:Dynamic):LevelData {
         var loader = new FlxOgmoLoader(AssetPaths.testLevel__oel);
 
-        return new LevelData(null, null, null, null);
+        var musicAssetPath = "assets/music/" + loader.getProperty("MusicTrack");
+        var bpm = Std.parseInt(loader.getProperty("BPM"));
+        var offset = Std.parseInt(loader.getProperty("MusicStartOffset"));
+        return new LevelData(musicAssetPath, bpm, offset, null);
     }
 }

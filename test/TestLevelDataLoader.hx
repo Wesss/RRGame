@@ -18,7 +18,7 @@ class TestLevelDataLoader {
 
 		Assert.isTrue(levelData != null);
 
-		Assert.isTrue(levelData.musicTrack == AssetPaths.testTrack__ogg);
+		Assert.isTrue(levelData.musicTrack == "assets/music/testTrack.ogg");
 		Assert.isTrue(levelData.bpm == 135);
 		Assert.isTrue(levelData.songStartOffsetMilis == 444);
 	}
