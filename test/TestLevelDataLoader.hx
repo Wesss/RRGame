@@ -8,22 +8,16 @@ class TestLevelDataLoader {
 	public function new() {
 		
 	}
-	
-	@Before
-	public function setup():Void {
-
-	}
-
-	@After
-	public function tearDown():Void {
-
-	}
 
 	@Test
-	public function testExample():Void {
+	public function metaLevelDataIsLoadedCorrectly():Void {
 		var levelData = LevelDataLoader.loadLevelData(AssetPaths.testLevel__oel);
 
-		// TODO test levelData more thoroughly
 		Assert.isTrue(levelData != null);
+
+		Assert.isTrue(levelData.musicTrack == AssetPaths.testTrack__ogg);
+		Assert.isTrue(levelData.bpm == 135);
+		Assert.isTrue(levelData.songStartOffsetMilis == 444);
+		// TODO assert trackaction array correctness
 	}
 }
