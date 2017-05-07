@@ -11,18 +11,20 @@ class SliderThreat extends FlxSprite implements TrackAction {
     // an array of beats relative the the offset defined above
     public var triggerBeats:Array<Float>;
 
+    private var beatWarnTime : Float;
     private var bpm : Int;
     private var position : Displacement;
     private var killBus : Bus<Displacement>;
 
-    public function new(beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus) {
+    public function new(beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus, beatWarnTime = 2.0) {
         super(BoardCoordinates.displacementToX(position.horizontalDisplacement),
               BoardCoordinates.displacementToY(position.verticalDisplacement),
               AssetPaths.BoardSquare__png);
 
         visible = false;
-        triggerBeats = [-2, 0, 0.1, 1];
+        triggerBeats = [-beatWarnTime, 0, 0.2, 1];
         this.beatOffset = beatOffset;
+        this.beatWarnTime = beatWarnTime;
         this.bpm = bpm;
         this.position = position;
         this.killBus = universalBus.threatKillSquare;
@@ -50,7 +52,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
             FlxTween.tween(this, {
                 x : x - width / 2,
                 y : y - height / 2
-            }, 2 / bpm * 60, {
+            }, beatWarnTime / bpm * 60, {
                 onComplete: function(tween) {
                 }
             });
