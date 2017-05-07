@@ -46,7 +46,7 @@ class PlayLevelState extends FlxState {
 		});
 
 	 	universalBus.threatKillSquare.subscribe(this, function(displacement) {
-			FlxG.camera.shake(0.05, 0.2);
+			FlxG.camera.shake(0.02, 0.2);
 		});
 
 		universalBus.playerHPChange.subscribe(this, function(newHP) {
