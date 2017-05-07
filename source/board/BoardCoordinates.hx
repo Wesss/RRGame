@@ -9,7 +9,7 @@ class BoardCoordinates {
     public static var BOARD_SQUARE_WIDTH(default, null) : Int;
     public static var BOARD_SQUARE_HEIGHT(default, null) : Int;
 
-    public static var MARGIN = 50;
+    public static var MARGIN = 15;
 
     // This variable is used to lazily initialize the constants
     // We need Flixel to set itself up so we can compute some constants which means
