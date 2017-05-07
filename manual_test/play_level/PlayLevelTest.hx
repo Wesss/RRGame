@@ -20,9 +20,20 @@ class PlayLevelTest extends FlxState
 		var universalBus = new bus.UniversalBus();
 		// Create sample level data
 		var trackGroup = new FlxSpriteGroup();
-		var slider = new track_action.SliderThreat(10, 135, new Displacement(HorizontalDisplacement.NONE, VerticalDisplacement.NONE), universalBus);
-		trackGroup.add(slider);
-		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, 135, 444, [slider]);
+		
+		var bpm = 135;
+		var threats : Array<track_action.TrackAction> = [];
+		
+		var i = 10;
+		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
+            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
+				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus);
+				threats.push(slider);
+				trackGroup.add(slider);
+				i++;
+			}
+		}
+		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, bpm, 444, threats);
 		
 		FlxG.switchState(new PlayLevelState(levelData, trackGroup, universalBus));
 	}
