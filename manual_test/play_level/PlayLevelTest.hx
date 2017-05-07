@@ -33,6 +33,26 @@ class PlayLevelTest extends FlxState
 				i++;
 			}
 		}
+
+		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
+            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
+				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus);
+				threats.push(slider);
+				trackGroup.add(slider);
+			}
+			i++;
+		}
+
+		
+		for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
+			for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
+				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus);
+				threats.push(slider);
+				trackGroup.add(slider);
+			}
+			i++;
+		}
+
 		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, bpm, 444, threats);
 		
 		FlxG.switchState(new PlayLevelState(levelData, trackGroup, universalBus));
