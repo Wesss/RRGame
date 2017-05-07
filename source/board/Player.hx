@@ -14,14 +14,41 @@ class Player extends FlxSprite {
 
     var hp : Int;
 
+    // for graphical tween
+    var oldX : Float;
+    var oldY : Float;
+
     public function new(bus : UniversalBus) {
-        super(-150, -150, AssetPaths.Player__png);
+        super(-92, -91, AssetPaths.Player__png);
         targetX = 0;
         targetY = 0;
         uniBus = bus;
         uniBus.controls.subscribe(this, controlEventHandler);
         uniBus.playerHit.subscribe(this, playerHitHandler);
         hp = 4;
+
+        oldX = x;
+        oldY = y;
+    }
+
+    public override function update(elapsed : Float) {
+        super.update(elapsed);
+
+        var dx = x - oldX;
+        var dy = y - oldY;
+        var speed = Math.sqrt(dx * dx + dy * dy);
+
+        oldX = x;
+        oldY = y;
+
+        // adjust scale on speed and rotation based on direction
+        var newScale = new flixel.math.FlxPoint(1 - speed / 100, 1 + speed / 100);
+        if (newScale.x < 0.5) {
+            newScale = new flixel.math.FlxPoint(0.5, 1.5);
+        }
+        scale = newScale;
+        angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+        trace(speed);
     }
 
     public function controlEventHandler(event : Displacement) {
@@ -37,7 +64,7 @@ class Player extends FlxSprite {
         tween = FlxTween.tween(this, {
             x : targetX,
             y : targetY
-        }, 0.05, {
+        }, 0.07, {
             ease: FlxEase.quadInOut,
             onComplete: function(tween) {
                 uniBus.playerMoved.broadcast(event);
