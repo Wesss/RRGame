@@ -16,10 +16,16 @@ class SliderThreat extends FlxSprite implements TrackAction {
     private var position : Displacement;
     private var killBus : Bus<Displacement>;
 
+    private var target : Displacement;
+    private var warningTween : FlxTween;
+
     public function new(beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus, beatWarnTime = 2.0) {
         super(BoardCoordinates.displacementToX(position.horizontalDisplacement),
-              BoardCoordinates.displacementToY(position.verticalDisplacement),
-              AssetPaths.BoardSquare__png);
+              BoardCoordinates.displacementToY(position.verticalDisplacement));
+        
+        loadGraphic(AssetPaths.RedSliderThreat__png, true, 112, 112);
+        animation.add("warning", [0]);
+        animation.add("hit", [1]);
 
         visible = false;
         triggerBeats = [-beatWarnTime, 0, 0.2, 1];
@@ -28,6 +34,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
         this.bpm = bpm;
         this.position = position;
         this.killBus = universalBus.threatKillSquare;
+        this.target = position;
     }
 
     /**
@@ -41,31 +48,49 @@ class SliderThreat extends FlxSprite implements TrackAction {
      * @param beatIndex - The index of the beat triggered within this.triggerBeats
      **/
     public function triggerBeat(beatIndex:Int):Void {
-        visible = true;
         if (beatIndex == 0) {
             // Warning phase of threat
 
             // Show threat:
-            set_color(flixel.util.FlxColor.RED);
+            visible = true;
+            x -= width / 4;
+            y -= height / 4;
 
             // Animate threat to target square:
-            FlxTween.tween(this, {
-                x : x - width / 2,
-                y : y - height / 2
+            warningTween = FlxTween.tween(this, {
+                x : BoardCoordinates.displacementToX(target.horizontalDisplacement) - width / 2,
+                y : BoardCoordinates.displacementToY(target.verticalDisplacement) - height / 2
             }, beatWarnTime / bpm * 60, {
-                onComplete: function(tween) {
-                }
+                ease: FlxEase.quartIn
             });
+
+            animation.play("warning");
         } else if (beatIndex == 1) {
             // Threat about to collide
-            
-            // Animate threat disappearing:
-            set_color(flixel.util.FlxColor.PURPLE);
+            warningTween.cancel(); // In case timing discrepency between beats timing and timer
+            x = BoardCoordinates.displacementToX(target.horizontalDisplacement) - width / 2;
+            y = BoardCoordinates.displacementToY(target.verticalDisplacement) - height / 2;
+
+            animation.play("hit");
         } else if (beatIndex == 2) {
             // Threat collision - a tenth of a beat after landing for tolerance
 
+            // Fade and scale out
+            FlxTween.tween(this, {
+                alpha: 0
+            }, 1 / bpm * 60, {
+                ease: FlxEase.quadOut
+            });
+
+            FlxTween.tween(this.scale, {
+                x : 1.2,
+                y : 1.2
+            }, 1 / bpm * 60, {
+                ease: FlxEase.quadOut
+            });
+
+
             killBus.broadcast(position);
-            set_color(flixel.util.FlxColor.PINK);
         } else if (beatIndex == 3) {
             // Threat disappear
             visible = false;
