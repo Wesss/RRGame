@@ -26,7 +26,7 @@ class PlayLevelState extends FlxState {
 
 	override public function create():Void {
 		super.create();
-
+		FlxG.mouse.visible = false;
 
 		// System initialization
 		new Referee(universalBus);

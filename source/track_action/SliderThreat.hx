@@ -53,8 +53,17 @@ class SliderThreat extends FlxSprite implements TrackAction {
 
             // Show threat:
             visible = true;
+
+            scale.y = 0;
             x -= width / 4;
             y -= height / 4;
+
+            // Flash open the threat square
+            FlxTween.tween(this.scale, {
+                y : 1
+            }, 0.1, {
+                ease: FlxEase.quartIn
+            });
 
             // Animate threat to target square:
             warningTween = FlxTween.tween(this, {
