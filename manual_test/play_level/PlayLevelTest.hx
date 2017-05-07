@@ -15,7 +15,6 @@ class PlayLevelTest extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		// TODO create level data and pass in to run the level
 		var trackGroup = new FlxSpriteGroup();
 		var slider = new track_action.SliderThreat(10, 135, new Displacement(HorizontalDisplacement.RIGHT, VerticalDisplacement.DOWN));
 		trackGroup.add(slider);

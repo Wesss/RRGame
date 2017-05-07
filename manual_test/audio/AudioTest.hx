@@ -43,11 +43,9 @@ class AudioTest extends FlxState {
 			universalBus.controlsEvents.broadcast(new Displacement(NONE, NONE));
 		}
 		if (FlxG.keys.anyJustPressed([L])) {
-			// TODO pass in actual level object with music to test
 			universalBus.levelEvents.broadcast(new LevelEvent(LOAD, mockLevelData));
 		}
 		if (FlxG.keys.anyJustPressed([M])) {
-			// TODO pass in actual level object with music to test
 			universalBus.levelEvents.broadcast(new LevelEvent(START, mockLevelData));
 		}
 	}

@@ -10,6 +10,6 @@ class LevelDataLoader {
     public static function loadLevelData(levelDataAsset:Dynamic):LevelData {
         var loader = new FlxOgmoLoader(AssetPaths.testLevel__oel);
 
-        return null;
+        return new LevelData(null, null, null, null);
     }
 }
