@@ -26,6 +26,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
         loadGraphic(AssetPaths.RedSliderThreat__png, true, 112, 112);
         animation.add("warning", [0]);
         animation.add("hit", [1]);
+        animation.add("dodge", [2]);
 
         visible = false;
         triggerBeats = [-beatWarnTime, 0, 0.2, 1];
@@ -35,6 +36,8 @@ class SliderThreat extends FlxSprite implements TrackAction {
         this.position = position;
         this.killBus = universalBus.threatKillSquare;
         this.target = position;
+
+        universalBus.playerHit.subscribe(this, playerHitHandler);
     }
 
     /**
@@ -79,11 +82,10 @@ class SliderThreat extends FlxSprite implements TrackAction {
             warningTween.cancel(); // In case timing discrepency between beats timing and timer
             x = BoardCoordinates.displacementToX(target.horizontalDisplacement) - width / 2;
             y = BoardCoordinates.displacementToY(target.verticalDisplacement) - height / 2;
-
-            animation.play("hit");
         } else if (beatIndex == 2) {
             // Threat collision - a tenth of a beat after landing for tolerance
 
+            animation.play("dodge");
             // Fade and scale out
             FlxTween.tween(this, {
                 alpha: 0
@@ -103,6 +105,12 @@ class SliderThreat extends FlxSprite implements TrackAction {
         } else if (beatIndex == 3) {
             // Threat disappear
             visible = false;
+        }
+    }
+    
+    public function playerHitHandler(where : Displacement) {
+        if (where == target) {
+            animation.play("hit");
         }
     }
 }
