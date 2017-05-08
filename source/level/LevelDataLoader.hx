@@ -26,6 +26,7 @@ class LevelDataLoader {
         // map<phrase number -> phrase division count>
         var boardDisplayLocations = new Map<Int, Int>();
 
+        // essentially a lambda for loading phrase count and divisions
         function parseBoardDisplays(type:String, data:Xml):Void {
             switch (type) {
                 case "Board": {
@@ -46,6 +47,7 @@ class LevelDataLoader {
         }
         loader.loadEntities(parseBoardDisplays, "BoardDisplayLayer");
 
+        // essentially a lambda for loading track actions
         function parseEntities(type:String, data:Xml):Void {
             switch (type) {
                 case "RedSlider": {
@@ -55,7 +57,7 @@ class LevelDataLoader {
                     );
 
                     // vertical displacement
-                    var verticalDisplacement = null;
+                    var verticalDisplacement:VerticalDisplacement = null;
                     switch (boardGrid.y % 4) {
                         case 0: verticalDisplacement = UP;
                         case 1: verticalDisplacement = NONE;
@@ -63,7 +65,7 @@ class LevelDataLoader {
                         default: throw "Invalid level format; beat below/above grid";
                     }
                     // horz displacement
-                    var horizontalDisplacement = null;
+                    var horizontalDisplacement:HorizontalDisplacement = null;
                     switch (boardGrid.x % 4) {
                         case 0: horizontalDisplacement = LEFT;
                         case 1: horizontalDisplacement = NONE;
@@ -90,16 +92,6 @@ class LevelDataLoader {
         }
         loader.loadEntities(parseEntities, "Entities");
 
-        // TODO DELETE THIS. Just a mock correct answer to show test passes/fails properly
-//        trackActions.push(new SliderThreat(0.0, 135, new Displacement(LEFT, UP), mockBus));
-//        trackActions.push(new SliderThreat(4.0, 135, new Displacement(LEFT, NONE), mockBus));
-//        trackActions.push(new SliderThreat(8.0, 135, new Displacement(LEFT, DOWN), mockBus));
-//        trackActions.push(new SliderThreat(12.0, 135, new Displacement(NONE, UP), mockBus));
-//        trackActions.push(new SliderThreat(12.0, 135, new Displacement(NONE, NONE), mockBus));
-//        trackActions.push(new SliderThreat(12.0, 135, new Displacement(NONE, DOWN), mockBus));
-//        trackActions.push(new SliderThreat(16.0, 135, new Displacement(RIGHT, UP), mockBus));
-//        trackActions.push(new SliderThreat(16.0, 135, new Displacement(RIGHT, NONE), mockBus));
-//        trackActions.push(new SliderThreat(16.0, 135, new Displacement(RIGHT, DOWN), mockBus));
         return new LevelData(musicAssetPath, bpm, offset, trackActions);
     }
 }

@@ -46,11 +46,16 @@ class TestLevelDataLoader {
 		expectedSliderThreats.push(getExpectedSliderThreat(4.0, new Displacement(LEFT, NONE)));
 		expectedSliderThreats.push(getExpectedSliderThreat(8.0, new Displacement(LEFT, DOWN)));
 		expectedSliderThreats.push(getExpectedSliderThreat(12.0, new Displacement(NONE, UP)));
-		expectedSliderThreats.push(getExpectedSliderThreat(12.0, new Displacement(NONE, NONE)));
-		expectedSliderThreats.push(getExpectedSliderThreat(12.0, new Displacement(NONE, DOWN)));
-		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(RIGHT, UP)));
-		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(RIGHT, NONE)));
-		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(RIGHT, DOWN)));
+		expectedSliderThreats.push(getExpectedSliderThreat(12.5, new Displacement(RIGHT, UP)));
+		expectedSliderThreats.push(getExpectedSliderThreat(13.0, new Displacement(RIGHT, NONE)));
+		expectedSliderThreats.push(getExpectedSliderThreat(13.5, new Displacement(NONE, NONE)));
+		expectedSliderThreats.push(getExpectedSliderThreat(14.0, new Displacement(NONE, DOWN)));
+		expectedSliderThreats.push(getExpectedSliderThreat(14.5, new Displacement(RIGHT, DOWN)));
+		expectedSliderThreats.push(getExpectedSliderThreat(15.0, new Displacement(RIGHT, NONE)));
+		expectedSliderThreats.push(getExpectedSliderThreat(15.5, new Displacement(NONE, NONE)));
+		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(LEFT, UP)));
+		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(LEFT, NONE)));
+		expectedSliderThreats.push(getExpectedSliderThreat(16.0, new Displacement(LEFT, DOWN)));
 
 		// test
 		for (sliderThreat in sliderThreats) {
