@@ -8,6 +8,7 @@ import domain.Displacement;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import timing.TimingSystemTop;
 
@@ -17,10 +18,16 @@ class PlayLevelState extends FlxState {
 	private var trackGroup:FlxSpriteGroup;
 	private var universalBus:UniversalBus;
 
-	public function new(levelData:LevelData, trackGroup:FlxSpriteGroup, universalBus:UniversalBus) {
+	public function new(levelData:LevelData, universalBus:UniversalBus) {
 		super();
 		this.levelData = levelData;
-		this.trackGroup = trackGroup;
+		this.trackGroup = new FlxSpriteGroup();
+		for (trackAction in levelData.trackActions) {
+			if (Std.is(trackAction, FlxSprite)) {
+				this.trackGroup.add(cast(trackAction, FlxSprite));
+				trace(trackAction.beatOffset);
+			}
+		}
 		this.universalBus = universalBus;
 	}
 

@@ -48,7 +48,7 @@ class SelectLevelButton extends FlxSpriteGroup {
 
                 var universalBus = new UniversalBus();
                 var levelData = LevelDataLoader.loadLevelData(levelAssetPath, universalBus);
-                FlxG.switchState(new PlayLevelState(levelData, new FlxSpriteGroup(), universalBus));
+                FlxG.switchState(new PlayLevelState(levelData, universalBus));
             }
         }
 
