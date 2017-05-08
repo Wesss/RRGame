@@ -1,5 +1,7 @@
 package level;
 
+import domain.VerticalDisplacement;
+import domain.HorizontalDisplacement;
 import domain.Displacement;
 import bus.UniversalBus;
 import track_action.SliderThreat;
@@ -21,7 +23,8 @@ class LevelDataLoader {
 
         var trackActions = new Array<TrackAction>();
 
-        var boardDisplayLocations = new Map<Int, Array<Grid>>();
+        // map<phrase number -> phrase division count>
+        var boardDisplayLocations = new Map<Int, Int>();
 
         function parseBoardDisplays(type:String, data:Xml):Void {
             switch (type) {
@@ -31,19 +34,57 @@ class LevelDataLoader {
                         Std.parseInt(data.get("y"))
                     );
 
-                    trace(boardGrid);
-                    boardDisplayLocations.set(Std.int(boardGrid.y / 4), new Array<Grid>());
-                    boardDisplayLocations.get(Std.int(boardGrid.y / 4)).push(boardGrid);
+                    var phraseNumber = Std.int(boardGrid.y / 4);
+                    if (!boardDisplayLocations.exists(phraseNumber)) {
+                        boardDisplayLocations.set(phraseNumber, 1);
+                    } else {
+                        boardDisplayLocations.set(phraseNumber, boardDisplayLocations.get(phraseNumber) + 1);
+                    }
                 }
                 default : throw "Unknown board display parsed";
             }
         }
         loader.loadEntities(parseBoardDisplays, "BoardDisplayLayer");
-        trace(boardDisplayLocations);
 
         function parseEntities(type:String, data:Xml):Void {
             switch (type) {
-                case "RedSlider":
+                case "RedSlider": {
+                    var boardGrid:Grid = Grid.gridFromRawCoordinates(
+                        Std.parseInt(data.get("x")),
+                        Std.parseInt(data.get("y"))
+                    );
+
+                    // vertical displacement
+                    var verticalDisplacement = null;
+                    switch (boardGrid.y % 4) {
+                        case 0: verticalDisplacement = UP;
+                        case 1: verticalDisplacement = NONE;
+                        case 2: verticalDisplacement = DOWN;
+                        default: throw "Invalid level format; beat below/above grid";
+                    }
+                    // horz displacement
+                    var horizontalDisplacement = null;
+                    switch (boardGrid.x % 4) {
+                        case 0: horizontalDisplacement = LEFT;
+                        case 1: horizontalDisplacement = NONE;
+                        case 2: horizontalDisplacement = RIGHT;
+                        default: throw "Invalid level format; beat below/above grid";
+                    }
+                    // beatoffset
+                    var phraseNumber = Std.int(boardGrid.y / 4);
+                    var phraseSubdivision = Std.int(boardGrid.x / 4);
+                    var phraseDivisions = boardDisplayLocations.get(phraseNumber);
+                    var beatOffset:Float = (phraseNumber + (phraseSubdivision / phraseDivisions)) * beatsPerPhrase;
+
+                    trackActions.push(
+                        new SliderThreat(
+                            beatOffset,
+                            bpm,
+                            new Displacement(horizontalDisplacement, verticalDisplacement),
+                            universalBus
+                        )
+                    );
+                }
                 default : throw "Unknown entity parsed";
             }
         }
