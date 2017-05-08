@@ -1,5 +1,9 @@
 package hubworld;
 
+import level.PlayLevelState;
+import flixel.FlxG;
+import bus.UniversalBus;
+import level.LevelDataLoader;
 import flixel.group.FlxSpriteGroup;
 import flixel.ui.FlxButton;
 import flixel.math.FlxPoint;
@@ -31,6 +35,9 @@ class WorldSpriteGroup extends FlxSpriteGroup {
             } else {
                 button.onDown.callback = function() {
                     trace("Start level: " + (i + 1));
+                    var universalBus = new UniversalBus();
+                    var levelData = LevelDataLoader.loadLevelData(world.levels[i], universalBus);
+                    FlxG.switchState(new PlayLevelState(levelData, new FlxSpriteGroup(), universalBus));
                 }
             }
         }
