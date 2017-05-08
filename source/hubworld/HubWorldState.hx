@@ -7,14 +7,9 @@ typedef Point = {
     var y : Int;   
 }
 
-typedef Level = {
-    var music : String;
-    var level : String;
-}
-
 typedef World = {
     var hasTutorial : Bool; // Forces the first level to be played before the others
-    var levels : Array<Level>;
+    var levels : Array<String>; // Asset path of .oel level file
 }
 
 typedef HubWorldData = {
