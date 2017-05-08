@@ -1,0 +1,81 @@
+{
+    "buttonLocations": [
+        { "x" : 355, "y" : 50 },
+        { "x" : 290, "y" : 180 },
+        { "x" : 420, "y" : 180 },
+        { "x" : 290, "y" : 310 },
+        { "x" : 420, "y" : 310 }
+    ],
+
+    "worlds": [
+        {
+            "hasTutorial" : true,
+            "levels" : [{
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level0.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level1.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level2.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level3.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level4.xml"
+            }]
+        },
+        {
+            "hasTutorial" : true,
+            "levels" : [{
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level0.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level1.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level2.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level3.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level4.xml"
+            }]
+        },
+        {
+            "hasTutorial" : false,
+            "levels" : [{
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level0.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level1.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level2.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level3.xml"
+            },
+            {
+                "music" : "To_Eris/Regards_from_Mars.ogg",
+                "level" : "levels/level4.xml"
+            }]
+        }
+    ]
+}
