@@ -28,10 +28,9 @@ class HubWorldState extends FlxState {
     override public function create():Void {
         super.create();
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
-        
-        var text = new flixel.text.FlxText(0, 0, 0, "TODO hub world", 18);
-        text.screenCenter();
-        add(text);
+
+        var world = new WorldSpriteGroup(hubWorldData, 0);
+        add(world);
     }
 
     override public function update(elapsed:Float):Void {
