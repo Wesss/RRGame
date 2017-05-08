@@ -8,13 +8,13 @@ import flixel.system.FlxAssets.FlxSoundAsset;
  **/
 class LevelData {
 
-    public var musicTrack(default, null):FlxSoundAsset;
+    public var musicTrack(default, null):String;
     public var bpm(default, null):Int;
     public var songStartOffsetMilis(default, null):Int;
     public var trackActions(default, null):Array<TrackAction>;
 
-    public function new(musicTrackAsset, bpm, songStartoffsetMilis, trackActions) {
-        this.musicTrack = musicTrackAsset;
+    public function new(musicTrackAssetPath, bpm, songStartoffsetMilis, trackActions) {
+        this.musicTrack = musicTrackAssetPath;
         this.bpm = bpm;
         this.songStartOffsetMilis = songStartoffsetMilis;
         this.trackActions = trackActions;

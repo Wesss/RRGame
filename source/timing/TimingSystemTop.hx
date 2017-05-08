@@ -53,7 +53,6 @@ class TimingSystemTop extends FlxBasic {
      * Save information on the music that is about to be played
      **/
     public function loadMusicInformation(levelData:LevelData):Void {
-        // TODO change to take in level load event and hook up to bus
         this.milisecondsPerBeat = MILISECONDS_PER_MINUTE / levelData.bpm;
         this.offsetMilis = levelData.songStartOffsetMilis;
     }

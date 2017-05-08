@@ -15,12 +15,11 @@ class PlayLevelTest extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		// TODO create level data and pass in to run the level
 
 		var universalBus = new bus.UniversalBus();
-		// Create sample level data
 		var trackGroup = new FlxSpriteGroup();
-		
+
+		// Create sample level data
 		var bpm = 135;
 		var threats : Array<track_action.TrackAction> = [];
 		

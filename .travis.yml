@@ -2,6 +2,7 @@ language: haxe
 install:
   - haxelib install flixel
   - yes | haxelib run lime setup
+  - haxelib install flixel-addons
   - haxelib install munit
   - haxelib install hamcrest
   - haxelib list
