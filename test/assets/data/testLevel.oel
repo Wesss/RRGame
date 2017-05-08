@@ -1,0 +1,41 @@
+<level width="512" height="2048" BPM="135" MusicTrack="testTrack.ogg" MusicStartOffset="444" BeatsPerPhrase="4">
+  <BoardDisplayLayer>
+    <Board id="26" x="0" y="256" />
+    <Board id="0" x="0" y="192" />
+    <Board id="13" x="0" y="64" />
+    <Board id="14" x="0" y="128" />
+    <Board id="1" x="0" y="0" />
+    <Board id="2" x="64" y="0" />
+    <Board id="3" x="128" y="0" />
+    <Board id="4" x="192" y="0" />
+    <Board id="5" x="64" y="64" />
+    <Board id="6" x="128" y="64" />
+    <Board id="7" x="192" y="64" />
+    <Board id="8" x="64" y="128" />
+    <Board id="9" x="128" y="128" />
+    <Board id="10" x="192" y="128" />
+    <Board id="11" x="64" y="192" />
+    <Board id="12" x="128" y="192" />
+    <Board id="15" x="192" y="192" />
+    <Board id="16" x="256" y="192" />
+    <Board id="17" x="320" y="192" />
+    <Board id="18" x="384" y="192" />
+    <Board id="19" x="448" y="192" />
+  </BoardDisplayLayer>
+  <Entities>
+    <RedSlider id="0" x="0" y="0" />
+    <RedSlider id="12" x="0" y="80" />
+    <RedSlider id="15" x="0" y="160" />
+    <RedSlider id="1" x="16" y="192" />
+    <RedSlider id="10" x="96" y="192" />
+    <RedSlider id="2" x="160" y="208" />
+    <RedSlider id="3" x="208" y="208" />
+    <RedSlider id="4" x="272" y="224" />
+    <RedSlider id="5" x="352" y="224" />
+    <RedSlider id="6" x="416" y="208" />
+    <RedSlider id="7" x="464" y="208" />
+    <RedSlider id="8" x="0" y="256" />
+    <RedSlider id="9" x="0" y="272" />
+    <RedSlider id="11" x="0" y="288" />
+  </Entities>
+</level>

@@ -7,12 +7,15 @@ using flixel.util.FlxArrayUtil;
 using StringTools;
 
 class AssetPathsMacros {
-public static function buildManualTestAssets():Array<haxe.macro.Expr.Field>
-	{			
+	public static function buildManualTestAssets():Array<haxe.macro.Expr.Field> {
 		var fileReferences:Array<FileReference> = getFileReferences("../../assets/", true);
 		
+		return buildTestAssets(fileReferences);
+	}
+
+	private static function buildTestAssets(fileReferences:Array<FileReference>):Array<haxe.macro.Expr.Field> {
 		var fields:Array<haxe.macro.Expr.Field> = Context.getBuildFields();
-			
+
 		for (fileRef in fileReferences)
 		{
 			// create new field based on file references!

@@ -46,9 +46,6 @@ class AudioSystemTop {
      * Prepare to play music specifically for a level
      **/
     public function loadMusicForLevel(levelData:LevelData):Void {
-        // TODO pass in level data object, hook this method up to appropriate bus,
-        // TODO and load in music associated with level
-
         if (musicForLevel != null) {
             throw "Music for level has already been loaded";
         }
@@ -59,9 +56,6 @@ class AudioSystemTop {
      * Start playing music specifically for a level
      **/
     public function playMusicForLevel(levelData:LevelData):Void{
-        // TODO pass in level data object, hook this method up to appropriate bus,
-        // TODO and play in music associated with level
-
         if (musicForLevel == null) {
             throw "No Music has been loaded";
         }
