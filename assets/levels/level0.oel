@@ -7,7 +7,7 @@
     <Board id="1" x="0" y="0" />
   </BoardDisplayLayer>
   <Entities>
-    <RedSlider id="0" x="0" y="0" />
+    <!--RedSlider id="0" x="0" y="0" /-->
     <RedSlider id="12" x="0" y="80" />
     <RedSlider id="15" x="0" y="160" />
     <RedSlider id="1" x="16" y="192" />
