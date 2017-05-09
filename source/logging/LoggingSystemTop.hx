@@ -24,7 +24,7 @@ class LoggingSystemTop {
     private var curBeat:Float;
 
     public function new() {
-        var logger = new CapstoneLogger(GAME_ID, GAME_NAME, GAME_KEY, CATEGORY_ID, VERSION, IS_DEV);
+        logger = new CapstoneLogger(GAME_ID, GAME_NAME, GAME_KEY, CATEGORY_ID, VERSION, IS_DEV);
         var userID = logger.getSavedUserId();
         if (userID == null) {
             userID = logger.generateUuid();

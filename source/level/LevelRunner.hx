@@ -16,11 +16,13 @@ class LevelRunner {
     private var actionsIndex:Int;
     private var lastBeat:Float;
     private var trackActions:Array<TrackAction>;
+    private var universalBus:UniversalBus;
 
     public function new(universalBus:UniversalBus):Void {
         this.levelEventBus = universalBus.level;
         universalBus.beat.subscribe(this, beatHandler);
         actions = [];
+        this.universalBus = universalBus;
     }
 
     /**
@@ -62,6 +64,10 @@ class LevelRunner {
 
     public function beatHandler(beat : BeatEvent) {
         // Check if any trigger beats have happened
+        if (actionsIndex == actions.length) {
+            // game is finished
+            universalBus.levelOutOfBeats.broadcast(true);
+        }
         for (i in actionsIndex...actions.length) {
             if (actions[i].absoluteBeatTime >= lastBeat && actions[i].absoluteBeatTime < beat.beat) {
                 actions[i].trackAction.triggerBeat(actions[i].beatIdx);

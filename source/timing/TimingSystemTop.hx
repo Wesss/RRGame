@@ -20,7 +20,7 @@ class TimingSystemTop extends FlxBasic {
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
     private var music:FlxSound;
-    private var prevMusicHeadPlayTime:Float;
+    private var prevMusicHeadPlayTime:Null<Float>;
     private var prevMusicTimeStamp:Float;
     private var wasPausedSinceLastMusicHeadUpdate:Bool;
     private var lastBeatBroadcasted:Float;

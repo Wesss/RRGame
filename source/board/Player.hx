@@ -15,7 +15,7 @@ class Player extends FlxSpriteGroup {
     var targetY : Float;
     var uniBus : UniversalBus;
 
-    var hp : Int;
+    public var hp(default, null) : Int;
 
     // for graphical tween
     var oldX : Float;
