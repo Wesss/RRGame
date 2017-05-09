@@ -8,20 +8,29 @@ import flixel.group.FlxSpriteGroup;
 import flixel.ui.FlxButton;
 import flixel.math.FlxPoint;
 import flixel.FlxSprite;
+import flixel.tweens.*;
 
 class WorldSpriteGroup extends FlxSpriteGroup {
-    var tutorialPassed : Bool; // true if tutorial is passed or if there isn't a tutorial
-
-    public function new(hubWorldData : hubworld.HubWorldState.HubWorldData, index : Int) {
-        super();
+    public function new(hubWorldData : hubworld.HubWorldState.HubWorldData, index : Int, levelScores : Map<Int, Float>) {
+        super(FlxG.width * index);
         var world = hubWorldData.worlds[index];
-        tutorialPassed = !world.hasTutorial;
+        var tutorialPassed = !world.hasTutorial || levelScores[index * 5] != null || levelScores[index * 5] < 1;
+        // TODO : fix this                              constant       ^                                      ^
 
         for (i in 0...world.levels.length) {
             var location = hubWorldData.buttonLocations[i];
-            var button = new SelectLevelButton(location.x, location.y, i + 1 + "", world.levels[i], !tutorialPassed && i > 0);
+            var button = new SelectLevelButton(location.x, location.y,
+                (index + 1) + "-" + (i + 1), world.levels[i], !tutorialPassed && i > 0);
             add(button);
         }
+    }
+
+    public function unlockAll() {
+        FlxG.camera.shake(0.02, 0.2, function() {
+            group.forEach(function(sprite) {
+                cast (sprite, SelectLevelButton).unlock();
+            });
+        });
     }
 }
 
@@ -37,6 +46,7 @@ class SelectLevelButton extends FlxSpriteGroup {
                 50, flixel.util.FlxColor.WHITE, CENTER);
         var centerOffset = new FlxPoint(0, button.height / 2 - button.label.height / 2 - 5);
         button.labelOffsets = [centerOffset, centerOffset, centerOffset];
+        button.scrollFactor.x = 1;
         add(button);
 
         lockOverlay = new FlxSprite(0, 0, AssetPaths.LockOverlay__png);
@@ -63,7 +73,20 @@ class SelectLevelButton extends FlxSpriteGroup {
     }
 
     public function unlock() {
-        isLocked = false;
-        lockOverlay.alpha = 0;
+        FlxTween.tween(lockOverlay.scale, {
+            x : 1.2,
+            y : 1.2
+        }, 1, {
+            ease : FlxEase.quadOut
+        });
+
+        FlxTween.tween(lockOverlay, {
+            alpha : 0
+        }, 1, {
+            ease : FlxEase.quadOut,
+            onComplete : function(tween) {
+                isLocked = false;
+            }
+        });
     }
 }
