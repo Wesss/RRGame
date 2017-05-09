@@ -20,7 +20,8 @@ class WorldSpriteGroup extends FlxSpriteGroup {
         for (i in 0...world.levels.length) {
             var location = hubWorldData.buttonLocations[i];
             var button = new SelectLevelButton(location.x, location.y,
-                (index + 1) + "-" + (i + 1), world.levels[i], !tutorialPassed && i > 0);
+                (index + 1) + "-" + (i + 1), world.levels[i], index * 5 + i, !tutorialPassed && i > 0);
+                // TODO :  and thiiiis                 ---------------^
             add(button);
         }
     }
@@ -38,7 +39,7 @@ class SelectLevelButton extends FlxSpriteGroup {
     private var isLocked : Bool;
     private var lockOverlay : FlxSprite;
 
-    public function new(x : Float, y : Float, label : String, levelAssetPath : String, isLocked = false) {
+    public function new(x : Float, y : Float, label : String, levelAssetPath : String, levelIndex : Int, isLocked = false) {
         super(x, y);
         var button = new FlxButton(0, 0, label);
         button.loadGraphic(AssetPaths.BoardSquare__png);
@@ -58,7 +59,7 @@ class SelectLevelButton extends FlxSpriteGroup {
 
                 var universalBus = new UniversalBus();
                 var levelData = LevelDataLoader.loadLevelData(levelAssetPath, universalBus);
-                FlxG.switchState(new PlayLevelState(levelData, universalBus));
+                FlxG.switchState(new PlayLevelState(levelData, levelIndex, universalBus));
             }
         }
 
