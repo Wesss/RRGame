@@ -22,35 +22,95 @@ class PlayLevelTest extends FlxState
 		var bpm = 135;
 		var threats : Array<track_action.TrackAction> = [];
 		
-		var i = 10;
+		var i = 2;
+		var warn = 2;
 		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
             for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus);
+				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
+				threats.push(slider);
+			}
+			i++;
+		}
+		/*
+		i += 9;
+		
+		for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
+			for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
+				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
+				threats.push(slider);
+			}
+			i++;
+		}
+
+		i += 9;
+
+		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
+            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
+				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
 				threats.push(slider);
 				i++;
 			}
 		}
 
+		i += 9;
+
 		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
             for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus);
-				threats.push(slider);
+				if (!horizontalDisplacement.equals(HorizontalDisplacement.NONE) ||
+					!verticalDisplacement.equals(VerticalDisplacement.NONE)) {
+					var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
+					threats.push(slider);
+				}
 			}
-			i++;
 		}
 
-		
-		for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-			for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
-				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus);
-				threats.push(slider);
+		i += 2;
+		var slider = new track_action.SliderThreat(i, bpm, new Displacement(HorizontalDisplacement.NONE, VerticalDisplacement.NONE), universalBus, warn);
+		threats.push(slider);
+
+		i += 2;
+
+		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
+            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
+				if (!horizontalDisplacement.equals(HorizontalDisplacement.NONE) ||
+					!verticalDisplacement.equals(VerticalDisplacement.NONE)) {
+					var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
+					threats.push(slider);
+				}
 			}
-			i++;
 		}
+
+		i += 2;
+		slider = new track_action.SliderThreat(i, bpm, new Displacement(HorizontalDisplacement.NONE, VerticalDisplacement.NONE), universalBus, warn);
+		threats.push(slider);
+
+		i += 2;
+		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
+            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
+				if (horizontalDisplacement.equals(HorizontalDisplacement.NONE) ||
+					verticalDisplacement.equals(VerticalDisplacement.NONE)) {
+					slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
+					threats.push(slider);
+				}
+			}
+		}
+
+		i += 2;
+		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
+            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
+				if (!horizontalDisplacement.equals(HorizontalDisplacement.NONE) &&
+					!verticalDisplacement.equals(VerticalDisplacement.NONE)) {
+					slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
+					threats.push(slider);
+				}
+			}
+		}
+		slider = new track_action.SliderThreat(i, bpm, new Displacement(HorizontalDisplacement.NONE, VerticalDisplacement.NONE), universalBus, warn);
+		threats.push(slider);*/
 
 		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, bpm, 444, threats);
 		
-		FlxG.switchState(new PlayLevelState(levelData, universalBus));
+		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus));
 	}
 
 	override public function update(elapsed:Float):Void
