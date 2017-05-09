@@ -11,21 +11,21 @@
         {
             "hasTutorial" : true,
             "levels" : [
-                "levels/level0.oel",
-                "levels/level1.oel",
-                "levels/level2.oel",
-                "levels/level3.oel",
-                "levels/level4.oel"
+                "assets/levels/level0.oel",
+                "assets/levels/level1.oel",
+                "assets/levels/level2.oel",
+                "assets/levels/level3.oel",
+                "assets/levels/level4.oel"
             ]
         },
         {
             "hasTutorial" : true,
             "levels" : [
-                "levels/level0.oel",
-                "levels/level1.oel",
-                "levels/level2.oel",
-                "levels/level3.oel",
-                "levels/level4.oel"
+                "assets/levels/level0.oel",
+                "assets/levels/level1.oel",
+                "assets/levels/level2.oel",
+                "assets/levels/level3.oel",
+                "assets/levels/level4.oel"
             ]
         },
         {
