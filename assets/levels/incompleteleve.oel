@@ -1,0 +1,20 @@
+<level width="512" height="2048" BPM="135" MusicTrack="Regards_from_Mars.ogg" MusicStartOffset="444" BeatsPerPhrase="8">
+  <BoardDisplayLayer>
+    <Board id="26" x="0" y="256" />
+    <Board id="0" x="0" y="192" />
+    <Board id="13" x="0" y="64" />
+    <Board id="14" x="0" y="128" />
+    <Board id="1" x="0" y="0" />
+  </BoardDisplayLayer>
+  <Entities>
+    <RedSlider id="0" x="0" y="0" />
+    <RedSlider id="12" x="0" y="80" />
+    <RedSlider id="15" x="0" y="160" />
+    <RedSlider id="1" x="16" y="192" />
+    <RedSlider id="2" x="16" y="208" />
+    <RedSlider id="3" x="16" y="224" />
+    <RedSlider id="4" x="32" y="256" />
+    <RedSlider id="5" x="32" y="272" />
+    <RedSlider id="6" x="32" y="288" />
+  </Entities>
+</level>
