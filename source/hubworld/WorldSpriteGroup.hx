@@ -74,19 +74,23 @@ class SelectLevelButton extends FlxSpriteGroup {
     }
 
     public function unlock() {
-        FlxTween.tween(lockOverlay.scale, {
-            x : 1.2,
-            y : 1.2
-        }, 1, {
-            ease : FlxEase.quadOut
-        });
+        FlxTween.tween({}, {}, Math.random() / 3 * 2, {
+            onComplete: function(tween) {
+                FlxTween.tween(lockOverlay.scale, {
+                    x : 1.2,
+                    y : 1.2
+                }, 0.5, {
+                    ease : FlxEase.quadOut
+                });
 
-        FlxTween.tween(lockOverlay, {
-            alpha : 0
-        }, 1, {
-            ease : FlxEase.quadOut,
-            onComplete : function(tween) {
-                isLocked = false;
+                FlxTween.tween(lockOverlay, {
+                    alpha : 0
+                }, 0.5, {
+                    ease : FlxEase.quadOut,
+                    onComplete : function(tween) {
+                        isLocked = false;
+                    }
+                });
             }
         });
     }
