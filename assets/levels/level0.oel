@@ -99,7 +99,6 @@
     <Board id="96" x="0" y="1024" />
   </BoardDisplayLayer>
   <Entities>
-    <RedSlider id="13" x="0" y="0" />
     <RedSlider id="14" x="160" y="16" />
     <RedSlider id="0" x="16" y="96" />
     <RedSlider id="1" x="160" y="64" />
