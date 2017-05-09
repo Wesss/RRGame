@@ -77,14 +77,14 @@ class HubWorldState extends FlxState {
 
         add(cameraTarget);
         FlxG.camera.follow(cameraTarget);
+        FlxG.mouse.visible = true;
 
         for (i in 0...hubWorldData.worlds.length) {
             var world = new WorldSpriteGroup(hubWorldData, i, FlxG.save.data.levelScore);
             add(world);
 
             if (betterProgress != null && i == worldProgress) {
-                trace("Improved/cleared: " + levelRelativeToWorld);
-                if (levelRelativeToWorld == 0 && (currentScore != null || currentScore < 1) && betterProgress.score >= 1) {
+                if (levelRelativeToWorld == 0 && (currentScore == null || currentScore < 1) && betterProgress.score >= 1) {
                     // Tutorial passed
                     world.unlockAll();
                 }
