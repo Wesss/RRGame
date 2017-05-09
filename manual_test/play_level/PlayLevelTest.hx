@@ -54,7 +54,7 @@ class PlayLevelTest extends FlxState
 
 		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, bpm, 444, threats);
 		
-		FlxG.switchState(new PlayLevelState(levelData, trackGroup, universalBus));
+		FlxG.switchState(new PlayLevelState(levelData, trackGroup, universalBus, null));
 	}
 
 	override public function update(elapsed:Float):Void

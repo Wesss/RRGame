@@ -1,5 +1,6 @@
 package level;
 
+import logging.LoggingSystemTop;
 import audio.AudioSystemTop;
 import bus.UniversalBus;
 import board.BoardSystemTop;
@@ -16,12 +17,17 @@ class PlayLevelState extends FlxState {
 	private var timingSystemTop:TimingSystemTop;
 	private var trackGroup:FlxSpriteGroup;
 	private var universalBus:UniversalBus;
+	private var logger:LoggingSystemTop; // TODO re-pass this into hubworld
 
-	public function new(levelData:LevelData, trackGroup:FlxSpriteGroup, universalBus:UniversalBus) {
+	public function new(levelData:LevelData,
+						trackGroup:FlxSpriteGroup,
+						universalBus:UniversalBus,
+						logger:LoggingSystemTop) {
 		super();
 		this.levelData = levelData;
 		this.trackGroup = trackGroup;
 		this.universalBus = universalBus;
+		this.logger = logger;
 	}
 
 	override public function create():Void {
