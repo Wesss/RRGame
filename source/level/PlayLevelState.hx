@@ -31,7 +31,6 @@ class PlayLevelState extends FlxState {
 		for (trackAction in levelData.trackActions) {
 			if (Std.is(trackAction, FlxSprite)) {
 				this.trackGroup.add(cast(trackAction, FlxSprite));
-				trace(trackAction.beatOffset);
 			}
 		}
 		this.universalBus = universalBus;
