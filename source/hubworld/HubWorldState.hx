@@ -84,7 +84,7 @@ class HubWorldState extends FlxState {
 
             if (betterProgress != null && i == worldProgress) {
                 trace("Improved/cleared: " + levelRelativeToWorld);
-                if (levelRelativeToWorld == 0 && (currentScore == null || currentScore < 1)) {
+                if (levelRelativeToWorld == 0 && (currentScore != null || currentScore < 1) && betterProgress.score >= 1) {
                     // Tutorial passed
                     world.unlockAll();
                 }
