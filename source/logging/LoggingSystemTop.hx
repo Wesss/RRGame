@@ -1,5 +1,6 @@
 package logging;
 
+import flixel.FlxG;
 import timing.BeatEvent;
 import domain.Displacement;
 import bus.UniversalBus;
@@ -27,9 +28,10 @@ class LoggingSystemTop {
 
     public function new() {
         logger = new CapstoneLogger(GAME_ID, GAME_NAME, GAME_KEY, CATEGORY_ID, VERSION, IS_DEV);
-        var userID = logger.getSavedUserId();
+        var userID = FlxG.save.data.userID;
         if (userID == null) {
             userID = logger.generateUuid();
+            FlxG.save.data.userID = userID;
         }
 
         // TODO pass in callback for when session is created and wait on callback before starting a level
