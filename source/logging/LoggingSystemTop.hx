@@ -28,10 +28,10 @@ class LoggingSystemTop {
 
     public function new() {
         logger = new CapstoneLogger(GAME_ID, GAME_NAME, GAME_KEY, CATEGORY_ID, VERSION, IS_DEV);
-        var userID = FlxG.save.data.userID;
+        var userID = logger.getSavedUserId();
         if (userID == null) {
             userID = logger.generateUuid();
-            FlxG.save.data.userID = userID;
+            logger.setSavedUserId(userID);
         }
 
         // TODO pass in callback for when session is created and wait on callback before starting a level
