@@ -1,5 +1,8 @@
 package hubworld;
 
+import level.PlayLevelState;
+import flixel.FlxG;
+import logging.LoggingSystemTop;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -29,6 +32,7 @@ typedef NewProgress = {
 class HubWorldState extends FlxState {
     var hubWorldData : HubWorldData;
     var cameraTarget : CameraTarget;
+    var logger:LoggingSystemTop;
 
     // Progress related fields
     var currentScore : Null<Int>;
@@ -36,13 +40,15 @@ class HubWorldState extends FlxState {
     var worldProgress : Null<Int>; // set if new progress is not null and has a valid level
     var levelRelativeToWorld : Null<Int>; // the level in the world given above
 
-    public function new(?newProgress : NewProgress) {
+    public function new(logger:LoggingSystemTop, ?newProgress : NewProgress) {
         super();
 
+        this.logger = logger;
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
 
         initializeSaveData();
         if (newProgress != null) {
+            logger.endLevel(newProgress.score);
             // Have the camera on the right screen that they finished the previous level
             // off of
             var levelAmountSum = 0;
@@ -80,7 +86,7 @@ class HubWorldState extends FlxState {
         FlxG.mouse.visible = true;
 
         for (i in 0...hubWorldData.worlds.length) {
-            var world = new WorldSpriteGroup(hubWorldData, i, FlxG.save.data.levelScore);
+            var world = new WorldSpriteGroup(hubWorldData, i, FlxG.save.data.levelScore, logger);
             add(world);
 
             if (betterProgress != null && i == worldProgress) {
@@ -114,6 +120,16 @@ class HubWorldState extends FlxState {
 
         FlxG.save.data.initialized = true;
         FlxG.save.flush();
+    }
+
+    override public function onFocus() {
+        super.onFocus();
+        logger.focusGained();
+    }
+
+    override public function onFocusLost() {
+        super.onFocusLost();
+        logger.focusLost();
     }
 }
 

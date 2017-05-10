@@ -69,9 +69,7 @@ class TestLevelDataLoader {
 	 * Returns an anonymous structure with info given
      **/
 	private function getExpectedSliderThreat(beatOffset:Float, position:Displacement) {
-		// TODO construct displacement positions and check for those
 		return {beatOffset: beatOffset, position: position};
-		//beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus, beatWarnTime = 2.0) {
 	}
 
 	/**
