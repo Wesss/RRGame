@@ -71,6 +71,8 @@ class HubWorldState extends FlxState {
             currentScore = FlxG.save.data.levelScore[newProgress.level];
             if (currentScore == null || newProgress.score > currentScore) {
                 betterProgress = newProgress;
+                FlxG.save.data.levelScore[newProgress.level] = newProgress.score;
+                FlxG.save.flush();
             } else {
                 betterProgress = null;
             }
