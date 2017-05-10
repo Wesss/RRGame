@@ -162,6 +162,7 @@
     <Board id="128" x="832" y="704" />
     <Board id="129" x="896" y="704" />
     <Board id="130" x="960" y="704" />
+    <Board id="76" x="0" y="768" />
   </BoardDisplayLayer>
   <Entities>
     <RedSlider id="0" x="0" y="128" />
@@ -240,6 +241,5 @@
     <RedSlider id="73" x="592" y="736" />
     <RedSlider id="74" x="800" y="736" />
     <RedSlider id="75" x="784" y="736" />
-    <Board id="76" x="0" y="768" />
   </Entities>
 </level>
