@@ -21,6 +21,7 @@ class LevelRunner {
     public function new(universalBus:UniversalBus):Void {
         this.levelEventBus = universalBus.level;
         universalBus.beat.subscribe(this, beatHandler);
+        universalBus.gameOver.subscribe(this, gameOverHandler);
         actions = [];
         this.universalBus = universalBus;
     }
@@ -82,6 +83,10 @@ class LevelRunner {
         }
 
         lastBeat = beat.beat;
+    }
+
+    public function gameOverHandler(_) {
+        universalBus.beat.unsubscribe(this);
     }
 }
 
