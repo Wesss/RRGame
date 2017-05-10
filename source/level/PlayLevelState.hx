@@ -62,6 +62,9 @@ class PlayLevelState extends FlxState {
 
 		// Camera and camera shake
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
+	 	universalBus.threatKillSquare.subscribe(this, function(displacement) {
+			FlxG.camera.shake(0.01, 0.1);
+		});
 
 		universalBus.playerHPChange.subscribe(this, function(newHP) {
 			FlxG.camera.flash(flixel.util.FlxColor.WHITE, 0.1);
