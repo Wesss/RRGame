@@ -121,6 +121,16 @@ class HubWorldState extends FlxState {
         FlxG.save.data.initialized = true;
         FlxG.save.flush();
     }
+
+    override public function onFocus() {
+        super.onFocus();
+        logger.focusGained();
+    }
+
+    override public function onFocusLost() {
+        super.onFocusLost();
+        logger.focusLost();
+    }
 }
 
 private class CameraTarget extends FlxSprite {

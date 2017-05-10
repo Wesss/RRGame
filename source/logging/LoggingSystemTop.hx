@@ -19,6 +19,8 @@ class LoggingSystemTop {
     // Action IDs
     private static inline var CONTROLS_ACTION_ID = 0;
     private static inline var PLAYER_HIT_ACTION_ID = 1;
+    private static inline var UNFOCUS_STATE_ID = 0;
+    private static inline var FOCUS_STATE_ID = 1;
 
     private var logger:CapstoneLogger;
     private var curBeat:Float;
@@ -58,5 +60,13 @@ class LoggingSystemTop {
     public function endLevel(score:Float) {
         logger.logLevelEnd({isWin : (score > 0), score : score});
         this.curBeat = null;
+    }
+
+    public function focusLost() {
+        logger.logActionWithNoLevel(UNFOCUS_STATE_ID);
+    }
+
+    public function focusGained() {
+        logger.logActionWithNoLevel(FOCUS_STATE_ID);
     }
 }

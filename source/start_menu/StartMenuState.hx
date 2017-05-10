@@ -28,6 +28,16 @@ class StartMenuState extends FlxState
         super.update(elapsed);
     }
 
+    override public function onFocus() {
+        super.onFocus();
+        logger.focusGained();
+    }
+
+    override public function onFocusLost() {
+        super.onFocusLost();
+        logger.focusLost();
+    }
+
     private function startGame()
     {
         FlxG.switchState(new HubWorldState(logger));

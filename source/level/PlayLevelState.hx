@@ -103,4 +103,14 @@ class PlayLevelState extends FlxState {
 			}
 		));
 	}
+
+	override public function onFocus() {
+		super.onFocus();
+		logger.focusGained();
+	}
+
+	override public function onFocusLost() {
+		super.onFocusLost();
+		logger.focusLost();
+	}
 }
