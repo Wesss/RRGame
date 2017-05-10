@@ -13,6 +13,22 @@ class BoardSquare extends FlxSprite {
 
         if (universalBus != null) {
             universalBus.beat.subscribe(this, handleBeat);
+            universalBus.gameOver.subscribe(this, function(_) {
+                universalBus.beat.unsubscribe(this);
+                FlxTween.tween(scale, {
+                    y : 0,
+                    x : 1.1
+                }, 0.2, {
+                    ease : FlxEase.quadIn
+                });
+                var explodeScale = 2;
+                FlxTween.tween(this, {
+                    x : (x + width / 2) * explodeScale + x,
+                    y : (y + height / 2) * explodeScale + y
+                }, 0.2, {
+                    ease : FlxEase.quadIn
+                });
+            });
         }
 
         oldBeat = 0;

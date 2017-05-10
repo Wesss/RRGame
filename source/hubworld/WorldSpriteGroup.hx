@@ -12,6 +12,8 @@ import flixel.FlxSprite;
 import flixel.tweens.*;
 
 class WorldSpriteGroup extends FlxSpriteGroup {
+    public var levels(default, null) : Array<SelectLevelButton>;
+
     public function new(hubWorldData : hubworld.HubWorldState.HubWorldData,
                         index : Int,
                         levelScores : Map<Int, Float>,
@@ -21,6 +23,7 @@ class WorldSpriteGroup extends FlxSpriteGroup {
         var tutorialPassed = !world.hasTutorial || levelScores[index * 5] != null || levelScores[index * 5] < 1;
         // TODO : fix this                              constant       ^                                      ^
 
+        levels = [];
         for (i in 0...world.levels.length) {
             var location = hubWorldData.buttonLocations[i];
             var button = new SelectLevelButton(
@@ -33,6 +36,7 @@ class WorldSpriteGroup extends FlxSpriteGroup {
                 logger,
                 !tutorialPassed && i > 0);
             add(button);
+            levels.push(button);
         }
     }
 
@@ -47,8 +51,13 @@ class WorldSpriteGroup extends FlxSpriteGroup {
 
 class SelectLevelButton extends FlxSpriteGroup {
     private var isLocked : Bool;
+    private var button : FlxButton;
     private var lockOverlay : FlxSprite;
     private var logger:LoggingSystemTop;
+
+    public function click() {
+        button.onDown.fire();
+    }
 
     public function new(x : Float,
                         y : Float,
@@ -58,7 +67,7 @@ class SelectLevelButton extends FlxSpriteGroup {
                         logger : LoggingSystemTop,
                         isLocked = false) {
         super(x, y);
-        var button = new FlxButton(0, 0, label);
+        button = new FlxButton(0, 0, label);
         button.loadGraphic(AssetPaths.BoardSquare__png);
         button.label.setFormat(AssetPaths.GlacialIndifference_Regular__ttf,
                 50, flixel.util.FlxColor.WHITE, CENTER);

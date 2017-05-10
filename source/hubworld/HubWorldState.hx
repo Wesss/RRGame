@@ -32,6 +32,7 @@ typedef NewProgress = {
 class HubWorldState extends FlxState {
     var hubWorldData : HubWorldData;
     var cameraTarget : CameraTarget;
+    var reset : Bool;
     var logger:LoggingSystemTop;
 
     // Progress related fields
@@ -40,7 +41,7 @@ class HubWorldState extends FlxState {
     var worldProgress : Null<Int>; // set if new progress is not null and has a valid level
     var levelRelativeToWorld : Null<Int>; // the level in the world given above
 
-    public function new(logger:LoggingSystemTop, ?newProgress : NewProgress) {
+    public function new(logger:LoggingSystemTop, ?newProgress : NewProgress, ?reset : Bool) {
         super();
 
         this.logger = logger;
@@ -76,6 +77,8 @@ class HubWorldState extends FlxState {
         } else {
             cameraTarget = new CameraTarget(0);
         }
+
+        this.reset = reset;
     }
 
     override public function create():Void {
@@ -93,6 +96,9 @@ class HubWorldState extends FlxState {
                 if (levelRelativeToWorld == 0 && (currentScore == null || currentScore < 1) && betterProgress.score >= 1) {
                     // Tutorial passed
                     world.unlockAll();
+                }
+                if (reset) {
+                    world.levels[levelRelativeToWorld].click();
                 }
             }
 

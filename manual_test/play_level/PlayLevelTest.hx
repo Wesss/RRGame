@@ -23,13 +23,12 @@ class PlayLevelTest extends FlxState
 		
 		var i = 2;
 		var warn = 2;
-		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
-            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
-				threats.push(slider);
-			}
-			i++;
+		for (x in 0...5) {
+			var slider = new track_action.SliderThreat(i, bpm, new Displacement(NONE, NONE), universalBus, warn);
+			threats.push(slider);
+			i += 1;
 		}
+
 		/*
 		i += 9;
 		
