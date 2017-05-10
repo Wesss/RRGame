@@ -162,6 +162,7 @@
     <Board id="128" x="832" y="704" />
     <Board id="129" x="896" y="704" />
     <Board id="130" x="960" y="704" />
+    <Board id="131" x="0" y="768" />
   </BoardDisplayLayer>
   <Entities>
     <RedSlider id="0" x="0" y="128" />
@@ -212,34 +213,33 @@
     <RedSlider id="9" x="224" y="208" />
     <RedSlider id="10" x="400" y="224" />
     <RedSlider id="11" x="416" y="224" />
-    <RedSlider id="12" x="576" y="160" />
-    <RedSlider id="13" x="592" y="160" />
-    <RedSlider id="14" x="608" y="224" />
-    <RedSlider id="15" x="592" y="224" />
-    <RedSlider id="16" x="768" y="160" />
-    <RedSlider id="17" x="784" y="160" />
-    <RedSlider id="55" x="800" y="224" />
-    <RedSlider id="56" x="784" y="224" />
     <RedSlider id="54" x="0" y="640" />
     <RedSlider id="57" x="16" y="640" />
     <RedSlider id="58" x="192" y="656" />
     <RedSlider id="59" x="208" y="656" />
     <RedSlider id="60" x="384" y="672" />
     <RedSlider id="61" x="400" y="672" />
-    <RedSlider id="62" x="576" y="672" />
-    <RedSlider id="63" x="592" y="672" />
-    <RedSlider id="64" x="768" y="672" />
-    <RedSlider id="65" x="784" y="672" />
     <RedSlider id="66" x="32" y="704" />
     <RedSlider id="67" x="16" y="704" />
     <RedSlider id="68" x="224" y="720" />
     <RedSlider id="69" x="208" y="720" />
     <RedSlider id="70" x="416" y="736" />
     <RedSlider id="71" x="400" y="736" />
-    <RedSlider id="72" x="608" y="736" />
-    <RedSlider id="73" x="592" y="736" />
-    <RedSlider id="74" x="800" y="736" />
-    <RedSlider id="75" x="784" y="736" />
-    <Board id="76" x="0" y="768" />
+    <RedSlider id="12" x="576" y="144" />
+    <RedSlider id="13" x="592" y="144" />
+    <RedSlider id="14" x="592" y="208" />
+    <RedSlider id="15" x="608" y="208" />
+    <RedSlider id="16" x="768" y="128" />
+    <RedSlider id="17" x="784" y="128" />
+    <RedSlider id="56" x="800" y="192" />
+    <RedSlider id="77" x="784" y="192" />
+    <RedSlider id="55" x="576" y="656" />
+    <RedSlider id="62" x="592" y="656" />
+    <RedSlider id="63" x="768" y="640" />
+    <RedSlider id="64" x="784" y="640" />
+    <RedSlider id="65" x="592" y="720" />
+    <RedSlider id="72" x="608" y="720" />
+    <RedSlider id="73" x="784" y="704" />
+    <RedSlider id="74" x="800" y="704" />
   </Entities>
 </level>
