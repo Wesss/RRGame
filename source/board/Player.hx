@@ -15,7 +15,7 @@ class Player extends FlxSpriteGroup {
     var targetY : Float;
     var uniBus : UniversalBus;
 
-    var hp : Int;
+    public var hp(default, null) : Int;
 
     // for graphical tween
     var oldX : Float;
@@ -45,6 +45,7 @@ class Player extends FlxSpriteGroup {
         uniBus = bus;
         uniBus.controls.subscribe(this, controlEventHandler);
         uniBus.playerHit.subscribe(this, playerHitHandler);
+        uniBus.gameOver.subscribe(this, gameOverHandler);
         hp = 4;
 
         oldX = x;
@@ -69,7 +70,10 @@ class Player extends FlxSpriteGroup {
         }
         playerSprite.scale = newScale;
 
-        var newAngle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+        setAngle(Math.atan2(dy, dx) * 180 / Math.PI + 90);
+    }
+
+    private function setAngle(newAngle : Float) {
         var dA = newAngle - angle;
         angle = newAngle;
 
@@ -107,7 +111,7 @@ class Player extends FlxSpriteGroup {
             uniBus.controls.unsubscribe(this);
         } else {
             // Remove indicators
-            var indicator = hpIndicators[3 - hp];
+            var indicator = hpIndicators[hp - 1];
             FlxTween.tween(indicator.scale, {
                 x : 1.1,
                 y : 1.1
@@ -118,6 +122,43 @@ class Player extends FlxSpriteGroup {
             FlxTween.tween(indicator, {
                 alpha : 0
             }, 1);
+        }
+    }
+
+    public function gameOverHandler(_) {
+        uniBus.controls.unsubscribe(this);
+        FlxTween.tween(this, {
+            x : -70,
+            y : 0
+        }, 1, {
+            ease : FlxEase.quadInOut,
+            onComplete : function(_) {
+                setAngle(0);
+            }
+        });
+
+        for (hpIndicatorIdx in 0...hpIndicators.length) {
+            hpIndicators[hpIndicatorIdx].angularVelocity = 0;
+
+            var targetAngle = 120 * hpIndicatorIdx + 360 * 4 - 60;
+            var scale = 10;
+            var dx = Math.sin((targetAngle + 60) *  Math.PI / 180) * scale;
+            var dy = Math.cos((targetAngle + 60) *  Math.PI / 180) * scale;
+            function pushOutTween(_) {
+                FlxTween.tween(hpIndicators[hpIndicatorIdx],
+                {
+                    x : hpIndicators[hpIndicatorIdx].x + dx,
+                    y : hpIndicators[hpIndicatorIdx].y - dy
+                }, 0.1, {
+                    ease : FlxEase.quadIn
+                });
+            }
+            FlxTween.angle(hpIndicators[hpIndicatorIdx], hpIndicators[hpIndicatorIdx].angle,
+                120 * hpIndicatorIdx + 360 * 4 - 60,
+                1, {
+                    ease : FlxEase.quadIn
+                }).wait(hpIndicatorIdx * 0.1 + 0.1).then(
+                    FlxTween.tween({}, {}, 0.4, { onComplete : pushOutTween }));
         }
     }
 }

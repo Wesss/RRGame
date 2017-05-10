@@ -23,6 +23,10 @@ class UniversalBus {
     public var playerHit(default, null) = new Bus<Displacement>();
     public var playerHPChange(default, null) = new Bus<Int>();
     public var playerDie(default, null) = new Bus<Displacement>();
+    public var levelOutOfBeats(default, null) = new Bus<Bool>(); // bool is placeholder
+    public var gameOver(default, null) = new Bus<Int>();
+    public var retry(default, null) = new Bus<Bool>();
+    public var returnToHub(default, null) = new Bus<Bool>();
 
     public function new() {}
 }
