@@ -1,5 +1,6 @@
 package hubworld;
 
+import logging.LoggingSystemTop;
 import level.PlayLevelState;
 import flixel.FlxG;
 import bus.UniversalBus;
@@ -13,7 +14,10 @@ import flixel.tweens.*;
 class WorldSpriteGroup extends FlxSpriteGroup {
     public var levels(default, null) : Array<SelectLevelButton>;
 
-    public function new(hubWorldData : hubworld.HubWorldState.HubWorldData, index : Int, levelScores : Map<Int, Float>) {
+    public function new(hubWorldData : hubworld.HubWorldState.HubWorldData,
+                        index : Int,
+                        levelScores : Map<Int, Float>,
+                        logger : LoggingSystemTop) {
         super(FlxG.width * index);
         var world = hubWorldData.worlds[index];
         var tutorialPassed = !world.hasTutorial || levelScores[index * 5] != null || levelScores[index * 5] < 1;
@@ -22,9 +26,15 @@ class WorldSpriteGroup extends FlxSpriteGroup {
         levels = [];
         for (i in 0...world.levels.length) {
             var location = hubWorldData.buttonLocations[i];
-            var button = new SelectLevelButton(location.x, location.y,
-                (index + 1) + "-" + (i + 1), world.levels[i], index * 5 + i, !tutorialPassed && i > 0);
-                // TODO :  and thiiiis                 ---------------^
+            var button = new SelectLevelButton(
+                location.x,
+                location.y,
+                (index + 1) + "-" + (i + 1),
+                world.levels[i],
+                index * 5 + i,
+                //TODO: ^ and that
+                logger,
+                !tutorialPassed && i > 0);
             add(button);
             levels.push(button);
         }
@@ -43,12 +53,19 @@ class SelectLevelButton extends FlxSpriteGroup {
     private var isLocked : Bool;
     private var button : FlxButton;
     private var lockOverlay : FlxSprite;
+    private var logger:LoggingSystemTop;
 
     public function click() {
         button.onDown.fire();
     }
 
-    public function new(x : Float, y : Float, label : String, levelAssetPath : String, levelIndex : Int, isLocked = false) {
+    public function new(x : Float,
+                        y : Float,
+                        label : String,
+                        levelAssetPath : String,
+                        levelIndex : Int,
+                        logger : LoggingSystemTop,
+                        isLocked = false) {
         super(x, y);
         button = new FlxButton(0, 0, label);
         button.loadGraphic(AssetPaths.BoardSquare__png);
@@ -68,7 +85,9 @@ class SelectLevelButton extends FlxSpriteGroup {
 
                 var universalBus = new UniversalBus();
                 var levelData = LevelDataLoader.loadLevelData(levelAssetPath, universalBus);
-                FlxG.switchState(new PlayLevelState(levelData, levelIndex, universalBus));
+
+                logger.startLevel(levelIndex, universalBus);
+                FlxG.switchState(new PlayLevelState(levelData, levelIndex, universalBus, logger));
             }
         }
 

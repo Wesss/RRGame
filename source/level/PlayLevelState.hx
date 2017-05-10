@@ -1,5 +1,6 @@
 package level;
 
+import logging.LoggingSystemTop;
 import audio.AudioSystemTop;
 import bus.UniversalBus;
 import board.BoardSystemTop;
@@ -22,10 +23,13 @@ class PlayLevelState extends FlxState {
 	private var timingSystemTop:TimingSystemTop;
 	private var trackGroup:FlxSpriteGroup;
 	private var universalBus:UniversalBus;
-
+	private var logger:LoggingSystemTop;
 	private var player:Player;
 
-	public function new(levelData:LevelData, levelIndex:Int, universalBus:UniversalBus) {
+	public function new(levelData:LevelData,
+						levelIndex:Int,
+						universalBus:UniversalBus,
+						logger:LoggingSystemTop) {
 		super();
 		this.levelData = levelData;
 		this.levelIndex = levelIndex;
@@ -36,6 +40,7 @@ class PlayLevelState extends FlxState {
 			}
 		}
 		this.universalBus = universalBus;
+		this.logger = logger;
 	}
 
 	override public function create():Void {
@@ -120,18 +125,29 @@ class PlayLevelState extends FlxState {
 
 	private function setupFinishControls() {
 		universalBus.retry.subscribe(this, function(_) {
-			FlxG.switchState(new HubWorldState({
+			FlxG.switchState(new HubWorldState(logger, {
 				level: levelIndex,
 				score: player.hp
 			}, true));
 		});
 
 		universalBus.returnToHub.subscribe(this, function(_) {
-			FlxG.switchState(new HubWorldState({
+			FlxG.switchState(new HubWorldState(logger, {
 				level: levelIndex,
 				score: player.hp
 			}));
 		});
+	}
+
+
+	override public function onFocus() {
+		super.onFocus();
+		logger.focusGained();
+	}
+
+	override public function onFocusLost() {
+		super.onFocusLost();
+		logger.focusLost();
 	}
 }
 

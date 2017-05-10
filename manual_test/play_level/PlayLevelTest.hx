@@ -5,7 +5,6 @@ import level.LevelData;
 import level.PlayLevelState;
 import flixel.FlxG;
 import flixel.FlxState;
-import flixel.group.FlxSpriteGroup;
 
 /**
  * A manual test for verifying level playing functionality
@@ -108,8 +107,7 @@ class PlayLevelTest extends FlxState
 		threats.push(slider);*/
 
 		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, bpm, 444, threats);
-		
-		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus));
+		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus, null));
 	}
 
 	override public function update(elapsed:Float):Void
