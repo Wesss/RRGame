@@ -14,6 +14,8 @@ class Player extends FlxSpriteGroup {
     var targetX : Float;
     var targetY : Float;
     var uniBus : UniversalBus;
+    var oldBeat : Float;
+    var updateScaleOnSpeed : Bool;
 
     public var hp(default, null) : Int;
 
@@ -46,31 +48,35 @@ class Player extends FlxSpriteGroup {
         uniBus.controls.subscribe(this, controlEventHandler);
         uniBus.playerHit.subscribe(this, playerHitHandler);
         uniBus.gameOver.subscribe(this, gameOverHandler);
+        uniBus.beat.subscribe(this, pulse);
         hp = 4;
 
         oldX = x;
         oldY = y;
+
+        updateScaleOnSpeed = true;
     }
 
     public override function update(elapsed : Float) {
         super.update(elapsed);
+        if (updateScaleOnSpeed) {
+            var dx = x - oldX;
+            var dy = y - oldY;
+            var speed = Math.sqrt(dx * dx + dy * dy);
 
-        var dx = x - oldX;
-        var dy = y - oldY;
-        var speed = Math.sqrt(dx * dx + dy * dy);
+            oldX = x;
+            oldY = y;
 
-        oldX = x;
-        oldY = y;
+            // adjust scale on speed and rotation based on direction
+            var newScale = new flixel.math.FlxPoint(1 - speed / 100, 1 + speed / 100);
+            if (newScale.x < 0.5) {
+                newScale.x = 0.5;
+                newScale.y = 1.5;
+            }
+            playerSprite.scale = newScale;
 
-        // adjust scale on speed and rotation based on direction
-        var newScale = new flixel.math.FlxPoint(1 - speed / 100, 1 + speed / 100);
-        if (newScale.x < 0.5) {
-            newScale.x = 0.5;
-            newScale.y = 1.5;
+            setAngle(Math.atan2(dy, dx) * 180 / Math.PI + 90);
         }
-        playerSprite.scale = newScale;
-
-        setAngle(Math.atan2(dy, dx) * 180 / Math.PI + 90);
     }
 
     private function setAngle(newAngle : Float) {
@@ -109,6 +115,14 @@ class Player extends FlxSpriteGroup {
         if (hp <= 0) {
             uniBus.playerDie.broadcast(whichSquareHit);
             uniBus.controls.unsubscribe(this);
+            uniBus.beat.unsubscribe(this);
+            updateScaleOnSpeed = false;
+            FlxTween.tween(playerSprite.scale, {
+                x : 0,
+                y : 0
+            }, 0.6, {
+                ease : FlxEase.backIn
+            });
         } else {
             // Remove indicators
             var indicator = hpIndicators[hp - 1];
@@ -127,15 +141,17 @@ class Player extends FlxSpriteGroup {
 
     public function gameOverHandler(_) {
         uniBus.controls.unsubscribe(this);
-        FlxTween.tween(this, {
-            x : -70,
-            y : 0
-        }, 1, {
-            ease : FlxEase.quadInOut,
-            onComplete : function(_) {
-                setAngle(0);
-            }
-        });
+        if (hp > 0) {
+            FlxTween.tween(this, {
+                x : -70,
+                y : 0
+            }, 1, {
+                ease : FlxEase.quadInOut,
+                onComplete : function(_) {
+                    setAngle(0);
+                }
+            });
+        }
 
         for (hpIndicatorIdx in 0...hpIndicators.length) {
             hpIndicators[hpIndicatorIdx].angularVelocity = 0;
@@ -160,5 +176,32 @@ class Player extends FlxSpriteGroup {
                 }).wait(hpIndicatorIdx * 0.1 + 0.1).then(
                     FlxTween.tween({}, {}, 0.4, { onComplete : pushOutTween }));
         }
+    }
+
+    public function pulse(beat) {
+        if (Math.round(oldBeat) >= oldBeat && Math.round(beat.beat) <= beat.beat) {
+            playerSprite.scale.x = 1.1;
+            playerSprite.scale.y = 1.1;
+
+            FlxTween.tween(playerSprite.scale, {
+                x : 1.0,
+                y : 1.0
+            }, 0.2, {
+                ease : FlxEase.quadOut
+            });
+
+            for (hpIndicator in hpIndicators) {
+                hpIndicator.scale.x = 1.1;
+                hpIndicator.scale.y = 1.1;
+
+                FlxTween.tween(hpIndicator.scale, {
+                    x : 1.0,
+                    y : 1.0
+                }, 0.2, {
+                    ease : FlxEase.quadOut
+                });
+            }
+        }
+        oldBeat = beat.beat;
     }
 }
