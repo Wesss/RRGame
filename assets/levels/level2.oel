@@ -174,7 +174,5 @@
     <RedSlider id="72" x="192" y="960" />
     <RedSlider id="73" x="352" y="976" />
     <RedSlider id="74" x="16" y="1040" />
-    <RedSlider id="75" x="16" y="1024" />
-    <RedSlider id="76" x="16" y="1056" />
   </Entities>
 </level>
