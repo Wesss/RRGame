@@ -29,6 +29,7 @@ typedef NewProgress = {
 class HubWorldState extends FlxState {
     var hubWorldData : HubWorldData;
     var cameraTarget : CameraTarget;
+    var reset : Bool;
 
     // Progress related fields
     var currentScore : Null<Int>;
@@ -36,7 +37,7 @@ class HubWorldState extends FlxState {
     var worldProgress : Null<Int>; // set if new progress is not null and has a valid level
     var levelRelativeToWorld : Null<Int>; // the level in the world given above
 
-    public function new(?newProgress : NewProgress) {
+    public function new(?newProgress : NewProgress, ?reset : Bool) {
         super();
 
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
@@ -70,6 +71,8 @@ class HubWorldState extends FlxState {
         } else {
             cameraTarget = new CameraTarget(0);
         }
+
+        this.reset = reset;
     }
 
     override public function create():Void {
@@ -87,6 +90,9 @@ class HubWorldState extends FlxState {
                 if (levelRelativeToWorld == 0 && (currentScore == null || currentScore < 1) && betterProgress.score >= 1) {
                     // Tutorial passed
                     world.unlockAll();
+                }
+                if (reset) {
+                    world.levels[levelRelativeToWorld].click();
                 }
             }
 

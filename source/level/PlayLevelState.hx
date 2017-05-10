@@ -93,10 +93,8 @@ class PlayLevelState extends FlxState {
 		instructions.x = -instructions.width / 2;
 		instructions.y = 60;
 		add(instructions);
-		/*FlxG.switchState(new HubWorldState({
-			level: levelIndex,
-			score: 0
-		}));*/
+
+		setupFinishControls();
 	}
 
 	public function handleOutOfBeats(_) {
@@ -116,10 +114,24 @@ class PlayLevelState extends FlxState {
 		instructions.x = -instructions.width / 2;
 		instructions.y = 60;
 		add(instructions);
-		/*FlxG.switchState(new HubWorldState({
-			level: levelIndex,
-			score: player.hp
-		}));*/
+
+		setupFinishControls();
+	}
+
+	private function setupFinishControls() {
+		universalBus.retry.subscribe(this, function(_) {
+			FlxG.switchState(new HubWorldState({
+				level: levelIndex,
+				score: player.hp
+			}, true));
+		});
+
+		universalBus.returnToHub.subscribe(this, function(_) {
+			FlxG.switchState(new HubWorldState({
+				level: levelIndex,
+				score: player.hp
+			}));
+		});
 	}
 }
 
