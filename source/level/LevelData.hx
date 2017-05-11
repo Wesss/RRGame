@@ -20,8 +20,8 @@ class LevelData {
 
         // music track asset path should be of for assets/music/author/title.ogg
         var split = musicTrackAssetPath.split("/");
-        this.title = split[3].substring(0, split[3].length - 4);
-        this.author = split[2];
+        this.title = split[3].substring(0, split[3].length - 4).split("_").join(" ");
+        this.author = split[2].split("_").join(" ");
 
         this.bpm = bpm;
         this.songStartOffsetMilis = songStartoffsetMilis;

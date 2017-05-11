@@ -57,13 +57,9 @@ class PlayLevelState extends FlxState {
 		timingSystemTop = new TimingSystemTop(universalBus);
 		add(timingSystemTop);
 		add(trackGroup);
+
 		Juicer.juiceLevel(universalBus);
 		var levelRunner = new LevelRunner(universalBus);
-
-		// Music Track Credits
-		var attributionText = new FlxText(-250, 200, levelData.title + ", by " + levelData.author);
-		Juicer.juiceText(attributionText, 18);
-		add(attributionText);
 
 		// Camera
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
@@ -88,12 +84,7 @@ class PlayLevelState extends FlxState {
 		message.y = -120;
 		add(message);
 
-		var instructions = new BeatText(universalBus, "[ Press R to retry ] [ Press Space to return to Level Select ]", 20, 1.05);
-		instructions.x = -instructions.width / 2;
-		instructions.y = 60;
-		add(instructions);
-
-		setupFinishControls();
+		handleGameOver();
 	}
 
 	public function handleOutOfBeats(_) {
@@ -109,15 +100,21 @@ class PlayLevelState extends FlxState {
 		stats.y = -stats.height / 2;
 		add(stats);
 
+		handleGameOver();
+	}
+
+	private function handleGameOver() {
 		var instructions = new BeatText(universalBus, "[ Press R to retry ] [ Press Space to return to Level Select ]", 20, 1.05);
 		instructions.x = -instructions.width / 2;
 		instructions.y = 60;
 		add(instructions);
 
-		setupFinishControls();
-	}
+		// Music Track Credits
+		var attributionText = new BeatText(universalBus, levelData.title + ", by " + levelData.author, 15, 1.05);
+		attributionText.x = -attributionText.width / 2;
+		attributionText.y = 150;
+		add(attributionText);
 
-	private function setupFinishControls() {
 		universalBus.retry.subscribe(this, function(_) {
 			FlxG.switchState(new HubWorldState(logger, {
 				level: levelIndex,
