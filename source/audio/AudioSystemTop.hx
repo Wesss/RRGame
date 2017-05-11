@@ -31,7 +31,8 @@ class AudioSystemTop {
         hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
         hitSound.volume = .7;
         deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
-        deathSound.volume = .5;
+        deathSound.volume = .7;
+        deathSound.fadeOut(1, .3);
 
 
         // music playing
