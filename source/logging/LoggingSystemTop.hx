@@ -7,7 +7,9 @@ import bus.UniversalBus;
 class LoggingSystemTop implements LoggingSystem {
 
     // Change based on release version TODO should we load these from some data or build file?
-    private static inline var CATEGORY_ID = 1;
+    private static inline var DEBUGGING_CATEGORY_ID = 1;
+    private static inline var RELEASE_CATEGORY_ID = 2;
+    private static inline var HOTFIX1_CATEGORY_ID = 3;
     private static inline var VERSION = 1;
     private static inline var IS_DEV = false;
 
@@ -26,7 +28,7 @@ class LoggingSystemTop implements LoggingSystem {
     private var curBeat:Float;
 
     public function new() {
-        logger = new CapstoneLogger(GAME_ID, GAME_NAME, GAME_KEY, CATEGORY_ID, VERSION, IS_DEV);
+        logger = new CapstoneLogger(GAME_ID, GAME_NAME, GAME_KEY, HOTFIX1_CATEGORY_ID, VERSION, IS_DEV);
         var userID = logger.getSavedUserId();
         if (userID == null) {
             userID = logger.generateUuid();
