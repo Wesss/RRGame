@@ -11,7 +11,7 @@ class LoggingSystemTop implements LoggingSystem {
     private static inline var RELEASE_CATEGORY_ID = 2;
     private static inline var HOTFIX1_CATEGORY_ID = 3;
     private static inline var VERSION = 1;
-    private static inline var IS_DEV = false;
+    private static inline var IS_DEV = true;
 
     // Constants
     private static inline var GAME_ID = 1706;
