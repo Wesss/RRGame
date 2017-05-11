@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import hubworld.HubWorldState;
 import flixel.FlxState;
+import hubworld.SaveManager;
 
 /**
  * A manual test for verifying controls are interpreted correctly
@@ -14,15 +15,14 @@ class HubworldTest extends FlxState {
 		var levelScores = new Map<Int, Float>();
 		// Add level scores here to load into hubworld with said data
 		// ie. levelScores.set(0, 4);
-		levelScores.set(0, 4);
+		levelScores.set(0, 0);
 
-		FlxG.save.data.initialized = true;
-		FlxG.save.data.levelScore = levelScores;
-		FlxG.save.flush();
+		SaveManager.initializeSaveData();
+		SaveManager.saveProgress(levelScores);
 
 		FlxG.switchState(new HubWorldState(null, {
-			level: 1,
-			score: 2
+			level: 0,
+			score: 4
 		}));
 	}
 
