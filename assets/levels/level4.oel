@@ -1,4 +1,4 @@
-<level width="512" height="2048" BPM="156" MusicTrack="To_Eris/Meeting_in_a_Black_Hole.ogg" MusicStartOffset="6840" BeatsPerPhrase="8">
+<level width="512" height="2048" BPM="156" MusicTrack="To_Eris/Meeting_in_a_Black_Hole.ogg" MusicStartOffset="6930" BeatsPerPhrase="8">
   <BoardDisplayLayer>
     <Board id="26" x="0" y="256" />
     <Board id="0" x="0" y="192" />
