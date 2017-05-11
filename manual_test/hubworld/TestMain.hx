@@ -8,6 +8,6 @@ class TestMain extends Sprite
     public function new()
     {
         super();
-        addChild(new FlxGame(0, 0, ScoreAnimation));
+        addChild(new FlxGame(0, 0, HubworldTest));
     }
 }
