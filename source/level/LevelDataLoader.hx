@@ -78,6 +78,8 @@ class LevelDataLoader {
                     var phraseDivisions = boardDisplayLocations.get(phraseNumber);
                     var beatOffset:Float = (phraseNumber + (phraseSubdivision / phraseDivisions)) * beatsPerPhrase;
 
+                    // TODO parse warn time duration
+
                     trackActions.push(
                         new SliderThreat(
                             beatOffset,
@@ -87,6 +89,7 @@ class LevelDataLoader {
                         )
                     );
                 }
+                // TODO parse text action
                 default : throw "Unknown entity parsed";
             }
         }
