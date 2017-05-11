@@ -4,7 +4,6 @@ import bus.Bus;
 import level.LevelData;
 import level.LevelEvent;
 import flixel.system.FlxSound;
-import flixel.FlxBasic;
 import flixel.FlxG;
 import domain.Displacement;
 import bus.UniversalBus;
@@ -15,22 +14,37 @@ import bus.UniversalBus;
  **/
 class AudioSystemTop {
 
+    // music
     private var musicBus:Bus<FlxSound>;
-    private var moveSound = FlxG.sound.load(AssetPaths.NFFsquirt02__wav);
     private var musicForLevel:FlxSound;
     private var isPlayingMusic:Bool;
+
+    // sounds
+    private var hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
+    private var deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
 
     public function new(universalBus:UniversalBus) {
         musicBus = universalBus.musicStart;
         musicForLevel = null;
         isPlayingMusic = false;
 
-        universalBus.controls.subscribe(this, playMovementSounds);
-        universalBus.level.subscribe(this, switchLevelState);
-    }
+        hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
+        hitSound.volume = .7;
+        deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
+        deathSound.volume = .5;
 
-    public function playMovementSounds(event:Displacement):Void {
-        moveSound.play(false, 0, 50);
+
+        // music playing
+        universalBus.level.subscribe(this, switchLevelState);
+
+        // sound playing
+        universalBus.playerHit.subscribe(this, function (event) {
+            hitSound.play();
+        });
+        // purposefully played along with hit sound
+        universalBus.playerDie.subscribe(this, function (event) {
+            deathSound.play();
+        });
     }
 
     public function switchLevelState(event:LevelEvent):Void {
