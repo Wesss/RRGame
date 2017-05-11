@@ -57,8 +57,12 @@ class PlayLevelState extends FlxState {
 		timingSystemTop = new TimingSystemTop(universalBus);
 		add(timingSystemTop);
 		add(trackGroup);
-
 		var levelRunner = new LevelRunner(universalBus);
+
+		// Music Track Credits
+		var attributionText = new FlxText(-250, 200, levelData.title + ", by " + levelData.author);
+		Juicer.juiceText(attributionText, 18);
+		add(attributionText);
 
 		// Camera and camera shake
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
