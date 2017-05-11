@@ -95,7 +95,7 @@ class SelectLevelButton extends FlxSpriteGroup {
         add(scoreStars);
 
         button.onDown.callback = function() {
-            if (!isLocked) {
+            if (!this.isLocked) {
                 trace("Starting level: " + levelAssetPath);
 
                 var universalBus = new UniversalBus();
@@ -112,6 +112,8 @@ class SelectLevelButton extends FlxSpriteGroup {
             scoreStars.alpha = 0.01;
             scoreStars.visible = false;
         }
+
+        this.isLocked = isLocked;
     }
 
     public function lock() {
