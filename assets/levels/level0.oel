@@ -83,7 +83,7 @@
   </BoardDisplayLayer>
   <Entities>
     <Text id="11" x="112" y="0" text="Welcome! Use the Arrow Keys/WASD to move." beatDuration="7" />
-    <Text id="12" x="48" y="64" text="Hold down keys to stay in position!" beatDuration="8" />
+    <Text id="12" x="48" y="64" text="Hold down keys to stay in a position!" beatDuration="8" />
     <Text id="2" x="48" y="128" text="This is a red slider. They fall onto the grid." beatDuration="8" />
     <Text id="3" x="48" y="192" text="If they land on you, you'll lose a life." beatDuration="8" />
     <Text id="4" x="48" y="256" text="Not so hard ain't it?" beatDuration="4" />
