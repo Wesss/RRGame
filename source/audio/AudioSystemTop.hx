@@ -5,7 +5,6 @@ import level.LevelData;
 import level.LevelEvent;
 import flixel.system.FlxSound;
 import flixel.FlxG;
-import domain.Displacement;
 import bus.UniversalBus;
 
 /**

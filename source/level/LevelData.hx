@@ -1,7 +1,6 @@
 package level;
 
 import track_action.TrackAction;
-import flixel.system.FlxAssets.FlxSoundAsset;
 
 /**
  * Represents all of the data needed to run a level of the game

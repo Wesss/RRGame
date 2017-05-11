@@ -2,9 +2,6 @@ package hubworld;
 
 import flixel.text.FlxText;
 import hubworld.SaveManager;
-import js.Browser;
-import level.PlayLevelState;
-import flixel.FlxG;
 import logging.*;
 import flixel.FlxState;
 import flixel.FlxG;
