@@ -82,17 +82,17 @@
     <Board id="79" x="320" y="512" />
   </BoardDisplayLayer>
   <Entities>
-    <Text id="11" x="112" y="0" text="text1" beatDuration="7" />
-    <Text id="12" x="48" y="64" text="text2" beatDuration="8" />
-    <Text id="2" x="48" y="128" text="text3" beatDuration="8" />
-    <Text id="3" x="48" y="192" text="text4" beatDuration="8" />
-    <Text id="4" x="48" y="256" text="text5" beatDuration="4" />
-    <Text id="0" x="304" y="256" text="text6" beatDuration="4" />
-    <Text id="5" x="48" y="320" text="text7" beatDuration="4" />
-    <Text id="7" x="304" y="320" text="text8" beatDuration="1" />
-    <Text id="10" x="368" y="320" text="text9" beatDuration="1" />
-    <Text id="9" x="432" y="320" text="text10" beatDuration="1" />
-    <Text id="8" x="496" y="320" text="text11" beatDuration="1" />
+    <Text id="11" x="112" y="0" text="Welcome! Use the Arrow Keys/WASD to move." beatDuration="7" />
+    <Text id="12" x="48" y="64" text="Hold down keys to stay in that position." beatDuration="8" />
+    <Text id="2" x="48" y="128" text="This is a red slider. They fall onto the grid." beatDuration="8" />
+    <Text id="3" x="48" y="192" text="If they land on you, you'll lose a life." beatDuration="8" />
+    <Text id="4" x="48" y="256" text="Not so hard ain't it?" beatDuration="4" />
+    <Text id="0" x="304" y="256" text="Not so hard ain't it? I think you're ready for a real challenge ;)" beatDuration="4" />
+    <Text id="5" x="48" y="320" text="        Ready?..." beatDuration="4" />
+    <Text id="7" x="304" y="320" text="             3" beatDuration="1" />
+    <Text id="10" x="368" y="320" text="             2" beatDuration="1" />
+    <Text id="9" x="432" y="320" text="             1" beatDuration="1" />
+    <Text id="8" x="496" y="320" text="            Go!" beatDuration="1" />
     <RedSlider id="1" x="384" y="128" warningTime="6" />
     <RedSlider id="6" x="384" y="192" warningTime="6" />
     <RedSlider id="13" x="80" y="384" warningTime="1" />

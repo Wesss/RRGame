@@ -8,11 +8,11 @@ class TextTrackAction extends FlxText implements TrackAction {
     public var triggerBeats:Array<Float>;
 
     public function new(beatOffset : Float, text : String, bpm : Int, beatDuration = 4) {
-        super(-100, -200, text); // TODO guess and check correct x and y
+        super(-250, -227, text); // TODO guess and check correct x and y
         triggerBeats = [0, beatDuration];
         this.beatOffset = beatOffset;
 
-        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 14, flixel.util.FlxColor.WHITE, CENTER);
+        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 20, flixel.util.FlxColor.ORANGE, CENTER);
         visible = false;
     }
 
