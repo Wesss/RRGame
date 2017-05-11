@@ -29,7 +29,8 @@
 
 	<set name="BUILD_DIR" value="export" />
 	<classpath name="source" />
-	<assets path="assets" />
+	<assets path="assets" exclude="*.mp3|*.wav|*/unused/*" if="html5" />
+	<assets path="assets" unless="html5" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
