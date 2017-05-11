@@ -1,6 +1,5 @@
 package ;
 
-import flixel.math.FlxPoint;
 import bus.UniversalBus;
 import flixel.FlxG;
 import flixel.text.FlxText;

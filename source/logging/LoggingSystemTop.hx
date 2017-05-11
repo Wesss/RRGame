@@ -1,6 +1,5 @@
 package logging;
 
-import flixel.FlxG;
 import timing.BeatEvent;
 import domain.Displacement;
 import bus.UniversalBus;
