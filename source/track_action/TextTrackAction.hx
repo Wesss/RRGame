@@ -1,0 +1,38 @@
+package track_action;
+
+import flixel.text.FlxText;
+
+class TextTrackAction extends FlxText implements TrackAction {
+    public var beatOffset:Float;
+    // an array of beats relative the the offset defined above
+    public var triggerBeats:Array<Float>;
+
+    public function new(beatOffset : Float, text : String, bpm : Int, beatDuration = 4) {
+        super(-250, -227, text); // TODO guess and check correct x and y
+        triggerBeats = [0, beatDuration];
+        this.beatOffset = beatOffset;
+
+        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 20, flixel.util.FlxColor.ORANGE, CENTER);
+        visible = false;
+    }
+
+    /**
+     * @param curBeat - the current beat RELATIVE to this.beatOffset
+     **/
+    public function updateBeat(curBeat:Float):Void {
+
+    }
+
+    /**
+     * @param beatIndex - The index of the beat triggered within this.triggerBeats
+     **/
+    public function triggerBeat(beatIndex:Int):Void {
+        if (beatIndex == 0) {
+            // appear
+            visible = true;
+        } else if (beatIndex == 1) {
+            // dissapear
+            visible = false;
+        }
+    }
+}
