@@ -57,6 +57,7 @@ class PlayLevelState extends FlxState {
 		timingSystemTop = new TimingSystemTop(universalBus);
 		add(timingSystemTop);
 		add(trackGroup);
+		Juicer.juiceLevel(universalBus);
 		var levelRunner = new LevelRunner(universalBus);
 
 		// Music Track Credits
@@ -64,19 +65,12 @@ class PlayLevelState extends FlxState {
 		Juicer.juiceText(attributionText, 18);
 		add(attributionText);
 
-		// Camera and camera shake
+		// Camera
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
-	 	universalBus.threatKillSquare.subscribe(this, function(displacement) {
-			FlxG.camera.shake(0.01, 0.1);
-		});
 
-		universalBus.playerHPChange.subscribe(this, function(newHP) {
-			FlxG.camera.flash(flixel.util.FlxColor.WHITE, 0.1);
-			FlxG.camera.shake(0.01, 0.1);
-		});
-		
+		// Win/Lose conditions
 		universalBus.playerDie.subscribe(this, handlePlayerDie);
-        universalBus.levelOutOfBeats.subscribe(this, handleOutOfBeats);
+		universalBus.levelOutOfBeats.subscribe(this, handleOutOfBeats);
 
 		levelRunner.runLevel(levelData);
 	}

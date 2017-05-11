@@ -8,7 +8,7 @@ class TextTrackAction extends FlxText implements TrackAction {
     public var triggerBeats:Array<Float>;
 
     public function new(beatOffset : Float, text : String, bpm : Int, beatDuration = 4) {
-        super(-250, -227, text);
+        super(-275, -227, text);
         triggerBeats = [0, beatDuration];
         this.beatOffset = beatOffset;
 
