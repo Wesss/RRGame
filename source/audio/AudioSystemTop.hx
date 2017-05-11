@@ -40,6 +40,8 @@ class AudioSystemTop {
 
         // sound playing
         universalBus.playerHit.subscribe(this, function (event) {
+            hitSound.pause();
+            hitSound.time = 0;
             hitSound.play();
         });
         // purposefully played along with hit sound
