@@ -12,7 +12,7 @@ import flixel.FlxState;
 class RunActualLevelTest extends FlxState {
 
 	// change this to change the level run
-	private static inline var LEVEL_ASSET_PATH = "assets/levels/level4.oel";
+	private static inline var LEVEL_ASSET_PATH = "assets/levels/level0.oel";
 
 	override public function create():Void {
 		super.create();

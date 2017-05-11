@@ -82,19 +82,19 @@
     <Board id="79" x="320" y="512" />
   </BoardDisplayLayer>
   <Entities>
-    <Text id="2" x="48" y="128" text="This is a red slider.&#xD;&#xA;They fall onto the grid.&#xD;&#xA;" beatDuration="8" />
-    <Text id="3" x="48" y="192" text="This is a red slider.&#xD;&#xA;They fall onto the grid.&#xD;&#xA;&#xD;&#xA;If they hit you,&#xD;&#xA;you'll lose a life." beatDuration="8" />
-    <Text id="4" x="48" y="256" text="Well, thats about it." beatDuration="4" />
-    <Text id="5" x="48" y="320" text="Put Text Here!" beatDuration="4" />
-    <Text id="7" x="304" y="320" text="Put Text Here!" beatDuration="4" />
-    <Text id="8" x="496" y="320" text="Put Text Here!" beatDuration="4" />
-    <Text id="9" x="432" y="320" text="Put Text Here!" beatDuration="4" />
-    <Text id="10" x="368" y="320" text="Put Text Here!" beatDuration="4" />
-    <Text id="11" x="112" y="0" text="Welcome to RRGrid!&#xD;&#xA;Use WASD or the&#xD;&#xA;Arrow Keys to move." beatDuration="8" />
-    <Text id="12" x="48" y="64" text="Welcome to RRGrid!&#xD;&#xA;Use WASD or the&#xD;&#xA;Arrow Keys to move.&#xD;&#xA;&#xD;&#xA;Hold keys to stay near&#xD;&#xA;the edge of the Grid." beatDuration="8" />
-    <Text id="0" x="304" y="256" text="Well, thats about it.&#xD;&#xA;&#xD;&#xA;Don't sweat it;&#xD;&#xA;Just dodge everything&#xD;&#xA;and you'll be fine ;)" beatDuration="4" />
+    <Text id="11" x="112" y="0" text="text1" beatDuration="7" />
+    <Text id="12" x="48" y="64" text="text2" beatDuration="8" />
+    <Text id="2" x="48" y="128" text="text3" beatDuration="8" />
+    <Text id="3" x="48" y="192" text="text4" beatDuration="8" />
+    <Text id="4" x="48" y="256" text="text5" beatDuration="4" />
+    <Text id="0" x="304" y="256" text="text6" beatDuration="4" />
+    <Text id="5" x="48" y="320" text="text7" beatDuration="4" />
+    <Text id="7" x="304" y="320" text="text8" beatDuration="1" />
+    <Text id="10" x="368" y="320" text="text9" beatDuration="1" />
+    <Text id="9" x="432" y="320" text="text10" beatDuration="1" />
+    <Text id="8" x="496" y="320" text="text11" beatDuration="1" />
     <RedSlider id="1" x="384" y="128" warningTime="6" />
-    <RedSlider id="6" x="384" y="192" warningTime="2" />
+    <RedSlider id="6" x="384" y="192" warningTime="6" />
     <RedSlider id="13" x="80" y="384" warningTime="1" />
     <RedSlider id="14" x="336" y="400" warningTime="1" />
     <RedSlider id="15" x="192" y="416" warningTime="1" />

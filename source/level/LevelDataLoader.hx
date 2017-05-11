@@ -1,5 +1,6 @@
 package level;
 
+import track_action.TextTrackAction;
 import domain.VerticalDisplacement;
 import domain.HorizontalDisplacement;
 import domain.Displacement;
@@ -24,7 +25,7 @@ class LevelDataLoader {
         var trackActions = new Array<TrackAction>();
 
         // map<phrase number -> phrase division count>
-        var boardDisplayLocations = new Map<Int, Int>();
+        var phraseNumberToPhraseDivisions = new Map<Int, Int>();
 
         // essentially a lambda for loading phrase count and divisions
         function parseBoardDisplays(type:String, data:Xml):Void {
@@ -36,10 +37,10 @@ class LevelDataLoader {
                     );
 
                     var phraseNumber = Std.int(boardGrid.y / 4);
-                    if (!boardDisplayLocations.exists(phraseNumber)) {
-                        boardDisplayLocations.set(phraseNumber, 1);
+                    if (!phraseNumberToPhraseDivisions.exists(phraseNumber)) {
+                        phraseNumberToPhraseDivisions.set(phraseNumber, 1);
                     } else {
-                        boardDisplayLocations.set(phraseNumber, boardDisplayLocations.get(phraseNumber) + 1);
+                        phraseNumberToPhraseDivisions.set(phraseNumber, phraseNumberToPhraseDivisions.get(phraseNumber) + 1);
                     }
                 }
                 default : throw "Unknown board display parsed";
@@ -51,51 +52,66 @@ class LevelDataLoader {
         function parseEntities(type:String, data:Xml):Void {
             switch (type) {
                 case "RedSlider": {
-                    var boardGrid:Grid = Grid.gridFromRawCoordinates(
-                        Std.parseInt(data.get("x")),
-                        Std.parseInt(data.get("y"))
-                    );
+                    var boardGrid:Grid = Grid.gridFromRawXml(data);
 
-                    // vertical displacement
-                    var verticalDisplacement:VerticalDisplacement = null;
-                    switch (boardGrid.y % 4) {
-                        case 0: verticalDisplacement = UP;
-                        case 1: verticalDisplacement = NONE;
-                        case 2: verticalDisplacement = DOWN;
-                        default: throw "Invalid level format; beat below/above grid";
-                    }
-                    // horz displacement
-                    var horizontalDisplacement:HorizontalDisplacement = null;
-                    switch (boardGrid.x % 4) {
-                        case 0: horizontalDisplacement = LEFT;
-                        case 1: horizontalDisplacement = NONE;
-                        case 2: horizontalDisplacement = RIGHT;
-                        default: throw "Invalid level format; beat below/above grid";
-                    }
-                    // beatoffset
-                    var phraseNumber = Std.int(boardGrid.y / 4);
-                    var phraseSubdivision = Std.int(boardGrid.x / 4);
-                    var phraseDivisions = boardDisplayLocations.get(phraseNumber);
-                    var beatOffset:Float = (phraseNumber + (phraseSubdivision / phraseDivisions)) * beatsPerPhrase;
+                    var displacement = parseDisplacement(boardGrid);
+                    var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
+                    var warnTime = Std.parseInt(data.get("warningTime"));
 
-                    // TODO parse warn time duration
-
-                    trackActions.push(
-                        new SliderThreat(
+                    trackActions.push(new SliderThreat(
                             beatOffset,
                             bpm,
-                            new Displacement(horizontalDisplacement, verticalDisplacement),
-                            universalBus
-                        )
-                    );
+                            displacement,
+                            universalBus,
+                            warnTime
+                    ));
                 }
-                // TODO parse text action
+                case "Text": {
+                    var boardGrid:Grid = Grid.gridFromRawXml(data);
+
+                    var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
+                    var text = data.get("text");
+                    var duration = Std.parseInt(data.get("beatDuration"));
+
+                    trackActions.push(new TextTrackAction(
+                            beatOffset, text, bpm, duration
+                    ));
+                }
                 default : throw "Unknown entity parsed";
             }
         }
         loader.loadEntities(parseEntities, "Entities");
 
         return new LevelData(musicAssetPath, bpm, offset, trackActions);
+    }
+
+    private static function parseDisplacement(boardGrid:Grid) {
+        var verticalDisplacement:VerticalDisplacement = null;
+        switch (boardGrid.y % 4) {
+            case 0: verticalDisplacement = UP;
+            case 1: verticalDisplacement = NONE;
+            case 2: verticalDisplacement = DOWN;
+            default: throw "Invalid level format; displacment is above or below grid";
+        }
+
+        var horizontalDisplacement:HorizontalDisplacement = null;
+        switch (boardGrid.x % 4) {
+            case 0: horizontalDisplacement = LEFT;
+            case 1: horizontalDisplacement = NONE;
+            case 2: horizontalDisplacement = RIGHT;
+            default: throw "Invalid level format; displacment is left or right of grid";
+        }
+
+        return new Displacement(horizontalDisplacement, verticalDisplacement);
+    }
+
+    private static function parseBeatOffset(boardGrid:Grid,
+                                            beatsPerPhrase:Int,
+                                            phraseNumberToPhraseDivisions:Map<Int, Int>) {
+        var phraseNumber = Std.int(boardGrid.y / 4);
+        var phraseSubdivision = Std.int(boardGrid.x / 4);
+        var phraseDivisions = phraseNumberToPhraseDivisions.get(phraseNumber);
+        return (phraseNumber + (phraseSubdivision / phraseDivisions)) * beatsPerPhrase;
     }
 }
 
@@ -120,5 +136,15 @@ class Grid {
      **/
     public static function gridFromRawCoordinates(rawX, rawY) {
         return new Grid(Std.int(rawX / GRID_SIZE), Std.int(rawY / GRID_SIZE));
+    }
+
+    /**
+     * Given xml data with x and y data, return an appropriate grid coordinate
+     **/
+    public static function gridFromRawXml(data:Xml) {
+        return Grid.gridFromRawCoordinates(
+            Std.parseInt(data.get("x")),
+            Std.parseInt(data.get("y"))
+        );
     }
 }
