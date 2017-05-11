@@ -1,5 +1,6 @@
 package hubworld;
 
+import flixel.text.FlxText;
 import hubworld.SaveManager;
 import js.Browser;
 import level.PlayLevelState;
@@ -125,6 +126,12 @@ class HubWorldState extends FlxState {
                 add(button);
             }
         }
+
+        // sound credits
+        var soundCredits = new FlxText(20, 430, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
+                                                "Music courtesy of the many artists on FreeMusicArchive.org");
+        Juicer.juiceText(soundCredits, 15);
+        add(soundCredits);
     }
 
     override public function update(elapsed:Float):Void {
