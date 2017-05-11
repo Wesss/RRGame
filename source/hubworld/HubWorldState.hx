@@ -2,7 +2,7 @@ package hubworld;
 
 import level.PlayLevelState;
 import flixel.FlxG;
-import logging.LoggingSystemTop;
+import logging.*;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -33,7 +33,7 @@ class HubWorldState extends FlxState {
     var hubWorldData : HubWorldData;
     var cameraTarget : CameraTarget;
     var reset : Bool;
-    var logger:LoggingSystemTop;
+    var logger:LoggingSystem;
 
     // Progress related fields
     var currentScore : Null<Int>;
@@ -41,10 +41,13 @@ class HubWorldState extends FlxState {
     var worldProgress : Null<Int>; // set if new progress is not null and has a valid level
     var levelRelativeToWorld : Null<Int>; // the level in the world given above
 
-    public function new(logger:LoggingSystemTop, ?newProgress : NewProgress, ?reset : Bool) {
+    public function new(logger:LoggingSystem, ?newProgress : NewProgress, ?reset : Bool) {
         super();
 
         this.logger = logger;
+        if (this.logger == null) {
+            this.logger = new EmptyLogger();
+        }
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
 
         initializeSaveData();
@@ -102,6 +105,7 @@ class HubWorldState extends FlxState {
                 if (reset) {
                     world.levels[levelRelativeToWorld].click();
                 }
+                world.levels[levelRelativeToWorld].addScore(betterProgress.score);
             }
 
             if (i > 0) {

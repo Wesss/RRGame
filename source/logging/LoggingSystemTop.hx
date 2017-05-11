@@ -5,7 +5,7 @@ import timing.BeatEvent;
 import domain.Displacement;
 import bus.UniversalBus;
 
-class LoggingSystemTop {
+class LoggingSystemTop implements LoggingSystem {
 
     // Change based on release version TODO should we load these from some data or build file?
     private static inline var CATEGORY_ID = 1;

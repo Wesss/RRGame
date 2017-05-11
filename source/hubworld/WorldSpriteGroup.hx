@@ -1,6 +1,6 @@
 package hubworld;
 
-import logging.LoggingSystemTop;
+import logging.LoggingSystem;
 import level.PlayLevelState;
 import flixel.FlxG;
 import bus.UniversalBus;
@@ -17,7 +17,7 @@ class WorldSpriteGroup extends FlxSpriteGroup {
     public function new(hubWorldData : hubworld.HubWorldState.HubWorldData,
                         index : Int,
                         levelScores : Map<Int, Float>,
-                        logger : LoggingSystemTop) {
+                        logger : LoggingSystem) {
         super(FlxG.width * index);
         var world = hubWorldData.worlds[index];
         var tutorialPassed = !world.hasTutorial || levelScores[index * 5] != null || levelScores[index * 5] < 1;
@@ -33,6 +33,7 @@ class WorldSpriteGroup extends FlxSpriteGroup {
                 world.levels[i],
                 index * 5 + i,
                 //TODO: ^ and that
+                levelScores[index * 5 + i],
                 logger,
                 !tutorialPassed && i > 0);
             add(button);
@@ -53,10 +54,16 @@ class SelectLevelButton extends FlxSpriteGroup {
     private var isLocked : Bool;
     private var button : FlxButton;
     private var lockOverlay : FlxSprite;
-    private var logger:LoggingSystemTop;
+    private var scoreStars : ScoreStars;
+    private var logger:LoggingSystem;
 
     public function click() {
         button.onDown.fire();
+    }
+
+    public function addScore(newScore : Float) {
+        var scoreDifference = Math.round(newScore) - scoreStars.score;
+        scoreStars.addScore(scoreDifference);
     }
 
     public function new(x : Float,
@@ -64,7 +71,8 @@ class SelectLevelButton extends FlxSpriteGroup {
                         label : String,
                         levelAssetPath : String,
                         levelIndex : Int,
-                        logger : LoggingSystemTop,
+                        score : Null<Float>,
+                        logger : LoggingSystem,
                         isLocked = false) {
         super(x, y);
         button = new FlxButton(0, 0, label);
@@ -78,6 +86,13 @@ class SelectLevelButton extends FlxSpriteGroup {
 
         lockOverlay = new FlxSprite(0, 0, AssetPaths.LockOverlay__png);
         add(lockOverlay);
+
+        var roundedScore = 0;
+        if (score != null) {
+            roundedScore = Math.round(score);
+        }
+        scoreStars = new ScoreStars(-1, 83, roundedScore);
+        add(scoreStars);
 
         button.onDown.callback = function() {
             if (!isLocked) {
@@ -93,12 +108,17 @@ class SelectLevelButton extends FlxSpriteGroup {
 
         if (!isLocked) {
             lockOverlay.alpha = 0;
+        } else {
+            scoreStars.alpha = 0.01;
+            scoreStars.visible = false;
         }
     }
 
     public function lock() {
         isLocked = true;
         lockOverlay.alpha = 1;
+        scoreStars.alpha = 0.01;
+        scoreStars.visible = false;
     }
 
     public function unlock() {
@@ -118,6 +138,13 @@ class SelectLevelButton extends FlxSpriteGroup {
                     onComplete : function(tween) {
                         isLocked = false;
                     }
+                });
+
+                scoreStars.visible = true;
+                FlxTween.tween(scoreStars, {
+                    alpha : 1
+                }, 0.5, {
+                    ease : FlxEase.quadIn
                 });
             }
         });

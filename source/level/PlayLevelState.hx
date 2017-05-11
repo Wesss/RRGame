@@ -1,6 +1,6 @@
 package level;
 
-import logging.LoggingSystemTop;
+import logging.LoggingSystem;
 import audio.AudioSystemTop;
 import bus.UniversalBus;
 import board.BoardSystemTop;
@@ -23,13 +23,13 @@ class PlayLevelState extends FlxState {
 	private var timingSystemTop:TimingSystemTop;
 	private var trackGroup:FlxSpriteGroup;
 	private var universalBus:UniversalBus;
-	private var logger:LoggingSystemTop;
+	private var logger:LoggingSystem;
 	private var player:Player;
 
 	public function new(levelData:LevelData,
 						levelIndex:Int,
 						universalBus:UniversalBus,
-						logger:LoggingSystemTop) {
+						logger:LoggingSystem) {
 		super();
 		this.levelData = levelData;
 		this.levelIndex = levelIndex;
