@@ -132,6 +132,12 @@ class HubWorldState extends FlxState {
                                                 "Music courtesy of the many artists on FreeMusicArchive.org");
         Juicer.juiceText(soundCredits, 15);
         add(soundCredits);
+
+        // incomplete!
+        var incompleteText = new FlxText(120, 330, "levels 1-2, 1-3, and world 2,\n" +
+                                                    "and more coming soon");
+        Juicer.juiceText(incompleteText, 14);
+        add(incompleteText);
     }
 
     override public function update(elapsed:Float):Void {
