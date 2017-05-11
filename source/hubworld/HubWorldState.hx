@@ -79,8 +79,6 @@ class HubWorldState extends FlxState {
             currentScore = levelScores[newProgress.level];
             if (currentScore == null || newProgress.score > currentScore) {
                 betterProgress = newProgress;
-                levelScores[newProgress.level] = newProgress.score;
-                SaveManager.saveProgress(levelScores);
             } else {
                 betterProgress = null;
             }
@@ -93,7 +91,6 @@ class HubWorldState extends FlxState {
 
     override public function create():Void {
         super.create();
-
         add(cameraTarget);
         FlxG.camera.follow(cameraTarget);
         FlxG.mouse.visible = true;
@@ -107,10 +104,15 @@ class HubWorldState extends FlxState {
                     // Tutorial passed
                     world.unlockAll();
                 }
+
+                world.levels[levelRelativeToWorld].addScore(betterProgress.score);
+                var levelScores = SaveManager.getProgress();
+                levelScores[betterProgress.level] = betterProgress.score;
+                SaveManager.saveProgress(levelScores);
+
                 if (reset) {
                     world.levels[levelRelativeToWorld].click();
                 }
-                world.levels[levelRelativeToWorld].addScore(betterProgress.score);
             }
 
             if (i > 0) {

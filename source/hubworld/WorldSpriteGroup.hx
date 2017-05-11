@@ -20,7 +20,7 @@ class WorldSpriteGroup extends FlxSpriteGroup {
                         logger : LoggingSystem) {
         super(FlxG.width * index);
         var world = hubWorldData.worlds[index];
-        var tutorialPassed = !world.hasTutorial || levelScores[index * 5] != null || levelScores[index * 5] < 1;
+        var tutorialPassed = !world.hasTutorial || (levelScores[index * 5] != null && levelScores[index * 5] >= 1);
         // TODO : fix this                              constant       ^                                      ^
 
         levels = [];
@@ -52,6 +52,7 @@ class WorldSpriteGroup extends FlxSpriteGroup {
 
 class SelectLevelButton extends FlxSpriteGroup {
     private var isLocked : Bool;
+    private var levelExists : Bool;
     private var button : FlxButton;
     private var lockOverlay : FlxSprite;
     private var scoreStars : ScoreStars;
@@ -94,8 +95,10 @@ class SelectLevelButton extends FlxSpriteGroup {
         scoreStars = new ScoreStars(-1, 83, roundedScore);
         add(scoreStars);
 
+        levelExists = openfl.Assets.list().indexOf(levelAssetPath) != -1;
+
         button.onDown.callback = function() {
-            if (!this.isLocked) {
+            if (!this.isLocked && levelExists) {
                 trace("Starting level: " + levelAssetPath);
 
                 var universalBus = new UniversalBus();
@@ -106,7 +109,7 @@ class SelectLevelButton extends FlxSpriteGroup {
             }
         }
 
-        if (!isLocked) {
+        if (!isLocked && levelExists) {
             lockOverlay.alpha = 0;
         } else {
             scoreStars.alpha = 0.01;
@@ -124,6 +127,9 @@ class SelectLevelButton extends FlxSpriteGroup {
     }
 
     public function unlock() {
+        if (!levelExists) {
+            return;
+        }
         FlxTween.tween({}, {}, Math.random() / 3 * 2, {
             onComplete: function(tween) {
                 FlxTween.tween(lockOverlay.scale, {
