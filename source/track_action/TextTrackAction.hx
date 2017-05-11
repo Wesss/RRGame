@@ -1,22 +1,19 @@
 package track_action;
 
 import flixel.text.FlxText;
-import board.BoardCoordinates;
-import domain.Displacement;
-import flixel.tweens.*;
 
-class Text implements TrackAction {
+class TextTrackAction extends FlxText implements TrackAction {
     public var beatOffset:Float;
     // an array of beats relative the the offset defined above
     public var triggerBeats:Array<Float>;
 
-    private var text:FlxText;
-
-    public function new(beatOffset : Float, text : String, bpm : Int, beatDuration = 8) {
+    public function new(beatOffset : Float, text : String, bpm : Int, beatDuration = 4) {
+        super(-100, -200, text); // TODO guess and check correct x and y
         triggerBeats = [0, beatDuration];
         this.beatOffset = beatOffset;
 
-        // TODO hook up text
+        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 14, flixel.util.FlxColor.WHITE, CENTER);
+        visible = false;
     }
 
     /**
@@ -32,10 +29,10 @@ class Text implements TrackAction {
     public function triggerBeat(beatIndex:Int):Void {
         if (beatIndex == 0) {
             // appear
-            // TODO
+            visible = true;
         } else if (beatIndex == 1) {
             // dissapear
-            // TODO
+            visible = false;
         }
     }
 }
