@@ -9,7 +9,7 @@ class LoggingSystemTop implements LoggingSystem {
     // Change based on release version TODO should we load these from some data or build file?
     private static inline var CATEGORY_ID = 1;
     private static inline var VERSION = 1;
-    private static inline var IS_DEV = true;
+    private static inline var IS_DEV = false;
 
     // Constants
     private static inline var GAME_ID = 1706;
