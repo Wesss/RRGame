@@ -44,10 +44,11 @@ class HubWorldState extends FlxState {
     public function new(logger:LoggingSystem, ?newProgress : NewProgress, ?reset : Bool) {
         super();
 
-        this.logger = logger;
-        if (this.logger == null) {
-            this.logger = new EmptyLogger();
+       if (logger == null) {
+            logger = new EmptyLogger();
         }
+        this.logger = logger;
+ 
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
 
         initializeSaveData();
