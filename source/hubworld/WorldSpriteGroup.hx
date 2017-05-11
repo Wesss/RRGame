@@ -20,7 +20,7 @@ class WorldSpriteGroup extends FlxSpriteGroup {
                         logger : LoggingSystem) {
         super(FlxG.width * index);
         var world = hubWorldData.worlds[index];
-        var tutorialPassed = !world.hasTutorial || levelScores[index * 5] != null || levelScores[index * 5] < 1;
+        var tutorialPassed = !world.hasTutorial || (levelScores[index * 5] != null && levelScores[index * 5] >= 1);
         // TODO : fix this                              constant       ^                                      ^
 
         levels = [];
