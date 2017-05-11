@@ -1,0 +1,12 @@
+language: haxe
+install:
+  - haxelib install flixel
+  - yes | haxelib run lime setup
+  - haxelib install flixel-addons
+  - haxelib install munit
+  - haxelib install hamcrest
+  - haxelib list
+script:
+  - haxelib run munit
+  - haxelib run lime build html5
+  - cd test ; haxelib run lime test neko

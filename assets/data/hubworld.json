@@ -1,0 +1,32 @@
+{
+    "buttonLocations": [
+        { "x" : 355, "y" : 50 },
+        { "x" : 290, "y" : 180 },
+        { "x" : 420, "y" : 180 },
+        { "x" : 290, "y" : 310 },
+        { "x" : 420, "y" : 310 }
+    ],
+
+    "worlds": [
+        {
+            "hasTutorial" : true,
+            "levels" : [
+                "assets/levels/level0.oel",
+                "assets/levels/level1.oel",
+                "assets/levels/level2.oel",
+                "assets/levels/level3.oel",
+                "assets/levels/level4.oel"
+            ]
+        },
+        {
+            "hasTutorial" : true,
+            "levels" : [
+                "assets/levels/level5.oel",
+                "assets/levels/level6.oel",
+                "assets/levels/level7.oel",
+                "assets/levels/level8.oel",
+                "assets/levels/level9.oel"
+            ]
+        }
+    ]
+}
