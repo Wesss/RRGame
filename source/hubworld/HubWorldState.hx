@@ -128,7 +128,7 @@ class HubWorldState extends FlxState {
         }
 
         // sound credits
-        var soundCredits = new FlxText(20, 430, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
+        var soundCredits = new FlxText(20, 430, 0, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
                                                 "Music courtesy of the many artists on FreeMusicArchive.org");
         Juicer.juiceText(soundCredits, 15);
         add(soundCredits);
