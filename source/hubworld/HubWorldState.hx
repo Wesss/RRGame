@@ -1,5 +1,7 @@
 package hubworld;
 
+import hubworld.SaveManager;
+import js.Browser;
 import level.PlayLevelState;
 import flixel.FlxG;
 import logging.*;
@@ -36,7 +38,7 @@ class HubWorldState extends FlxState {
     var logger:LoggingSystem;
 
     // Progress related fields
-    var currentScore : Null<Int>;
+    var currentScore : Null<Float>;
     var betterProgress : NewProgress; // set if the new progress is constructed with a better score than saved
     var worldProgress : Null<Int>; // set if new progress is not null and has a valid level
     var levelRelativeToWorld : Null<Int>; // the level in the world given above
@@ -44,14 +46,15 @@ class HubWorldState extends FlxState {
     public function new(logger:LoggingSystem, ?newProgress : NewProgress, ?reset : Bool) {
         super();
 
-       if (logger == null) {
+        if (logger == null) {
             logger = new EmptyLogger();
         }
         this.logger = logger;
  
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
 
-        initializeSaveData();
+        SaveManager.initializeSaveData();
+
         if (newProgress != null) {
             logger.endLevel(newProgress.score);
             // Have the camera on the right screen that they finished the previous level
@@ -72,11 +75,12 @@ class HubWorldState extends FlxState {
             }
 
             // If level cleared/improved on, show animation
-            currentScore = FlxG.save.data.levelScore[newProgress.level];
+            var levelScores = SaveManager.getProgress();
+            currentScore = levelScores[newProgress.level];
             if (currentScore == null || newProgress.score > currentScore) {
                 betterProgress = newProgress;
-                FlxG.save.data.levelScore[newProgress.level] = newProgress.score;
-                FlxG.save.flush();
+                levelScores[newProgress.level] = newProgress.score;
+                SaveManager.saveProgress(levelScores);
             } else {
                 betterProgress = null;
             }
@@ -95,7 +99,7 @@ class HubWorldState extends FlxState {
         FlxG.mouse.visible = true;
 
         for (i in 0...hubWorldData.worlds.length) {
-            var world = new WorldSpriteGroup(hubWorldData, i, FlxG.save.data.levelScore, logger);
+            var world = new WorldSpriteGroup(hubWorldData, i, SaveManager.getProgress(), logger);
             add(world);
 
             if (betterProgress != null && i == worldProgress) {
@@ -123,16 +127,6 @@ class HubWorldState extends FlxState {
 
     override public function update(elapsed:Float):Void {
         super.update(elapsed);
-    }
-
-    private function initializeSaveData() {
-        if (FlxG.save.data.initialized != null) {
-            return;
-        }
-        FlxG.save.data.levelScore = new Map<Int, Float>();
-
-        FlxG.save.data.initialized = true;
-        FlxG.save.flush();
     }
 
     override public function onFocus() {
