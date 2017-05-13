@@ -38,6 +38,7 @@ class TimingSystemTop extends FlxBasic {
 
         universalBus.level.subscribe(this, switchLevelState);
         universalBus.musicStart.subscribe(this, trackSongStart);
+        universalBus.pause.subscribe(this, pause);
     }
 
     public function switchLevelState(event:LevelEvent):Void {
