@@ -28,6 +28,7 @@ class UniversalBus {
     public var retry(default, null) = new Bus<Bool>();
     public var returnToHub(default, null) = new Bus<Bool>();
     public var pause(default, null) = new Bus<Bool>();
+    public var unpause(default, null) = new Bus<Bool>();
 
     public function new() {}
 }

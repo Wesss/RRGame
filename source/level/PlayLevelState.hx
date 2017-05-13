@@ -67,6 +67,7 @@ class PlayLevelState extends FlxState {
 
 		// Pause
 		universalBus.pause.subscribe(this, pauseGame);
+		universalBus.unpause.subscribe(this, unpauseGame);
 
 		// Win/Lose conditions
 		universalBus.playerDie.subscribe(this, handlePlayerDie);
@@ -137,11 +138,14 @@ class PlayLevelState extends FlxState {
 	public function pauseGame(pauseEvent) {
 		var menu = new PauseOptionsMenu();
 		FlxTween.globalManager.active = false;
-		// timingsystem.pause() // TODO timing pause unpause
-		 menu.closeCallback = function() {
-			 FlxTween.globalManager.active = true;
-		 }
+		menu.closeCallback = function() {
+			universalBus.unPause.broadcast(true);
+		}
 		openSubState(menu);
+	}
+
+	public function unpauseGame(unpauseEvent) {
+		FlxTween.globalManager.active = true;
 	}
 
 	override public function onFocus() {
