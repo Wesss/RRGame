@@ -1,5 +1,6 @@
 package level;
 
+import pause_options_menu.PauseOptionsMenu;
 import logging.LoggingSystem;
 import audio.AudioSystemTop;
 import bus.UniversalBus;
@@ -63,6 +64,9 @@ class PlayLevelState extends FlxState {
 
 		// Camera
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
+
+		// Pause
+		universalBus.pause.subscribe(this, pauseGame);
 
 		// Win/Lose conditions
 		universalBus.playerDie.subscribe(this, handlePlayerDie);
@@ -130,6 +134,15 @@ class PlayLevelState extends FlxState {
 		});
 	}
 
+	public function pauseGame(pauseEvent) {
+		var menu = new PauseOptionsMenu();
+		FlxTween.globalManager.active = false;
+		// timingsystem.pause() // TODO timing pause unpause
+		 menu.closeCallback = function() {
+			 FlxTween.globalManager.active = true;
+		 }
+		openSubState(menu);
+	}
 
 	override public function onFocus() {
 		super.onFocus();
