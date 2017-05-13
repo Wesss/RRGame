@@ -139,7 +139,7 @@ class PlayLevelState extends FlxState {
 		var menu = new PauseOptionsMenu();
 		FlxTween.globalManager.active = false;
 		menu.closeCallback = function() {
-			universalBus.unPause.broadcast(true);
+			universalBus.unpause.broadcast(true);
 		}
 		openSubState(menu);
 	}
@@ -151,6 +151,7 @@ class PlayLevelState extends FlxState {
 	override public function onFocus() {
 		super.onFocus();
 		logger.focusGained();
+		// TODO hook focus up to pausing and unpausing?
 	}
 
 	override public function onFocusLost() {
