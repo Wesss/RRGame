@@ -27,6 +27,7 @@ class UniversalBus {
     public var gameOver(default, null) = new Bus<Int>();
     public var retry(default, null) = new Bus<Bool>();
     public var returnToHub(default, null) = new Bus<Bool>();
+    public var pause(default, null) = new Bus<Bool>();
 
     public function new() {}
 }

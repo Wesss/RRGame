@@ -7,7 +7,7 @@ import flixel.FlxSubState;
  **/
 class PauseOptionsMenu extends FlxSubState {
 
-    // TODO potentially use flixel.addons.ui.FlxSlider
+    // Controls for ESC to open/close, restart and quit button? or R to restart, Space to quit
 
     public function new() {
         super();
@@ -15,5 +15,6 @@ class PauseOptionsMenu extends FlxSubState {
 
     override public function create():Void {
         super.create();
+        // TODO draw text
     }
 }

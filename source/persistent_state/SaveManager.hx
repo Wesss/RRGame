@@ -34,12 +34,4 @@ class SaveManager {
         localStorage.setItem("levelScore", serializer.toString());
         #end
     }
-
-    public static function loadSettings() {
-        // TODO implement
-    }
-
-    public static function saveSettings() {
-        // TODO implement
-    }
 }
