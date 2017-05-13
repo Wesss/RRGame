@@ -19,10 +19,9 @@ class TimingSystemTop extends FlxBasic {
     private var beatEventBus:Bus<BeatEvent>;
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
-    private var music:FlxSound;
     private var prevMusicHeadPlayTime:Null<Float>;
     private var prevMusicTimeStamp:Float;
-    private var wasPausedSinceLastMusicHeadUpdate:Bool;
+    private var isOffSync:Bool;
     private var lastBeatBroadcasted:Float;
 
     public function new(universalBus:UniversalBus) {
@@ -30,14 +29,13 @@ class TimingSystemTop extends FlxBasic {
         beatEventBus = universalBus.beat;
         milisecondsPerBeat = 0;
         offsetMilis = 0;
-        music = null;
         prevMusicHeadPlayTime = 0;
         prevMusicTimeStamp = 0;
-        wasPausedSinceLastMusicHeadUpdate = false;
-        lastBeatBroadcasted = FlxMath.MIN_VALUE_FLOAT;
+        isOffSync = true;
+        lastBeatBroadcasted = -9999999;
 
         universalBus.level.subscribe(this, switchLevelState);
-        universalBus.musicStart.subscribe(this, trackSongStart);
+        universalBus.musicPlayheadUpdate.subscribe(this, updateMusicPlayhead);
         universalBus.pause.subscribe(this, pause);
     }
 
@@ -59,32 +57,14 @@ class TimingSystemTop extends FlxBasic {
     }
 
     /**
-     * Start releasing beat events as a song starts playing
-     **/
-    public function trackSongStart(music:FlxSound):Void {
-        this.music = music;
-        this.prevMusicHeadPlayTime = null;
-    }
-
-    /**
      * If a song is playing, update our time and release beat events as appropriate
      **/
     override public function update(elapsed:Float):Void {
         super.update(elapsed);
 
-        // if song hasnt started, nothing to do
-        if (music == null) {
-            return;
-        }
-
         var curStamp = haxe.Timer.stamp() * 1000;
-        if (prevMusicHeadPlayTime != music.time) {
-            prevMusicHeadPlayTime = music.time;
-            prevMusicTimeStamp = curStamp;
-            wasPausedSinceLastMusicHeadUpdate = false;
-        }
 
-        if (!wasPausedSinceLastMusicHeadUpdate) {
+        if (!isOffSync) {
             var curBeat = (prevMusicHeadPlayTime + ((curStamp) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
 
             if (curBeat > lastBeatBroadcasted) {
@@ -93,7 +73,13 @@ class TimingSystemTop extends FlxBasic {
         }
     }
 
-    public function pause():Void {
-        wasPausedSinceLastMusicHeadUpdate = true;
+    public function updateMusicPlayhead(playheadTime:Float) {
+        prevMusicHeadPlayTime = playheadTime;
+        prevMusicTimeStamp = haxe.Timer.stamp() * 1000;
+        isOffSync = false;
+    }
+
+    public function pause(pauseEvent):Void {
+        isOffSync = true;
     }
 }
