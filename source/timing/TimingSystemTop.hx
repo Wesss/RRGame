@@ -1,11 +1,9 @@
 package timing;
 
-import flixel.math.FlxMath;
 import haxe.Timer;
 import bus.Bus;
 import bus.UniversalBus;
 import flixel.FlxBasic;
-import flixel.system.FlxSound;
 import level.LevelData;
 import level.LevelEvent;
 

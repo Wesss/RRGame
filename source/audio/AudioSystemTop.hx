@@ -15,7 +15,7 @@ import bus.UniversalBus;
 class AudioSystemTop extends FlxBasic {
 
     // music
-    private var musicPlayheadUpdate:Bus<FlxSound>;
+    private var musicPlayheadUpdate:Bus<Float>;
     private var musicForLevel:FlxSound;
     private var isPlayingMusic:Bool;
     private var prevMusicPlayhead:Float;
@@ -25,6 +25,7 @@ class AudioSystemTop extends FlxBasic {
     private var deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
 
     public function new(universalBus:UniversalBus) {
+        super();
         musicPlayheadUpdate = universalBus.musicPlayheadUpdate;
         musicForLevel = null;
         isPlayingMusic = false;
@@ -37,6 +38,8 @@ class AudioSystemTop extends FlxBasic {
 
         // music playing
         universalBus.level.subscribe(this, switchLevelState);
+        universalBus.pause.subscribe(this, pause);
+        universalBus.unpause.subscribe(this, unpause);
 
         // sound playing
         universalBus.playerHit.subscribe(this, function (event) {

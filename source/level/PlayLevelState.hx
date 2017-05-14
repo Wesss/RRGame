@@ -50,7 +50,7 @@ class PlayLevelState extends FlxState {
 
 		// System initialization
 		new Referee(universalBus);
-		new AudioSystemTop(universalBus);
+		add(new AudioSystemTop(universalBus));
 		add(new ControlsSystemTop(universalBus));
 		var board = new BoardSystemTop(0, 0, universalBus);
 		add(board);
