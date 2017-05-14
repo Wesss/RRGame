@@ -105,10 +105,10 @@ class HubWorldState extends FlxState {
                 var levelScores = SaveManager.getProgress();
                 levelScores[betterProgress.level] = betterProgress.score;
                 SaveManager.saveProgress(levelScores);
+            }
 
-                if (reset) {
-                    world.levels[levelRelativeToWorld].click();
-                }
+            if (reset && i == worldProgress) {
+                world.levels[levelRelativeToWorld].click();
             }
 
             if (i > 0) {
