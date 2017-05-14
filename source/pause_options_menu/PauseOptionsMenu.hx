@@ -1,5 +1,6 @@
 package pause_options_menu;
 
+import flixel.text.FlxText;
 import bus.UniversalBus;
 import logging.LoggingSystem;
 import level.PlayLevelState;
@@ -26,7 +27,21 @@ class PauseOptionsMenu extends FlxSubState {
 
     override public function create():Void {
         super.create();
-        // TODO draw text
+
+        var pauseMsg = new FlxText(-50, -40, "PAUSED");
+        var volumeMsg = new FlxText(-50, 10, "Press +/- to change Volume");
+        var retryMsg = new FlxText(-50, 30, "Press R to restart");
+        var exitMsg = new FlxText(-50, 50, "press SPACE to quit to hubworld");
+
+        Juicer.juiceText(pauseMsg, 20);
+        Juicer.juiceText(volumeMsg, 20);
+        Juicer.juiceText(retryMsg, 20);
+        Juicer.juiceText(exitMsg, 20);
+
+        add(pauseMsg);
+        add(volumeMsg);
+        add(retryMsg);
+        add(exitMsg);
     }
 
     override public function update(elapsed:Float) {
