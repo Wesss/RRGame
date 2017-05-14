@@ -121,22 +121,23 @@ class PlayLevelState extends FlxState {
 		add(attributionText);
 
 		universalBus.retry.subscribe(this, function(_) {
-			FlxG.switchState(new HubWorldState(logger, {
-				level: levelIndex,
-				score: player.hp
-			}, true));
+			endPlayState(logger, levelIndex, player.hp, true);
 		});
 
 		universalBus.returnToHub.subscribe(this, function(_) {
-			FlxG.switchState(new HubWorldState(logger, {
-				level: levelIndex,
-				score: player.hp
-			}));
+			endPlayState(logger, levelIndex, player.hp, false);
 		});
 	}
 
+	public static function endPlayState(logger, levelIndex, playerHP, isRetrying) {
+		FlxG.switchState(new HubWorldState(logger, {
+			level: levelIndex,
+			score: playerHP
+		}, isRetrying));
+	}
+
 	public function pauseGame(pauseEvent) {
-		var menu = new PauseOptionsMenu();
+		var menu = new PauseOptionsMenu(universalBus, logger, levelIndex);
 		FlxTween.globalManager.active = false;
 		menu.closeCallback = function() {
 			universalBus.unpause.broadcast(true);
