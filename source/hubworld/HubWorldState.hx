@@ -1,7 +1,7 @@
 package hubworld;
 
+import persistent_state.SaveManager;
 import flixel.text.FlxText;
-import hubworld.SaveManager;
 import logging.*;
 import flixel.FlxState;
 import flixel.FlxG;
@@ -50,8 +50,6 @@ class HubWorldState extends FlxState {
         this.logger = logger;
  
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
-
-        SaveManager.initializeSaveData();
 
         if (newProgress != null) {
             logger.endLevel(newProgress.score);

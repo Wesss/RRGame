@@ -1,5 +1,6 @@
 package level;
 
+import pause_options_menu.PauseOptionsMenu;
 import logging.LoggingSystem;
 import audio.AudioSystemTop;
 import bus.UniversalBus;
@@ -49,7 +50,7 @@ class PlayLevelState extends FlxState {
 
 		// System initialization
 		new Referee(universalBus);
-		new AudioSystemTop(universalBus);
+		add(new AudioSystemTop(universalBus));
 		add(new ControlsSystemTop(universalBus));
 		var board = new BoardSystemTop(0, 0, universalBus);
 		add(board);
@@ -63,6 +64,10 @@ class PlayLevelState extends FlxState {
 
 		// Camera
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
+
+		// Pause
+		universalBus.pause.subscribe(this, pauseGame);
+		universalBus.unpause.subscribe(this, unpauseGame);
 
 		// Win/Lose conditions
 		universalBus.playerDie.subscribe(this, handlePlayerDie);
@@ -116,24 +121,38 @@ class PlayLevelState extends FlxState {
 		add(attributionText);
 
 		universalBus.retry.subscribe(this, function(_) {
-			FlxG.switchState(new HubWorldState(logger, {
-				level: levelIndex,
-				score: player.hp
-			}, true));
+			endPlayState(logger, levelIndex, player.hp, true);
 		});
 
 		universalBus.returnToHub.subscribe(this, function(_) {
-			FlxG.switchState(new HubWorldState(logger, {
-				level: levelIndex,
-				score: player.hp
-			}));
+			endPlayState(logger, levelIndex, player.hp, false);
 		});
 	}
 
+	public static function endPlayState(logger, levelIndex, playerHP, isRetrying) {
+		FlxG.switchState(new HubWorldState(logger, {
+			level: levelIndex,
+			score: playerHP
+		}, isRetrying));
+	}
+
+	public function pauseGame(pauseEvent) {
+		var menu = new PauseOptionsMenu(universalBus, logger, levelIndex);
+		FlxTween.globalManager.active = false;
+		menu.closeCallback = function() {
+			universalBus.unpause.broadcast(true);
+		}
+		openSubState(menu);
+	}
+
+	public function unpauseGame(unpauseEvent) {
+		FlxTween.globalManager.active = true;
+	}
 
 	override public function onFocus() {
 		super.onFocus();
 		logger.focusGained();
+		// TODO hook focus up to pausing and unpausing?
 	}
 
 	override public function onFocusLost() {

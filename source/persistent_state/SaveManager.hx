@@ -1,4 +1,4 @@
-package hubworld;
+package persistent_state;
 
 import haxe.Unserializer;
 import haxe.Serializer;
@@ -6,21 +6,23 @@ import js.Browser;
 
 class SaveManager {
 
+    private static var localStorage = Browser.window.localStorage;
+
     public static function initializeSaveData() {
         #if js
-        var localStorage = Browser.window.localStorage;
-
         if (localStorage.getItem("isInitiallized") != null) {
             return;
         }
         saveProgress(new Map<Int, Float>());
         localStorage.setItem("isInitiallized", "true");
+        #else
+        throw "Error: Saving is not supported on a non-js target"
         #end
     }
 
     public static function getProgress():Map<Int, Float> {
         #if js
-        var unserializer = new Unserializer(Browser.window.localStorage.getItem("levelScore"));
+        var unserializer = new Unserializer(localStorage.getItem("levelScore"));
         return unserializer.unserialize();
         #end
     }
@@ -29,7 +31,7 @@ class SaveManager {
         #if js
         var serializer = new Serializer();
         serializer.serialize(progress);
-        Browser.window.localStorage.setItem("levelScore", serializer.toString());
+        localStorage.setItem("levelScore", serializer.toString());
         #end
     }
 }

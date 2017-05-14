@@ -17,12 +17,14 @@ class ControlsSystemTop extends FlxBasic {
 
     private var retryBus:Bus<Bool>;
     private var returnBus:Bus<Bool>;
+    private var pauseBus:Bus<Bool>;
 
     public function new(universalBus:UniversalBus) {
         super();
         controlsBus = universalBus.controls;
         retryBus = universalBus.retry;
         returnBus = universalBus.returnToHub;
+        pauseBus = universalBus.pause;
         controlsPoller = new ControlsPoller();
         previousPolledInput = null;
     }
@@ -41,6 +43,10 @@ class ControlsSystemTop extends FlxBasic {
 
         if (FlxG.keys.justPressed.SPACE) {
             returnBus.broadcast(true);
+        }
+
+        if (FlxG.keys.justPressed.ESCAPE) {
+            pauseBus.broadcast(true);
         }
     }
 }

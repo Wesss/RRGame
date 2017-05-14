@@ -1,5 +1,6 @@
 package;
 
+import logging.EmptyLogger;
 import level.LevelDataLoader;
 import bus.UniversalBus;
 import level.PlayLevelState;
@@ -19,6 +20,6 @@ class RunActualLevelTest extends FlxState {
 		var universalBus = new UniversalBus();
 		var levelData = LevelDataLoader.loadLevelData(LEVEL_ASSET_PATH, universalBus);
 
-		FlxG.switchState(new PlayLevelState(levelData, -1, universalBus, null));
+		FlxG.switchState(new PlayLevelState(levelData, -1, universalBus, new EmptyLogger()));
 	}
 }

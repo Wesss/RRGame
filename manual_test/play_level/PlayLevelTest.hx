@@ -1,5 +1,6 @@
 package;
 
+import logging.EmptyLogger;
 import timing.TimingSystemTop;
 import timing.TimingSystemTop;
 import domain.*;
@@ -110,7 +111,7 @@ class PlayLevelTest extends FlxState
 
 		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, bpm, 444, threats);
 		trace(TimingSystemTop.MILISECONDS_PER_MINUTE / levelData.bpm);
-		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus, null));
+		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus, new EmptyLogger()));
 	}
 
 	override public function update(elapsed:Float):Void
