@@ -1,0 +1,82 @@
+<level width="512" height="2048" BPM="139" MusicTrack="WYLT/Closer_To_Me.ogg" MusicStartOffset="4320" BeatsPerPhrase="8">
+  <BoardDisplayLayer>
+    <Board id="0" x="0" y="0" />
+    <Board id="1" x="64" y="0" />
+    <Board id="2" x="128" y="0" />
+    <Board id="3" x="192" y="0" />
+    <Board id="8" x="0" y="64" />
+    <Board id="9" x="64" y="64" />
+    <Board id="10" x="128" y="64" />
+    <Board id="11" x="192" y="64" />
+    <Board id="4" x="0" y="128" />
+    <Board id="5" x="64" y="128" />
+    <Board id="6" x="128" y="128" />
+    <Board id="7" x="192" y="128" />
+    <Board id="12" x="256" y="128" />
+    <Board id="13" x="320" y="128" />
+    <Board id="14" x="384" y="128" />
+    <Board id="15" x="448" y="128" />
+    <Board id="16" x="0" y="192" />
+    <Board id="17" x="64" y="192" />
+    <Board id="18" x="128" y="192" />
+    <Board id="19" x="192" y="192" />
+    <Board id="20" x="0" y="256" />
+    <Board id="21" x="64" y="256" />
+    <Board id="22" x="128" y="256" />
+    <Board id="23" x="192" y="256" />
+    <Board id="24" x="256" y="256" />
+    <Board id="25" x="320" y="256" />
+    <Board id="26" x="384" y="256" />
+    <Board id="27" x="448" y="256" />
+    <Board id="28" x="0" y="320" />
+    <Board id="29" x="64" y="320" />
+    <Board id="30" x="128" y="320" />
+    <Board id="31" x="192" y="320" />
+    <Board id="32" x="0" y="384" />
+    <Board id="33" x="64" y="384" />
+    <Board id="34" x="128" y="384" />
+    <Board id="35" x="192" y="384" />
+    <Board id="36" x="256" y="384" />
+    <Board id="37" x="320" y="384" />
+    <Board id="38" x="384" y="384" />
+    <Board id="39" x="448" y="384" />
+  </BoardDisplayLayer>
+  <Entities>
+    <RedSlider id="0" x="32" y="64" warningTime="2" />
+    <RedSlider id="1" x="96" y="64" warningTime="2" />
+    <RedSlider id="2" x="160" y="64" warningTime="2" />
+    <RedSlider id="3" x="224" y="64" warningTime="2" />
+    <RedSlider id="4" x="0" y="128" warningTime="2" />
+    <RedSlider id="5" x="64" y="144" warningTime="2" />
+    <RedSlider id="6" x="128" y="128" warningTime="2" />
+    <RedSlider id="7" x="192" y="144" warningTime="2" />
+    <RedSlider id="8" x="256" y="128" warningTime="2" />
+    <RedSlider id="9" x="320" y="144" warningTime="2" />
+    <RedSlider id="10" x="384" y="128" warningTime="2" />
+    <RedSlider id="11" x="448" y="144" warningTime="2" />
+    <RedSlider id="12" x="32" y="192" warningTime="2" />
+    <RedSlider id="13" x="96" y="192" warningTime="2" />
+    <RedSlider id="14" x="160" y="192" warningTime="2" />
+    <RedSlider id="15" x="224" y="192" warningTime="2" />
+    <RedSlider id="16" x="0" y="256" warningTime="2" />
+    <RedSlider id="17" x="64" y="272" warningTime="2" />
+    <RedSlider id="18" x="128" y="256" warningTime="2" />
+    <RedSlider id="19" x="192" y="272" warningTime="2" />
+    <RedSlider id="20" x="256" y="256" warningTime="2" />
+    <RedSlider id="21" x="320" y="272" warningTime="2" />
+    <RedSlider id="22" x="384" y="256" warningTime="2" />
+    <RedSlider id="23" x="448" y="272" warningTime="2" />
+    <RedSlider id="24" x="32" y="320" warningTime="2" />
+    <RedSlider id="25" x="96" y="320" warningTime="2" />
+    <RedSlider id="26" x="160" y="320" warningTime="2" />
+    <RedSlider id="27" x="224" y="320" warningTime="2" />
+    <RedSlider id="28" x="0" y="384" warningTime="2" />
+    <RedSlider id="29" x="64" y="400" warningTime="2" />
+    <RedSlider id="30" x="128" y="384" warningTime="2" />
+    <RedSlider id="31" x="192" y="400" warningTime="2" />
+    <RedSlider id="32" x="256" y="384" warningTime="2" />
+    <RedSlider id="33" x="320" y="400" warningTime="2" />
+    <RedSlider id="34" x="384" y="384" warningTime="2" />
+    <RedSlider id="35" x="448" y="400" warningTime="2" />
+  </Entities>
+</level>
