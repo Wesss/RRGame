@@ -25,7 +25,7 @@ class Referee {
         unsafeSquares.add(displacement);
     }
 
-     public function handlePlayerMove(displacement : Displacement) {
+    public function handlePlayerMove(displacement : Displacement) {
         logicalPlayerPosition = displacement;
     }
 

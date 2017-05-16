@@ -1,5 +1,6 @@
 package level;
 
+import track_action.SliderThreatHoming;
 import track_action.EmptyTrackAction;
 import track_action.TextTrackAction;
 import domain.VerticalDisplacement;
@@ -70,17 +71,9 @@ class LevelDataLoader {
                 case "RedSliderHoming": {
                     var warnTime = Std.parseInt(data.get("warningTime"));
 
-                    // TODO homing slider threat
-//                    trackActions.push(new SliderThreatHoming(
-//                        beatOffset,
-//                        bpm,
-//                        universalBus,
-//                        warnTime
-//                    ));
-                    trackActions.push(new SliderThreat(
+                    trackActions.push(new SliderThreatHoming(
                         beatOffset,
                         bpm,
-                        new Displacement(RIGHT, UP),
                         universalBus,
                         warnTime
                     ));
