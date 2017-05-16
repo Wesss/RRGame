@@ -58,24 +58,23 @@ class SliderThreat extends FlxSprite implements TrackAction {
             // Show threat:
             visible = true;
 
+            scale.x = 0;
             scale.y = 0;
-            x -= width / 4;
-            y -= height / 4;
+            x -= width / 2;
+            y -= height / 2;
 
             // Flash open the threat square
-            FlxTween.tween(this.scale, {
-                y : 1
+            warningTween = FlxTween.tween(this.scale, {
+                x : 0.5,
+                y : 0.5
             }, 0.1, {
                 ease: FlxEase.quartIn
-            });
-
-            // Animate threat to target square:
-            warningTween = FlxTween.tween(this, {
-                x : BoardCoordinates.displacementToX(target.horizontalDisplacement) - width / 2,
-                y : BoardCoordinates.displacementToY(target.verticalDisplacement) - height / 2
-            }, beatWarnTime / bpm * 60, {
+            }).then(FlxTween.tween(this.scale, {
+                x : 1.0,
+                y : 1.0
+            }, beatWarnTime / bpm * 60 - 0.1, {
                 ease: FlxEase.quartIn
-            });
+            }));
 
             animation.play("warning");
         } else if (beatIndex == 1) {
@@ -84,8 +83,8 @@ class SliderThreat extends FlxSprite implements TrackAction {
 
             killBus.broadcast(position);
 
-            x = BoardCoordinates.displacementToX(target.horizontalDisplacement) - width / 2;
-            y = BoardCoordinates.displacementToY(target.verticalDisplacement) - height / 2;
+            scale.x = 1;
+            scale.y = 1;
 
             animation.play("dodge");
             // Fade and scale out
