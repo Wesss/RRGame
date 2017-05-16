@@ -1,5 +1,6 @@
 package level;
 
+import track_action.EmptyTrackAction;
 import track_action.TextTrackAction;
 import domain.VerticalDisplacement;
 import domain.HorizontalDisplacement;
@@ -50,12 +51,12 @@ class LevelDataLoader {
 
         // essentially a lambda for loading track actions
         function parseEntities(type:String, data:Xml):Void {
+            var boardGrid:Grid = Grid.gridFromRawXml(data);
+            var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
+
             switch (type) {
                 case "RedSlider": {
-                    var boardGrid:Grid = Grid.gridFromRawXml(data);
-
                     var displacement = parseDisplacement(boardGrid);
-                    var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
                     var warnTime = Std.parseInt(data.get("warningTime"));
 
                     trackActions.push(new SliderThreat(
@@ -67,9 +68,6 @@ class LevelDataLoader {
                     ));
                 }
                 case "RedSliderHoming": {
-                    var boardGrid:Grid = Grid.gridFromRawXml(data);
-
-                    var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
                     var warnTime = Std.parseInt(data.get("warningTime"));
 
                     // TODO homing slider threat
@@ -87,10 +85,10 @@ class LevelDataLoader {
                         warnTime
                     ));
                 }
-                case "Text": {
-                    var boardGrid:Grid = Grid.gridFromRawXml(data);
+                case "Comment":{
 
-                    var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
+                }
+                case "Text": {
                     var text = data.get("text");
                     var duration = Std.parseInt(data.get("beatDuration"));
 
@@ -98,8 +96,9 @@ class LevelDataLoader {
                             beatOffset, text, bpm, duration
                     ));
                 }
-                case "Comment":
-                case "Empty": // TODO empty action
+                case "Empty": {
+                    trackActions.push(new EmptyTrackAction(beatOffset));
+                }
                 default : throw "Unknown entity parsed : " + type;
             }
         }
