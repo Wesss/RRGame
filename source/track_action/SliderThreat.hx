@@ -30,7 +30,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
         animation.add("dodge", [2]);
 
         visible = false;
-        triggerBeats = [-beatWarnTime, 0, 0.2, 1];
+        triggerBeats = [-beatWarnTime, 0, 1];
         this.beatOffset = beatOffset;
         this.beatWarnTime = beatWarnTime;
         this.bpm = bpm;
@@ -79,12 +79,13 @@ class SliderThreat extends FlxSprite implements TrackAction {
 
             animation.play("warning");
         } else if (beatIndex == 1) {
-            // Threat about to collide
+            // Threat collision
             warningTween.cancel(); // In case timing discrepency between beats timing and timer
+
+            killBus.broadcast(position);
+
             x = BoardCoordinates.displacementToX(target.horizontalDisplacement) - width / 2;
             y = BoardCoordinates.displacementToY(target.verticalDisplacement) - height / 2;
-        } else if (beatIndex == 2) {
-            // Threat collision - a tenth of a beat after landing for tolerance
 
             animation.play("dodge");
             // Fade and scale out
@@ -100,10 +101,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
             }, 1 / bpm * 60, {
                 ease: FlxEase.quadOut
             });
-
-
-            killBus.broadcast(position);
-        } else if (beatIndex == 3) {
+        } else if (beatIndex == 2) {
             // Threat disappear
             visible = false;
         }
