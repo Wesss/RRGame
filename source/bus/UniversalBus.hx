@@ -29,6 +29,7 @@ class UniversalBus {
     public var returnToHub(default, null) = new Bus<Bool>();
     public var pause(default, null) = new Bus<Bool>();
     public var unpause(default, null) = new Bus<Bool>();
+    public var triggerBeats(default, null) = new Bus<BeatEvent>();
 
     public function new() {}
 }

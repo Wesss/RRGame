@@ -49,7 +49,7 @@ class PlayLevelState extends FlxState {
 		FlxG.mouse.visible = false;
 
 		// System initialization
-		new Referee(universalBus);
+		new Referee(universalBus, levelData.bpm);
 		add(new AudioSystemTop(universalBus));
 		add(new ControlsSystemTop(universalBus));
 		var board = new BoardSystemTop(0, 0, universalBus);

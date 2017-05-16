@@ -69,10 +69,16 @@ class LevelRunner {
             // game is finished
             universalBus.levelOutOfBeats.broadcast(true);
         }
+
+        // flag to see if we trigger any beats
+        // this lets us send a single event signifying beats being triggered
+        var triggerBeatsTriggered = false;
         for (i in actionsIndex...actions.length) {
             if (actions[i].absoluteBeatTime >= lastBeat && actions[i].absoluteBeatTime < beat.beat) {
                 actions[i].trackAction.triggerBeat(actions[i].beatIdx);
                 actionsIndex++;
+
+                triggerBeatsTriggered = true;
             } else { // Because it's sorted, we don't have to check anymore
                 break;
             }
@@ -80,6 +86,10 @@ class LevelRunner {
 
         for (trackAction in trackActions) {
             trackAction.updateBeat(beat.beat);
+        }
+
+        if (triggerBeatsTriggered) {
+            universalBus.triggerBeats.broadcast(beat);
         }
 
         lastBeat = beat.beat;
