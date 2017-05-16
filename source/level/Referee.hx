@@ -9,15 +9,40 @@ class Referee {
     private var unsafeSquares : UnsafeSquareKiller;
     private var bpm : Int;
     private var logicalPlayerPosition : Displacement;
+    private var crates : Array<Displacement>;
 
     public function new(universalBus : UniversalBus, bpm : Int) {
         this.universalBus = universalBus;
+        universalBus.newControlDesire.subscribe(this, handleNewControlDesire);
+        universalBus.crateLanded.subscribe(this, handleCrateLanded);
+        universalBus.crateDestroyed.subscribe(this, handleCrateDestroyed);
         universalBus.threatKillSquare.subscribe(this, handleThreatKillingSquare);
         universalBus.triggerBeats.subscribe(this, handleTriggerBeats);
         universalBus.playerStartMove.subscribe(this, handlePlayerMove);
 
         unsafeSquares = new UnsafeSquareKiller(universalBus, bpm);
         this.bpm = bpm;
+
+        crates = [];
+    }
+
+    public function handleNewControlDesire(displacement : Displacement) {
+        for (crate in crates) {
+            if (crate.equals(displacement)) {
+                // a crate is where they want to be
+                return;
+            }
+        }
+        // no crates in the way
+        universalBus.controls.broadcast(displacement);
+    }
+
+    public function handleCrateLanded(displacement : Displacement) {
+        crates.push(displacement);
+    }
+
+    public function handleCrateDestroyed(displacement : Displacement) {
+        crates.remove(displacement);
     }
 
     public function handleThreatKillingSquare(displacement : Displacement) {

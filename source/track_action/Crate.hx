@@ -14,6 +14,9 @@ class Crate extends SliderThreat {
         
         durationIndex = triggerBeats.length;
         triggerBeats.push(duration);
+
+        crateLandedBus = universalBus.crateLanded;
+        crateDestroyedBus = universalBus.crateDestroyed;
     }
 
     /**
