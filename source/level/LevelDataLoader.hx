@@ -66,6 +66,27 @@ class LevelDataLoader {
                             warnTime
                     ));
                 }
+                case "RedSliderHoming": {
+                    var boardGrid:Grid = Grid.gridFromRawXml(data);
+
+                    var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
+                    var warnTime = Std.parseInt(data.get("warningTime"));
+
+                    // TODO homing slider threat
+//                    trackActions.push(new SliderThreatHoming(
+//                        beatOffset,
+//                        bpm,
+//                        universalBus,
+//                        warnTime
+//                    ));
+                    trackActions.push(new SliderThreat(
+                        beatOffset,
+                        bpm,
+                        new Displacement(RIGHT, UP),
+                        universalBus,
+                        warnTime
+                    ));
+                }
                 case "Text": {
                     var boardGrid:Grid = Grid.gridFromRawXml(data);
 
@@ -77,7 +98,9 @@ class LevelDataLoader {
                             beatOffset, text, bpm, duration
                     ));
                 }
-                default : throw "Unknown entity parsed";
+                case "Comment":
+                case "Empty": // TODO empty action
+                default : throw "Unknown entity parsed : " + type;
             }
         }
         loader.loadEntities(parseEntities, "Entities");
