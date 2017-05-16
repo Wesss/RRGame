@@ -27,9 +27,27 @@ class Referee {
     }
 
     public function handleNewControlDesire(displacement : Displacement) {
+        var inbetweenLocation : Displacement;
+        inbetweenLocation = null;
+        if (displacement.horizontalDisplacement != NONE && displacement.verticalDisplacement != NONE &&
+            logicalPlayerPosition.horizontalDisplacement != NONE && logicalPlayerPosition.verticalDisplacement != NONE &&
+            (logicalPlayerPosition.horizontalDisplacement == displacement.horizontalDisplacement ||
+            logicalPlayerPosition.verticalDisplacement == displacement.verticalDisplacement)) {
+            // Adjacent corner to corner movement
+            if (logicalPlayerPosition.horizontalDisplacement == displacement.horizontalDisplacement) {
+                inbetweenLocation = new Displacement(logicalPlayerPosition.horizontalDisplacement, NONE);
+            } else {
+                inbetweenLocation = new Displacement(NONE, logicalPlayerPosition.verticalDisplacement);
+            }
+        }
+
         for (crate in crates) {
             if (crate.equals(displacement)) {
                 // a crate is where they want to be
+                return;
+            }
+            if (crate.equals(inbetweenLocation)) {
+                // a crate is inbetween them and their destination
                 return;
             }
         }
