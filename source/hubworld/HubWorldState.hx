@@ -126,7 +126,9 @@ class HubWorldState extends FlxState {
         add(new ScreenTransitionButton(0, Left, cameraTarget.moveToScreen.bind(-1)));
         add(new ScreenTransitionButton(-1, Right, cameraTarget.moveToScreen.bind(0)));
         var soundCredits = new FlxText(0, 0, 0, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
-                                                "Music courtesy of the many artists on FreeMusicArchive.org");
+                                                "Music courtesy of the many artists on FreeMusicArchive.org,\n" +
+                                                "Soundcloud, and Youtube. See the endscreen of each level for\n" +
+                                                "specific track info.");
         soundCredits.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 20, flixel.util.FlxColor.WHITE, CENTER);
         soundCredits.y = FlxG.height / 2 - 40;
         soundCredits.x = -FlxG.width + 10;

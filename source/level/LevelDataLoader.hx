@@ -10,6 +10,7 @@ import bus.UniversalBus;
 import track_action.SliderThreat;
 import track_action.TrackAction;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
+using StringTools;
 
 /**
  * Parses level.oel files into LevelData structures
@@ -20,10 +21,20 @@ class LevelDataLoader {
         var loader = new FlxOgmoLoader(levelDataAsset);
 
         var musicAssetPath = "assets/music/" + loader.getProperty("MusicTrack");
+
+        // music track asset path should be of for assets/music/<author>/<title>.ogg
+        var split = musicAssetPath.split("/");
+        var title = split[3].substring(0, split[3].length - 4).split("_").join(" ");
+        var composer = split[2].split("_").join(" ");
+        // composer's webpage should be contained in file assets/music/<author>/<author>.att
+        var composerAttributionFilePath = split.slice(0, 3).join("/") + "/" + split[2] + ".att";
+        var composerWebpage = openfl.Assets.getText(composerAttributionFilePath).replace("\n", "");
+
         var bpm = Std.parseInt(loader.getProperty("BPM"));
         var offset = Std.parseInt(loader.getProperty("MusicStartOffset"));
         var beatsPerPhrase = Std.parseInt(loader.getProperty("BeatsPerPhrase"));
 
+        // track actions
         var trackActions = new Array<TrackAction>();
 
         // map<phrase number -> phrase division count>
@@ -97,7 +108,7 @@ class LevelDataLoader {
         }
         loader.loadEntities(parseEntities, "Entities");
 
-        return new LevelData(musicAssetPath, bpm, offset, trackActions);
+        return new LevelData(musicAssetPath, title, composer, composerWebpage, bpm, offset, trackActions);
     }
 
     private static function parseDisplacement(boardGrid:Grid) {

@@ -7,20 +7,25 @@ import track_action.TrackAction;
  **/
 class LevelData {
 
-    public var musicTrack(default, null):String;
+    public var musicAssetPath(default, null):String;
     public var title(default, null):String;
-    public var author(default, null):String;
+    public var composer(default, null):String;
+    public var composerWebpage(default, null):String;
     public var bpm(default, null):Int;
     public var songStartOffsetMilis(default, null):Int;
     public var trackActions(default, null):Array<TrackAction>;
 
-    public function new(musicTrackAssetPath:String, bpm, songStartoffsetMilis, trackActions) {
-        this.musicTrack = musicTrackAssetPath;
-
-        // music track asset path should be of for assets/music/author/title.ogg
-        var split = musicTrackAssetPath.split("/");
-        this.title = split[3].substring(0, split[3].length - 4).split("_").join(" ");
-        this.author = split[2].split("_").join(" ");
+    public function new(musicAssetPath:String,
+                        title:String,
+                        composer:String,
+                        composerWebpage:String,
+                        bpm:Int,
+                        songStartoffsetMilis:Int,
+                        trackActions) {
+        this.musicAssetPath = musicAssetPath;
+        this.title = title;
+        this.composer = composer;
+        this.composerWebpage = composerWebpage;
 
         this.bpm = bpm;
         this.songStartOffsetMilis = songStartoffsetMilis;

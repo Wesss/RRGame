@@ -69,7 +69,7 @@ class AudioSystemTop extends FlxBasic {
         if (musicForLevel != null) {
             throw "Music for level has already been loaded";
         }
-        musicForLevel = FlxG.sound.load(levelData.musicTrack);
+        musicForLevel = FlxG.sound.load(levelData.musicAssetPath);
     }
 
     /**
