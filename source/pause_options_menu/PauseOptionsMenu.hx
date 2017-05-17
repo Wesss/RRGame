@@ -6,6 +6,8 @@ import logging.LoggingSystem;
 import level.PlayLevelState;
 import flixel.FlxG;
 import flixel.FlxSubState;
+import flixel.FlxSprite;
+import flixel.tweens.*;
 
 /**
  * A menu that pauses the game and allows for manipulating persistent options settings
@@ -28,15 +30,22 @@ class PauseOptionsMenu extends FlxSubState {
     override public function create():Void {
         super.create();
 
-        var pauseMsg = new FlxText(-50, -40, "PAUSED");
-        var volumeMsg = new FlxText(-50, 10, "Press +/- to change Volume");
-        var retryMsg = new FlxText(-50, 30, "Press R to restart");
-        var exitMsg = new FlxText(-50, 50, "press SPACE to quit to hubworld");
+        var background = new FlxSprite();
+        var seethroughColor = new flixel.util.FlxColor(0xcc2E4172);
+        background.makeGraphic(FlxG.width, cast(FlxG.height / 2), seethroughColor);
+        background.x -= background.width / 2;
+        background.y -= background.height / 2;
+        add(background);
 
-        Juicer.juiceText(pauseMsg, 20);
-        Juicer.juiceText(volumeMsg, 20);
-        Juicer.juiceText(retryMsg, 20);
-        Juicer.juiceText(exitMsg, 20);
+        var pauseMsg = new PauseText("PAUSED", 50);
+        pauseMsg.y = -120;
+
+        var volumeMsg = new PauseText("[ Press +/- to change the Volume ]", 30);
+        volumeMsg.y = -40;
+        var retryMsg = new PauseText("[ Press R to restart ]", 30);
+        retryMsg.y = 0;
+        var exitMsg = new PauseText("[ Press Space to return to Level Select ]", 30);
+        exitMsg.y = 40;
 
         add(pauseMsg);
         add(volumeMsg);
@@ -73,4 +82,12 @@ class PauseOptionsMenu extends FlxSubState {
             this.close();
         }
     }
+}
+
+private class PauseText extends FlxText {
+	public function new(text : String, size : Int) {
+		super(0, 0, 0, text);
+		setFormat(AssetPaths.GlacialIndifference_Regular__ttf, size, flixel.util.FlxColor.WHITE, CENTER);
+        x -= width/2;
+	}
 }
