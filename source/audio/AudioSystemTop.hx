@@ -17,6 +17,7 @@ class AudioSystemTop extends FlxBasic {
     // music
     private var musicPlayheadUpdate:Bus<Float>;
     private var musicForLevel:FlxSound;
+    private var streamedMusic:StreamSound;
     private var isPlayingMusic:Bool;
     private var prevMusicPlayhead:Float;
 
@@ -69,7 +70,19 @@ class AudioSystemTop extends FlxBasic {
         if (musicForLevel != null) {
             throw "Music for level has already been loaded";
         }
-        musicForLevel = FlxG.sound.load(levelData.musicAssetPath);
+
+        /*openfl.Assets.loadMusic(levelData.musicAssetPath).onComplete(function(sound) {
+            trace("Stream started");
+            streamedMusic = new StreamSound(sound, false, true);
+            trace("Is playing B" + streamedMusic.playing);
+            streamedMusic.play();
+            trace("Is playing A" + streamedMusic.playing);
+            trace("Stream time:" + streamedMusic.time);
+        }).onError(function (error) {
+            trace("Stream error: " + error);
+        });*/
+        var musicCached = FlxG.sound.cache(levelData.musicAssetPath);
+        musicForLevel = new StreamSound(musicCached, false, true);
     }
 
     /**
@@ -82,6 +95,7 @@ class AudioSystemTop extends FlxBasic {
         if (isPlayingMusic) {
             throw "Cannot play level music whilst previous level music is still running";
         }
+        
         musicForLevel.play();
         isPlayingMusic = true;
         var musicTime = musicForLevel.time;
@@ -95,9 +109,18 @@ class AudioSystemTop extends FlxBasic {
         }
 
         var musicTime = musicForLevel.time;
+        trace("Mtime: " + musicTime);
         if (musicTime != prevMusicPlayhead) {
             prevMusicPlayhead = musicTime;
             musicPlayheadUpdate.broadcast(musicTime);
+        }
+
+        if (streamedMusic != null) {
+            trace("Stream time:" + streamedMusic.time);
+            if (streamedMusic.time == 0) {
+                streamedMusic.pause();
+                streamedMusic.play();
+            }
         }
     }
 
