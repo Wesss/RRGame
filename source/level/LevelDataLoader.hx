@@ -10,6 +10,7 @@ import bus.UniversalBus;
 import track_action.SliderThreat;
 import track_action.TrackAction;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
+using StringTools;
 
 /**
  * Parses level.oel files into LevelData structures
@@ -21,11 +22,13 @@ class LevelDataLoader {
 
         var musicAssetPath = "assets/music/" + loader.getProperty("MusicTrack");
 
-        // music track asset path should be of for assets/music/author/title.ogg
+        // music track asset path should be of for assets/music/<author>/<title>.ogg
         var split = musicAssetPath.split("/");
         var title = split[3].substring(0, split[3].length - 4).split("_").join(" ");
         var composer = split[2].split("_").join(" ");
-        var composerWebpage = "TODO";
+        // composer's webpage should be contained in file assets/music/<author>/<author>.att
+        var composerAttributionFilePath = split.slice(0, 3).join("/") + "/" + split[2] + ".att";
+        var composerWebpage = openfl.Assets.getText(composerAttributionFilePath).replace("\n", "");
 
         var bpm = Std.parseInt(loader.getProperty("BPM"));
         var offset = Std.parseInt(loader.getProperty("MusicStartOffset"));
