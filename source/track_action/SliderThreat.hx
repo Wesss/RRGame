@@ -17,7 +17,6 @@ class SliderThreat extends FlxSprite implements TrackAction {
     public var position(default, null) : Displacement;
     private var killBus : Bus<Displacement>;
 
-    private var target : Displacement;
     private var warningTween : FlxTween;
 
     public function new(beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus, beatWarnTime = 2.0) {
@@ -33,7 +32,6 @@ class SliderThreat extends FlxSprite implements TrackAction {
         this.bpm = bpm;
         this.position = position;
         this.killBus = universalBus.threatKillSquare;
-        this.target = position;
 
         universalBus.playerHit.subscribe(this, playerHitHandler);
     }
@@ -124,7 +122,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
     }
     
     public function playerHitHandler(where : Displacement) {
-        if (where == target) {
+        if (where == position) {
             animateHit();
         }
     }
