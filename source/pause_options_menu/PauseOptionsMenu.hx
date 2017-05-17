@@ -7,7 +7,6 @@ import level.PlayLevelState;
 import flixel.FlxG;
 import flixel.FlxSubState;
 import flixel.FlxSprite;
-import flixel.tweens.*;
 
 /**
  * A menu that pauses the game and allows for manipulating persistent options settings
