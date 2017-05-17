@@ -1,5 +1,6 @@
 package audio;
 
+import flixel.FlxBasic;
 import bus.Bus;
 import level.LevelData;
 import level.LevelEvent;
@@ -11,19 +12,21 @@ import bus.UniversalBus;
  * Top level module for controlling audio. Responsible for loading/playing of sounds.
  * This class is NOT responsible for any sort of precise timing or coordination
  **/
-class AudioSystemTop {
+class AudioSystemTop extends FlxBasic {
 
     // music
-    private var musicBus:Bus<FlxSound>;
+    private var musicPlayheadUpdate:Bus<Float>;
     private var musicForLevel:FlxSound;
     private var isPlayingMusic:Bool;
+    private var prevMusicPlayhead:Float;
 
     // sounds
     private var hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
     private var deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
 
     public function new(universalBus:UniversalBus) {
-        musicBus = universalBus.musicStart;
+        super();
+        musicPlayheadUpdate = universalBus.musicPlayheadUpdate;
         musicForLevel = null;
         isPlayingMusic = false;
 
@@ -33,9 +36,10 @@ class AudioSystemTop {
         deathSound.volume = .7;
         deathSound.fadeOut(1, .3);
 
-
         // music playing
         universalBus.level.subscribe(this, switchLevelState);
+        universalBus.pause.subscribe(this, pause);
+        universalBus.unpause.subscribe(this, unpause);
 
         // sound playing
         universalBus.playerHit.subscribe(this, function (event) {
@@ -65,7 +69,7 @@ class AudioSystemTop {
         if (musicForLevel != null) {
             throw "Music for level has already been loaded";
         }
-        musicForLevel = FlxG.sound.load(levelData.musicTrack);
+        musicForLevel = FlxG.sound.load(levelData.musicAssetPath);
     }
 
     /**
@@ -80,6 +84,28 @@ class AudioSystemTop {
         }
         musicForLevel.play();
         isPlayingMusic = true;
-        musicBus.broadcast(musicForLevel);
+        var musicTime = musicForLevel.time;
+        prevMusicPlayhead = musicTime;
+        musicPlayheadUpdate.broadcast(musicTime);
+    }
+
+    override public function update(elapsed:Float) {
+        if (musicForLevel == null || !musicForLevel.playing) {
+            return;
+        }
+
+        var musicTime = musicForLevel.time;
+        if (musicTime != prevMusicPlayhead) {
+            prevMusicPlayhead = musicTime;
+            musicPlayheadUpdate.broadcast(musicTime);
+        }
+    }
+
+    public function pause(pauseEvent) {
+        musicForLevel.pause();
+    }
+
+    public function unpause(unpauseEvent) {
+        musicForLevel.resume();
     }
 }

@@ -83,9 +83,9 @@
   </BoardDisplayLayer>
   <Entities>
     <Text id="11" x="112" y="0" text="Welcome! Use the Arrow Keys/WASD to move." beatDuration="7" />
-    <Text id="12" x="48" y="64" text="Hold down keys to stay in a position!" beatDuration="8" />
-    <Text id="2" x="48" y="128" text="This is a red slider. They fall onto the grid." beatDuration="8" />
-    <Text id="3" x="48" y="192" text="If they land on you, you'll lose a life." beatDuration="8" />
+    <Text id="12" x="48" y="64" text="Hold down these keys to stay away from the center." beatDuration="8" />
+    <Text id="2" x="48" y="128" text="These are red sliders." beatDuration="8" />
+    <Text id="3" x="48" y="192" text="If they land on you, you lose a life." beatDuration="8" />
     <Text id="4" x="48" y="256" text="Not so hard ain't it?" beatDuration="4" />
     <Text id="0" x="304" y="256" text="Not so hard ain't it? I think you're ready for a real challenge ;)" beatDuration="4" />
     <Text id="5" x="48" y="320" text="        Ready?..." beatDuration="4" />
@@ -93,7 +93,7 @@
     <Text id="10" x="368" y="320" text="             2" beatDuration="1" />
     <Text id="9" x="432" y="320" text="             1" beatDuration="1" />
     <Text id="8" x="496" y="320" text="            Go!" beatDuration="1" />
-    <RedSlider id="1" x="256" y="128" warningTime="4" />
+    <RedSlider id="1" x="128" y="128" warningTime="2" />
     <RedSlider id="6" x="128" y="192" warningTime="2" />
     <RedSlider id="13" x="80" y="384" warningTime="1" />
     <RedSlider id="14" x="336" y="400" warningTime="1" />
@@ -111,10 +111,16 @@
     <RedSlider id="25" x="400" y="528" warningTime="2" />
     <RedSlider id="26" x="400" y="544" warningTime="2" />
     <RedSlider id="27" x="128" y="608" warningTime="2" />
-    <RedSlider id="28" x="128" y="592" warningTime="2" />
-    <RedSlider id="30" x="128" y="576" warningTime="2" />
+    <RedSlider id="28" x="144" y="608" warningTime="2" />
+    <RedSlider id="30" x="160" y="608" warningTime="2" />
     <RedSlider id="31" x="384" y="592" warningTime="2" />
     <RedSlider id="32" x="400" y="592" warningTime="2" />
     <RedSlider id="33" x="416" y="592" warningTime="2" />
+    <RedSlider id="34" x="384" y="128" warningTime="2" />
+    <Empty id="35" x="496" y="576" />
+    <RedSlider id="36" x="64" y="464" warningTime="1" />
+    <RedSlider id="37" x="352" y="480" warningTime="1" />
+    <RedSlider id="38" x="400" y="576" warningTime="2" />
+    <RedSlider id="39" x="400" y="608" warningTime="2" />
   </Entities>
 </level>

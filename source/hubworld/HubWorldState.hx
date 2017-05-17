@@ -1,7 +1,7 @@
 package hubworld;
 
+import persistent_state.SaveManager;
 import flixel.text.FlxText;
-import hubworld.SaveManager;
 import logging.*;
 import flixel.FlxState;
 import flixel.FlxG;
@@ -50,8 +50,6 @@ class HubWorldState extends FlxState {
         this.logger = logger;
  
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
-
-        SaveManager.initializeSaveData();
 
         if (newProgress != null) {
             logger.endLevel(newProgress.score);
@@ -107,10 +105,10 @@ class HubWorldState extends FlxState {
                 var levelScores = SaveManager.getProgress();
                 levelScores[betterProgress.level] = betterProgress.score;
                 SaveManager.saveProgress(levelScores);
+            }
 
-                if (reset) {
-                    world.levels[levelRelativeToWorld].click();
-                }
+            if (reset && i == worldProgress) {
+                world.levels[levelRelativeToWorld].click();
             }
 
             if (i > 0) {
@@ -125,16 +123,16 @@ class HubWorldState extends FlxState {
         }
 
         // sound credits
-        var soundCredits = new FlxText(20, 430, 0, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
-                                                "Music courtesy of the many artists on FreeMusicArchive.org");
-        Juicer.juiceText(soundCredits, 15);
+        add(new ScreenTransitionButton(0, Left, cameraTarget.moveToScreen.bind(-1)));
+        add(new ScreenTransitionButton(-1, Right, cameraTarget.moveToScreen.bind(0)));
+        var soundCredits = new FlxText(0, 0, 0, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
+                                                "Music courtesy of the many artists on FreeMusicArchive.org,\n" +
+                                                "Soundcloud, and Youtube. See the endscreen of each level for\n" +
+                                                "specific track info.");
+        soundCredits.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 20, flixel.util.FlxColor.WHITE, CENTER);
+        soundCredits.y = FlxG.height / 2 - 40;
+        soundCredits.x = -FlxG.width + 10;
         add(soundCredits);
-
-        // incomplete!
-        var incompleteText = new FlxText(120, 330, "levels 1-2, 1-3, and world 2,\n" +
-                                                    "and more coming soon");
-        Juicer.juiceText(incompleteText, 14);
-        add(incompleteText);
     }
 
     override public function update(elapsed:Float):Void {

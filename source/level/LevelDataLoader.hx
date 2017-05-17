@@ -1,5 +1,7 @@
 package level;
 
+import track_action.SliderThreatHoming;
+import track_action.EmptyTrackAction;
 import track_action.TextTrackAction;
 import domain.VerticalDisplacement;
 import domain.HorizontalDisplacement;
@@ -8,6 +10,7 @@ import bus.UniversalBus;
 import track_action.SliderThreat;
 import track_action.TrackAction;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
+using StringTools;
 
 /**
  * Parses level.oel files into LevelData structures
@@ -18,10 +21,20 @@ class LevelDataLoader {
         var loader = new FlxOgmoLoader(levelDataAsset);
 
         var musicAssetPath = "assets/music/" + loader.getProperty("MusicTrack");
+
+        // music track asset path should be of for assets/music/<author>/<title>.ogg
+        var split = musicAssetPath.split("/");
+        var title = split[3].substring(0, split[3].length - 4).split("_").join(" ");
+        var composer = split[2].split("_").join(" ");
+        // composer's webpage should be contained in file assets/music/<author>/<author>.att
+        var composerAttributionFilePath = split.slice(0, 3).join("/") + "/" + split[2] + ".att";
+        var composerWebpage = openfl.Assets.getText(composerAttributionFilePath).replace("\n", "");
+
         var bpm = Std.parseInt(loader.getProperty("BPM"));
         var offset = Std.parseInt(loader.getProperty("MusicStartOffset"));
         var beatsPerPhrase = Std.parseInt(loader.getProperty("BeatsPerPhrase"));
 
+        // track actions
         var trackActions = new Array<TrackAction>();
 
         // map<phrase number -> phrase division count>
@@ -50,12 +63,12 @@ class LevelDataLoader {
 
         // essentially a lambda for loading track actions
         function parseEntities(type:String, data:Xml):Void {
+            var boardGrid:Grid = Grid.gridFromRawXml(data);
+            var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
+
             switch (type) {
                 case "RedSlider": {
-                    var boardGrid:Grid = Grid.gridFromRawXml(data);
-
                     var displacement = parseDisplacement(boardGrid);
-                    var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
                     var warnTime = Std.parseInt(data.get("warningTime"));
 
                     trackActions.push(new SliderThreat(
@@ -66,10 +79,20 @@ class LevelDataLoader {
                             warnTime
                     ));
                 }
-                case "Text": {
-                    var boardGrid:Grid = Grid.gridFromRawXml(data);
+                case "RedSliderHoming": {
+                    var warnTime = Std.parseInt(data.get("warningTime"));
 
-                    var beatOffset = parseBeatOffset(boardGrid, beatsPerPhrase, phraseNumberToPhraseDivisions);
+                    trackActions.push(new SliderThreatHoming(
+                        beatOffset,
+                        bpm,
+                        universalBus,
+                        warnTime
+                    ));
+                }
+                case "Comment":{
+
+                }
+                case "Text": {
                     var text = data.get("text");
                     var duration = Std.parseInt(data.get("beatDuration"));
 
@@ -77,12 +100,15 @@ class LevelDataLoader {
                             beatOffset, text, bpm, duration
                     ));
                 }
-                default : throw "Unknown entity parsed";
+                case "Empty": {
+                    trackActions.push(new EmptyTrackAction(beatOffset));
+                }
+                default : throw "Unknown entity parsed : " + type;
             }
         }
         loader.loadEntities(parseEntities, "Entities");
 
-        return new LevelData(musicAssetPath, bpm, offset, trackActions);
+        return new LevelData(musicAssetPath, title, composer, composerWebpage, bpm, offset, trackActions);
     }
 
     private static function parseDisplacement(boardGrid:Grid) {
