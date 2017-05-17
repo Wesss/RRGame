@@ -29,7 +29,9 @@
 
 	<set name="BUILD_DIR" value="export" />
 	<classpath name="source" />
-	<assets path="assets" exclude="*.mp3|*.wav|*/unused/*" if="html5" />
+	<assets path="assets" include="*.att|*.oel|*.oep|*.png|*.eot|*.svg|*.ttf|*.woff|*.json|*.txt" if="html5" />
+	<assets path="assets/sounds" include="*.ogg" type="sound" embed="true" if="html5" />
+	<assets path="assets/music" include="*.ogg"  type="music" embed="false" if="html5" />
 	<assets path="assets" unless="html5" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
