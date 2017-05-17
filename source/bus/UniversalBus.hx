@@ -13,6 +13,7 @@ class UniversalBus {
     // Add different bus as properties to this class. See below for an example
     // public var intEvents(default, null) = new Bus<Int>();
 
+    public var newControlDesire(default, null) = new Bus<Displacement>();
     public var controls(default, null) = new Bus<Displacement>();
     public var playerStartMove(default, null) = new Bus<Displacement>();
     public var playerMoved(default, null) = new Bus<Displacement>();
@@ -30,6 +31,9 @@ class UniversalBus {
     public var pause(default, null) = new Bus<Bool>();
     public var unpause(default, null) = new Bus<Bool>();
     public var triggerBeats(default, null) = new Bus<BeatEvent>();
+    public var crateLanded(default, null) = new Bus<Displacement>();
+    public var crateDestroyed(default, null) = new Bus<Displacement>();
+    public var crateHit(default, null) = new Bus<Displacement>();
 
     public function new() {}
 }

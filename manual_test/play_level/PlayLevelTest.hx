@@ -31,87 +31,21 @@ class PlayLevelTest extends FlxState
 			threats.push(slider);
 			i += 1;
 		}
-
-		/*
-		i += 9;
-		
-		for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-			for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
-				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
-				threats.push(slider);
-			}
-			i++;
-		}
-
-		i += 9;
-
-		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
-            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-				var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
-				threats.push(slider);
-				i++;
-			}
-		}
-
-		i += 9;
-
-		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
-            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-				if (!horizontalDisplacement.equals(HorizontalDisplacement.NONE) ||
-					!verticalDisplacement.equals(VerticalDisplacement.NONE)) {
-					var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
-					threats.push(slider);
-				}
-			}
-		}
-
-		i += 2;
-		var slider = new track_action.SliderThreat(i, bpm, new Displacement(HorizontalDisplacement.NONE, VerticalDisplacement.NONE), universalBus, warn);
-		threats.push(slider);
-
-		i += 2;
-
-		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
-            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-				if (!horizontalDisplacement.equals(HorizontalDisplacement.NONE) ||
-					!verticalDisplacement.equals(VerticalDisplacement.NONE)) {
-					var slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
-					threats.push(slider);
-				}
-			}
-		}
-
-		i += 2;
-		slider = new track_action.SliderThreat(i, bpm, new Displacement(HorizontalDisplacement.NONE, VerticalDisplacement.NONE), universalBus, warn);
-		threats.push(slider);
-
-		i += 2;
-		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
-            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-				if (horizontalDisplacement.equals(HorizontalDisplacement.NONE) ||
-					verticalDisplacement.equals(VerticalDisplacement.NONE)) {
-					slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
-					threats.push(slider);
-				}
-			}
-		}
-
-		i += 2;
-		for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
-            for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-				if (!horizontalDisplacement.equals(HorizontalDisplacement.NONE) &&
-					!verticalDisplacement.equals(VerticalDisplacement.NONE)) {
-					slider = new track_action.SliderThreat(i, bpm, new Displacement(horizontalDisplacement, verticalDisplacement), universalBus, warn);
-					threats.push(slider);
-				}
-			}
-		}
-		slider = new track_action.SliderThreat(i, bpm, new Displacement(HorizontalDisplacement.NONE, VerticalDisplacement.NONE), universalBus, warn);
-		threats.push(slider);*/
+		threats.push(new track_action.Crate(2, bpm, new Displacement(NONE, DOWN), universalBus, warn, 128));
+		threats.push(new track_action.Crate(2, bpm, new Displacement(RIGHT, NONE), universalBus, warn, 128));
+		threats.push(new track_action.Crate(2, bpm, new Displacement(RIGHT, UP), universalBus, warn, 128));
 
 		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, bpm, 444, threats);
 		trace(TimingSystemTop.MILISECONDS_PER_MINUTE / levelData.bpm);
-		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus, new EmptyLogger()));
+		var logger = new EmptyLogger();
+		logger.startLevel(0, universalBus);
+		FlxG.console.registerFunction("goUp", function() {
+			universalBus.newControlDesire.broadcast(new Displacement(NONE, UP));
+		});
+		FlxG.console.registerFunction("goDown", function() {
+			universalBus.newControlDesire.broadcast(new Displacement(NONE, DOWN));
+		});
+		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus, logger));
 	}
 
 	override public function update(elapsed:Float):Void

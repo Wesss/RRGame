@@ -21,7 +21,7 @@ class ControlsSystemTop extends FlxBasic {
 
     public function new(universalBus:UniversalBus) {
         super();
-        controlsBus = universalBus.controls;
+        controlsBus = universalBus.newControlDesire;
         retryBus = universalBus.retry;
         returnBus = universalBus.returnToHub;
         pauseBus = universalBus.pause;

@@ -7,11 +7,15 @@ import timing.BeatEvent;
 class EmptyLogger implements LoggingSystem {
     public function new() {}
 
-    public function startLevel(level:Int, universalBus:UniversalBus):Void {}
+    public function startLevel(level:Int, universalBus:UniversalBus):Void {
+        universalBus.newControlDesire.subscribe(this, logControlsInput);
+    }
 
     private function updateBeat(event:BeatEvent):Void {}
 
-    private function logControlsInput(event:Displacement):Void {}
+    private function logControlsInput(event:Displacement):Void {
+        trace(event);
+    }
 
     private function logPlayerHit(event:Displacement):Void {}
 
