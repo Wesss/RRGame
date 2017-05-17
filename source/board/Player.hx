@@ -16,6 +16,7 @@ class Player extends FlxSpriteGroup {
     var uniBus : UniversalBus;
     var oldBeat : Float;
     var updateScaleOnSpeed : Bool;
+    var position : Displacement;
 
     public var hp(default, null) : Int;
 
@@ -49,6 +50,7 @@ class Player extends FlxSpriteGroup {
         uniBus.playerHit.subscribe(this, playerHitHandler);
         uniBus.gameOver.subscribe(this, gameOverHandler);
         uniBus.beat.subscribe(this, pulse);
+        uniBus.crateHit.subscribe(this, showCrateHit);
         hp = 4;
 
         oldX = x;
@@ -90,6 +92,7 @@ class Player extends FlxSpriteGroup {
 
     public function controlEventHandler(event : Displacement) {
         uniBus.playerStartMove.broadcast(event);
+        position = event;
 
         var targetX = (BoardCoordinates.displacementToX(event.horizontalDisplacement));
         var targetY = (BoardCoordinates.displacementToY(event.verticalDisplacement));
@@ -203,5 +206,28 @@ class Player extends FlxSpriteGroup {
             }
         }
         oldBeat = beat.beat;
+    }
+
+    public function showCrateHit(cratePosition : Displacement) {
+        var startX = BoardCoordinates.displacementToX(position.horizontalDisplacement);
+        var startY = BoardCoordinates.displacementToY(position.verticalDisplacement);
+        var targetX = (BoardCoordinates.displacementToX(cratePosition.horizontalDisplacement));
+        var targetY = (BoardCoordinates.displacementToY(cratePosition.verticalDisplacement));
+
+        if (tween != null) {
+            tween.cancel();
+        }
+    
+        tween = FlxTween.tween(this, {
+            x : startX + (targetX - startX) / 3,
+            y : startY + (targetY - startY) / 3 
+        }, 0.03, {
+            ease: FlxEase.quadIn
+        }).then(FlxTween.tween(this, {
+            x : startX,
+            y : startY
+        }, 0.03, {
+            ease: FlxEase.quadOut
+        }));
     }
 }

@@ -47,7 +47,7 @@ class LoggingSystemTop implements LoggingSystem {
 
         this.curBeat = null;
         universalBus.beat.subscribe(this, updateBeat);
-        universalBus.controls.subscribe(this, logControlsInput);
+        universalBus.newControlDesire.subscribe(this, logControlsInput);
         universalBus.playerHit.subscribe(this, logPlayerHit);
     }
 

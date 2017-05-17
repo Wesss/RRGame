@@ -33,6 +33,7 @@ class UniversalBus {
     public var triggerBeats(default, null) = new Bus<BeatEvent>();
     public var crateLanded(default, null) = new Bus<Displacement>();
     public var crateDestroyed(default, null) = new Bus<Displacement>();
+    public var crateHit(default, null) = new Bus<Displacement>();
 
     public function new() {}
 }

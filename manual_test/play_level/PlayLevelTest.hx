@@ -31,11 +31,21 @@ class PlayLevelTest extends FlxState
 			threats.push(slider);
 			i += 1;
 		}
-		threats.push(new track_action.Crate(2, bpm, new Displacement(NONE, DOWN), universalBus, warn, 32));
+		threats.push(new track_action.Crate(2, bpm, new Displacement(NONE, DOWN), universalBus, warn, 128));
+		threats.push(new track_action.Crate(2, bpm, new Displacement(RIGHT, NONE), universalBus, warn, 128));
+		threats.push(new track_action.Crate(2, bpm, new Displacement(RIGHT, UP), universalBus, warn, 128));
 
 		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, bpm, 444, threats);
 		trace(TimingSystemTop.MILISECONDS_PER_MINUTE / levelData.bpm);
-		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus, new EmptyLogger()));
+		var logger = new EmptyLogger();
+		logger.startLevel(0, universalBus);
+		FlxG.console.registerFunction("goUp", function() {
+			universalBus.newControlDesire.broadcast(new Displacement(NONE, UP));
+		});
+		FlxG.console.registerFunction("goDown", function() {
+			universalBus.newControlDesire.broadcast(new Displacement(NONE, DOWN));
+		});
+		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus, logger));
 	}
 
 	override public function update(elapsed:Float):Void

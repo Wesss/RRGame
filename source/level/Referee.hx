@@ -19,38 +19,49 @@ class Referee {
         universalBus.threatKillSquare.subscribe(this, handleThreatKillingSquare);
         universalBus.triggerBeats.subscribe(this, handleTriggerBeats);
         universalBus.playerStartMove.subscribe(this, handlePlayerMove);
+        universalBus.playerHit.subscribe(this, handlePlayerHit);
 
         unsafeSquares = new UnsafeSquareKiller(universalBus, bpm);
         this.bpm = bpm;
 
+        logicalPlayerPosition = new Displacement(NONE, NONE);
         crates = [];
     }
 
     public function handleNewControlDesire(displacement : Displacement) {
-        var inbetweenLocation : Displacement;
-        inbetweenLocation = null;
-        if (displacement.horizontalDisplacement != NONE && displacement.verticalDisplacement != NONE &&
-            logicalPlayerPosition.horizontalDisplacement != NONE && logicalPlayerPosition.verticalDisplacement != NONE &&
-            (logicalPlayerPosition.horizontalDisplacement == displacement.horizontalDisplacement ||
-            logicalPlayerPosition.verticalDisplacement == displacement.verticalDisplacement)) {
-            // Adjacent corner to corner movement
-            if (logicalPlayerPosition.horizontalDisplacement == displacement.horizontalDisplacement) {
-                inbetweenLocation = new Displacement(logicalPlayerPosition.horizontalDisplacement, NONE);
-            } else {
-                inbetweenLocation = new Displacement(NONE, logicalPlayerPosition.verticalDisplacement);
+        // the location halfway between player and destination
+        var halfLocation : Displacement = null;
+        if (displacement.horizontalDisplacement == logicalPlayerPosition.horizontalDisplacement &&
+            displacement.verticalDisplacement != NONE && logicalPlayerPosition.verticalDisplacement != NONE) {
+            // crate and player opposing each other in a column
+            halfLocation = new Displacement(displacement.horizontalDisplacement, NONE);
+        } else if (displacement.verticalDisplacement == logicalPlayerPosition.verticalDisplacement &&
+                    displacement.horizontalDisplacement != NONE && logicalPlayerPosition.horizontalDisplacement != NONE) {
+            // crate and player opposing each other in a row
+            halfLocation = new Displacement(NONE, displacement.verticalDisplacement);
+        } else if (displacement.verticalDisplacement != NONE && displacement.horizontalDisplacement != NONE &&
+                    logicalPlayerPosition.verticalDisplacement != NONE && logicalPlayerPosition.horizontalDisplacement != NONE &&
+                    logicalPlayerPosition.verticalDisplacement != displacement.verticalDisplacement &&
+                    logicalPlayerPosition.horizontalDisplacement != displacement.horizontalDisplacement) {
+            // crate and player opposing each other on a diagonal
+            halfLocation = new Displacement(NONE, NONE);
+        }
+        if (halfLocation != null) {
+            for (crate in crates) {
+                if (crate.equals(halfLocation)) {
+                    universalBus.crateHit.broadcast(crate);
+                    return;
+                }
+            }
+            universalBus.controls.broadcast(halfLocation);
+        }
+        for (crate in crates) {
+            if (crate.equals(displacement)) {
+                universalBus.crateHit.broadcast(crate);
+                return;
             }
         }
 
-        for (crate in crates) {
-            if (crate.equals(displacement)) {
-                // a crate is where they want to be
-                return;
-            }
-            if (crate.equals(inbetweenLocation)) {
-                // a crate is inbetween them and their destination
-                return;
-            }
-        }
         // no crates in the way
         universalBus.controls.broadcast(displacement);
     }
@@ -64,19 +75,27 @@ class Referee {
     }
 
     public function handleThreatKillingSquare(displacement : Displacement) {
-        trace("Threat hit added");
         unsafeSquares.add(displacement);
     }
 
-     public function handlePlayerMove(displacement : Displacement) {
+    public function handlePlayerMove(displacement : Displacement) {
         logicalPlayerPosition = displacement;
     }
 
     public function handleTriggerBeats(beat : BeatEvent) {
         if (unsafeSquares.ready()) {
-            trace("Threats pushed to handler");
             unsafeSquares.finishAndWatch(logicalPlayerPosition, beat.beat);
             unsafeSquares = new UnsafeSquareKiller(universalBus, bpm);
+        }
+    }
+
+    public function handlePlayerHit(where : Displacement) {
+        trace("Player hit! : " + crates + "|" + where);
+        for (crate in crates) {
+            if (crate.equals(where)) {
+                trace("Manually pushing player");
+                universalBus.controls.broadcast(new Displacement(NONE, NONE));
+            }
         }
     }
 }
@@ -121,6 +140,7 @@ class UnsafeSquareKiller {
         // If the player is safe when the threats hit, they'll always be safe!
         playerSafe = squareSafe(currentPlayerPosition);
         playerStartedSafe = playerSafe;
+        logicalPlayerPosition = currentPlayerPosition;
         
         universalBus.playerStartMove.subscribe(this, playerMove); 
         universalBus.beat.subscribe(this, function(beatEvent : BeatEvent) {
