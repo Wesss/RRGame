@@ -1,4 +1,4 @@
-<level width="512" height="4096" BPM="172" MusicTrack="Michett/Planes.ogg" MusicStartOffset="0" BeatsPerPhrase="8">
+<level width="1024" height="2048" BPM="96" MusicTrack="Michett/Stahlinism.ogg" MusicStartOffset="0" BeatsPerPhrase="8">
   <BoardDisplayLayer>
     <Board id="0" x="0" y="0" />
     <Board id="1" x="0" y="64" />
@@ -16,77 +16,93 @@
     <Board id="13" x="0" y="832" />
     <Board id="14" x="0" y="896" />
     <Board id="15" x="0" y="960" />
-    <Board id="16" x="0" y="1024" />
-    <Board id="17" x="0" y="1088" />
-    <Board id="18" x="0" y="1152" />
-    <Board id="19" x="0" y="1216" />
-    <Board id="20" x="0" y="1280" />
-    <Board id="21" x="0" y="1344" />
-    <Board id="22" x="0" y="1408" />
-    <Board id="23" x="0" y="1472" />
-    <Board id="24" x="0" y="1536" />
-    <Board id="25" x="0" y="1600" />
-    <Board id="26" x="0" y="1664" />
-    <Board id="27" x="0" y="1728" />
-    <Board id="28" x="0" y="1792" />
-    <Board id="29" x="0" y="1856" />
-    <Board id="30" x="0" y="1920" />
-    <Board id="31" x="0" y="1984" />
-    <Board id="32" x="64" y="1472" />
-    <Board id="33" x="128" y="1472" />
-    <Board id="34" x="192" y="1472" />
-    <Board id="35" x="256" y="1472" />
-    <Board id="36" x="320" y="1472" />
-    <Board id="37" x="384" y="1472" />
-    <Board id="38" x="448" y="1472" />
-    <Board id="39" x="0" y="2048" />
-    <Board id="40" x="0" y="2112" />
-    <Board id="41" x="0" y="2176" />
-    <Board id="42" x="0" y="2240" />
-    <Board id="43" x="0" y="2304" />
-    <Board id="44" x="0" y="2368" />
-    <Board id="45" x="0" y="2432" />
-    <Board id="46" x="0" y="2496" />
-    <Board id="47" x="0" y="2560" />
-    <Board id="48" x="0" y="2624" />
-    <Board id="49" x="0" y="2688" />
-    <Board id="50" x="0" y="2752" />
-    <Board id="51" x="0" y="2816" />
-    <Board id="52" x="0" y="2880" />
-    <Board id="53" x="0" y="2944" />
-    <Board id="54" x="0" y="3008" />
-    <Board id="55" x="0" y="3072" />
-    <Board id="56" x="0" y="3136" />
-    <Board id="57" x="0" y="3200" />
-    <Board id="58" x="0" y="3264" />
-    <Board id="59" x="0" y="3328" />
-    <Board id="60" x="0" y="3392" />
-    <Board id="61" x="0" y="3456" />
-    <Board id="62" x="0" y="3520" />
-    <Board id="63" x="0" y="3584" />
-    <Board id="64" x="0" y="3648" />
-    <Board id="65" x="0" y="3712" />
-    <Board id="66" x="0" y="3776" />
-    <Board id="67" x="0" y="3840" />
-    <Board id="68" x="0" y="3904" />
-    <Board id="69" x="0" y="3968" />
-    <Board id="70" x="0" y="4032" />
-    <Board id="71" x="64" y="2624" />
-    <Board id="72" x="128" y="2624" />
-    <Board id="73" x="192" y="2624" />
-    <Board id="74" x="256" y="2624" />
-    <Board id="75" x="320" y="2624" />
-    <Board id="76" x="384" y="2624" />
-    <Board id="77" x="448" y="2624" />
+    <Board id="16" x="64" y="448" />
+    <Board id="17" x="128" y="448" />
+    <Board id="18" x="192" y="448" />
+    <Board id="19" x="256" y="448" />
+    <Board id="20" x="320" y="448" />
+    <Board id="21" x="384" y="448" />
+    <Board id="22" x="448" y="448" />
+    <Board id="23" x="64" y="128" />
+    <Board id="24" x="128" y="128" />
+    <Board id="25" x="192" y="128" />
+    <Board id="26" x="256" y="128" />
+    <Board id="27" x="320" y="128" />
+    <Board id="28" x="384" y="128" />
+    <Board id="29" x="448" y="128" />
+    <Board id="30" x="64" y="704" />
+    <Board id="31" x="128" y="704" />
+    <Board id="32" x="192" y="704" />
+    <Board id="33" x="256" y="704" />
+    <Board id="34" x="320" y="704" />
+    <Board id="35" x="384" y="704" />
+    <Board id="36" x="448" y="704" />
+    <Board id="37" x="0" y="1024" />
+    <Board id="38" x="64" y="960" />
+    <Board id="39" x="128" y="960" />
+    <Board id="40" x="192" y="960" />
+    <Board id="41" x="256" y="960" />
+    <Board id="42" x="320" y="960" />
+    <Board id="43" x="384" y="960" />
+    <Board id="44" x="448" y="960" />
+    <Board id="45" x="0" y="1088" />
+    <Board id="46" x="0" y="1152" />
+    <Board id="47" x="0" y="1216" />
+    <Board id="48" x="0" y="1280" />
+    <Board id="49" x="0" y="1344" />
+    <Board id="50" x="0" y="1408" />
+    <Board id="51" x="0" y="1472" />
+    <Board id="52" x="0" y="1536" />
+    <Board id="53" x="0" y="1600" />
+    <Board id="54" x="0" y="1664" />
+    <Board id="55" x="0" y="1728" />
+    <Board id="56" x="0" y="1792" />
+    <Board id="57" x="0" y="1856" />
+    <Board id="58" x="0" y="1920" />
+    <Board id="59" x="0" y="1984" />
+    <Board id="61" x="64" y="1984" />
+    <Board id="62" x="128" y="1984" />
+    <Board id="63" x="192" y="1984" />
+    <Board id="64" x="256" y="1984" />
+    <Board id="65" x="320" y="1984" />
+    <Board id="66" x="384" y="1984" />
+    <Board id="67" x="448" y="1984" />
   </BoardDisplayLayer>
   <Entities>
-    <Comment id="0" x="48" y="256" comment="glitch start" />
-    <Comment id="1" x="48" y="768" comment="synth lead out" />
-    <Comment id="2" x="48" y="1024" comment="synth cords in" />
-    <Comment id="3" x="48" y="1536" comment="synthlead in" />
-    <Comment id="4" x="48" y="1664" comment="bass in" />
-    <Comment id="5" x="304" y="1472" comment="glitch out for buildup" />
-    <Comment id="6" x="48" y="2688" comment="back to buildup" />
-    <Comment id="7" x="304" y="2624" comment="windout" />
+    <Comment id="8" x="48" y="128" comment="drum in" />
+    <Comment id="9" x="48" y="512" comment="synth lead in" />
+    <Comment id="10" x="432" y="448" comment="segway" />
+    <RedSlider id="0" x="32" y="128" warningTime="2" />
+    <RedSlider id="1" x="96" y="128" warningTime="2" />
+    <RedSlider id="2" x="160" y="128" warningTime="2" />
+    <RedSlider id="3" x="224" y="128" warningTime="2" />
+    <RedSlider id="4" x="288" y="128" warningTime="2" />
+    <RedSlider id="5" x="352" y="128" warningTime="2" />
+    <RedSlider id="6" x="416" y="128" warningTime="2" />
+    <RedSlider id="7" x="480" y="128" warningTime="2" />
+    <RedSlider id="13" x="400" y="448" warningTime="2" />
+    <RedSlider id="14" x="464" y="448" warningTime="2" />
+    <RedSlider id="15" x="0" y="512" warningTime="2" />
+    <Comment id="16" x="304" y="704" comment="segway" />
+    <Comment id="17" x="48" y="768" comment="drum in" />
+    <RedSlider id="18" x="288" y="704" warningTime="2" />
+    <RedSlider id="19" x="352" y="704" warningTime="2" />
+    <RedSlider id="20" x="416" y="704" warningTime="2" />
+    <RedSlider id="21" x="480" y="704" warningTime="2" />
+    <RedSlider id="22" x="16" y="768" warningTime="2" />
+    <Comment id="23" x="48" y="1024" comment="metal riffs in" />
+    <Comment id="24" x="304" y="960" comment="segway" />
+    <RedSlider id="25" x="256" y="960" warningTime="2" />
+    <RedSlider id="26" x="320" y="960" warningTime="2" />
+    <RedSlider id="27" x="384" y="960" warningTime="2" />
+    <RedSlider id="28" x="448" y="960" warningTime="2" />
+    <RedSlider id="29" x="32" y="1024" warningTime="2" />
+    <Comment id="30" x="48" y="1280" comment="dubstep" />
+    <Comment id="31" x="48" y="1536" comment="metals riffs back in" />
+    <Comment id="32" x="48" y="1792" comment="metal riff scratchy" />
+    <Empty id="34" x="496" y="1984" />
+    <RedSlider id="33" x="16" y="1280" warningTime="2" />
+    <RedSlider id="35" x="0" y="1536" warningTime="2" />
+    <RedSlider id="36" x="32" y="1792" warningTime="2" />
   </Entities>
 </level>
