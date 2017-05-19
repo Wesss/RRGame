@@ -73,25 +73,6 @@
     <Board id="70" x="0" y="2688" />
     <Board id="71" x="0" y="2752" />
     <Board id="72" x="0" y="2816" />
-    <Board id="73" x="0" y="2880" />
-    <Board id="74" x="0" y="2944" />
-    <Board id="75" x="0" y="3008" />
-    <Board id="76" x="0" y="3072" />
-    <Board id="77" x="0" y="3136" />
-    <Board id="78" x="0" y="3200" />
-    <Board id="79" x="0" y="3264" />
-    <Board id="80" x="0" y="3328" />
-    <Board id="81" x="0" y="3392" />
-    <Board id="82" x="0" y="3456" />
-    <Board id="83" x="0" y="3520" />
-    <Board id="84" x="0" y="3584" />
-    <Board id="85" x="0" y="3648" />
-    <Board id="86" x="0" y="3712" />
-    <Board id="87" x="0" y="3776" />
-    <Board id="88" x="0" y="3840" />
-    <Board id="89" x="0" y="3904" />
-    <Board id="90" x="0" y="3968" />
-    <Board id="91" x="0" y="4032" />
     <Board id="92" x="0" y="2176" />
     <Board id="93" x="0" y="2048" />
     <Board id="94" x="0" y="2112" />
@@ -106,8 +87,6 @@
     <Board id="103" x="0" y="2688" />
     <Board id="104" x="0" y="2752" />
     <Board id="105" x="0" y="2816" />
-    <Board id="106" x="0" y="2880" />
-    <Board id="107" x="0" y="2944" />
     <Board id="108" x="64" y="2816" />
     <Board id="109" x="128" y="2816" />
     <Board id="110" x="192" y="2816" />
@@ -133,6 +112,6 @@
     <RedSlider id="13" x="16" y="2048" warningTime="2" />
     <RedSlider id="14" x="0" y="2304" warningTime="2" />
     <RedSlider id="15" x="32" y="2560" warningTime="2" />
-    <RedSlider id="16" x="80" y="2816" warningTime="2" />
+    <Empty id="18" x="48" y="2816" />
   </Entities>
 </level>
