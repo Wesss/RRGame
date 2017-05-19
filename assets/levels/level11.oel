@@ -1,4 +1,74 @@
-<level width="512" height="2048" BPM="0" MusicTrack="Michett/Demolition.ogg" MusicStartOffset="0" BeatsPerPhrase="0">
-  <BoardDisplayLayer />
-  <Entities />
+<level width="1024" height="4096" BPM="70" MusicTrack="Michett/Demolition.ogg" MusicStartOffset="0" BeatsPerPhrase="4">
+  <BoardDisplayLayer>
+    <Board id="0" x="0" y="0" />
+    <Board id="1" x="0" y="64" />
+    <Board id="2" x="0" y="128" />
+    <Board id="3" x="0" y="192" />
+    <Board id="4" x="0" y="256" />
+    <Board id="5" x="0" y="320" />
+    <Board id="6" x="0" y="384" />
+    <Board id="7" x="0" y="448" />
+    <Board id="8" x="0" y="512" />
+    <Board id="9" x="0" y="576" />
+    <Board id="10" x="0" y="640" />
+    <Board id="11" x="0" y="704" />
+    <Board id="12" x="0" y="768" />
+    <Board id="13" x="0" y="832" />
+    <Board id="14" x="0" y="896" />
+    <Board id="15" x="0" y="960" />
+    <Board id="16" x="0" y="1024" />
+    <Board id="17" x="0" y="1088" />
+    <Board id="18" x="0" y="1152" />
+    <Board id="19" x="0" y="1216" />
+    <Board id="20" x="0" y="1280" />
+    <Board id="21" x="0" y="1344" />
+    <Board id="22" x="0" y="1408" />
+    <Board id="23" x="0" y="1472" />
+    <Board id="24" x="0" y="1536" />
+    <Board id="25" x="0" y="1600" />
+    <Board id="26" x="0" y="1664" />
+    <Board id="27" x="0" y="1728" />
+    <Board id="28" x="0" y="1792" />
+    <Board id="29" x="0" y="1856" />
+    <Board id="30" x="0" y="1920" />
+    <Board id="31" x="0" y="1984" />
+    <Board id="32" x="0" y="2048" />
+    <Board id="33" x="0" y="2112" />
+    <Board id="34" x="0" y="2176" />
+    <Board id="35" x="0" y="2240" />
+    <Board id="36" x="0" y="2304" />
+    <Board id="37" x="0" y="2368" />
+    <Board id="38" x="0" y="2432" />
+    <Board id="39" x="0" y="2496" />
+    <Board id="40" x="0" y="2560" />
+    <Board id="41" x="0" y="2624" />
+    <Board id="42" x="0" y="2688" />
+    <Board id="43" x="0" y="2752" />
+    <Board id="44" x="0" y="2816" />
+    <Board id="45" x="0" y="2880" />
+    <Board id="46" x="0" y="2944" />
+    <Board id="47" x="64" y="2688" />
+    <Board id="48" x="128" y="2688" />
+    <Board id="49" x="192" y="2688" />
+  </BoardDisplayLayer>
+  <Entities>
+    <Comment id="0" x="48" y="256" comment="drum in" />
+    <Comment id="1" x="48" y="512" comment="chrous" />
+    <Comment id="2" x="48" y="1024" comment="bridge" />
+    <Comment id="3" x="48" y="1152" comment="chrous" />
+    <Comment id="4" x="48" y="1664" comment="bridge" />
+    <Comment id="5" x="48" y="1920" comment="buildup" />
+    <Comment id="6" x="48" y="2176" comment="breakdown" />
+    <Comment id="7" x="48" y="2688" comment="bridge" />
+    <Comment id="8" x="48" y="2944" comment="chrous" />
+    <Empty id="9" x="112" y="2688" />
+    <RedSlider id="10" x="32" y="256" warningTime="2" />
+    <RedSlider id="14" x="32" y="64" warningTime="2" />
+    <RedSlider id="11" x="16" y="512" warningTime="2" />
+    <RedSlider id="12" x="0" y="1024" warningTime="2" />
+    <RedSlider id="13" x="32" y="1152" warningTime="2" />
+    <RedSlider id="15" x="16" y="1664" warningTime="2" />
+    <RedSlider id="16" x="0" y="1920" warningTime="2" />
+    <RedSlider id="17" x="32" y="2176" warningTime="2" />
+  </Entities>
 </level>
