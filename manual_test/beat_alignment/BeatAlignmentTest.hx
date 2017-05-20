@@ -1,5 +1,7 @@
 package;
 
+import level.LevelStartEvent;
+import level.LevelLoadEvent;
 import level.LevelData;
 import level.LevelEvent;
 import timing.BeatEvent;
@@ -45,8 +47,8 @@ class BeatAlignmentTest extends FlxState
 
 		if (FlxG.keys.anyJustPressed([A])) {
 			var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, 135, 444, null);
-			universalBus.level.broadcast(new LevelEvent(LOAD, levelData));
-			universalBus.level.broadcast(new LevelEvent(START, levelData));
+			universalBus.levelLoad.broadcast(new LevelLoadEvent(levelData));
+			universalBus.levelStart.broadcast(new LevelStartEvent(levelData, 9999));
 		}
 	}
 

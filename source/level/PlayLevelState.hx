@@ -21,7 +21,6 @@ import timing.TimingSystemTop;
 class PlayLevelState extends FlxState {
 	private var levelData:LevelData;
 	private var levelIndex:Int;
-	private var timingSystemTop:TimingSystemTop;
 	private var trackGroup:FlxSpriteGroup;
 	private var universalBus:UniversalBus;
 	private var logger:LoggingSystem;
@@ -55,8 +54,7 @@ class PlayLevelState extends FlxState {
 		var board = new BoardSystemTop(0, 0, universalBus);
 		add(board);
 		player = board.player;
-		timingSystemTop = new TimingSystemTop(universalBus);
-		add(timingSystemTop);
+		add(new TimingSystemTop(universalBus));
 		add(trackGroup);
 
 		Juicer.juiceLevel(universalBus);
