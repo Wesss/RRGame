@@ -91,12 +91,14 @@ class LevelDataLoader {
                     ));
                 }
                 case "Crate": {
+                    var displacement = parseDisplacement(boardGrid);
                     var warnTime = Std.parseInt(data.get("warningTime"));
                     var duration = Std.parseInt(data.get("duration"));
 
                     trackActions.push(new Crate(
                         beatOffset,
                         bpm,
+                        displacement,
                         universalBus,
                         warnTime,
                         duration
