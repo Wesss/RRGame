@@ -11,8 +11,7 @@ class TextTrackAction extends FlxText implements TrackAction {
         super(-275, -227, 0, text);
         triggerBeats = [0, beatDuration];
         this.beatOffset = beatOffset;
-
-        Juicer.juiceText(this, 22);
+        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 22, flixel.util.FlxColor.WHITE, CENTER);
         visible = false;
     }
 

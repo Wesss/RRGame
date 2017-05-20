@@ -1,24 +1,40 @@
 package level;
 
+import bus.UniversalBus;
+import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import timing.BeatEvent;
 
 class ProgressBar extends FlxText {
 
+    private static inline var X_POSITION = -300;
+    private static inline var Y_POSITION = 200;
+    private var userInterfaceGroup:FlxSpriteGroup;
     private var levelEndBeat:Float;
-    private var curBeat:Float;
 
-    public function new(universalBus, levelEndBeat) {
-        this.levelEndBeat = levelEndBeat;
-        this.curBeat = 0;
-        super(100, 100, curBeat / levelEndBeat + "% complete");
-        Juicer.juiceText(this, 18);
+    public function new(universalBus:UniversalBus, userInterfaceGroup) {
+        this.userInterfaceGroup = userInterfaceGroup;
+        super(X_POSITION, Y_POSITION, "");
+        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 16, flixel.util.FlxColor.WHITE, CENTER);
+
+        universalBus.levelStart.subscribe(this, levelStart);
+        universalBus.beat.subscribe(this, updateBeat);
+    }
+
+    public function levelStart(event:LevelStartEvent) {
+        this.levelEndBeat = event.lastBeat;
+        this.text = "0% complete";
+        userInterfaceGroup.add(this);
     }
 
     public function updateBeat(event:BeatEvent) {
-        if (event.beat > 0) {
-            this.curBeat = event.beat;
-            this.text =  curBeat / levelEndBeat + "% complete";
+        var completion = Std.int((event.beat / levelEndBeat) * 100);
+        if (completion < 0) {
+            completion = 0;
         }
+        if (completion > 100) {
+            completion = 100;
+        }
+        this.text =  completion + "% complete";
     }
 }
