@@ -57,7 +57,7 @@ class PlayLevelState extends FlxState {
 		add(board);
 		player = board.player;
 		add(new TimingSystemTop(universalBus));
-		new ProgressBar(universalBus, userInterfaceGroup);
+		userInterfaceGroup.add(new ProgressBar(universalBus));
 		add(trackGroup);
 		add(userInterfaceGroup);
 

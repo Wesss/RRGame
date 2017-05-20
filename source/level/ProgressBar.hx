@@ -1,22 +1,29 @@
 package level;
 
+import flixel.util.FlxColor;
+import flixel.FlxSprite;
 import bus.UniversalBus;
 import flixel.group.FlxSpriteGroup;
-import flixel.text.FlxText;
 import timing.BeatEvent;
 
-class ProgressBar extends FlxText {
+class ProgressBar extends FlxSpriteGroup {
 
-    private static inline var X_POSITION = -300;
+    private static inline var X_POSITION = -270;
     private static inline var Y_POSITION = 200;
-    private var userInterfaceGroup:FlxSpriteGroup;
+
+    private var barSprite:FlxSprite;
+    private var sliderSprite:FlxSprite;
     private var levelEndBeat:Float;
     private var isProgressing:Bool;
 
-    public function new(universalBus:UniversalBus, userInterfaceGroup) {
-        super(X_POSITION, Y_POSITION, "");
-        this.userInterfaceGroup = userInterfaceGroup;
-        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 16, flixel.util.FlxColor.WHITE, CENTER);
+    public function new(universalBus:UniversalBus) {
+        super();
+        barSprite = new FlxSprite(X_POSITION, Y_POSITION);
+        barSprite.makeGraphic(100, 10, FlxColor.WHITE);
+        sliderSprite = new FlxSprite(X_POSITION, Y_POSITION);
+        sliderSprite.makeGraphic(10, 15, FlxColor.WHITE);
+        add(barSprite);
+        add(sliderSprite);
 
         universalBus.levelStart.subscribe(this, levelStart);
         universalBus.beat.subscribe(this, updateBeat);
@@ -25,9 +32,7 @@ class ProgressBar extends FlxText {
 
     public function levelStart(event:LevelStartEvent) {
         this.levelEndBeat = event.lastBeat;
-        this.text = "0% complete";
         this.isProgressing = true;
-        userInterfaceGroup.add(this);
     }
 
     public function updateBeat(event:BeatEvent) {
@@ -39,7 +44,7 @@ class ProgressBar extends FlxText {
             if (completion > 100) {
                 completion = 100;
             }
-            this.text =  completion + "% complete";
+            sliderSprite.x = X_POSITION + completion;
         }
     }
 
