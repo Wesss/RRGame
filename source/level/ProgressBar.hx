@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 import bus.UniversalBus;
 import flixel.group.FlxSpriteGroup;
 import timing.BeatEvent;
+import flixel.tweens.*;
 
 class ProgressBar extends FlxSpriteGroup {
 
@@ -29,6 +30,7 @@ class ProgressBar extends FlxSpriteGroup {
         universalBus.levelStart.subscribe(this, levelStart);
         universalBus.beat.subscribe(this, updateBeat);
         universalBus.playerDie.subscribe(this, stopProgressing);
+        universalBus.levelOutOfBeats.subscribe(this, disappear);
     }
 
     public function levelStart(event:LevelStartEvent) {
@@ -51,5 +53,19 @@ class ProgressBar extends FlxSpriteGroup {
 
     public function stopProgressing(_) {
         isProgressing = false;
+    }
+
+    public function disappear(_) {
+        FlxTween.tween(this.scale, {
+            x : 1.2,
+            y : 1.2
+        }, 0.3, {
+            ease : FlxEase.quadIn
+        });
+        FlxTween.tween(this, {
+            alpha : 0
+        }, 0.3, {
+            ease : FlxEase.quadIn
+        });
     }
 }
