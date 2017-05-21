@@ -1,9 +1,9 @@
 package audio;
 
+import level.LevelStartEvent;
+import level.LevelLoadEvent;
 import flixel.FlxBasic;
 import bus.Bus;
-import level.LevelData;
-import level.LevelEvent;
 import flixel.system.FlxSound;
 import flixel.FlxG;
 import bus.UniversalBus;
@@ -37,7 +37,8 @@ class AudioSystemTop extends FlxBasic {
         deathSound.fadeOut(1, .3);
 
         // music playing
-        universalBus.level.subscribe(this, switchLevelState);
+        universalBus.levelLoad.subscribe(this, loadMusicForLevel);
+        universalBus.levelStart.subscribe(this, playMusicForLevel);
         universalBus.pause.subscribe(this, pause);
         universalBus.unpause.subscribe(this, unpause);
 
@@ -53,29 +54,20 @@ class AudioSystemTop extends FlxBasic {
         });
     }
 
-    public function switchLevelState(event:LevelEvent):Void {
-        switch (event.levelState) {
-            case LOAD: loadMusicForLevel(event.levelData);
-            case START: playMusicForLevel(event.levelData);
-            case WIN:
-            case LOSE:
-        }
-    }
-
     /**
      * Prepare to play music specifically for a level
      **/
-    public function loadMusicForLevel(levelData:LevelData):Void {
+    public function loadMusicForLevel(event:LevelLoadEvent):Void {
         if (musicForLevel != null) {
             throw "Music for level has already been loaded";
         }
-        musicForLevel = FlxG.sound.load(levelData.musicAssetPath);
+        musicForLevel = FlxG.sound.load(event.levelData.musicAssetPath);
     }
 
     /**
      * Start playing music specifically for a level
      **/
-    public function playMusicForLevel(levelData:LevelData):Void{
+    public function playMusicForLevel(event:LevelStartEvent):Void{
         if (musicForLevel == null) {
             throw "No Music has been loaded";
         }

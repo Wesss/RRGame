@@ -3,13 +3,11 @@ package level;
 /**
  * Represents the changing of state for a level
  **/
-class LevelEvent {
+class LevelLoadEvent {
 
-    public var levelState(default, null):LevelState;
     public var levelData(default, null):LevelData;
 
-    public function new(levelState, levelData) {
-        this.levelState = levelState;
+    public function new(levelData) {
         this.levelData = levelData;
     }
 }
