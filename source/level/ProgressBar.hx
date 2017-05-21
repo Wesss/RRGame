@@ -8,8 +8,9 @@ import timing.BeatEvent;
 
 class ProgressBar extends FlxSpriteGroup {
 
-    private static inline var X_POSITION = -270;
-    private static inline var Y_POSITION = 200;
+    private static inline var X_POSITION = -200;
+    private static inline var Y_POSITION = 210;
+    private static inline var BAR_LENGTH = 400;
 
     private var barSprite:FlxSprite;
     private var sliderSprite:FlxSprite;
@@ -19,9 +20,9 @@ class ProgressBar extends FlxSpriteGroup {
     public function new(universalBus:UniversalBus) {
         super();
         barSprite = new FlxSprite(X_POSITION, Y_POSITION);
-        barSprite.makeGraphic(100, 10, FlxColor.WHITE);
+        barSprite.makeGraphic(BAR_LENGTH, 12, FlxColor.fromRGB(104, 153, 153));
         sliderSprite = new FlxSprite(X_POSITION, Y_POSITION);
-        sliderSprite.makeGraphic(10, 15, FlxColor.WHITE);
+        sliderSprite.makeGraphic(10, 12, FlxColor.fromRGB(255, 227, 171));
         add(barSprite);
         add(sliderSprite);
 
@@ -37,14 +38,14 @@ class ProgressBar extends FlxSpriteGroup {
 
     public function updateBeat(event:BeatEvent) {
         if (isProgressing) {
-            var completion = Std.int((event.beat / levelEndBeat) * 100);
-            if (completion < 0) {
-                completion = 0;
+            var percentCoplete = (event.beat / levelEndBeat) * 100;
+            if (percentCoplete < 0) {
+                percentCoplete = 0;
             }
-            if (completion > 100) {
-                completion = 100;
+            if (percentCoplete > 100) {
+                percentCoplete = 100;
             }
-            sliderSprite.x = X_POSITION + completion;
+            sliderSprite.x = X_POSITION + (percentCoplete * BAR_LENGTH / 100);
         }
     }
 
