@@ -1,5 +1,6 @@
 package level;
 
+import track_action.Crate;
 import track_action.SliderThreatHoming;
 import track_action.EmptyTrackAction;
 import track_action.TextTrackAction;
@@ -87,6 +88,20 @@ class LevelDataLoader {
                         bpm,
                         universalBus,
                         warnTime
+                    ));
+                }
+                case "Crate": {
+                    var displacement = parseDisplacement(boardGrid);
+                    var warnTime = Std.parseInt(data.get("warningTime"));
+                    var duration = Std.parseInt(data.get("duration"));
+
+                    trackActions.push(new Crate(
+                        beatOffset,
+                        bpm,
+                        displacement,
+                        universalBus,
+                        warnTime,
+                        duration
                     ));
                 }
                 case "Comment":{

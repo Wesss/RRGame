@@ -7,7 +7,6 @@ import bus.UniversalBus;
 class LoggingSystemTop implements LoggingSystem {
 
     // Change based on release version TODO should we load these from some data or build file?
-
     private static inline var CATEGORY_ID = DEBUGGING_CATEGORY_ID;
     private static inline var VERSION = 1;
 

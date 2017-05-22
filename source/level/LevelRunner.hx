@@ -10,7 +10,8 @@ import track_action.TrackAction;
  **/
 class LevelRunner {
 
-    private var levelEventBus:Bus<LevelEvent>;
+    private var levelStart:Bus<LevelStartEvent>;
+    private var levelLoad:Bus<LevelLoadEvent>;
     private var isRunningLevel = false;
     private var actions:Array<AbsoluteTrackAction>;
     private var actionsIndex:Int;
@@ -19,7 +20,8 @@ class LevelRunner {
     private var universalBus:UniversalBus;
 
     public function new(universalBus:UniversalBus):Void {
-        this.levelEventBus = universalBus.level;
+        this.levelStart = universalBus.levelStart;
+        this.levelLoad = universalBus.levelLoad;
         universalBus.beat.subscribe(this, beatHandler);
         universalBus.gameOver.subscribe(this, gameOverHandler);
         actions = [];
@@ -35,7 +37,7 @@ class LevelRunner {
         }
 
         isRunningLevel = true;
-        levelEventBus.broadcast(new LevelEvent(LOAD, levelData));
+        levelLoad.broadcast(new LevelLoadEvent(levelData));
         
         // loads track actions
         for (trackAction in levelData.trackActions) {
@@ -60,7 +62,7 @@ class LevelRunner {
 
         trackActions = levelData.trackActions;
 
-        levelEventBus.broadcast(new LevelEvent(START, levelData));
+        levelStart.broadcast(new LevelStartEvent(levelData, actions[actions.length - 1].absoluteBeatTime));
     }
 
     public function beatHandler(beat : BeatEvent) {

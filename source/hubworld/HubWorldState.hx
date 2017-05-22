@@ -91,6 +91,8 @@ class HubWorldState extends FlxState {
         FlxG.camera.follow(cameraTarget);
         FlxG.mouse.visible = true;
 
+        var levelScores = SaveManager.getProgress();
+
         for (i in 0...hubWorldData.worlds.length) {
             var world = new WorldSpriteGroup(hubWorldData, i, SaveManager.getProgress(), logger);
             add(world);
@@ -102,9 +104,13 @@ class HubWorldState extends FlxState {
                 }
 
                 world.levels[levelRelativeToWorld].addScore(betterProgress.score);
-                var levelScores = SaveManager.getProgress();
                 levelScores[betterProgress.level] = betterProgress.score;
                 SaveManager.saveProgress(levelScores);
+            }
+
+            // if there is no level 1-1 score, start level 1-1 immediately
+            if (i == 0 && !levelScores.exists(0)) {
+                world.levels[0].click();
             }
 
             if (reset && i == worldProgress) {

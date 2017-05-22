@@ -11,12 +11,19 @@ class Crate extends SliderThreat {
 
     public function new(beatOffset : Float, bpm : Int, position : Displacement, universalBus : UniversalBus, beatWarnTime = 2.0, duration = 8.0) {
         super(beatOffset, bpm, position, universalBus, beatWarnTime);
+
         
         durationIndex = triggerBeats.length;
         triggerBeats.push(duration);
 
         crateLandedBus = universalBus.crateLanded;
         crateDestroyedBus = universalBus.crateDestroyed;
+    }
+
+    public override function initGraphicsAndAnimations() {
+        loadGraphic(AssetPaths.CrateThreat__png, true, 112, 112);
+        animation.add("warning", [0]);
+        animation.add("landed", [1]);
     }
 
     /**
@@ -38,6 +45,8 @@ class Crate extends SliderThreat {
 
         scale.x = 1;
         scale.y = 1;
+
+        animation.play("landed");
     }
 
     public function disappear() {
