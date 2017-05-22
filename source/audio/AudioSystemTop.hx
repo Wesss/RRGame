@@ -16,7 +16,6 @@ class AudioSystemTop extends FlxBasic {
 
     // music
     private var musicPlayheadUpdate:Bus<Float>;
-    private var musicForLevel:FlxSound;
     private var streamedMusic:StreamSound;
     private var isPlayingMusic:Bool;
     private var prevMusicPlayhead:Float;
@@ -28,7 +27,6 @@ class AudioSystemTop extends FlxBasic {
     public function new(universalBus:UniversalBus) {
         super();
         musicPlayheadUpdate = universalBus.musicPlayheadUpdate;
-        musicForLevel = null;
         isPlayingMusic = false;
 
         hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
@@ -52,6 +50,13 @@ class AudioSystemTop extends FlxBasic {
         universalBus.playerDie.subscribe(this, function (event) {
             deathSound.play();
         });
+
+        universalBus.gameOver.subscribe(this, function (event) {
+            if (FlxG.sound.music != null) {
+                FlxG.sound.music.stop();
+                FlxG.sound.music = null;
+            }
+        });
     }
 
     public function switchLevelState(event:LevelEvent):Void {
@@ -67,68 +72,46 @@ class AudioSystemTop extends FlxBasic {
      * Prepare to play music specifically for a level
      **/
     public function loadMusicForLevel(levelData:LevelData):Void {
-        if (musicForLevel != null) {
-            throw "Music for level has already been loaded";
-        }
-
-        /*openfl.Assets.loadMusic(levelData.musicAssetPath).onComplete(function(sound) {
-            trace("Stream started");
-            streamedMusic = new StreamSound(sound, false, true);
-            trace("Is playing B" + streamedMusic.playing);
-            streamedMusic.play();
-            trace("Is playing A" + streamedMusic.playing);
-            trace("Stream time:" + streamedMusic.time);
-        }).onError(function (error) {
-            trace("Stream error: " + error);
-        });*/
-        var musicCached = FlxG.sound.cache(levelData.musicAssetPath);
-        musicForLevel = new StreamSound(musicCached, false, true);
+        FlxG.sound.music = new FlxSound();
+        FlxG.sound.music.loadStream(levelData.musicAssetPath, false, false);
+        FlxG.sound.music.play(true);
     }
 
     /**
      * Start playing music specifically for a level
      **/
     public function playMusicForLevel(levelData:LevelData):Void{
-        if (musicForLevel == null) {
-            throw "No Music has been loaded";
-        }
-        if (isPlayingMusic) {
-            throw "Cannot play level music whilst previous level music is still running";
-        }
-        
-        musicForLevel.play();
+        FlxG.sound.music.play();
         isPlayingMusic = true;
-        var musicTime = musicForLevel.time;
+        var musicTime = FlxG.sound.music.time;
         prevMusicPlayhead = musicTime;
         musicPlayheadUpdate.broadcast(musicTime);
     }
 
     override public function update(elapsed:Float) {
-        if (musicForLevel == null || !musicForLevel.playing) {
+        if (FlxG.sound.music == null || !FlxG.sound.music.playing) {
             return;
         }
 
-        var musicTime = musicForLevel.time;
-        trace("Mtime: " + musicTime);
+        var musicTime = FlxG.sound.music.time;
+        if (FlxG.sound.music.time == 0 && isPlayingMusic) {
+            FlxG.sound.music.pause();
+            FlxG.sound.music.resume();
+        }
+
         if (musicTime != prevMusicPlayhead) {
             prevMusicPlayhead = musicTime;
             musicPlayheadUpdate.broadcast(musicTime);
         }
-
-        if (streamedMusic != null) {
-            trace("Stream time:" + streamedMusic.time);
-            if (streamedMusic.time == 0) {
-                streamedMusic.pause();
-                streamedMusic.play();
-            }
-        }
     }
 
     public function pause(pauseEvent) {
-        musicForLevel.pause();
+        FlxG.sound.music.pause();
+        isPlayingMusic = false;
     }
 
     public function unpause(unpauseEvent) {
-        musicForLevel.resume();
+        FlxG.sound.music.resume();
+        isPlayingMusic = true;
     }
 }
