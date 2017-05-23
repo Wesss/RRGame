@@ -51,13 +51,14 @@ class Crate extends SliderThreat {
 
     public function disappear() {
         // Fade and scale out
+        crateDestroyedBus.broadcast(position);
         FlxTween.tween(this, {
             alpha: 0
         }, 1 / bpm * 60, {
             ease: FlxEase.quadOut,
             onComplete: function(_) {
                 visible = false;
-                crateDestroyedBus.broadcast(position);
+                destroy();
             }
         });
     }

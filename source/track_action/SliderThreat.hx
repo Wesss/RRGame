@@ -26,6 +26,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
         initGraphicsAndAnimations();
 
         visible = false;
+        kill();
         triggerBeats = [-beatWarnTime, 0];
         this.beatOffset = beatOffset;
         this.beatWarnTime = beatWarnTime;
@@ -62,6 +63,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
     public function warning() {
         // Show threat:
         visible = true;
+        revive();
 
         scale.x = 0;
         scale.y = 0;
@@ -104,6 +106,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
             ease: FlxEase.quadOut,
             onComplete: function(_) {
                 visible = false;
+                destroy();
             }
         });
 
