@@ -64,6 +64,8 @@ class PlayLevelState extends FlxState {
 		Juicer.juiceLevel(universalBus);
 		var levelRunner = new LevelRunner(universalBus);
 
+		add(new ScreenBanner(universalBus, "Loading", 20));
+
 		// Camera
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
 
@@ -130,6 +132,9 @@ class PlayLevelState extends FlxState {
 		universalBus.returnToHub.subscribe(this, function(_) {
 			endPlayState(logger, levelIndex, player.hp, false);
 		});
+
+		universalBus.pause.unsubscribe(this);
+		universalBus.unpause.unsubscribe(this);
 	}
 
 	public static function endPlayState(logger, levelIndex, playerHP, isRetrying) {
@@ -186,5 +191,70 @@ private class BeatText extends FlxText {
 			}
 			oldBeat = beat.beat;
 		});
+	}
+}
+
+private class ScreenBanner extends FlxSpriteGroup {
+	private var texts : Array<FlxText>;
+	private var speed = 200;
+
+	public function new(universalBus : UniversalBus, text : String, size : Int) {
+		super();
+
+		var background = new FlxSprite();
+        var seethroughColor = new flixel.util.FlxColor(0xcc2E4172);
+        background.makeGraphic(FlxG.width, size + 10, seethroughColor);
+        background.x -= background.width / 2;
+        background.y -= background.height / 2 - 2;
+        add(background);
+
+		texts = [];
+		texts[0] = new FlxText(0, 0, 0, text);
+		texts[0].setFormat(AssetPaths.GlacialIndifference_Regular__ttf, size, flixel.util.FlxColor.WHITE);
+		for (i in 1...(Math.round(FlxG.width / texts[0].width) + 1)) {
+			texts[i] = new FlxText(0, 0, 0, text);
+			texts[i].setFormat(AssetPaths.GlacialIndifference_Regular__ttf, size, flixel.util.FlxColor.WHITE);
+		}
+
+		for (i in 0...texts.length) {
+			add(texts[i]);
+			texts[i].x = i * (texts[i].width + 10) - FlxG.width / 2;
+			texts[i].y -= texts[i].height / 2;
+		}
+
+		universalBus.levelStart.subscribe(this, function(_) {
+			FlxTween.tween(background.scale, {
+				y : 0
+			}, 0.1, {
+				ease : FlxEase.quadIn
+			});
+			for (text in texts) {
+				FlxTween.tween(text, {
+					alpha : 0
+				}, 0.1, {
+					ease : FlxEase.quadIn
+				});
+			}
+			FlxTween.tween(this, {
+				speed : 0
+			}, 0.1, {
+				ease : FlxEase.quadOut
+			});
+		});
+	}
+
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
+
+		for (text in texts) {
+			text.x -= speed * elapsed;
+		}
+
+		for (i in 0...texts.length) {
+			if (texts[i].x < -texts[i].width - FlxG.width / 2) {
+				var previousIdx = (i + texts.length - 1) % texts.length;
+				texts[i].x = texts[previousIdx].x + (texts[i].width + 10);
+			}
+		}
 	}
 }

@@ -52,7 +52,7 @@ class TimingSystemTop extends FlxBasic {
 
         var curStamp = haxe.Timer.stamp() * 1000;
 
-        if (!isOffSync) {
+        if (!isOffSync && prevMusicHeadPlayTime != 0) {
             var curBeat = (prevMusicHeadPlayTime + ((curStamp) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
 
             if (curBeat > lastBeatBroadcasted) {

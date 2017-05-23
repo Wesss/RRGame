@@ -16,9 +16,10 @@ class AudioSystemTop extends FlxBasic {
 
     // music
     private var musicPlayheadUpdate:Bus<Float>;
-    private var musicForLevel:FlxSound;
+    private var musicLoaded:Bus<Bool>;
     private var isPlayingMusic:Bool;
     private var prevMusicPlayhead:Float;
+    private var loaded:Bool;
 
     // sounds
     private var hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
@@ -27,7 +28,7 @@ class AudioSystemTop extends FlxBasic {
     public function new(universalBus:UniversalBus) {
         super();
         musicPlayheadUpdate = universalBus.musicPlayheadUpdate;
-        musicForLevel = null;
+        musicLoaded = universalBus.musicLoaded;
         isPlayingMusic = false;
 
         hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
@@ -52,41 +53,50 @@ class AudioSystemTop extends FlxBasic {
         universalBus.playerDie.subscribe(this, function (event) {
             deathSound.play();
         });
+
+        universalBus.gameOver.subscribe(this, function (event) {
+            universalBus.pause.unsubscribe(this);
+            universalBus.unpause.unsubscribe(this);
+        });
     }
 
     /**
      * Prepare to play music specifically for a level
      **/
     public function loadMusicForLevel(event:LevelLoadEvent):Void {
-        if (musicForLevel != null) {
-            throw "Music for level has already been loaded";
-        }
-        musicForLevel = FlxG.sound.load(event.levelData.musicAssetPath);
+        loaded = false;        
+        FlxG.sound.music = new FlxSound();
+        FlxG.sound.music.loadStream(event.levelData.musicAssetPath, false, false);
+        FlxG.sound.music.play(true);
     }
 
     /**
      * Start playing music specifically for a level
      **/
     public function playMusicForLevel(event:LevelStartEvent):Void{
-        if (musicForLevel == null) {
-            throw "No Music has been loaded";
-        }
-        if (isPlayingMusic) {
-            throw "Cannot play level music whilst previous level music is still running";
-        }
-        musicForLevel.play();
+        FlxG.sound.music.play();
         isPlayingMusic = true;
-        var musicTime = musicForLevel.time;
+        var musicTime = FlxG.sound.music.time;
         prevMusicPlayhead = musicTime;
         musicPlayheadUpdate.broadcast(musicTime);
     }
 
     override public function update(elapsed:Float) {
-        if (musicForLevel == null || !musicForLevel.playing) {
+        if (FlxG.sound.music == null || !FlxG.sound.music.playing) {
             return;
         }
 
-        var musicTime = musicForLevel.time;
+        var musicTime = FlxG.sound.music.time;
+        if (!loaded && FlxG.sound.music.time == 0) {
+            // Load the music
+            FlxG.sound.music.pause();
+            FlxG.sound.music.resume();
+        } else if (!loaded && FlxG.sound.music.time > 0) {
+            // Music is finally loaded
+            musicLoaded.broadcast(true);
+            loaded = true;
+        }
+
         if (musicTime != prevMusicPlayhead) {
             prevMusicPlayhead = musicTime;
             musicPlayheadUpdate.broadcast(musicTime);
@@ -94,10 +104,12 @@ class AudioSystemTop extends FlxBasic {
     }
 
     public function pause(pauseEvent) {
-        musicForLevel.pause();
+        FlxG.sound.music.pause();
+        isPlayingMusic = false;
     }
 
     public function unpause(unpauseEvent) {
-        musicForLevel.resume();
+        FlxG.sound.music.resume();
+        isPlayingMusic = true;
     }
 }

@@ -20,6 +20,7 @@ class UniversalBus {
     public var beat(default, null):Bus<BeatEvent> = new Bus<BeatEvent>();
     public var levelStart(default, null):Bus<LevelStartEvent> = new Bus<LevelStartEvent>();
     public var levelLoad(default, null):Bus<LevelLoadEvent> = new Bus<LevelLoadEvent>();
+    public var musicLoaded(default, null):Bus<Bool> = new Bus<Bool>();
     public var musicPlayheadUpdate(default, null):Bus<Float> = new Bus<Float>();
     public var threatKillSquare(default, null) = new Bus<Displacement>();
     public var playerHit(default, null) = new Bus<Displacement>();
