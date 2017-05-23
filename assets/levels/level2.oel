@@ -576,7 +576,7 @@
     <RedSlider id="103" x="464" y="160" warningTime="1" />
     <RedSlider id="104" x="160" y="208" warningTime="1" />
     <RedSlider id="106" x="224" y="208" warningTime="1" />
-    <RedSlider id="366" x="272" y="208" warningTime="1" />
+    <RedSlider id="366" x="272" y="208" warningTime="2" />
     <RedSlider id="369" x="336" y="208" warningTime="1" />
     <RedSlider id="370" x="400" y="208" warningTime="1" />
     <RedSlider id="372" x="464" y="208" warningTime="1" />
