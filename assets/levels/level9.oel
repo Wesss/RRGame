@@ -936,7 +936,7 @@
     <RedSlider id="642" x="160" y="1248" warningTime="2" />
     <RedSlider id="643" x="16" y="1232" warningTime="1" />
     <RedSlider id="644" x="272" y="1232" warningTime="1" />
-    <HeatlhPickup id="396" x="400" y="976" />
-    <HeatlhPickup id="645" x="0" y="1568" />
+    <HealthPickup id="396" x="400" y="976" />
+    <HealthPickup id="645" x="0" y="1568" />
   </Entities>
 </level>
