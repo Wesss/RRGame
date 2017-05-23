@@ -130,6 +130,9 @@ class PlayLevelState extends FlxState {
 		universalBus.returnToHub.subscribe(this, function(_) {
 			endPlayState(logger, levelIndex, player.hp, false);
 		});
+
+		universalBus.pause.unsubscribe(this);
+		universalBus.unpause.unsubscribe(this);
 	}
 
 	public static function endPlayState(logger, levelIndex, playerHP, isRetrying) {

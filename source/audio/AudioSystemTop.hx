@@ -16,7 +16,6 @@ class AudioSystemTop extends FlxBasic {
 
     // music
     private var musicPlayheadUpdate:Bus<Float>;
-    private var streamedMusic:StreamSound;
     private var isPlayingMusic:Bool;
     private var prevMusicPlayhead:Float;
 
@@ -53,26 +52,24 @@ class AudioSystemTop extends FlxBasic {
         });
 
         universalBus.gameOver.subscribe(this, function (event) {
-            if (FlxG.sound.music != null) {
-                FlxG.sound.music.stop();
-                FlxG.sound.music = null;
-            }
+            universalBus.pause.unsubscribe(this);
+            universalBus.unpause.unsubscribe(this);
         });
     }
 
     /**
      * Prepare to play music specifically for a level
      **/
-    public function loadMusicForLevel(levelData:LevelData):Void {
+    public function loadMusicForLevel(event:LevelLoadEvent):Void {
         FlxG.sound.music = new FlxSound();
-        FlxG.sound.music.loadStream(levelData.musicAssetPath, false, false);
+        FlxG.sound.music.loadStream(event.levelData.musicAssetPath, false, false);
         FlxG.sound.music.play(true);
     }
 
     /**
      * Start playing music specifically for a level
      **/
-    public function playMusicForLevel(levelData:LevelData):Void{
+    public function playMusicForLevel(event:LevelStartEvent):Void{
         FlxG.sound.music.play();
         isPlayingMusic = true;
         var musicTime = FlxG.sound.music.time;
