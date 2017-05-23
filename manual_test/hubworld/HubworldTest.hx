@@ -16,7 +16,9 @@ class HubworldTest extends FlxState {
 		// Add level scores here to load into hubworld with said data
 		// ie. levelScores.set(0, 4);
 		levelScores.set(0, 2);
-		levelScores.set(1, 3);
+//		levelScores.set(1, 3);
+//		levelScores.set(3, 3);
+
 
 		SaveManager.initializeSaveData();
 		SaveManager.saveProgress(levelScores);

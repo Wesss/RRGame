@@ -1,5 +1,6 @@
 package hubworld;
 
+import flixel.group.FlxGroup;
 import persistent_state.SaveManager;
 import flixel.text.FlxText;
 import logging.*;
@@ -118,32 +119,33 @@ class HubWorldState extends FlxState {
             }
 
             if (i > 0) {
-                var button = new ScreenTransitionButton(i, Left, cameraTarget.moveToScreen.bind(i - 1));
+                var text = "World " + i;
+                var button = new ScreenTransitionButton(i, Left, text, cameraTarget.moveToScreen.bind(i - 1));
                 add(button);
             }
 
             var numLevelsPassed = getLevelsPassedInWorld(i, levelScores);
             // only show button if there are more worlds to right and 3 of 5 levels have been passed
             if (i < hubWorldData.worlds.length - 1 && numLevelsPassed >= 3) {
-                var button = new ScreenTransitionButton(i, Right, cameraTarget.moveToScreen.bind(i + 1));
+                var text = "World " + (i + 2);
+                var button = new ScreenTransitionButton(i, Right, text, cameraTarget.moveToScreen.bind(i + 1));
 
                 // if world was just unlocked, animate it
-//                if (betterProgress != null &&
-//                    betterProgress.level >= i * 5 &&
-//                    betterProgress.level < i * 5 + 5 &&
-//                    numLevelsPassed == 3 &&
-//                    currentScore < 1
-//                ) {
+                if (betterProgress != null &&
+                    betterProgress.level >= i * 5 &&
+                    betterProgress.level < i * 5 + 5 &&
+                    numLevelsPassed == 3 &&
+                    currentScore < 1) {
                     button.appearForFirstTime();
-//                }
+                }
 
                 add(button);
             }
         }
 
         // sound credits
-        add(new ScreenTransitionButton(0, Left, cameraTarget.moveToScreen.bind(-1)));
-        add(new ScreenTransitionButton(-1, Right, cameraTarget.moveToScreen.bind(0)));
+        add(new ScreenTransitionButton(0, Left, "Credits", cameraTarget.moveToScreen.bind(-1)));
+        add(new ScreenTransitionButton(-1, Right, "World 1", cameraTarget.moveToScreen.bind(0)));
         var soundCredits = new FlxText(0, 0, 0, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
                                                 "Music courtesy of the many artists on FreeMusicArchive.org,\n" +
                                                 "Soundcloud, and Youtube. See the endscreen of each level for\n" +
@@ -212,29 +214,48 @@ private enum Direction {
     Left; Right;
 }
 
-private class ScreenTransitionButton extends FlxButton {
+private class ScreenTransitionButton extends FlxGroup {
     private static var MARGIN = 10;
 
-    public function new(screen : Int, direction : Direction, callback : Void -> Void) {
-        super();
-        loadGraphic(AssetPaths.RightArrowButton__png);
-        switch (direction) {
-            case Left  : x = FlxG.width * screen + MARGIN;
-            case Right : x = FlxG.width * (screen + 1) - width - MARGIN;
-        }
-        y = (FlxG.height - height) / 2;
-        scrollFactor.x = 1;
-        flipX = direction == Left;
+    private var button:FlxButton;
+    private var buttonText:FlxText;
 
-        onUp.callback = callback;
+    public function new(screen : Int, direction : Direction, text : String, callback : Void -> Void) {
+        super();
+        button = new FlxButton();
+        button.loadGraphic(AssetPaths.RightArrowButton__png);
+        switch (direction) {
+            case Left  : button.x = FlxG.width * screen + MARGIN;
+            case Right : button.x = FlxG.width * (screen + 1) - button.width - MARGIN;
+        }
+        button.y = (FlxG.height - button.height) / 2;
+        button.scrollFactor.x = 1;
+        button.flipX = direction == Left;
+        button.onUp.callback = callback;
+        add(button);
+
+        buttonText = new FlxText();
+        buttonText.text = text;
+        buttonText.y = button.y - 18;
+        buttonText.x = button.x + (button.width / 2) - (buttonText.width * 5 / 7);
+        buttonText.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 16, flixel.util.FlxColor.WHITE, CENTER);
+        add(buttonText);
     }
 
     public function appearForFirstTime() {
-        this.alpha = 0;
+        button.alpha = 0;
         FlxTween.tween({}, {}, 1, {
             ease : FlxEase.quadOut,
             onComplete : function(tween) {
-                FlxTween.tween(this, {
+                FlxTween.tween(button, {
+                    alpha : 1
+                }, 0.5, {
+                    ease : FlxEase.quadOut,
+                    onComplete : function(tween) {
+                        //TODO
+                    }
+                });
+                FlxTween.tween(buttonText, {
                     alpha : 1
                 }, 0.5, {
                     ease : FlxEase.quadOut,
