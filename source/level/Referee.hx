@@ -10,6 +10,7 @@ class Referee {
     private var bpm : Int;
     private var logicalPlayerPosition : Displacement;
     private var crates : Array<Displacement>;
+    private var healthPickups : Array<Displacement>;
 
     public function new(universalBus : UniversalBus, bpm : Int) {
         this.universalBus = universalBus;
@@ -20,12 +21,25 @@ class Referee {
         universalBus.triggerBeats.subscribe(this, handleTriggerBeats);
         universalBus.playerStartMove.subscribe(this, handlePlayerMove);
         universalBus.playerHit.subscribe(this, handlePlayerHit);
+        universalBus.healthLanded.subscribe(this, function(x) {
+            for (healthPickup in healthPickups) {
+                if (healthPickup.equals(x)) {
+                    return;
+                }
+            }
+            healthPickups.push(x);
+        });
+        universalBus.healthHit.subscribe(this, function(x) {
+            healthPickups.remove(x);
+        });
 
         unsafeSquares = new UnsafeSquareKiller(universalBus, bpm);
         this.bpm = bpm;
 
         logicalPlayerPosition = new Displacement(NONE, NONE);
         crates = [];
+
+        healthPickups = [];
     }
 
     public function handleNewControlDesire(displacement : Displacement) {
@@ -53,12 +67,22 @@ class Referee {
                     return;
                 }
             }
+            for (healthPickup in healthPickups) {
+                if (healthPickup.equals(halfLocation)) {
+                    universalBus.healthHit.broadcast(healthPickup);
+                }
+            }
             universalBus.controls.broadcast(halfLocation);
         }
         for (crate in crates) {
             if (crate.equals(displacement)) {
                 universalBus.crateHit.broadcast(crate);
                 return;
+            }
+        }
+        for (healthPickup in healthPickups) {
+            if (healthPickup.equals(displacement)) {
+                universalBus.healthHit.broadcast(healthPickup);
             }
         }
 
