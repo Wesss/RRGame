@@ -772,5 +772,7 @@
     <RedSlider id="132" x="256" y="976" warningTime="2" />
     <RedSlider id="134" x="400" y="976" warningTime="2" />
     <RedSlider id="320" x="336" y="960" warningTime="2" />
+    <HeatlhPickup id="133" x="0" y="2144" />
+    <HeatlhPickup id="321" x="16" y="1536" />
   </Entities>
 </level>
