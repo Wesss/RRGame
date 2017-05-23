@@ -122,8 +122,21 @@ class HubWorldState extends FlxState {
                 add(button);
             }
 
-            if (i < hubWorldData.worlds.length - 1) {
+            var numLevelsPassed = getLevelsPassedInWorld(i, levelScores);
+            // only show button if there are more worlds to right and 3 of 5 levels have been passed
+            if (i < hubWorldData.worlds.length - 1 && numLevelsPassed >= 3) {
                 var button = new ScreenTransitionButton(i, Right, cameraTarget.moveToScreen.bind(i + 1));
+
+                // if world was just unlocked, animate it
+//                if (betterProgress != null &&
+//                    betterProgress.level >= i * 5 &&
+//                    betterProgress.level < i * 5 + 5 &&
+//                    numLevelsPassed == 3 &&
+//                    currentScore < 1
+//                ) {
+                    button.appearForFirstTime();
+//                }
+
                 add(button);
             }
         }
@@ -139,6 +152,17 @@ class HubWorldState extends FlxState {
         soundCredits.y = FlxG.height / 2 - 40;
         soundCredits.x = -FlxG.width + 10;
         add(soundCredits);
+    }
+
+    private static function getLevelsPassedInWorld(i:Int, levelScores:Map<Int, Float>):Int {
+        var numWorldLevelsPassed = 0;
+        for (j in 0...5) {
+            var levelScore = levelScores[i * 5 + j];
+            if (levelScore != null && levelScore >= 0) {
+                numWorldLevelsPassed++;
+            }
+        }
+        return numWorldLevelsPassed;
     }
 
     override public function update(elapsed:Float):Void {
@@ -203,5 +227,22 @@ private class ScreenTransitionButton extends FlxButton {
         flipX = direction == Left;
 
         onUp.callback = callback;
+    }
+
+    public function appearForFirstTime() {
+        this.alpha = 0;
+        FlxTween.tween({}, {}, 1, {
+            ease : FlxEase.quadOut,
+            onComplete : function(tween) {
+                FlxTween.tween(this, {
+                    alpha : 1
+                }, 0.5, {
+                    ease : FlxEase.quadOut,
+                    onComplete : function(tween) {
+                        //TODO
+                    }
+                });
+            }
+        });
     }
 }
