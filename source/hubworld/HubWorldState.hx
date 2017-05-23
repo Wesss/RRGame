@@ -120,22 +120,23 @@ class HubWorldState extends FlxState {
 
             if (i > 0) {
                 var text = "World " + i;
-                var button = new ScreenTransitionButton(i, Left, text, cameraTarget.moveToScreen.bind(i - 1));
+                var button = new ScreenTransitionButton(i, Left, text, true, cameraTarget.moveToScreen.bind(i - 1));
                 add(button);
             }
 
-            var numLevelsPassed = getLevelsPassedInWorld(i, levelScores);
-            // only show button if there are more worlds to right and 3 of 5 levels have been passed
-            if (i < hubWorldData.worlds.length - 1 && numLevelsPassed >= 3) {
+            // only show button if there are more worlds to right
+            if (i < hubWorldData.worlds.length - 1) {
+                var numLevelsPassed = getLevelsPassedInWorld(i, levelScores);
+                var isEnabled = numLevelsPassed >= 3;
                 var text = "World " + (i + 2);
-                var button = new ScreenTransitionButton(i, Right, text, cameraTarget.moveToScreen.bind(i + 1));
+                var button = new ScreenTransitionButton(i, Right, text, isEnabled, cameraTarget.moveToScreen.bind(i + 1));
 
                 // if world was just unlocked, animate it
                 if (betterProgress != null &&
-                    betterProgress.level >= i * 5 &&
-                    betterProgress.level < i * 5 + 5 &&
-                    numLevelsPassed == 3 &&
-                    currentScore < 1) {
+                        betterProgress.level >= i * 5 &&
+                        betterProgress.level < i * 5 + 5 &&
+                        numLevelsPassed == 3 &&
+                        (currentScore == null || currentScore < 1)) {
                     button.appearForFirstTime();
                 }
 
@@ -144,8 +145,8 @@ class HubWorldState extends FlxState {
         }
 
         // sound credits
-        add(new ScreenTransitionButton(0, Left, "Credits", cameraTarget.moveToScreen.bind(-1)));
-        add(new ScreenTransitionButton(-1, Right, "World 1", cameraTarget.moveToScreen.bind(0)));
+        add(new ScreenTransitionButton(0, Left, "Credits", true, cameraTarget.moveToScreen.bind(-1)));
+        add(new ScreenTransitionButton(-1, Right, "World 1", true, cameraTarget.moveToScreen.bind(0)));
         var soundCredits = new FlxText(0, 0, 0, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
                                                 "Music courtesy of the many artists on FreeMusicArchive.org,\n" +
                                                 "Soundcloud, and Youtube. See the endscreen of each level for\n" +
@@ -220,40 +221,46 @@ private class ScreenTransitionButton extends FlxGroup {
     private var button:FlxButton;
     private var buttonText:FlxText;
 
-    public function new(screen : Int, direction : Direction, text : String, callback : Void -> Void) {
+    public function new(screen : Int, direction : Direction, text : String, isEnabled : Bool, callback : Void -> Void) {
         super();
-        button = new FlxButton();
-        button.loadGraphic(AssetPaths.RightArrowButton__png);
-        switch (direction) {
-            case Left  : button.x = FlxG.width * screen + MARGIN;
-            case Right : button.x = FlxG.width * (screen + 1) - button.width - MARGIN;
-        }
-        button.y = (FlxG.height - button.height) / 2;
-        button.scrollFactor.x = 1;
-        button.flipX = direction == Left;
-        button.onUp.callback = callback;
-        add(button);
+            button = new FlxButton();
+            button.loadGraphic(AssetPaths.RightArrowButton__png);
+            switch (direction) {
+                case Left  : button.x = FlxG.width * screen + MARGIN;
+                case Right : button.x = FlxG.width * (screen + 1) - button.width - MARGIN;
+            }
+            button.y = (FlxG.height - button.height) / 2;
+            button.scrollFactor.x = 1;
+            button.flipX = direction == Left;
+            if (isEnabled) {
+                button.onUp.callback = callback;
+            } else {
+                button.alpha = 0.25;
+            }
 
-        buttonText = new FlxText();
-        buttonText.text = text;
-        buttonText.y = button.y - 18;
-        buttonText.x = button.x + (button.width / 2) - (buttonText.width * 5 / 7);
+            buttonText = new FlxText();
+            if (isEnabled) {
+                buttonText.text = text;
+            } else {
+                buttonText.text = "Beat 3 levels";
+            }
+            buttonText.y = button.y - 18;
+            buttonText.x = button.x + (button.width / 2) - (buttonText.width * 5 / 7);
+        add(button);
         buttonText.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 16, flixel.util.FlxColor.WHITE, CENTER);
         add(buttonText);
     }
 
     public function appearForFirstTime() {
         button.alpha = 0;
-        FlxTween.tween({}, {}, 1, {
+        buttonText.alpha = 0;
+        FlxTween.tween({}, {}, 1.3, {
             ease : FlxEase.quadOut,
             onComplete : function(tween) {
                 FlxTween.tween(button, {
                     alpha : 1
                 }, 0.5, {
-                    ease : FlxEase.quadOut,
-                    onComplete : function(tween) {
-                        //TODO
-                    }
+                    ease : FlxEase.quadOut
                 });
                 FlxTween.tween(buttonText, {
                     alpha : 1
