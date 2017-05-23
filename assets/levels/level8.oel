@@ -620,5 +620,7 @@
     <RedSlider id="323" x="144" y="2464" warningTime="2" />
     <RedSlider id="324" x="160" y="2464" warningTime="2" />
     <RedSlider id="325" x="144" y="2448" warningTime="2" />
+    <HealthPickup id="180" x="16" y="1920" />
+    <HealthPickup id="181" x="272" y="1296" />
   </Entities>
 </level>

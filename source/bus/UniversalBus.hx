@@ -36,6 +36,9 @@ class UniversalBus {
     public var crateLanded(default, null) = new Bus<Displacement>();
     public var crateDestroyed(default, null) = new Bus<Displacement>();
     public var crateHit(default, null) = new Bus<Displacement>();
+    public var healthLanded(default, null) = new Bus<Displacement>();
+    public var healthDestroyed(default, null) = new Bus<Displacement>();
+    public var healthHit(default, null) = new Bus<Displacement>();
 
     public function new() {}
 }

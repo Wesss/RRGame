@@ -10,6 +10,7 @@ class Referee {
     private var bpm : Int;
     private var logicalPlayerPosition : Displacement;
     private var crates : Array<Displacement>;
+    private var healthPickups : Array<Displacement>;
 
     public function new(universalBus : UniversalBus, bpm : Int) {
         this.universalBus = universalBus;
@@ -20,37 +21,52 @@ class Referee {
         universalBus.triggerBeats.subscribe(this, handleTriggerBeats);
         universalBus.playerStartMove.subscribe(this, handlePlayerMove);
         universalBus.playerHit.subscribe(this, handlePlayerHit);
+        universalBus.healthLanded.subscribe(this, function(x) {
+            for (healthPickup in healthPickups) {
+                if (healthPickup.equals(x)) {
+                    return;
+                }
+            }
+            healthPickups.push(x);
+        });
+        universalBus.healthHit.subscribe(this, function(x) {
+            healthPickups.remove(x);
+        });
 
         unsafeSquares = new UnsafeSquareKiller(universalBus, bpm);
         this.bpm = bpm;
 
         logicalPlayerPosition = new Displacement(NONE, NONE);
         crates = [];
+
+        healthPickups = [];
     }
 
     public function handleNewControlDesire(displacement : Displacement) {
         // the location halfway between player and destination
         var halfLocation : Displacement = null;
-        if (displacement.horizontalDisplacement == logicalPlayerPosition.horizontalDisplacement &&
-            displacement.verticalDisplacement != NONE && logicalPlayerPosition.verticalDisplacement != NONE) {
+        if (Displacement.opposeVertically(displacement, logicalPlayerPosition)) {
             // crate and player opposing each other in a column
             halfLocation = new Displacement(displacement.horizontalDisplacement, NONE);
-        } else if (displacement.verticalDisplacement == logicalPlayerPosition.verticalDisplacement &&
-                    displacement.horizontalDisplacement != NONE && logicalPlayerPosition.horizontalDisplacement != NONE) {
+        } else if (Displacement.opposeHorizontally(displacement, logicalPlayerPosition)) {
             // crate and player opposing each other in a row
             halfLocation = new Displacement(NONE, displacement.verticalDisplacement);
-        } else if (displacement.verticalDisplacement != NONE && displacement.horizontalDisplacement != NONE &&
-                    logicalPlayerPosition.verticalDisplacement != NONE && logicalPlayerPosition.horizontalDisplacement != NONE &&
-                    logicalPlayerPosition.verticalDisplacement != displacement.verticalDisplacement &&
-                    logicalPlayerPosition.horizontalDisplacement != displacement.horizontalDisplacement) {
+        } else if (Displacement.opposeDiagonally(displacement, logicalPlayerPosition) ||
+            Displacement.opposeInL(displacement, logicalPlayerPosition)) {
             // crate and player opposing each other on a diagonal
             halfLocation = new Displacement(NONE, NONE);
         }
+
         if (halfLocation != null) {
             for (crate in crates) {
                 if (crate.equals(halfLocation)) {
                     universalBus.crateHit.broadcast(crate);
                     return;
+                }
+            }
+            for (healthPickup in healthPickups) {
+                if (healthPickup.equals(halfLocation)) {
+                    universalBus.healthHit.broadcast(healthPickup);
                 }
             }
             universalBus.controls.broadcast(halfLocation);
@@ -59,6 +75,11 @@ class Referee {
             if (crate.equals(displacement)) {
                 universalBus.crateHit.broadcast(crate);
                 return;
+            }
+        }
+        for (healthPickup in healthPickups) {
+            if (healthPickup.equals(displacement)) {
+                universalBus.healthHit.broadcast(healthPickup);
             }
         }
 

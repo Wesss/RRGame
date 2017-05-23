@@ -48,6 +48,7 @@ class Player extends FlxSpriteGroup {
         uniBus = bus;
         uniBus.controls.subscribe(this, controlEventHandler);
         uniBus.playerHit.subscribe(this, playerHitHandler);
+        uniBus.healthHit.subscribe(this, healthHitHandler);
         uniBus.gameOver.subscribe(this, gameOverHandler);
         uniBus.beat.subscribe(this, pulse);
         uniBus.crateHit.subscribe(this, showCrateHit);
@@ -139,6 +140,24 @@ class Player extends FlxSpriteGroup {
             FlxTween.tween(indicator, {
                 alpha : 0
             }, 1);
+        }
+    }
+
+    public function healthHitHandler(_) {
+        if (hp < 4) {
+            var indicator = hpIndicators[hp - 1];
+            FlxTween.tween(indicator.scale, {
+                x : 1,
+                y : 1
+            }, 0.5, {
+                ease : FlxEase.quadOut
+            });
+
+            FlxTween.tween(indicator, {
+                alpha : 1
+            }, 0.5);
+
+            hp++;
         }
     }
 

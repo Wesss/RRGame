@@ -10,6 +10,7 @@ import domain.Displacement;
 import bus.UniversalBus;
 import track_action.SliderThreat;
 import track_action.TrackAction;
+import track_action.HealthPickup;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
 using StringTools;
 
@@ -102,6 +103,15 @@ class LevelDataLoader {
                         universalBus,
                         warnTime,
                         duration
+                    ));
+                }
+                case "HealthPickup": {
+                    var displacement = parseDisplacement(boardGrid);
+
+                    trackActions.push(new HealthPickup(
+                        beatOffset,
+                        displacement,
+                        universalBus
                     ));
                 }
                 case "Comment":{
