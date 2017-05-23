@@ -104,6 +104,15 @@ class LevelDataLoader {
                         duration
                     ));
                 }
+                case "HealthPickup": {
+                    var displacement = parseDisplacement(boardGrid);
+
+                    trackActions.push(new HealthPickup(
+                        beatOffset,
+                        displacement,
+                        universalBus
+                    ));
+                }
                 case "Comment":{
 
                 }
