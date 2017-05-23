@@ -45,21 +45,18 @@ class Referee {
     public function handleNewControlDesire(displacement : Displacement) {
         // the location halfway between player and destination
         var halfLocation : Displacement = null;
-        if (displacement.horizontalDisplacement == logicalPlayerPosition.horizontalDisplacement &&
-            displacement.verticalDisplacement != NONE && logicalPlayerPosition.verticalDisplacement != NONE) {
+        if (Displacement.opposeVertically(displacement, logicalPlayerPosition)) {
             // crate and player opposing each other in a column
             halfLocation = new Displacement(displacement.horizontalDisplacement, NONE);
-        } else if (displacement.verticalDisplacement == logicalPlayerPosition.verticalDisplacement &&
-                    displacement.horizontalDisplacement != NONE && logicalPlayerPosition.horizontalDisplacement != NONE) {
+        } else if (Displacement.opposeHorizontally(displacement, logicalPlayerPosition)) {
             // crate and player opposing each other in a row
             halfLocation = new Displacement(NONE, displacement.verticalDisplacement);
-        } else if (displacement.verticalDisplacement != NONE && displacement.horizontalDisplacement != NONE &&
-                    logicalPlayerPosition.verticalDisplacement != NONE && logicalPlayerPosition.horizontalDisplacement != NONE &&
-                    logicalPlayerPosition.verticalDisplacement != displacement.verticalDisplacement &&
-                    logicalPlayerPosition.horizontalDisplacement != displacement.horizontalDisplacement) {
+        } else if (Displacement.opposeDiagonally(displacement, logicalPlayerPosition) ||
+            Displacement.opposeInL(displacement, logicalPlayerPosition)) {
             // crate and player opposing each other on a diagonal
             halfLocation = new Displacement(NONE, NONE);
         }
+
         if (halfLocation != null) {
             for (crate in crates) {
                 if (crate.equals(halfLocation)) {
