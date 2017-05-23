@@ -1,15 +1,31 @@
 package track_action;
 
+import board.BoardCoordinates;
 import bus.*;
 import domain.Displacement;
+import flixel.FlxSprite;
 
-class HealthPickup implements TrackAction {
+class HealthPickup extends FlxSprite implements TrackAction {
     public var beatOffset:Float;
     // an array of beats relative the the offset defined above
     public var triggerBeats:Array<Float>;
 
-    public function new(beatOffset:Float, location:Displacement, universalBus:UniversalBus) {
+    private var universalBus:UniversalBus;
+    private var position:Displacement;
+
+    public function new(beatOffset:Float, position:Displacement, universalBus:UniversalBus) {
+        super(BoardCoordinates.displacementToX(position.horizontalDisplacement),
+              BoardCoordinates.displacementToY(position.verticalDisplacement));
         
+        loadGraphic(AssetPaths.HPIndicator__png, false);
+        x -= width / 2;
+        y -= height / 2;
+
+        this.beatOffset = beatOffset;
+        this.universalBus = universalBus;
+        this.position = position;
+        triggerBeats = [0];
+        kill();
     }
 
     /**
@@ -21,6 +37,11 @@ class HealthPickup implements TrackAction {
      * @param beatIndex - The index of the beat triggered within this.triggerBeats
      **/
     public function triggerBeat(beatIndex:Int):Void {
-
+        revive();
+        angularVelocity = 90;
+        universalBus.healthLanded.broadcast(position);
+        universalBus.healthHit.subscribe(this, function(_) {
+            kill();
+        });
     }
 }
