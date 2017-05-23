@@ -16,8 +16,10 @@ class AudioSystemTop extends FlxBasic {
 
     // music
     private var musicPlayheadUpdate:Bus<Float>;
+    private var musicLoaded:Bus<Bool>;
     private var isPlayingMusic:Bool;
     private var prevMusicPlayhead:Float;
+    private var loaded:Bool;
 
     // sounds
     private var hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
@@ -26,6 +28,7 @@ class AudioSystemTop extends FlxBasic {
     public function new(universalBus:UniversalBus) {
         super();
         musicPlayheadUpdate = universalBus.musicPlayheadUpdate;
+        musicLoaded = universalBus.musicLoaded;
         isPlayingMusic = false;
 
         hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
@@ -61,6 +64,7 @@ class AudioSystemTop extends FlxBasic {
      * Prepare to play music specifically for a level
      **/
     public function loadMusicForLevel(event:LevelLoadEvent):Void {
+        loaded = false;        
         FlxG.sound.music = new FlxSound();
         FlxG.sound.music.loadStream(event.levelData.musicAssetPath, false, false);
         FlxG.sound.music.play(true);
@@ -83,9 +87,14 @@ class AudioSystemTop extends FlxBasic {
         }
 
         var musicTime = FlxG.sound.music.time;
-        if (FlxG.sound.music.time == 0 && isPlayingMusic) {
+        if (!loaded && FlxG.sound.music.time == 0) {
+            // Load the music
             FlxG.sound.music.pause();
             FlxG.sound.music.resume();
+        } else if (!loaded && FlxG.sound.music.time > 0) {
+            // Music is finally loaded
+            musicLoaded.broadcast(true);
+            loaded = true;
         }
 
         if (musicTime != prevMusicPlayhead) {

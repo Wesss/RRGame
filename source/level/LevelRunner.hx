@@ -61,8 +61,9 @@ class LevelRunner {
         lastBeat = 0;
 
         trackActions = levelData.trackActions;
-
-        levelStart.broadcast(new LevelStartEvent(levelData, actions[actions.length - 1].absoluteBeatTime));
+        universalBus.musicLoaded.subscribe(this, function(_) {
+            levelStart.broadcast(new LevelStartEvent(levelData, actions[actions.length - 1].absoluteBeatTime));
+        });
     }
 
     public function beatHandler(beat : BeatEvent) {
