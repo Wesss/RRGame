@@ -53,7 +53,6 @@ class HubWorldState extends FlxState {
         hubWorldData = haxe.Json.parse(openfl.Assets.getText(AssetPaths.hubworld__json));
 
         if (newProgress != null) {
-            logger.endLevel(newProgress.score);
             // Have the camera on the right screen that they finished the previous level
             // off of
             var levelAmountSum = 0;
