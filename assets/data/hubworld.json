@@ -27,16 +27,6 @@
                 "assets/levels/level8.oel",
                 "assets/levels/level9.oel"
             ]
-        },
-        {
-            "hasTutorial" : true,
-            "levels" : [
-                "assets/levels/level10.oel",
-                "assets/levels/level11.oel",
-                "assets/levels/level12.oel",
-                "assets/levels/level13.oel",
-                "assets/levels/level14.oel"
-            ]
         }
     ]
 }
