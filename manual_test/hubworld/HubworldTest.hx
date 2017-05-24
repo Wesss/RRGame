@@ -17,7 +17,7 @@ class HubworldTest extends FlxState {
 		// ie. levelScores.set(0, 4);
 		levelScores.set(0, 2);
 		levelScores.set(1, 3);
-//		levelScores.set(3, 3);
+		levelScores.set(3, 3);
 
 
 		SaveManager.initializeSaveData();

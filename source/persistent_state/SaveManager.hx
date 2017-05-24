@@ -1,5 +1,6 @@
 package persistent_state;
 
+import flixel.FlxG;
 import haxe.Unserializer;
 import haxe.Serializer;
 import js.Browser;
@@ -15,6 +16,7 @@ class SaveManager {
         }
         saveProgress(new Map<Int, Float>());
         localStorage.setItem("isInitiallized", "true");
+        FlxG.sound.volume = .2;
         #else
         throw "Error: Saving is not supported on a non-js target"
         #end
