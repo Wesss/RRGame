@@ -114,7 +114,7 @@ class HubWorldState extends FlxState {
             }
 
             if (reset && i == worldProgress) {
-                world.levels[levelRelativeToWorld].click();
+                world.levels[levelRelativeToWorld].startRetry();
             }
 
             if (i > 0) {

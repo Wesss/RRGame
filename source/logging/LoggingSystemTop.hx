@@ -45,8 +45,10 @@ class LoggingSystemTop implements LoggingSystem {
         logger.startNewSession(userID, null);
     }
 
-    public function startLevel(level:Int, universalBus:UniversalBus) {
-        logger.logLevelStart(level);
+    public function startLevel(level:Int, universalBus:UniversalBus, retry:Bool) {
+        logger.logLevelStart(level, {
+            isRetry: retry
+        });
 
         this.curBeat = null;
         universalBus.beat.subscribe(this, updateBeat);
