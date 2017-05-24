@@ -66,7 +66,7 @@ class PlayLevelState extends FlxState {
 		add(juiceGroup);
 		var levelRunner = new LevelRunner(universalBus);
 
-		add(new ScreenBanner(universalBus, "Loading", 20));
+		add(new ScreenBanner(universalBus, "Bringing the music", 20));
 
 		// Camera
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
