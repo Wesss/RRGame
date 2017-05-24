@@ -729,7 +729,6 @@
     <RedSlider id="338" x="32" y="1040" warningTime="1.5" />
     <RedSlider id="339" x="32" y="1056" warningTime="1.5" />
     <RedSlider id="340" x="16" y="1040" warningTime="1.5" />
-    <RedSlider id="341" x="32" y="1024" warningTime="1.5" />
     <RedSlider id="342" x="16" y="1120" warningTime="1.5" />
     <RedSlider id="343" x="32" y="1104" warningTime="1.5" />
     <RedSlider id="344" x="32" y="1120" warningTime="1.5" />
@@ -765,7 +764,7 @@
     <RedSlider id="361" x="128" y="1440" warningTime="2" />
     <RedSlider id="362" x="272" y="1408" warningTime="3" />
     <RedSlider id="363" x="288" y="1424" warningTime="2" />
-    <RedSlider id="364" x="400" y="1424" warningTime="1" />
+    <RedSlider id="364" x="400" y="1424" warningTime="3" />
     <RedSlider id="365" x="416" y="1440" warningTime="3" />
     <RedSlider id="366" x="160" y="1280" warningTime="4" />
     <RedSlider id="23" x="32" y="1184" warningTime="1.5" />
