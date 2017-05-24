@@ -1,5 +1,6 @@
 package level;
 
+import track_action.Crate;
 import track_action.SliderThreatHoming;
 import track_action.EmptyTrackAction;
 import track_action.TextTrackAction;
@@ -9,6 +10,7 @@ import domain.Displacement;
 import bus.UniversalBus;
 import track_action.SliderThreat;
 import track_action.TrackAction;
+import track_action.HealthPickup;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
 using StringTools;
 
@@ -87,6 +89,29 @@ class LevelDataLoader {
                         bpm,
                         universalBus,
                         warnTime
+                    ));
+                }
+                case "Crate": {
+                    var displacement = parseDisplacement(boardGrid);
+                    var warnTime = Std.parseInt(data.get("warningTime"));
+                    var duration = Std.parseInt(data.get("duration"));
+
+                    trackActions.push(new Crate(
+                        beatOffset,
+                        bpm,
+                        displacement,
+                        universalBus,
+                        warnTime,
+                        duration
+                    ));
+                }
+                case "HealthPickup": {
+                    var displacement = parseDisplacement(boardGrid);
+
+                    trackActions.push(new HealthPickup(
+                        beatOffset,
+                        displacement,
+                        universalBus
                     ));
                 }
                 case "Comment":{

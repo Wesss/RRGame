@@ -1,9 +1,9 @@
 package audio;
 
+import level.LevelStartEvent;
+import level.LevelLoadEvent;
 import flixel.FlxBasic;
 import bus.Bus;
-import level.LevelData;
-import level.LevelEvent;
 import flixel.system.FlxSound;
 import flixel.FlxG;
 import bus.UniversalBus;
@@ -16,28 +16,30 @@ class AudioSystemTop extends FlxBasic {
 
     // music
     private var musicPlayheadUpdate:Bus<Float>;
-    private var musicForLevel:FlxSound;
+    private var musicLoaded:Bus<Bool>;
     private var isPlayingMusic:Bool;
     private var prevMusicPlayhead:Float;
+    private var loaded:Bool;
 
     // sounds
     private var hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
     private var deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
+    private var healthUpSound = FlxG.sound.load(AssetPaths.NFFcoin04__ogg);
 
     public function new(universalBus:UniversalBus) {
         super();
         musicPlayheadUpdate = universalBus.musicPlayheadUpdate;
-        musicForLevel = null;
+        musicLoaded = universalBus.musicLoaded;
         isPlayingMusic = false;
 
-        hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
         hitSound.volume = .7;
-        deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
         deathSound.volume = .7;
         deathSound.fadeOut(1, .3);
+        healthUpSound.volume = .7;
 
         // music playing
-        universalBus.level.subscribe(this, switchLevelState);
+        universalBus.levelLoad.subscribe(this, loadMusicForLevel);
+        universalBus.levelStart.subscribe(this, playMusicForLevel);
         universalBus.pause.subscribe(this, pause);
         universalBus.unpause.subscribe(this, unpause);
 
@@ -51,50 +53,53 @@ class AudioSystemTop extends FlxBasic {
         universalBus.playerDie.subscribe(this, function (event) {
             deathSound.play();
         });
-    }
+        universalBus.healthHit.subscribe(this, function (event) {
+            healthUpSound.play();
+        });
 
-    public function switchLevelState(event:LevelEvent):Void {
-        switch (event.levelState) {
-            case LOAD: loadMusicForLevel(event.levelData);
-            case START: playMusicForLevel(event.levelData);
-            case WIN:
-            case LOSE:
-        }
+        universalBus.gameOver.subscribe(this, function (event) {
+            universalBus.pause.unsubscribe(this);
+            universalBus.unpause.unsubscribe(this);
+        });
     }
 
     /**
      * Prepare to play music specifically for a level
      **/
-    public function loadMusicForLevel(levelData:LevelData):Void {
-        if (musicForLevel != null) {
-            throw "Music for level has already been loaded";
-        }
-        musicForLevel = FlxG.sound.load(levelData.musicAssetPath);
+    public function loadMusicForLevel(event:LevelLoadEvent):Void {
+        loaded = false;        
+        FlxG.sound.music = new FlxSound();
+        FlxG.sound.music.loadStream(event.levelData.musicAssetPath, false, false);
+        FlxG.sound.music.play(true);
     }
 
     /**
      * Start playing music specifically for a level
      **/
-    public function playMusicForLevel(levelData:LevelData):Void{
-        if (musicForLevel == null) {
-            throw "No Music has been loaded";
-        }
-        if (isPlayingMusic) {
-            throw "Cannot play level music whilst previous level music is still running";
-        }
-        musicForLevel.play();
+    public function playMusicForLevel(event:LevelStartEvent):Void{
+        FlxG.sound.music.play();
         isPlayingMusic = true;
-        var musicTime = musicForLevel.time;
+        var musicTime = FlxG.sound.music.time;
         prevMusicPlayhead = musicTime;
         musicPlayheadUpdate.broadcast(musicTime);
     }
 
     override public function update(elapsed:Float) {
-        if (musicForLevel == null || !musicForLevel.playing) {
+        if (FlxG.sound.music == null || !FlxG.sound.music.playing) {
             return;
         }
 
-        var musicTime = musicForLevel.time;
+        var musicTime = FlxG.sound.music.time;
+        if (!loaded && FlxG.sound.music.time == 0) {
+            // Load the music
+            FlxG.sound.music.pause();
+            FlxG.sound.music.resume();
+        } else if (!loaded && FlxG.sound.music.time > 0) {
+            // Music is finally loaded
+            musicLoaded.broadcast(true);
+            loaded = true;
+        }
+
         if (musicTime != prevMusicPlayhead) {
             prevMusicPlayhead = musicTime;
             musicPlayheadUpdate.broadcast(musicTime);
@@ -102,10 +107,12 @@ class AudioSystemTop extends FlxBasic {
     }
 
     public function pause(pauseEvent) {
-        musicForLevel.pause();
+        FlxG.sound.music.pause();
+        isPlayingMusic = false;
     }
 
     public function unpause(unpauseEvent) {
-        musicForLevel.resume();
+        FlxG.sound.music.resume();
+        isPlayingMusic = true;
     }
 }

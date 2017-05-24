@@ -5,7 +5,7 @@ import domain.Displacement;
 import timing.BeatEvent;
 
 interface LoggingSystem {
-    public function startLevel(level:Int, universalBus:UniversalBus):Void;
+    public function startLevel(level:Int, universalBus:UniversalBus, retry:Bool):Void;
 
     private function updateBeat(event:BeatEvent):Void;
 

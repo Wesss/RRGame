@@ -1,8 +1,8 @@
 package bus;
 
-import flixel.system.FlxSound;
+import level.LevelLoadEvent;
+import level.LevelStartEvent;
 import timing.BeatEvent;
-import level.LevelEvent;
 import domain.Displacement;
 
 /**
@@ -18,7 +18,9 @@ class UniversalBus {
     public var playerStartMove(default, null) = new Bus<Displacement>();
     public var playerMoved(default, null) = new Bus<Displacement>();
     public var beat(default, null):Bus<BeatEvent> = new Bus<BeatEvent>();
-    public var level(default, null):Bus<LevelEvent> = new Bus<LevelEvent>();
+    public var levelStart(default, null):Bus<LevelStartEvent> = new Bus<LevelStartEvent>();
+    public var levelLoad(default, null):Bus<LevelLoadEvent> = new Bus<LevelLoadEvent>();
+    public var musicLoaded(default, null):Bus<Bool> = new Bus<Bool>();
     public var musicPlayheadUpdate(default, null):Bus<Float> = new Bus<Float>();
     public var threatKillSquare(default, null) = new Bus<Displacement>();
     public var playerHit(default, null) = new Bus<Displacement>();
@@ -34,6 +36,9 @@ class UniversalBus {
     public var crateLanded(default, null) = new Bus<Displacement>();
     public var crateDestroyed(default, null) = new Bus<Displacement>();
     public var crateHit(default, null) = new Bus<Displacement>();
+    public var healthLanded(default, null) = new Bus<Displacement>();
+    public var healthDestroyed(default, null) = new Bus<Displacement>();
+    public var healthHit(default, null) = new Bus<Displacement>();
 
     public function new() {}
 }

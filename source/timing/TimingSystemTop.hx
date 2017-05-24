@@ -1,11 +1,10 @@
 package timing;
 
+import level.LevelLoadEvent;
 import haxe.Timer;
 import bus.Bus;
 import bus.UniversalBus;
 import flixel.FlxBasic;
-import level.LevelData;
-import level.LevelEvent;
 
 /**
  * Responsible for the coordination between music playing and broadcasting when its beats occur
@@ -32,26 +31,17 @@ class TimingSystemTop extends FlxBasic {
         isOffSync = true;
         lastBeatBroadcasted = -9999999;
 
-        universalBus.level.subscribe(this, switchLevelState);
+        universalBus.levelLoad.subscribe(this, loadMusicInformation);
         universalBus.musicPlayheadUpdate.subscribe(this, updateMusicPlayhead);
         universalBus.pause.subscribe(this, pause);
-    }
-
-    public function switchLevelState(event:LevelEvent):Void {
-        switch (event.levelState) {
-            case LOAD: loadMusicInformation(event.levelData);
-            case START:
-            case WIN:
-            case LOSE:
-        }
     }
 
     /**
      * Save information on the music that is about to be played
      **/
-    public function loadMusicInformation(levelData:LevelData):Void {
-        this.milisecondsPerBeat = MILISECONDS_PER_MINUTE / levelData.bpm;
-        this.offsetMilis = levelData.songStartOffsetMilis;
+    public function loadMusicInformation(event:LevelLoadEvent):Void {
+        this.milisecondsPerBeat = MILISECONDS_PER_MINUTE / event.levelData.bpm;
+        this.offsetMilis = event.levelData.songStartOffsetMilis;
     }
 
     /**
@@ -62,7 +52,7 @@ class TimingSystemTop extends FlxBasic {
 
         var curStamp = haxe.Timer.stamp() * 1000;
 
-        if (!isOffSync) {
+        if (!isOffSync && prevMusicHeadPlayTime != 0) {
             var curBeat = (prevMusicHeadPlayTime + ((curStamp) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
 
             if (curBeat > lastBeatBroadcasted) {

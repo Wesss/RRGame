@@ -576,7 +576,7 @@
     <RedSlider id="103" x="464" y="160" warningTime="1" />
     <RedSlider id="104" x="160" y="208" warningTime="1" />
     <RedSlider id="106" x="224" y="208" warningTime="1" />
-    <RedSlider id="366" x="272" y="208" warningTime="1" />
+    <RedSlider id="366" x="272" y="208" warningTime="2" />
     <RedSlider id="369" x="336" y="208" warningTime="1" />
     <RedSlider id="370" x="400" y="208" warningTime="1" />
     <RedSlider id="372" x="464" y="208" warningTime="1" />
@@ -608,7 +608,6 @@
     <RedSlider id="341" x="384" y="1856" warningTime="1" />
     <RedSlider id="345" x="416" y="1888" warningTime="1" />
     <RedSlider id="349" x="320" y="1792" warningTime="1" />
-    <RedSlider id="358" x="352" y="1824" warningTime="1" />
     <RedSlider id="361" x="416" y="1952" warningTime="1" />
     <RedSlider id="362" x="384" y="1920" warningTime="1" />
     <RedSlider id="376" x="480" y="1952" warningTime="1" />
@@ -647,5 +646,6 @@
     <RedSlider id="50" x="0" y="736" warningTime="2" />
     <RedSlider id="51" x="128" y="720" warningTime="2" />
     <RedSlider id="52" x="256" y="704" warningTime="2" />
+    <HealthPickup id="53" x="32" y="1056" />
   </Entities>
 </level>
