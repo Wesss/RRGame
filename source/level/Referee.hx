@@ -22,6 +22,10 @@ class Referee {
         universalBus.playerStartMove.subscribe(this, handlePlayerMove);
         universalBus.playerHit.subscribe(this, handlePlayerHit);
         universalBus.healthLanded.subscribe(this, function(x) {
+            if (logicalPlayerPosition.equals(x)) {
+                universalBus.healthHit.broadcast(x);
+                return;
+            }
             for (healthPickup in healthPickups) {
                 if (healthPickup.equals(x)) {
                     return;
