@@ -23,6 +23,7 @@ class PlayLevelState extends FlxState {
 	private var levelIndex:Int;
 	private var trackGroup:FlxSpriteGroup;
 	private var userInterfaceGroup:FlxSpriteGroup;
+	private var juiceGroup:FlxSpriteGroup;
 	private var universalBus:UniversalBus;
 	private var logger:LoggingSystem;
 	private var player:Player;
@@ -41,6 +42,7 @@ class PlayLevelState extends FlxState {
 			}
 		}
 		this.userInterfaceGroup = new FlxSpriteGroup();
+		this.juiceGroup = new FlxSpriteGroup();
 		this.universalBus = universalBus;
 		this.logger = logger;
 	}
@@ -60,8 +62,8 @@ class PlayLevelState extends FlxState {
 		userInterfaceGroup.add(new ProgressBar(universalBus));
 		add(trackGroup);
 		add(userInterfaceGroup);
-
-		Juicer.juiceLevel(universalBus);
+		Juicer.juiceLevel(universalBus, juiceGroup);
+		add(juiceGroup);
 		var levelRunner = new LevelRunner(universalBus);
 
 		add(new ScreenBanner(universalBus, "Loading", 20));
