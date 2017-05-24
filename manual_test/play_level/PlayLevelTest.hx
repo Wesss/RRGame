@@ -31,7 +31,7 @@ class PlayLevelTest extends FlxState
 		var levelData = new LevelData(AssetPaths.Regards_from_Mars__ogg, "", "", "", bpm, 444, threats);
 		trace(TimingSystemTop.MILISECONDS_PER_MINUTE / levelData.bpm);
 		var logger = new EmptyLogger();
-		logger.startLevel(0, universalBus);
+		logger.startLevel(0, universalBus, false);
 		FlxG.switchState(new PlayLevelState(levelData, 0, universalBus, logger));
 	}
 

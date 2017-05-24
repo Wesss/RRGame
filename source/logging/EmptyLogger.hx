@@ -7,7 +7,8 @@ import timing.BeatEvent;
 class EmptyLogger implements LoggingSystem {
     public function new() {}
 
-    public function startLevel(level:Int, universalBus:UniversalBus):Void {
+    public function startLevel(level:Int, universalBus:UniversalBus, retry:Bool):Void {
+        trace("Level " + level + " starting. Retry: " + retry);
         universalBus.newControlDesire.subscribe(this, logControlsInput);
     }
 

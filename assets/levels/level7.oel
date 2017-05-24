@@ -729,6 +729,7 @@
     <RedSlider id="338" x="32" y="1040" warningTime="1.5" />
     <RedSlider id="339" x="32" y="1056" warningTime="1.5" />
     <RedSlider id="340" x="16" y="1040" warningTime="1.5" />
+    <RedSlider id="341" x="32" y="1024" warningTime="1.5" />
     <RedSlider id="342" x="16" y="1120" warningTime="1.5" />
     <RedSlider id="343" x="32" y="1104" warningTime="1.5" />
     <RedSlider id="344" x="32" y="1120" warningTime="1.5" />

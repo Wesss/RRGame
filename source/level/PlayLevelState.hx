@@ -127,6 +127,8 @@ class PlayLevelState extends FlxState {
 		attributionText.y = 150;
 		add(attributionText);
 
+		logger.endLevel(player.hp);
+
 		universalBus.retry.subscribe(this, function(_) {
 			endPlayState(logger, levelIndex, player.hp, true);
 		});

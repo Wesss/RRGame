@@ -57,9 +57,25 @@ class SelectLevelButton extends FlxSpriteGroup {
     private var lockOverlay : FlxSprite;
     private var scoreStars : ScoreStars;
     private var logger:LoggingSystem;
+    private var levelIndex : Int;
+    private var levelAssetPath : String;
 
     public function click() {
         button.onDown.fire();
+    }
+
+    public function startRetry() {
+        transitionToLevel(true);
+    }
+
+    private function transitionToLevel(isRetry : Bool) {
+        if (levelExists) {
+            var universalBus = new UniversalBus();
+            logger.startLevel(levelIndex, universalBus, isRetry);
+            
+            var levelData = LevelDataLoader.loadLevelData(levelAssetPath, universalBus);
+            FlxG.switchState(new PlayLevelState(levelData, levelIndex, universalBus, logger));
+        }
     }
 
     public function addScore(newScore : Float) {
@@ -98,14 +114,8 @@ class SelectLevelButton extends FlxSpriteGroup {
         levelExists = openfl.Assets.list().indexOf(levelAssetPath) != -1;
 
         button.onDown.callback = function() {
-            if (!this.isLocked && levelExists) {
-                trace("Starting level: " + levelAssetPath);
-
-                var universalBus = new UniversalBus();
-                var levelData = LevelDataLoader.loadLevelData(levelAssetPath, universalBus);
-
-                logger.startLevel(levelIndex, universalBus);
-                FlxG.switchState(new PlayLevelState(levelData, levelIndex, universalBus, logger));
+            if (!this.isLocked) {
+                transitionToLevel(false);
             }
         }
 
@@ -117,6 +127,9 @@ class SelectLevelButton extends FlxSpriteGroup {
         }
 
         this.isLocked = isLocked;
+        this.levelIndex = levelIndex;
+        this.levelAssetPath = levelAssetPath;
+        this.logger = logger;
     }
 
     public function lock() {
