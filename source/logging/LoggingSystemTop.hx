@@ -7,7 +7,7 @@ import bus.UniversalBus;
 class LoggingSystemTop implements LoggingSystem {
 
     // Change based on release version TODO should we load these from some data or build file?
-    private static inline var CATEGORY_ID = DEBUGGING_CATEGORY_ID;
+    private static inline var CATEGORY_ID = DEBUGGING3_CATEGORY_ID;
     private static inline var VERSION = 1;
 
     // only to be set to false if hosting on cs.washington.edu or specific distribution sites like kongregate
@@ -29,6 +29,7 @@ class LoggingSystemTop implements LoggingSystem {
     private static inline var RELEASE_CATEGORY_ID = 2;
     private static inline var HOTFIX1_CATEGORY_ID = 3;
     private static inline var RELEASE2_CATEGORY_ID = 4;
+    private static inline var DEBUGGING3_CATEGORY_ID = 5;
 
     private var logger:CapstoneLogger;
     private var curBeat:Float;
