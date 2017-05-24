@@ -16,7 +16,7 @@ class SaveManager {
         }
         saveProgress(new Map<Int, Float>());
         localStorage.setItem("isInitiallized", "true");
-        FlxG.sound.volume = .2;
+        FlxG.sound.changeVolume(-0.8);
         #else
         throw "Error: Saving is not supported on a non-js target"
         #end
