@@ -24,6 +24,7 @@ class AudioSystemTop extends FlxBasic {
     // sounds
     private var hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
     private var deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
+    private var healthUpSound = FlxG.sound.load(AssetPaths.NFFcoin04__ogg);
 
     public function new(universalBus:UniversalBus) {
         super();
@@ -31,11 +32,10 @@ class AudioSystemTop extends FlxBasic {
         musicLoaded = universalBus.musicLoaded;
         isPlayingMusic = false;
 
-        hitSound = FlxG.sound.load(AssetPaths.NFFdirthit__ogg);
         hitSound.volume = .7;
-        deathSound = FlxG.sound.load(AssetPaths.NFFdisappear__ogg);
         deathSound.volume = .7;
         deathSound.fadeOut(1, .3);
+        healthUpSound.volume = .7;
 
         // music playing
         universalBus.levelLoad.subscribe(this, loadMusicForLevel);
@@ -52,6 +52,9 @@ class AudioSystemTop extends FlxBasic {
         // purposefully played along with hit sound
         universalBus.playerDie.subscribe(this, function (event) {
             deathSound.play();
+        });
+        universalBus.healthHit.subscribe(this, function (event) {
+            healthUpSound.play();
         });
 
         universalBus.gameOver.subscribe(this, function (event) {
