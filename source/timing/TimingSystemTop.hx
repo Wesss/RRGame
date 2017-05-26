@@ -52,7 +52,7 @@ class TimingSystemTop extends FlxBasic {
     override public function update(elapsed:Float):Void {
         super.update(elapsed);
 
-        var curStamp = haxe.Timer.stamp() * 1000;
+        var curStamp = getTimeStampMilis();
 
         if (!isOffSync && prevMusicHeadPlayTime != 0) {
             var curBeat = (prevMusicHeadPlayTime + ((curStamp) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
@@ -72,6 +72,15 @@ class TimingSystemTop extends FlxBasic {
     }
 
     public function rewind(event:RewindLevelEvent):Void {
+        var milisecondsToRewind = event.beatsToRewind / milisecondsPerBeat;
+        var milisecondsSinceLastMusicPlayheadUpdate = getTimeStampMilis() - prevMusicTimeStamp;
 
+        isOffSync = true;
+
+        rewindTimingBus.broadcast(new RewindTimingEvent(milisecondsToRewind, milisecondsSinceLastMusicPlayheadUpdate));
+    }
+
+    private static function getTimeStampMilis():Float {
+        return haxe.Timer.stamp() * 1000;
     }
 }
