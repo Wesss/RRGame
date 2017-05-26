@@ -1,5 +1,6 @@
 package audio;
 
+import timing.RewindTimingEvent;
 import level.LevelStartEvent;
 import level.LevelLoadEvent;
 import flixel.FlxBasic;
@@ -42,6 +43,7 @@ class AudioSystemTop extends FlxBasic {
         universalBus.levelStart.subscribe(this, playMusicForLevel);
         universalBus.pause.subscribe(this, pause);
         universalBus.unpause.subscribe(this, unpause);
+        universalBus.rewindTiming.subscribe(this, rewind);
 
         // sound playing
         universalBus.playerHit.subscribe(this, function (event) {
@@ -114,5 +116,9 @@ class AudioSystemTop extends FlxBasic {
     public function unpause(unpauseEvent) {
         FlxG.sound.music.resume();
         isPlayingMusic = true;
+    }
+
+    public function rewind(event:RewindTimingEvent) {
+
     }
 }

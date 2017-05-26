@@ -13,16 +13,19 @@ class TimingSystemTop extends FlxBasic {
 
     public static inline var MILISECONDS_PER_MINUTE = 60000.0;
 
-    private var beatEventBus:Bus<BeatEvent>;
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
     private var prevMusicHeadPlayTime:Null<Float>;
     private var prevMusicTimeStamp:Float;
     private var isOffSync:Bool;
 
+    private var beatEventBus:Bus<BeatEvent>;
+    private var rewindTimingBus:Bus<RewindTimingEvent>;
+
     public function new(universalBus:UniversalBus) {
         super();
         beatEventBus = universalBus.beat;
+        rewindTimingBus = universalBus.rewindTiming;
         milisecondsPerBeat = 0;
         offsetMilis = 0;
         prevMusicHeadPlayTime = 0;
@@ -32,6 +35,7 @@ class TimingSystemTop extends FlxBasic {
         universalBus.levelLoad.subscribe(this, loadMusicInformation);
         universalBus.musicPlayheadUpdate.subscribe(this, updateMusicPlayhead);
         universalBus.pause.subscribe(this, pause);
+        universalBus.rewindLevel.subscribe(this, rewind);
     }
 
     /**
@@ -65,5 +69,9 @@ class TimingSystemTop extends FlxBasic {
 
     public function pause(pauseEvent):Void {
         isOffSync = true;
+    }
+
+    public function rewind(event:RewindLevelEvent):Void {
+
     }
 }
