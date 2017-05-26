@@ -19,7 +19,6 @@ class TimingSystemTop extends FlxBasic {
     private var prevMusicHeadPlayTime:Null<Float>;
     private var prevMusicTimeStamp:Float;
     private var isOffSync:Bool;
-    private var lastBeatBroadcasted:Float;
 
     public function new(universalBus:UniversalBus) {
         super();
@@ -29,7 +28,6 @@ class TimingSystemTop extends FlxBasic {
         prevMusicHeadPlayTime = 0;
         prevMusicTimeStamp = 0;
         isOffSync = true;
-        lastBeatBroadcasted = -9999999;
 
         universalBus.levelLoad.subscribe(this, loadMusicInformation);
         universalBus.musicPlayheadUpdate.subscribe(this, updateMusicPlayhead);
@@ -55,9 +53,7 @@ class TimingSystemTop extends FlxBasic {
         if (!isOffSync && prevMusicHeadPlayTime != 0) {
             var curBeat = (prevMusicHeadPlayTime + ((curStamp) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
 
-            if (curBeat > lastBeatBroadcasted) {
-                beatEventBus.broadcast(new BeatEvent(curBeat));
-            }
+            beatEventBus.broadcast(new BeatEvent(curBeat));
         }
     }
 
