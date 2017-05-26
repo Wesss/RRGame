@@ -72,7 +72,7 @@ class TimingSystemTop extends FlxBasic {
     }
 
     public function rewind(event:RewindLevelEvent):Void {
-        var milisecondsToRewind = event.beatsToRewind / milisecondsPerBeat;
+        var milisecondsToRewind = event.beatsToRewind * milisecondsPerBeat;
         var milisecondsSinceLastMusicPlayheadUpdate = getTimeStampMilis() - prevMusicTimeStamp;
 
         isOffSync = true;

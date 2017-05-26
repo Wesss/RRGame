@@ -119,6 +119,10 @@ class AudioSystemTop extends FlxBasic {
     }
 
     public function rewind(event:RewindTimingEvent) {
-
+        FlxG.sound.music.pause();
+        FlxG.sound.music.time = FlxG.sound.music.time +
+                event.milisecondsSinceLastMusicPlayheadUpdate -
+                event.milisecondsToRewind;
+        FlxG.sound.music.resume();
     }
 }
