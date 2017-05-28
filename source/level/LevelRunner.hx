@@ -1,5 +1,6 @@
 package level;
 
+import timing.RewindTimingEvent;
 import timing.RewindLevelEvent;
 import bus.Bus;
 import bus.UniversalBus;
@@ -25,7 +26,7 @@ class LevelRunner {
         this.levelLoad = universalBus.levelLoad;
         universalBus.beat.subscribe(this, beatHandler);
         universalBus.gameOver.subscribe(this, gameOverHandler);
-        universalBus.rewindLevel.subscribe(this, rewindHandler);
+        universalBus.rewindTiming.subscribe(this, rewindHandler);
         actions = [];
         this.universalBus = universalBus;
     }
@@ -104,8 +105,12 @@ class LevelRunner {
         universalBus.beat.unsubscribe(this);
     }
 
-    public function rewindHandler(event:RewindLevelEvent) {
+    public function rewindHandler(event:RewindTimingEvent) {
         // TODO rewind to earliest index in track actions that is at least the beat we are rewinding to.
+        while (actionsIndex >= 0 && actions[actionsIndex].absoluteBeatTime >= event.beatRewindingTo) {
+            actionsIndex--;
+        }
+        actionsIndex++;
     }
 }
 
