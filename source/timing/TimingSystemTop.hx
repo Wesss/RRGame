@@ -84,7 +84,7 @@ class TimingSystemTop extends FlxBasic {
         return haxe.Timer.stamp() * 1000;
     }
 
-    private static function getCurBeat():Float {
-        return (prevMusicHeadPlayTime + ((getTimeStampMilis()) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat
+    private function getCurBeat():Float {
+        return (prevMusicHeadPlayTime + ((getTimeStampMilis()) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
     }
 }
