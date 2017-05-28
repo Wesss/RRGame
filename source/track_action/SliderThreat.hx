@@ -106,7 +106,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
             ease: FlxEase.quadOut,
             onComplete: function(_) {
                 visible = false;
-                destroy();
+                kill();
             }
         });
 
