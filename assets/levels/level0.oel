@@ -73,12 +73,12 @@
     <RedSliderRewind id="21" x="848" y="272" warningTime="2" rewindTime="4" />
     <RedSliderRewind id="22" x="832" y="272" warningTime="2" rewindTime="4" />
     <RedSliderRewind id="23" x="864" y="272" warningTime="2" rewindTime="4" />
-    <Crate id="16" x="64" y="0" warningTime="0.01" duration="27" />
-    <Crate id="17" x="96" y="0" warningTime="0.01" duration="27" />
-    <Crate id="19" x="96" y="32" warningTime="0.01" duration="27" />
-    <Crate id="24" x="64" y="32" warningTime="0.01" duration="27" />
-    <Crate id="25" x="64" y="16" warningTime="0.01" duration="14" />
-    <Crate id="26" x="96" y="16" warningTime="0.01" duration="14" />
-    <Crate id="27" x="80" y="32" warningTime="0.01" duration="14" />
+    <Crate id="16" x="64" y="0" warningTime="1" duration="27" />
+    <Crate id="17" x="96" y="0" warningTime="1" duration="27" />
+    <Crate id="19" x="96" y="32" warningTime="1" duration="27" />
+    <Crate id="24" x="64" y="32" warningTime="1" duration="27" />
+    <Crate id="25" x="64" y="16" warningTime="1" duration="14" />
+    <Crate id="26" x="96" y="16" warningTime="1" duration="14" />
+    <Crate id="27" x="80" y="32" warningTime="1" duration="14" />
   </Entities>
 </level>
