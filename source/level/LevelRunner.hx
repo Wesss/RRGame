@@ -108,10 +108,9 @@ class LevelRunner {
 
     public function rewindHandler(event:RewindTimingEvent) {
         // rewind to earliest index in track actions that is at least the beat we are rewinding to.
-        while (actionsIndex >= 0 && actions[actionsIndex].absoluteBeatTime >= event.beatRewindingTo) {
+        while (actionsIndex > 0 && actions[actionsIndex].absoluteBeatTime > event.beatRewindingTo) {
             actionsIndex--;
         }
-        actionsIndex++;
         lastBeat = event.beatRewindingTo;
     }
 }
