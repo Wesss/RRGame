@@ -24,8 +24,8 @@ class RewindTest extends FlxState
 		var bpm = 135;
 		var threats : Array<track_action.TrackAction> = [];
 
-		threats.push(new RewindSliderThreat(8, bpm, new Displacement(LEFT, NONE), universalBus, 2, 8));
-		threats.push(new RewindSliderThreat(12, bpm, new Displacement(RIGHT, NONE), universalBus, 2, 11));
+		threats.push(new RewindSliderThreat(8, bpm, new Displacement(LEFT, NONE), universalBus, 2, 4));
+		threats.push(new RewindSliderThreat(12, bpm, new Displacement(RIGHT, NONE), universalBus, 2, 8));
 		threats.push(new RewindSliderThreat(16, bpm, new Displacement(NONE, NONE), universalBus, 2, 3));
 		threats.push(new HealthPickupTutorial(20, new Displacement(LEFT, DOWN), universalBus));
 		threats.push(new SliderThreat(24, bpm, new Displacement(RIGHT, DOWN), universalBus, 2));

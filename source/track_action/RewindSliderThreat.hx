@@ -15,8 +15,6 @@ class RewindSliderThreat extends SliderThreat {
     }
     override public function playerHitHandler(where : Displacement) {
         this.rewindBus.broadcast(new RewindLevelEvent(beatsToRewind));
-        if (where == position) {
-            animateHit();
-        }
+        super.playerHitHandler(where);
     }
 }

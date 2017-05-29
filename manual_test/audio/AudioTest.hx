@@ -1,5 +1,6 @@
 package;
 
+import level.ThreatLandedEvent;
 import level.LevelStartEvent;
 import level.LevelLoadEvent;
 import level.LevelData;
@@ -42,7 +43,7 @@ class AudioTest extends FlxState {
 		super.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A])) {
-			universalBus.playerHit.broadcast(new Displacement(NONE, NONE));
+			universalBus.playerHit.broadcast(new ThreatLandedEvent(null, new Displacement(NONE, NONE)));
 		}
 		if (FlxG.keys.anyJustPressed([L])) {
 			universalBus.levelLoad.broadcast(new LevelLoadEvent(mockLevelData));

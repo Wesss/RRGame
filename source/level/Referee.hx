@@ -114,10 +114,10 @@ class Referee {
         }
     }
 
-    public function handlePlayerHit(where : Displacement) {
-        trace("Player hit! : " + crates + "|" + where);
+    public function handlePlayerHit(event : ThreatLandedEvent) {
+        trace("Player hit! : " + crates + "|" + event.position);
         for (crate in crates) {
-            if (crate.equals(where)) {
+            if (crate.equals(event.position)) {
                 trace("Manually pushing player");
                 universalBus.controls.broadcast(new Displacement(NONE, NONE));
             }
@@ -171,6 +171,7 @@ class UnsafeSquareKiller {
         universalBus.beat.subscribe(this, function(beatEvent : BeatEvent) {
             if (targetBeat > beatEvent.beat) {
                 if (!playerSafe) {
+                    // TODO
                     universalBus.playerHit.broadcast(logicalPlayerPosition);
                 }
                 universalBus.playerStartMove.unsubscribe(this);

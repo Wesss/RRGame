@@ -1,5 +1,6 @@
 package track_action;
 
+import level.ThreatLandedEvent;
 import board.BoardCoordinates;
 import bus.*;
 import domain.Displacement;
@@ -15,7 +16,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
     private var bpm : Int;
     // PUBLIC FOR TESTING
     public var position(default, null) : Displacement;
-    private var killBus : Bus<Displacement>;
+    private var killBus : Bus<ThreatLandedEvent>;
 
     private var warningTween : FlxTween;
 
@@ -98,7 +99,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
         // Threat collision
         warningTween.cancel(); // In case timing discrepency between beats timing and timer
 
-        killBus.broadcast(position);
+        killBus.broadcast(new ThreatLandedEvent(this, position));
 
         scale.x = 1;
         scale.y = 1;
@@ -127,8 +128,8 @@ class SliderThreat extends FlxSprite implements TrackAction {
         animation.play("dodge");
     }
     
-    public function playerHitHandler(where : Displacement) {
-        if (where == position) {
+    public function playerHitHandler(event : ThreatLandedEvent) {
+        if (event.position == position) {
             animateHit();
         }
     }

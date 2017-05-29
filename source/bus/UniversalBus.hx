@@ -1,5 +1,6 @@
 package bus;
 
+import level.ThreatLandedEvent;
 import domain.Displacement;
 import level.LevelLoadEvent;
 import level.LevelStartEvent;
@@ -30,8 +31,8 @@ class UniversalBus {
     public var rewindLevel(default, null):Bus<RewindLevelEvent> = new Bus<RewindLevelEvent>();
     public var rewindTiming(default, null):Bus<RewindTimingEvent> = new Bus<RewindTimingEvent>(); // NOT this bus
 
-    public var threatKillSquare(default, null) = new Bus<Displacement>();
-    public var playerHit(default, null) = new Bus<Displacement>();
+    public var threatKillSquare(default, null) = new Bus<ThreatLandedEvent>();
+    public var playerHit(default, null) = new Bus<ThreatLandedEvent>();
     public var playerHPChange(default, null) = new Bus<Int>();
     public var playerDie(default, null) = new Bus<Displacement>();
     public var levelOutOfBeats(default, null) = new Bus<Bool>(); // bool is placeholder

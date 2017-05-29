@@ -14,7 +14,7 @@ class Juicer {
 
     public static function juiceLevel(universalBus:UniversalBus, juiceGroup:FlxSpriteGroup) {
         // Camera and camera shake
-        universalBus.threatKillSquare.subscribe({}, function(displacement) {
+        universalBus.threatKillSquare.subscribe({}, function(event) {
             FlxG.camera.shake(0.01, 0.1);
         });
 

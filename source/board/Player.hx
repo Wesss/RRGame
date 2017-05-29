@@ -1,5 +1,6 @@
 package board;
 
+import level.ThreatLandedEvent;
 import bus.UniversalBus;
 import domain.Displacement;
 import flixel.FlxSprite;
@@ -113,11 +114,11 @@ class Player extends FlxSpriteGroup {
         });
     }
     
-    public function playerHitHandler(whichSquareHit : Displacement) {
+    public function playerHitHandler(event : ThreatLandedEvent) {
         hp--;
         uniBus.playerHPChange.broadcast(hp);
         if (hp <= 0) {
-            uniBus.playerDie.broadcast(whichSquareHit);
+            uniBus.playerDie.broadcast(event.position);
             uniBus.controls.unsubscribe(this);
             uniBus.beat.unsubscribe(this);
             updateScaleOnSpeed = false;
