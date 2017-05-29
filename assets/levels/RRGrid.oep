@@ -103,7 +103,7 @@
         <RectColor A="255" R="255" G="128" B="64" />
       </ImageDefinition>
       <ValueDefinitions>
-        <ValueDefinition xsi:type="FloatValueDefinition" Name="warningTime" Default="2" Min="0" Max="100" Round="0.01" />
+        <ValueDefinition xsi:type="FloatValueDefinition" Name="warningTime" Default="2" Min="0.01" Max="100" Round="0.01" />
         <ValueDefinition xsi:type="FloatValueDefinition" Name="duration" Default="8" Min="0.01" Max="100" Round="0.01" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
