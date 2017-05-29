@@ -90,6 +90,7 @@ class LevelRunner {
             }
         }
 
+
         for (trackAction in trackActions) {
             trackAction.updateBeat(beat.beat);
         }
@@ -111,6 +112,7 @@ class LevelRunner {
             actionsIndex--;
         }
         actionsIndex++;
+        lastBeat = event.beatRewindingTo;
     }
 }
 
