@@ -16,7 +16,6 @@ class HealthPickupTutorial extends HealthPickup {
     public function new(beatOffset:Float, position:Displacement, universalBus:UniversalBus) {
         super(beatOffset, position, universalBus);
         this.rewindBus = universalBus.rewindLevel;
-        universalBus.healthHit.subscribe(this, healthPickedUp);
         isLanded = false;
         isPickedUp = false;
     }
@@ -36,8 +35,8 @@ class HealthPickupTutorial extends HealthPickup {
         }
     }
 
-    private function healthPickedUp(event) {
-        trace(isPickedUp);
+    override public function handleHealthHit(displacement) {
+        super.handleHealthHit(displacement);
         isPickedUp = true;
     }
 }
