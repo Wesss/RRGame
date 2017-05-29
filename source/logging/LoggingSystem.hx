@@ -1,5 +1,6 @@
 package logging;
 
+import level.ThreatLandedEvent;
 import bus.UniversalBus;
 import domain.Displacement;
 import timing.BeatEvent;
@@ -11,7 +12,7 @@ interface LoggingSystem {
 
     private function logControlsInput(event:Displacement):Void;
 
-    private function logPlayerHit(event:Displacement):Void;
+    private function logPlayerHit(event:ThreatLandedEvent):Void;
 
     public function endLevel(score:Float):Void;
 

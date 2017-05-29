@@ -1,5 +1,6 @@
 package logging;
 
+import level.ThreatLandedEvent;
 import timing.BeatEvent;
 import domain.Displacement;
 import bus.UniversalBus;
@@ -66,8 +67,8 @@ class LoggingSystemTop implements LoggingSystem {
         logger.logLevelAction(CONTROLS_ACTION_ID, {displacement : event, beat : curBeat});
     }
 
-    private function logPlayerHit(event:Displacement) {
-        logger.logLevelAction(PLAYER_HIT_ACTION_ID, {displacement : event, beat : curBeat});
+    private function logPlayerHit(event:ThreatLandedEvent) {
+        logger.logLevelAction(PLAYER_HIT_ACTION_ID, {displacement : event.position, beat : curBeat});
     }
 
     public function endLevel(score:Float) {

@@ -1,5 +1,6 @@
 package track_action;
 
+import level.ThreatLandedEvent;
 import bus.*;
 import domain.Displacement;
 import timing.RewindLevelEvent;
@@ -13,10 +14,10 @@ class RewindSliderThreat extends SliderThreat {
         this.beatsToRewind = beatsToRewind;
         this.rewindBus = universalBus.sliderRewindHit;
     }
-    override public function playerHitHandler(where : Displacement) {
-        this.rewindBus.broadcast(new RewindLevelEvent(beatsToRewind));
-        if (where == position) {
-            animateHit();
+    override public function playerHitHandler(event : ThreatLandedEvent) {
+        if (this == event.trackAction) {
+            this.rewindBus.broadcast(new RewindLevelEvent(beatsToRewind));
         }
+        super.playerHitHandler(event);
     }
 }
