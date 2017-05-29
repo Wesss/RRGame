@@ -24,26 +24,26 @@ class RewindIndicator extends FlxSubState {
         background.y -= background.height / 2;
         add(background);
 
-        var text = new FlxText(0, 0, 0, "Dodge the Red Sliders");
+        var text = new FlxText(0, 0, 0, "Dodge the Red Sliders!");
 		text.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 40, flixel.util.FlxColor.WHITE, CENTER);
         text.y -= text.height / 2;
         add(text);
 
-        var startX = -text.width;
+        var startX = -text.width - FlxG.width / 2;
         var middleX = text.x - text.width / 2;
-        var endX = FlxG.width;
+        var endX = FlxG.width / 2;
 
         var tweenManager = new FlxTween.FlxTweenManager();
         add(tweenManager);
         text.x = startX;
         tweenManager.tween(text, {
             x : middleX
-        }, 0.5, {
-            ease : FlxEase.expoIn
+        }, 0.8, {
+            ease : FlxEase.expoOut
         }).then(tweenManager.tween(text, {
             x: endX
-        }, 0.5, {
-            ease : FlxEase.expoOut,
+        }, 0.8, {
+            ease : FlxEase.expoIn,
             onComplete : function(_) {
                 close();
             }
