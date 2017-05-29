@@ -103,7 +103,7 @@
         <RectColor A="255" R="255" G="128" B="64" />
       </ImageDefinition>
       <ValueDefinitions>
-        <ValueDefinition xsi:type="FloatValueDefinition" Name="warningTime" Default="2" Min="0.01" Max="100" Round="0.01" />
+        <ValueDefinition xsi:type="FloatValueDefinition" Name="warningTime" Default="2" Min="0" Max="100" Round="0.01" />
         <ValueDefinition xsi:type="FloatValueDefinition" Name="duration" Default="8" Min="0.01" Max="100" Round="0.01" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
@@ -184,6 +184,39 @@
       </Origin>
       <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
         <RectColor A="255" R="0" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions />
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="RedSliderRewind" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
+        <RectColor A="255" R="128" G="64" B="64" />
+      </ImageDefinition>
+      <ValueDefinitions>
+        <ValueDefinition xsi:type="FloatValueDefinition" Name="warningTime" Default="2" Min="0.1" Max="100" Round="0.1" />
+        <ValueDefinition xsi:type="FloatValueDefinition" Name="rewindTime" Default="0" Min="0" Max="100" Round="0.01" />
+      </ValueDefinitions>
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="HealthPickupTutorial" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="128" />
       </ImageDefinition>
       <ValueDefinitions />
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
