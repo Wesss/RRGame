@@ -129,7 +129,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
     }
     
     public function playerHitHandler(event : ThreatLandedEvent) {
-        if (event.position == position) {
+        if (this == event.trackAction) {
             animateHit();
         }
     }

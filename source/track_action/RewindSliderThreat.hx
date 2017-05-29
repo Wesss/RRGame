@@ -15,7 +15,9 @@ class RewindSliderThreat extends SliderThreat {
         this.rewindBus = universalBus.rewindLevel;
     }
     override public function playerHitHandler(event : ThreatLandedEvent) {
-        this.rewindBus.broadcast(new RewindLevelEvent(beatsToRewind));
+        if (this == event.trackAction) {
+            this.rewindBus.broadcast(new RewindLevelEvent(beatsToRewind));
+        }
         super.playerHitHandler(event);
     }
 }
