@@ -19,7 +19,7 @@ class RewindIndicator extends FlxSubState {
 
         var background = new FlxSprite();
         var seethroughColor = new flixel.util.FlxColor(0xcc2E4172);
-        background.makeGraphic(FlxG.width, cast(FlxG.height / 2), seethroughColor);
+        background.makeGraphic(FlxG.width, cast(FlxG.height / 4), seethroughColor);
         background.x -= background.width / 2;
         background.y -= background.height / 2;
         add(background);
