@@ -1,5 +1,6 @@
 package level;
 
+import track_action.HealthPickupTutorial;
 import track_action.RewindSliderThreat;
 import track_action.Crate;
 import track_action.SliderThreatHoming;
@@ -136,7 +137,7 @@ class LevelDataLoader {
                 case "HealthPickupTutorial": {
                     var displacement = parseDisplacement(boardGrid);
 
-                    trackActions.push(new HealthPickup(
+                    trackActions.push(new HealthPickupTutorial(
                         beatOffset,
                         displacement,
                         universalBus
