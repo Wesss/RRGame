@@ -99,8 +99,8 @@ class Referee {
         crates.remove(displacement);
     }
 
-    public function handleThreatKillingSquare(displacement : Displacement) {
-        unsafeSquares.add(displacement);
+    public function handleThreatKillingSquare(event : ThreatLandedEvent) {
+        unsafeSquares.add(event.position);
     }
 
     public function handlePlayerMove(displacement : Displacement) {
@@ -172,7 +172,7 @@ class UnsafeSquareKiller {
             if (targetBeat > beatEvent.beat) {
                 if (!playerSafe) {
                     // TODO
-                    universalBus.playerHit.broadcast(logicalPlayerPosition);
+                    universalBus.playerHit.broadcast(new ThreatLandedEvent(null, logicalPlayerPosition));
                 }
                 universalBus.playerStartMove.unsubscribe(this);
                 universalBus.beat.unsubscribe(this);
