@@ -1,5 +1,6 @@
 package level;
 
+import track_action.RewindSliderThreat;
 import track_action.Crate;
 import track_action.SliderThreatHoming;
 import track_action.EmptyTrackAction;
@@ -114,8 +115,32 @@ class LevelDataLoader {
                         universalBus
                     ));
                 }
-                case "Comment":{
+                case "Comment": {
 
+                }
+                case "RedSliderRewind": {
+                    var displacement = parseDisplacement(boardGrid);
+                    var warnTime = Std.parseInt(data.get("warningTime"));
+                    var rewindTime = Std.parseInt(data.get("rewindTime"));
+
+                    trackActions.push(new RewindSliderThreat(
+                        beatOffset,
+                        bpm,
+                        displacement,
+                        universalBus,
+                        warnTime,
+                        rewindTime
+                    ));
+
+                }
+                case "HealthPickupTutorial": {
+                    var displacement = parseDisplacement(boardGrid);
+
+                    trackActions.push(new HealthPickup(
+                        beatOffset,
+                        displacement,
+                        universalBus
+                    ));
                 }
                 case "Text": {
                     var text = data.get("text");
