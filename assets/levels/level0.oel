@@ -80,5 +80,6 @@
     <Crate id="25" x="64" y="16" warningTime="1" duration="14" />
     <Crate id="26" x="96" y="16" warningTime="1" duration="14" />
     <Crate id="27" x="80" y="32" warningTime="1" duration="14" />
+    <TutorialFlag id="28" x="48" y="0" />
   </Entities>
 </level>
