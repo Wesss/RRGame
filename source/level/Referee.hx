@@ -100,7 +100,7 @@ class Referee {
     }
 
     public function handleThreatKillingSquare(event : ThreatLandedEvent) {
-        unsafeSquares.add(event.position);
+        unsafeSquares.add(event);
     }
 
     public function handlePlayerMove(displacement : Displacement) {
@@ -129,7 +129,7 @@ class UnsafeSquareKiller {
     public static var TOLERANCE_SECONDS(default, null) = 0.1;
 
     private var logicalPlayerPosition : Displacement;
-    private var unsafeSquares : Array<Displacement>;
+    private var unsafeSquares : Array<ThreatLandedEvent>;
     private var playerStartedSafe : Bool;
     private var playerSafe : Bool;
     private var universalBus : UniversalBus;
@@ -143,8 +143,8 @@ class UnsafeSquareKiller {
         nonEmpty = false;
     }
 
-    public function add(displacement : Displacement) {
-        unsafeSquares.push(displacement);
+    public function add(event : ThreatLandedEvent) {
+        unsafeSquares.push(event);
         nonEmpty = true;
     }
 
@@ -171,8 +171,11 @@ class UnsafeSquareKiller {
         universalBus.beat.subscribe(this, function(beatEvent : BeatEvent) {
             if (targetBeat > beatEvent.beat) {
                 if (!playerSafe) {
-                    // TODO
-                    universalBus.playerHit.broadcast(new ThreatLandedEvent(null, logicalPlayerPosition));
+                    for (unsafeSquare in unsafeSquares) {
+                        if (unsafeSquare.position.equals(logicalPlayerPosition)) {
+                            universalBus.playerHit.broadcast(unsafeSquare);
+                        }
+                    }
                 }
                 universalBus.playerStartMove.unsubscribe(this);
                 universalBus.beat.unsubscribe(this);
@@ -190,7 +193,7 @@ class UnsafeSquareKiller {
 
     public function squareSafe(displacement : Displacement) {
         for (unsafeSquare in unsafeSquares) {
-            if (unsafeSquare.equals(displacement)) {
+            if (unsafeSquare.position.equals(displacement)) {
                 return false;
             }
         }
