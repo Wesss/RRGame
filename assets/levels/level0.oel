@@ -52,27 +52,27 @@
   </BoardDisplayLayer>
   <Entities>
     <Empty id="35" x="48" y="320" />
-    <HealthPickupTutorial id="0" x="208" y="0" />
+    <HealthPickupTutorial id="0" x="272" y="0" />
     <RedSliderRewind id="1" x="16" y="80" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="2" x="336" y="64" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="2" x="272" y="64" warningTime="2" rewindTime="4" />
     <HealthPickupTutorial id="3" x="0" y="144" />
-    <RedSliderRewind id="4" x="336" y="128" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="5" x="336" y="144" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="6" x="336" y="160" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="7" x="128" y="208" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="8" x="144" y="208" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="9" x="160" y="208" warningTime="2" rewindTime="4" />
-    <HealthPickupTutorial id="10" x="352" y="224" />
-    <RedSliderRewind id="11" x="80" y="272" warningTime="2" rewindTime="3" />
-    <RedSliderRewind id="12" x="144" y="272" warningTime="2" rewindTime="3.5" />
-    <RedSliderRewind id="13" x="208" y="272" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="14" x="272" y="272" warningTime="2" rewindTime="4.5" />
-    <RedSliderRewind id="15" x="336" y="272" warningTime="2" rewindTime="5" />
-    <RedSliderRewind id="18" x="848" y="256" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="20" x="848" y="288" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="21" x="848" y="272" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="22" x="832" y="272" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="23" x="864" y="272" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="4" x="272" y="128" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="5" x="272" y="144" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="6" x="272" y="160" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="7" x="0" y="208" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="8" x="16" y="208" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="9" x="32" y="208" warningTime="2" rewindTime="4" />
+    <HealthPickupTutorial id="10" x="416" y="224" />
+    <RedSliderRewind id="11" x="16" y="272" warningTime="2" rewindTime="3" />
+    <RedSliderRewind id="12" x="80" y="272" warningTime="2" rewindTime="3.5" />
+    <RedSliderRewind id="13" x="144" y="272" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="14" x="208" y="272" warningTime="2" rewindTime="4.5" />
+    <RedSliderRewind id="15" x="272" y="272" warningTime="2" rewindTime="5" />
+    <RedSliderRewind id="18" x="784" y="256" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="20" x="784" y="288" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="21" x="784" y="272" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="22" x="768" y="272" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="23" x="800" y="272" warningTime="2" rewindTime="4" />
     <Crate id="16" x="64" y="0" warningTime="1" duration="27" />
     <Crate id="17" x="96" y="0" warningTime="1" duration="27" />
     <Crate id="19" x="96" y="32" warningTime="1" duration="27" />
