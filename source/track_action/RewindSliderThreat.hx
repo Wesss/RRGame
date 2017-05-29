@@ -1,11 +1,7 @@
-package;
+package track_action;
 
-import board.BoardCoordinates;
 import bus.*;
 import domain.Displacement;
-import flixel.FlxSprite;
-import flixel.tweens.*;
-import track_action.SliderThreat;
 import timing.RewindLevelEvent;
 
 class RewindSliderThreat extends SliderThreat {
