@@ -1,7 +1,6 @@
 package level;
 
 import timing.RewindTimingEvent;
-import timing.RewindLevelEvent;
 import bus.Bus;
 import bus.UniversalBus;
 import timing.BeatEvent;
@@ -20,6 +19,7 @@ class LevelRunner {
     private var lastBeat:Float;
     private var trackActions:Array<TrackAction>;
     private var universalBus:UniversalBus;
+    private var rewound:Bool;
 
     public function new(universalBus:UniversalBus):Void {
         this.levelStart = universalBus.levelStart;
@@ -62,6 +62,7 @@ class LevelRunner {
 
         actionsIndex = 0;
         lastBeat = 0;
+        rewound = false;
 
         trackActions = levelData.trackActions;
         universalBus.musicLoaded.subscribe(this, function(_) {
@@ -82,6 +83,10 @@ class LevelRunner {
         for (i in actionsIndex...actions.length) {
             if (actions[i].absoluteBeatTime >= lastBeat && actions[i].absoluteBeatTime < beat.beat) {
                 actions[i].trackAction.triggerBeat(actions[i].beatIdx);
+                if (rewound) {
+                    rewound = false;
+                    return;
+                }
                 actionsIndex++;
 
                 triggerBeatsTriggered = true;
@@ -108,10 +113,12 @@ class LevelRunner {
 
     public function rewindHandler(event:RewindTimingEvent) {
         // rewind to earliest index in track actions that is at least the beat we are rewinding to.
-        while (actionsIndex > 0 && actions[actionsIndex].absoluteBeatTime > event.beatRewindingTo) {
+        lastBeat = event.beatRewindingTo;
+        while (actionsIndex >= 0 && actions[actionsIndex].absoluteBeatTime >= lastBeat) {
             actionsIndex--;
         }
-        lastBeat = event.beatRewindingTo;
+        actionsIndex++;
+        rewound = true;
     }
 }
 
