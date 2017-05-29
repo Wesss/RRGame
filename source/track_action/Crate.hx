@@ -57,7 +57,6 @@ class Crate extends SliderThreat {
         }, 1 / bpm * 60, {
             ease: FlxEase.quadOut,
             onComplete: function(_) {
-                visible = false;
                 kill();
             }
         });
