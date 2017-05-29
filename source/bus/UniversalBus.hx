@@ -29,6 +29,7 @@ class UniversalBus {
     // rewind trigger should broadcast on this bus
     public var rewindLevel(default, null):Bus<RewindLevelEvent> = new Bus<RewindLevelEvent>();
     public var rewindTiming(default, null):Bus<RewindTimingEvent> = new Bus<RewindTimingEvent>(); // NOT this bus
+    public var sliderRewindHit(default, null):Bus<RewindLevelEvent> = new Bus<RewindLevelEvent>();
 
     public var threatKillSquare(default, null) = new Bus<Displacement>();
     public var playerHit(default, null) = new Bus<Displacement>();

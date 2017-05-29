@@ -69,7 +69,7 @@ class PlayLevelState extends FlxState {
 		add(new ScreenBanner(universalBus, "Bringing the music", 20));
 
 		// Rewind indicators
-		universalBus.rewindLevel.subscribe(this, function(_) {
+		universalBus.sliderRewindHit.subscribe(this, function(e) {
 			var rewindIndicator = new RewindIndicator();
 			FlxTween.globalManager.active = false;
 
@@ -82,6 +82,7 @@ class PlayLevelState extends FlxState {
 				universalBus.unpause.subscribe(this, unpauseGame);
 			}
 
+			universalBus.rewindLevel.broadcast(e);
 			openSubState(rewindIndicator);
 		});
 
