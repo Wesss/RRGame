@@ -92,11 +92,16 @@ class Referee {
     }
 
     public function handleCrateLanded(displacement : Displacement) {
+        for (crate in crates) {
+            if (crate.equals(displacement)) {
+                return;
+            }
+        }
         crates.push(displacement);
     }
 
     public function handleCrateDestroyed(displacement : Displacement) {
-        crates.remove(displacement);
+        trace("Removed? " + crates.remove(displacement));
     }
 
     public function handleThreatKillingSquare(event : ThreatLandedEvent) {

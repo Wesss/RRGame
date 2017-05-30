@@ -21,6 +21,11 @@ class ControlsPoller {
         });
         universalBus.crateLanded.subscribe(this, function(location) {
             if (location.horizontalDisplacement == NONE || location.verticalDisplacement == NONE) {
+                for (crate in crates) {
+                    if (crate.equals(location)) {
+                        return;
+                    }
+                }
                 crates.push(location);
             }
         });
