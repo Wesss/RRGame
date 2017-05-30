@@ -1,6 +1,7 @@
 package board;
 
 import domain.*;
+import flixel.FlxSprite;
 
 /**
  *  Static conversions from board coordinates to pixel coordinates
@@ -44,7 +45,8 @@ class BoardCoordinates {
 
     private static function initializeConstants() {
         if (!INIT) {
-            var square = new BoardSquare(0, 0, null);
+            var square = new FlxSprite();
+            square.loadGraphic(AssetPaths.BoardSquare__png);
             BOARD_SQUARE_WIDTH = cast (square.width, Int);
             BOARD_SQUARE_HEIGHT = cast (square.height, Int);
             INIT = true;

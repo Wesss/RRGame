@@ -1,14 +1,12 @@
 package track_action;
 
-import board.BoardCoordinates;
 import bus.*;
 import domain.*;
-import flixel.FlxSprite;
 import flixel.tweens.*;
 import level.ThreatLandedEvent;
 
 
-class TutorialCrate extends FlxSprite implements TrackAction {
+class TutorialCrate implements TrackAction {
     public var beatOffset:Float;
     public var triggerBeats:Array<Float>;
     private var crateLandedBus : Bus<Displacement>;
@@ -18,17 +16,6 @@ class TutorialCrate extends FlxSprite implements TrackAction {
     private var killBus : Bus<ThreatLandedEvent>;
 
     public function new(beatOffset : Float, position : Displacement, universalBus : UniversalBus, duration = 8.0) {
-        super(BoardCoordinates.displacementToX(position.horizontalDisplacement),
-              BoardCoordinates.displacementToY(position.verticalDisplacement));
-        
-        var backgroundColor = new flixel.util.FlxColor(0xff2E4172);
-        makeGraphic(132, 132, backgroundColor);
-
-        x -= width / 2;
-        y -= height / 2;
-
-        kill();
-
         triggerBeats = [0, duration];
         this.beatOffset = beatOffset;
         crateLandedBus = universalBus.crateLanded;
@@ -48,19 +35,10 @@ class TutorialCrate extends FlxSprite implements TrackAction {
      **/
     public function triggerBeat(beatIndex:Int):Void {
         if (beatIndex == 0) {
-            revive();
             killBus.broadcast(new ThreatLandedEvent(this, position));
             crateLandedBus.broadcast(position);
         } else {
             crateDestroyedBus.broadcast(position);
-            FlxTween.tween(this, {
-                alpha: 0
-            }, 1, {
-                ease: FlxEase.quadOut,
-                onComplete: function(_) {
-                    kill();
-                }
-            });
         }
     }
 }

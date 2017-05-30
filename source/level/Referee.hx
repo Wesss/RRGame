@@ -11,6 +11,7 @@ class Referee {
     private var logicalPlayerPosition : Displacement;
     private var crates : Array<Displacement>;
     private var healthPickups : Array<Displacement>;
+    private var isTutorial : Bool;
 
     public function new(universalBus : UniversalBus, bpm : Int) {
         this.universalBus = universalBus;
@@ -44,6 +45,11 @@ class Referee {
         crates = [];
 
         healthPickups = [];
+
+        isTutorial = false;
+        universalBus.tutorialFlag.subscribe(this, function(_) {
+            isTutorial = true;
+        });
     }
 
     public function handleNewControlDesire(displacement : Displacement) {
@@ -64,7 +70,9 @@ class Referee {
         if (halfLocation != null) {
             for (crate in crates) {
                 if (crate.equals(halfLocation)) {
-                    universalBus.crateHit.broadcast(crate);
+                    if (!isTutorial) {
+                        universalBus.crateHit.broadcast(crate);
+                    }
                     return;
                 }
             }
@@ -77,7 +85,9 @@ class Referee {
         }
         for (crate in crates) {
             if (crate.equals(displacement)) {
-                universalBus.crateHit.broadcast(crate);
+                if (!isTutorial) {
+                    universalBus.crateHit.broadcast(crate);
+                }
                 return;
             }
         }
