@@ -25,7 +25,7 @@ class ControlsSystemTop extends FlxBasic {
         retryBus = universalBus.retry;
         returnBus = universalBus.returnToHub;
         pauseBus = universalBus.pause;
-        controlsPoller = new ControlsPoller();
+        controlsPoller = new ControlsPoller(universalBus);
         previousPolledInput = null;
     }
 

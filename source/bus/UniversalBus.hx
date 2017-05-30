@@ -51,5 +51,7 @@ class UniversalBus {
     public var pause(default, null) = new Bus<Bool>();
     public var unpause(default, null) = new Bus<Bool>();
 
+    public var tutorialFlag(default, null) = new Bus<Bool>();
+
     public function new() {}
 }

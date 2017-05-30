@@ -31,6 +31,9 @@ class ProgressBar extends FlxSpriteGroup {
         universalBus.beat.subscribe(this, updateBeat);
         universalBus.playerDie.subscribe(this, stopProgressing);
         universalBus.levelOutOfBeats.subscribe(this, disappear);
+        universalBus.tutorialFlag.subscribe(this, function(_) {
+            kill();
+        });
     }
 
     public function levelStart(event:LevelStartEvent) {

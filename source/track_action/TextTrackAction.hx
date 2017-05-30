@@ -1,5 +1,7 @@
 package track_action;
 
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
 import flixel.text.FlxText;
 
 class TextTrackAction extends FlxText implements TrackAction {
@@ -7,11 +9,13 @@ class TextTrackAction extends FlxText implements TrackAction {
     // an array of beats relative the the offset defined above
     public var triggerBeats:Array<Float>;
 
-    public function new(beatOffset : Float, text : String, bpm : Int, beatDuration = 4) {
-        super(-275, -227, 0, text);
+    public function new(beatOffset : Float, xPos : Int, yPos : Int, text : String, bpm : Int, beatDuration = 4) {
+        super(xPos, yPos, 0, text);
         triggerBeats = [0, beatDuration];
         this.beatOffset = beatOffset;
-        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 22, flixel.util.FlxColor.WHITE, CENTER);
+        setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 22, FlxColor.WHITE, CENTER);
+        setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
+        this.x -= this.width / 2;
         visible = false;
     }
 

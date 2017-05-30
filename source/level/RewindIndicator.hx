@@ -14,6 +14,13 @@ class RewindIndicator extends FlxSubState {
         super();
     }
 
+    override public function update(dt : Float) : Void {
+        super.update(dt);
+        if (FlxG.sound.music.playing) {
+            FlxG.sound.music.pause();
+        }
+    }
+
     override public function create() : Void {
         super.create();
 
