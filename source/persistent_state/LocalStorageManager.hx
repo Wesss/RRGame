@@ -1,39 +1,50 @@
 package persistent_state;
 
+import logging.LoggingSystem;
+import logging.LoggingSystemTop;
 import flixel.FlxG;
 import haxe.Unserializer;
 import haxe.Serializer;
 import js.Browser;
 
-class SaveManager {
+class LocalStorageManager {
 
     private static var localStorage = Browser.window.localStorage;
 
-    public static function initializeSaveData() {
+    public static function initializePersistentState(logger) {
         #if js
         if (localStorage.getItem("isInitiallized") != null) {
             return;
         }
         saveProgress(new Map<Int, Float>());
+        initABTesting(logger);
         localStorage.setItem("isInitiallized", "true");
-        FlxG.sound.changeVolume(-0.8);
         #else
         throw "Error: Saving is not supported on a non-js target"
         #end
     }
 
     public static function getProgress():Map<Int, Float> {
-        #if js
         var unserializer = new Unserializer(localStorage.getItem("levelScore"));
         return unserializer.unserialize();
-        #end
     }
 
     public static function saveProgress(progress:Map<Int, Float>):Void {
-        #if js
         var serializer = new Serializer();
         serializer.serialize(progress);
         localStorage.setItem("levelScore", serializer.toString());
-        #end
+    }
+
+    private static function initABTesting(logger:LoggingSystem) {
+        if (FlxG.random.bool()) {
+            localStorage.setItem("ABTesting", "A");
+        } else {
+            localStorage.setItem("ABTesting", "B");
+        }
+        logger.logABTestBuild(LocalStorageManager.isBuildA());
+    }
+
+    public static function isBuildA():Bool {
+        return localStorage.getItem("ABTesting") == "A";
     }
 }

@@ -1,7 +1,7 @@
 package hubworld;
 
 import flixel.group.FlxGroup;
-import persistent_state.SaveManager;
+import persistent_state.LocalStorageManager;
 import flixel.text.FlxText;
 import logging.*;
 import flixel.FlxState;
@@ -71,7 +71,7 @@ class HubWorldState extends FlxState {
             }
 
             // If level cleared/improved on, show animation
-            var levelScores = SaveManager.getProgress();
+            var levelScores = LocalStorageManager.getProgress();
             currentScore = levelScores[newProgress.level];
             if (currentScore == null || newProgress.score > currentScore) {
                 betterProgress = newProgress;
@@ -91,10 +91,10 @@ class HubWorldState extends FlxState {
         FlxG.camera.follow(cameraTarget);
         FlxG.mouse.visible = true;
 
-        var levelScores = SaveManager.getProgress();
+        var levelScores = LocalStorageManager.getProgress();
 
         for (i in 0...hubWorldData.worlds.length) {
-            var world = new WorldSpriteGroup(hubWorldData, i, SaveManager.getProgress(), logger);
+            var world = new WorldSpriteGroup(hubWorldData, i, LocalStorageManager.getProgress(), logger);
             add(world);
 
             if (betterProgress != null && i == worldProgress) {
@@ -105,7 +105,7 @@ class HubWorldState extends FlxState {
 
                 world.levels[levelRelativeToWorld].addScore(betterProgress.score);
                 levelScores[betterProgress.level] = betterProgress.score;
-                SaveManager.saveProgress(levelScores);
+                LocalStorageManager.saveProgress(levelScores);
             }
 
             // if there is no level 1-1 score, start level 1-1 immediately
