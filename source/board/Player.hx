@@ -259,5 +259,9 @@ class Player extends FlxSpriteGroup {
 
     public function tutorialHandler(event) {
         isTutorial = true;
+        hp = 1;
+        for (indicator in hpIndicators) {
+            indicator.alpha = 0;
+        }
     }
 }
