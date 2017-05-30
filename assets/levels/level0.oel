@@ -49,9 +49,12 @@
     <Board id="85" x="960" y="256" />
     <Board id="86" x="896" y="256" />
     <Board id="87" x="832" y="256" />
+    <Board id="34" x="64" y="320" />
+    <Board id="35" x="128" y="320" />
+    <Board id="36" x="192" y="320" />
   </BoardDisplayLayer>
   <Entities>
-    <Empty id="35" x="48" y="320" />
+    <Empty id="35" x="112" y="320" />
     <HealthPickupTutorial id="0" x="272" y="0" />
     <RedSliderRewind id="1" x="16" y="80" warningTime="2" rewindTime="4" />
     <RedSliderRewind id="2" x="272" y="64" warningTime="2" rewindTime="4" />
@@ -63,19 +66,19 @@
     <RedSliderRewind id="8" x="16" y="208" warningTime="2" rewindTime="4" />
     <RedSliderRewind id="9" x="32" y="208" warningTime="2" rewindTime="4" />
     <HealthPickupTutorial id="10" x="416" y="224" />
-    <RedSliderRewind id="11" x="16" y="272" warningTime="2" rewindTime="3" />
-    <RedSliderRewind id="12" x="80" y="272" warningTime="2" rewindTime="3.5" />
-    <RedSliderRewind id="13" x="144" y="272" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="14" x="208" y="272" warningTime="2" rewindTime="4.5" />
-    <RedSliderRewind id="15" x="272" y="272" warningTime="2" rewindTime="5" />
-    <RedSliderRewind id="18" x="784" y="256" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="20" x="784" y="288" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="21" x="784" y="272" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="22" x="768" y="272" warningTime="2" rewindTime="4" />
-    <RedSliderRewind id="23" x="800" y="272" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="11" x="272" y="272" warningTime="2" rewindTime="3" />
+    <RedSliderRewind id="12" x="336" y="272" warningTime="2" rewindTime="3.5" />
+    <RedSliderRewind id="13" x="400" y="272" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="14" x="464" y="272" warningTime="2" rewindTime="4.5" />
+    <RedSliderRewind id="15" x="528" y="272" warningTime="2" rewindTime="5" />
+    <RedSliderRewind id="18" x="16" y="320" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="20" x="16" y="352" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="21" x="16" y="336" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="22" x="0" y="336" warningTime="2" rewindTime="4" />
+    <RedSliderRewind id="23" x="32" y="336" warningTime="2" rewindTime="4" />
     <TutorialFlag id="28" x="48" y="0" />
-    <Text id="29" x="176" y="64" text="Dodge!" beatDuration="2" xPos="0" yPos="-100" />
-    <Text id="30" x="432" y="0" text="Dodge!" beatDuration="4" xPos="0" yPos="0" />
+    <Text id="29" x="176" y="64" text="Dodge!" beatDuration="3" xPos="0" yPos="-130" />
+    <Text id="30" x="432" y="0" text="Dodge!" beatDuration="3" xPos="0" yPos="0" />
     <TutorialCrate id="31" x="0" y="0" duration="28" />
     <TutorialCrate id="32" x="0" y="32" duration="28" />
     <TutorialCrate id="33" x="32" y="32" duration="28" />
