@@ -1,7 +1,6 @@
 package persistent_state;
 
 import logging.LoggingSystem;
-import logging.LoggingSystemTop;
 import flixel.FlxG;
 import haxe.Unserializer;
 import haxe.Serializer;
@@ -10,6 +9,7 @@ import js.Browser;
 class LocalStorageManager {
 
     private static var localStorage = Browser.window.localStorage;
+    private static var abTestBuild:String = "";
 
     public static function initializePersistentState(logger) {
         #if js
@@ -45,6 +45,9 @@ class LocalStorageManager {
     }
 
     public static function isBuildA():Bool {
-        return localStorage.getItem("ABTesting") == "A";
+        if (abTestBuild == "") {
+            abTestBuild = localStorage.getItem("ABTesting");
+        }
+        return abTestBuild == "A";
     }
 }
