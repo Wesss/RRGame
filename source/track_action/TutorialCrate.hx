@@ -21,9 +21,8 @@ class TutorialCrate extends FlxSprite implements TrackAction {
         super(BoardCoordinates.displacementToX(position.horizontalDisplacement),
               BoardCoordinates.displacementToY(position.verticalDisplacement));
         
-        loadGraphic(AssetPaths.CrateThreat__png, true, 112, 112);
-        animation.add("warning", [0]);
-        animation.add("landed", [1]);
+        var backgroundColor = new flixel.util.FlxColor(0xff2E4172);
+        makeGraphic(132, 132, backgroundColor);
 
         x -= width / 2;
         y -= height / 2;
@@ -52,7 +51,6 @@ class TutorialCrate extends FlxSprite implements TrackAction {
             revive();
             killBus.broadcast(new ThreatLandedEvent(this, position));
             crateLandedBus.broadcast(position);
-            animation.play("landed");
         } else {
             crateDestroyedBus.broadcast(position);
             FlxTween.tween(this, {
