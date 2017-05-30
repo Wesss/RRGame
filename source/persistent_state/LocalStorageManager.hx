@@ -46,7 +46,7 @@ class LocalStorageManager {
 
     public static function isBuildA():Bool {
         if (abTestBuild == "") {
-            abTestBuild == localStorage.getItem("ABTesting");
+            abTestBuild = localStorage.getItem("ABTesting");
         }
         return abTestBuild == "A";
     }
