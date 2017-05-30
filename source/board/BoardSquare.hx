@@ -77,6 +77,7 @@ class BoardSquare extends FlxSpriteGroup {
                         }, 0.3, {
                             ease : FlxEase.quadIn
                         });
+                        universalBus.crateDestroyed.unsubscribe(this);
                     }
                 }
             });
@@ -112,7 +113,7 @@ class BoardSquare extends FlxSpriteGroup {
                     add(ghost);
                     universalBus.playerMoved.subscribe(this, function(location) {
                         if (location.equals(displacement)) {
-                            FlxTween.tween({}, {}, 10).then(FlxTween.tween(ghost, {
+                            FlxTween.tween({}, {}, 4).then(FlxTween.tween(ghost, {
                                 alpha : 0
                             }, 1, {
                                 ease : FlxEase.quadIn
@@ -121,6 +122,7 @@ class BoardSquare extends FlxSpriteGroup {
                         }
                     });
                 }
+                universalBus.tutorialFlag.unsubscribe(this);
             });
         }
 
