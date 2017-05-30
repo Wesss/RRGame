@@ -6,6 +6,7 @@ import track_action.Crate;
 import track_action.SliderThreatHoming;
 import track_action.EmptyTrackAction;
 import track_action.TextTrackAction;
+import track_action.TutorialCrate;
 import domain.VerticalDisplacement;
 import domain.HorizontalDisplacement;
 import domain.Displacement;
@@ -142,6 +143,20 @@ class LevelDataLoader {
                         displacement,
                         universalBus
                     ));
+                }
+                case "TutorialCrate": {
+                    var displacement = parseDisplacement(boardGrid);
+                    var duration = Std.parseInt(data.get("duration"));
+
+                    trackActions.push(new TutorialCrate(
+                        beatOffset,
+                        displacement,
+                        universalBus,
+                        duration
+                    ));
+                }
+                case "TutorialFlag": {
+
                 }
                 case "Text": {
                     var text = data.get("text");
