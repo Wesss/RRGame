@@ -76,12 +76,12 @@
     <TutorialFlag id="28" x="48" y="0" />
     <Text id="29" x="176" y="64" text="Dodge!" beatDuration="2" xPos="0" yPos="-100" />
     <Text id="30" x="432" y="0" text="Dodge!" beatDuration="4" xPos="0" yPos="0" />
-    <CrateTutorial id="31" x="0" y="0" duration="28" />
-    <CrateTutorial id="32" x="0" y="32" duration="28" />
-    <CrateTutorial id="33" x="32" y="32" duration="28" />
-    <CrateTutorial id="34" x="32" y="0" duration="28" />
-    <CrateTutorial id="36" x="32" y="16" duration="14" />
-    <CrateTutorial id="37" x="16" y="32" duration="14" />
-    <CrateTutorial id="38" x="0" y="16" duration="14" />
+    <TutorialCrate id="31" x="0" y="0" duration="28" />
+    <TutorialCrate id="32" x="0" y="32" duration="28" />
+    <TutorialCrate id="33" x="32" y="32" duration="28" />
+    <TutorialCrate id="34" x="32" y="0" duration="28" />
+    <TutorialCrate id="36" x="32" y="16" duration="14" />
+    <TutorialCrate id="37" x="16" y="32" duration="14" />
+    <TutorialCrate id="38" x="0" y="16" duration="14" />
   </Entities>
 </level>
