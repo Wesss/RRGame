@@ -7,6 +7,7 @@ import track_action.SliderThreatHoming;
 import track_action.EmptyTrackAction;
 import track_action.TextTrackAction;
 import track_action.TutorialCrate;
+import track_action.TutorialFlag;
 import domain.VerticalDisplacement;
 import domain.HorizontalDisplacement;
 import domain.Displacement;
@@ -156,7 +157,10 @@ class LevelDataLoader {
                     ));
                 }
                 case "TutorialFlag": {
-
+                    trackActions.push(new TutorialFlag(
+                        beatOffset,
+                        universalBus
+                    ));
                 }
                 case "Text": {
                     var text = data.get("text");
