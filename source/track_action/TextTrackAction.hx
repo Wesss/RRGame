@@ -1,5 +1,6 @@
 package track_action;
 
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
 
@@ -14,6 +15,7 @@ class TextTrackAction extends FlxText implements TrackAction {
         this.beatOffset = beatOffset;
         setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 22, FlxColor.WHITE, CENTER);
         setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
+        this.x -= this.width / 2;
         visible = false;
     }
 
