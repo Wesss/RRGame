@@ -1,6 +1,6 @@
 package;
 
-import persistent_state.SaveManager;
+import persistent_state.LocalStorageManager;
 import flixel.FlxG;
 import hubworld.HubWorldState;
 import flixel.FlxState;
@@ -20,8 +20,8 @@ class HubworldTest extends FlxState {
 		levelScores.set(3, 3);
 
 
-		SaveManager.initializeSaveData();
-		SaveManager.saveProgress(levelScores);
+		LocalStorageManager.initializePersistentState();
+		LocalStorageManager.saveProgress(levelScores);
 
 		FlxG.switchState(new HubWorldState(null, {
 			level: 2,
