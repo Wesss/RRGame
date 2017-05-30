@@ -6,11 +6,13 @@ import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.tweens.*;
 import timing.BeatEvent;
+import persistent_state.LocalStorageManager;
 
 class BoardSquare extends FlxSpriteGroup {
     private var oldBeat : Float;
     private var crateOnTop : Bool;
     private var isTutorial : Bool;
+    private var threatTriggered : Bool;
 
     public function new(displacement : Displacement, universalBus : UniversalBus) {
         super(0, 0);
@@ -25,9 +27,18 @@ class BoardSquare extends FlxSpriteGroup {
 
         crateOnTop = false;
         isTutorial = false;
+        threatTriggered = false;
 
         if (universalBus != null) {
-            universalBus.beat.subscribe(this, handleBeat);
+            // AB Testing experiment
+            if (LocalStorageManager.isBuildA()) {
+                universalBus.beat.subscribe(this, handleBeat);
+            } else {
+                universalBus.threatKillSquare.subscribe(this, function(_) {
+                    threatTriggered = true;
+                });
+                universalBus.triggerBeats.subscribe(this, handleBeat);
+            }
             universalBus.gameOver.subscribe(this, function(_) {
                 universalBus.beat.unsubscribe(this);
                 FlxTween.tween(scale, {
@@ -130,7 +141,8 @@ class BoardSquare extends FlxSpriteGroup {
     }
 
     public function handleBeat(beat : BeatEvent) {
-        if (Math.round(oldBeat) >= oldBeat && Math.round(beat.beat) <= beat.beat) {
+        if (LocalStorageManager.isBuildA() && Math.round(oldBeat) >= oldBeat && Math.round(beat.beat) <= beat.beat ||
+            !LocalStorageManager.isBuildA() && threatTriggered) {
             scale.x = 1.1;
             scale.y = 1.1;
 
@@ -140,6 +152,7 @@ class BoardSquare extends FlxSpriteGroup {
             }, 0.2, {
                 ease : FlxEase.quadOut
             });
+            threatTriggered = false;
         }
         oldBeat = beat.beat;
     }
