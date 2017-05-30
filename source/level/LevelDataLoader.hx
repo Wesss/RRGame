@@ -165,9 +165,11 @@ class LevelDataLoader {
                 case "Text": {
                     var text = data.get("text");
                     var duration = Std.parseInt(data.get("beatDuration"));
+                    var xPos = Std.parseInt(data.get("xPos"));
+                    var yPos = Std.parseInt(data.get("yPos"));
 
                     trackActions.push(new TextTrackAction(
-                            beatOffset, text, bpm, duration
+                            beatOffset, xPos, yPos, text, bpm, duration
                     ));
                 }
                 case "Empty": {
