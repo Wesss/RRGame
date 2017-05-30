@@ -1,9 +1,13 @@
 package level;
 
+import track_action.HealthPickupTutorial;
+import track_action.RewindSliderThreat;
 import track_action.Crate;
 import track_action.SliderThreatHoming;
 import track_action.EmptyTrackAction;
 import track_action.TextTrackAction;
+import track_action.TutorialCrate;
+import track_action.TutorialFlag;
 import domain.VerticalDisplacement;
 import domain.HorizontalDisplacement;
 import domain.Displacement;
@@ -114,15 +118,58 @@ class LevelDataLoader {
                         universalBus
                     ));
                 }
-                case "Comment":{
+                case "Comment": {
 
+                }
+                case "RedSliderRewind": {
+                    var displacement = parseDisplacement(boardGrid);
+                    var warnTime = Std.parseInt(data.get("warningTime"));
+                    var rewindTime = Std.parseInt(data.get("rewindTime"));
+
+                    trackActions.push(new RewindSliderThreat(
+                        beatOffset,
+                        bpm,
+                        displacement,
+                        universalBus,
+                        warnTime,
+                        rewindTime
+                    ));
+
+                }
+                case "HealthPickupTutorial": {
+                    var displacement = parseDisplacement(boardGrid);
+
+                    trackActions.push(new HealthPickupTutorial(
+                        beatOffset,
+                        displacement,
+                        universalBus
+                    ));
+                }
+                case "TutorialCrate": {
+                    var displacement = parseDisplacement(boardGrid);
+                    var duration = Std.parseInt(data.get("duration"));
+
+                    trackActions.push(new TutorialCrate(
+                        beatOffset,
+                        displacement,
+                        universalBus,
+                        duration
+                    ));
+                }
+                case "TutorialFlag": {
+                    trackActions.push(new TutorialFlag(
+                        beatOffset,
+                        universalBus
+                    ));
                 }
                 case "Text": {
                     var text = data.get("text");
                     var duration = Std.parseInt(data.get("beatDuration"));
+                    var xPos = Std.parseInt(data.get("xPos"));
+                    var yPos = Std.parseInt(data.get("yPos"));
 
                     trackActions.push(new TextTrackAction(
-                            beatOffset, text, bpm, duration
+                            beatOffset, xPos, yPos, text, bpm, duration
                     ));
                 }
                 case "Empty": {
