@@ -264,10 +264,7 @@ private class ScreenTransitionButton extends FlxGroup {
                 FlxTween.tween(buttonText, {
                     alpha : 1
                 }, 0.5, {
-                    ease : FlxEase.quadOut,
-                    onComplete : function(tween) {
-                        //TODO
-                    }
+                    ease : FlxEase.quadOut
                 });
             }
         });

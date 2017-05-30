@@ -94,6 +94,12 @@ class PlayLevelState extends FlxState {
 		var escHintText = new FlxText(-310, -240, 0, "ESC: Pause/Options");
 		escHintText.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 15, flixel.util.FlxColor.WHITE);
 		userInterfaceGroup.add(escHintText);
+		FlxTween.tween(escHintText, {alpha : 0}, 1, {
+			startDelay : 10,
+			onComplete : function(tween) {
+				userInterfaceGroup.remove(escHintText);
+			}
+		});
 		universalBus.pause.subscribe(this, pauseGame);
 		universalBus.unpause.subscribe(this, unpauseGame);
 
