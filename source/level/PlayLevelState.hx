@@ -91,6 +91,9 @@ class PlayLevelState extends FlxState {
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
 
 		// Pause
+		var escHintText = new FlxText(-310, -240, 0, "ESC: Pause/Options");
+		escHintText.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 15, flixel.util.FlxColor.WHITE);
+		userInterfaceGroup.add(escHintText);
 		universalBus.pause.subscribe(this, pauseGame);
 		universalBus.unpause.subscribe(this, unpauseGame);
 
