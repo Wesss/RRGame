@@ -17,10 +17,15 @@ class RewindSliderThreat extends SliderThreat {
         this.beatsToRewind = beatsToRewind;
         this.rewindBus = universalBus.sliderRewindHit;
         universalBus.rewindLevel.subscribe(this, function(_) {
+            if (warningTween != null) {
+                warningTween.cancel();
+            }
             if (fadeOutTween != null) {
                 fadeOutTween.cancel();
                 scaleOutTween.cancel();
             }
+            scale.x = 0;
+            scale.y = 0;
         });
     }
     override public function playerHitHandler(event : ThreatLandedEvent) {
@@ -29,12 +34,16 @@ class RewindSliderThreat extends SliderThreat {
         }
         super.playerHitHandler(event);
     }
+    override public function warning() {
+        if (fadeOutTween != null) {
+            fadeOutTween.cancel();
+            scaleOutTween.cancel();
+        }
+        super.warning();
+    }
     override public function hit() {
         // Threat collision
         warningTween.cancel(); // In case timing discrepency between beats timing and timer
-
-        killBus.broadcast(new ThreatLandedEvent(this, position));
-
         scale.x = 1;
         scale.y = 1;
 
@@ -56,5 +65,6 @@ class RewindSliderThreat extends SliderThreat {
         });
 
         animateDodge();
+        killBus.broadcast(new ThreatLandedEvent(this, position));
     }
 }
