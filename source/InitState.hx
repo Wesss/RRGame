@@ -18,11 +18,9 @@ class InitState extends FlxState {
         #else
         var logger = new LoggingSystemTop();
         #end
-        LocalStorageManager.initializePersistentState();
-        FlxG.sound.changeVolume(-0.8);
+        LocalStorageManager.initializePersistentState(logger);
 
-        trace(LocalStorageManager.isBuildA());
-        trace(LocalStorageManager.isBuildA());
+        FlxG.sound.changeVolume(-0.8);
 
         FlxG.switchState(new HubWorldState(logger));
     }

@@ -1,5 +1,7 @@
 package persistent_state;
 
+import logging.LoggingSystem;
+import logging.LoggingSystemTop;
 import flixel.FlxG;
 import haxe.Unserializer;
 import haxe.Serializer;
@@ -9,13 +11,13 @@ class LocalStorageManager {
 
     private static var localStorage = Browser.window.localStorage;
 
-    public static function initializePersistentState() {
+    public static function initializePersistentState(logger) {
         #if js
         if (localStorage.getItem("isInitiallized") != null) {
             return;
         }
         saveProgress(new Map<Int, Float>());
-        initABTesting();
+        initABTesting(logger);
         localStorage.setItem("isInitiallized", "true");
         #else
         throw "Error: Saving is not supported on a non-js target"
@@ -33,12 +35,13 @@ class LocalStorageManager {
         localStorage.setItem("levelScore", serializer.toString());
     }
 
-    private static function initABTesting() {
+    private static function initABTesting(logger:LoggingSystem) {
         if (FlxG.random.bool()) {
             localStorage.setItem("ABTesting", "A");
         } else {
             localStorage.setItem("ABTesting", "B");
         }
+        logger.logABTestBuild(LocalStorageManager.isBuildA());
     }
 
     public static function isBuildA():Bool {

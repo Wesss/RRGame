@@ -29,6 +29,8 @@ class EmptyLogger implements LoggingSystem {
 
     public function focusGained():Void {}
 
+    public function logABTestBuild(isBuildA:Bool):Void {}
+
     public function traceEvent0(event) {
         trace(event);
     }

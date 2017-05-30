@@ -25,6 +25,7 @@ class LoggingSystemTop implements LoggingSystem {
     // non level action IDs
     private static inline var UNFOCUS_STATE_ID = 0;
     private static inline var FOCUS_STATE_ID = 1;
+    private static inline var AB_TEST_ID = 2;
     // category IDs
     private static inline var DEBUGGING_CATEGORY_ID = 1;
     private static inline var RELEASE_CATEGORY_ID = 2;
@@ -83,4 +84,12 @@ class LoggingSystemTop implements LoggingSystem {
     public function focusGained() {
         logger.logActionWithNoLevel(FOCUS_STATE_ID);
     }
+
+    public function logABTestBuild(isBuildA : Bool) {
+        if (isBuildA) {
+            logger.logActionWithNoLevel(AB_TEST_ID, {build : "A"});
+        } else {
+            logger.logActionWithNoLevel(AB_TEST_ID, {build : "B"});
+        }
+    };
 }

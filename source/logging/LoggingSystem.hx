@@ -19,4 +19,6 @@ interface LoggingSystem {
     public function focusLost():Void;
 
     public function focusGained():Void;
+
+    public function logABTestBuild(isBuildA:Bool):Void;
 }
