@@ -62,4 +62,9 @@ class Crate extends SliderThreat {
             }
         });
     }
+
+    // No hit animation exists, so don't attempt to play anything
+    public override function animateHit() {
+
+    }
 }
