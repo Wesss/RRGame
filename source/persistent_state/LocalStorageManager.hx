@@ -18,6 +18,7 @@ class LocalStorageManager {
         }
         saveProgress(new Map<Int, Float>());
         initABTesting(logger);
+        FlxG.sound.changeVolume(-0.8);
         localStorage.setItem("isInitiallized", "true");
         #else
         throw "Error: Saving is not supported on a non-js target"
