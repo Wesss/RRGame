@@ -20,8 +20,6 @@ class InitState extends FlxState {
         #end
         LocalStorageManager.initializePersistentState(logger);
 
-        FlxG.sound.changeVolume(-0.8);
-
         FlxG.switchState(new HubWorldState(logger));
     }
 }

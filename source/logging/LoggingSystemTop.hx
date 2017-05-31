@@ -8,11 +8,11 @@ import bus.UniversalBus;
 class LoggingSystemTop implements LoggingSystem {
 
     // Change based on release version TODO should we load these from some data or build file?
-    private static inline var CATEGORY_ID = DEBUGGING_CATEGORY_ID;
+    private static inline var CATEGORY_ID = RELEASE4_RELEASE_ID;
     private static inline var VERSION = 1;
 
     // only to be set to false if hosting on cs.washington.edu or specific distribution sites like kongregate
-    private static inline var IS_DEV = true;
+    private static inline var IS_DEV = false;
 
     // Constants
     private static inline var GAME_ID = 1706;
@@ -34,6 +34,8 @@ class LoggingSystemTop implements LoggingSystem {
     private static inline var RELEASE2_CATEGORY_ID = 4;
     private static inline var DEBUGGING3_CATEGORY_ID = 5;
     private static inline var RELEASE3_RELEASE_ID = 6; // newgrounds
+    private static inline var DEBUGGING4_CATEGORY_ID = 7;
+    private static inline var RELEASE4_RELEASE_ID = 8; // 
 
     private var logger:CapstoneLogger;
     private var curBeat:Float;

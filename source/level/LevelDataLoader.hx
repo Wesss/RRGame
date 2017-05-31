@@ -124,7 +124,7 @@ class LevelDataLoader {
                 case "RedSliderRewind": {
                     var displacement = parseDisplacement(boardGrid);
                     var warnTime = Std.parseInt(data.get("warningTime"));
-                    var rewindTime = Std.parseInt(data.get("rewindTime"));
+                    var rewindTime = Std.parseFloat(data.get("rewindTime"));
 
                     trackActions.push(new RewindSliderThreat(
                         beatOffset,
