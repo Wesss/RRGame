@@ -170,6 +170,7 @@ class PlayLevelState extends FlxState {
 	}
 
 	public static function endPlayState(logger, levelIndex, playerHP, isRetrying) {
+		FlxG.sound.music.persist = true;
 		FlxG.switchState(new HubWorldState(logger, {
 			level: levelIndex,
 			score: playerHP

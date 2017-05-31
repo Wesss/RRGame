@@ -91,6 +91,11 @@ class HubWorldState extends FlxState {
         FlxG.camera.follow(cameraTarget);
         FlxG.mouse.visible = true;
 
+        if (FlxG.sound.music != null) {
+            FlxG.sound.music.volume = .5;
+            FlxG.sound.music.persist = false;
+        }
+
         var levelScores = LocalStorageManager.getProgress();
 
         for (i in 0...hubWorldData.worlds.length) {
