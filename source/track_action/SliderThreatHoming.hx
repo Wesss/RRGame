@@ -23,8 +23,8 @@ class SliderThreatHoming extends SliderThreat {
     override public function triggerBeat(beatIndex:Int):Void {
         if (beatIndex == 0) {
             this.position = playerPosition;
-            this.x = BoardCoordinates.displacementToX(position.horizontalDisplacement);
-            this.y = BoardCoordinates.displacementToY(position.verticalDisplacement);
+            this.x = BoardCoordinates.displacementToX(position.horizontalDisplacement) - width / 2;
+            this.y = BoardCoordinates.displacementToY(position.verticalDisplacement) - height / 2;
             isStarted = true;
         }
         super.triggerBeat(beatIndex);

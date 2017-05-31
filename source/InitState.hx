@@ -1,6 +1,6 @@
 package ;
 
-import persistent_state.SaveManager;
+import persistent_state.LocalStorageManager;
 import flixel.FlxState;
 import hubworld.HubWorldState;
 import flixel.FlxG;
@@ -18,7 +18,7 @@ class InitState extends FlxState {
         #else
         var logger = new LoggingSystemTop();
         #end
-        SaveManager.initializeSaveData();
+        LocalStorageManager.initializePersistentState(logger);
 
         FlxG.switchState(new HubWorldState(logger));
     }

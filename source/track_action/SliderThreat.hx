@@ -1,5 +1,6 @@
 package track_action;
 
+import level.ThreatLandedEvent;
 import board.BoardCoordinates;
 import bus.*;
 import domain.Displacement;
@@ -15,7 +16,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
     private var bpm : Int;
     // PUBLIC FOR TESTING
     public var position(default, null) : Displacement;
-    private var killBus : Bus<Displacement>;
+    private var killBus : Bus<ThreatLandedEvent>;
 
     private var warningTween : FlxTween;
 
@@ -24,8 +25,9 @@ class SliderThreat extends FlxSprite implements TrackAction {
               BoardCoordinates.displacementToY(position.verticalDisplacement));
 
         initGraphicsAndAnimations();
+        x -= width / 2;
+        y -= height / 2;
 
-        visible = false;
         kill();
         triggerBeats = [-beatWarnTime, 0];
         this.beatOffset = beatOffset;
@@ -35,6 +37,11 @@ class SliderThreat extends FlxSprite implements TrackAction {
         this.killBus = universalBus.threatKillSquare;
 
         universalBus.playerHit.subscribe(this, playerHitHandler);
+        universalBus.rewindTiming.subscribe(this, function(rewindTimingEvent) {
+            if (rewindTimingEvent.beatRewindingTo < beatOffset - beatWarnTime) {
+                kill();
+            }
+        });
     }
 
     public function initGraphicsAndAnimations() {
@@ -62,13 +69,11 @@ class SliderThreat extends FlxSprite implements TrackAction {
 
     public function warning() {
         // Show threat:
-        visible = true;
         revive();
+        alpha = 1;
 
         scale.x = 0;
         scale.y = 0;
-        x -= width / 2;
-        y -= height / 2;
 
         // Flash open the threat square
         warningTween = FlxTween.tween(this.scale, {
@@ -94,7 +99,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
         // Threat collision
         warningTween.cancel(); // In case timing discrepency between beats timing and timer
 
-        killBus.broadcast(position);
+        killBus.broadcast(new ThreatLandedEvent(this, position));
 
         scale.x = 1;
         scale.y = 1;
@@ -105,8 +110,7 @@ class SliderThreat extends FlxSprite implements TrackAction {
         }, 1 / bpm * 60, {
             ease: FlxEase.quadOut,
             onComplete: function(_) {
-                visible = false;
-                destroy();
+                kill();
             }
         });
 
@@ -124,8 +128,8 @@ class SliderThreat extends FlxSprite implements TrackAction {
         animation.play("dodge");
     }
     
-    public function playerHitHandler(where : Displacement) {
-        if (where == position) {
+    public function playerHitHandler(event : ThreatLandedEvent) {
+        if (this == event.trackAction) {
             animateHit();
         }
     }

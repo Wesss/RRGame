@@ -1,5 +1,6 @@
 package track_action;
 
+import level.ThreatLandedEvent;
 import bus.*;
 import domain.Displacement;
 import flixel.tweens.*;
@@ -40,7 +41,7 @@ class Crate extends SliderThreat {
         // Threat collision
         warningTween.cancel(); // In case timing discrepency between beats timing and timer
 
-        killBus.broadcast(position);
+        killBus.broadcast(new ThreatLandedEvent(this, position));
         crateLandedBus.broadcast(position);
 
         scale.x = 1;
@@ -57,9 +58,13 @@ class Crate extends SliderThreat {
         }, 1 / bpm * 60, {
             ease: FlxEase.quadOut,
             onComplete: function(_) {
-                visible = false;
-                destroy();
+                kill();
             }
         });
+    }
+
+    // No hit animation exists, so don't attempt to play anything
+    public override function animateHit() {
+
     }
 }

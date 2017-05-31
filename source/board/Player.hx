@@ -1,5 +1,6 @@
 package board;
 
+import level.ThreatLandedEvent;
 import bus.UniversalBus;
 import domain.Displacement;
 import flixel.FlxSprite;
@@ -17,6 +18,7 @@ class Player extends FlxSpriteGroup {
     var oldBeat : Float;
     var updateScaleOnSpeed : Bool;
     var position : Displacement;
+    var isTutorial : Bool;
 
     public var hp(default, null) : Int;
 
@@ -52,12 +54,15 @@ class Player extends FlxSpriteGroup {
         uniBus.gameOver.subscribe(this, gameOverHandler);
         uniBus.beat.subscribe(this, pulse);
         uniBus.crateHit.subscribe(this, showCrateHit);
+        uniBus.tutorialFlag.subscribe(this, tutorialHandler);
         hp = 4;
 
         oldX = x;
         oldY = y;
 
         updateScaleOnSpeed = true;
+
+        isTutorial = false;
     }
 
     public override function update(elapsed : Float) {
@@ -113,11 +118,13 @@ class Player extends FlxSpriteGroup {
         });
     }
     
-    public function playerHitHandler(whichSquareHit : Displacement) {
-        hp--;
+    public function playerHitHandler(event : ThreatLandedEvent) {
+        if (hp > 1 || !isTutorial) {
+            hp--;
+        }
         uniBus.playerHPChange.broadcast(hp);
         if (hp <= 0) {
-            uniBus.playerDie.broadcast(whichSquareHit);
+            uniBus.playerDie.broadcast(event.position);
             uniBus.controls.unsubscribe(this);
             uniBus.beat.unsubscribe(this);
             updateScaleOnSpeed = false;
@@ -248,5 +255,13 @@ class Player extends FlxSpriteGroup {
         }, 0.03, {
             ease: FlxEase.quadOut
         }));
+    }
+
+    public function tutorialHandler(event) {
+        isTutorial = true;
+        hp = 1;
+        for (indicator in hpIndicators) {
+            indicator.alpha = 0;
+        }
     }
 }

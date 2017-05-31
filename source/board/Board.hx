@@ -10,9 +10,7 @@ class Board extends FlxSpriteGroup {
 
         for (horizontalDisplacement in Type.allEnums(HorizontalDisplacement)) {
             for (verticalDisplacement in Type.allEnums(VerticalDisplacement)) {
-                var square = new BoardSquare(BoardCoordinates.displacementToX(horizontalDisplacement) - BoardCoordinates.BOARD_SQUARE_WIDTH / 2,
-                                             BoardCoordinates.displacementToY(verticalDisplacement) - BoardCoordinates.BOARD_SQUARE_HEIGHT / 2,
-                                             universalBus);
+                var square = new BoardSquare(new Displacement(horizontalDisplacement, verticalDisplacement), universalBus);
                 add(square);
             }
         }

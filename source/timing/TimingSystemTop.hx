@@ -13,27 +13,29 @@ class TimingSystemTop extends FlxBasic {
 
     public static inline var MILISECONDS_PER_MINUTE = 60000.0;
 
-    private var beatEventBus:Bus<BeatEvent>;
     private var milisecondsPerBeat:Float;
     private var offsetMilis:Float;
     private var prevMusicHeadPlayTime:Null<Float>;
     private var prevMusicTimeStamp:Float;
     private var isOffSync:Bool;
-    private var lastBeatBroadcasted:Float;
+
+    private var beatEventBus:Bus<BeatEvent>;
+    private var rewindTimingBus:Bus<RewindTimingEvent>;
 
     public function new(universalBus:UniversalBus) {
         super();
         beatEventBus = universalBus.beat;
+        rewindTimingBus = universalBus.rewindTiming;
         milisecondsPerBeat = 0;
         offsetMilis = 0;
         prevMusicHeadPlayTime = 0;
         prevMusicTimeStamp = 0;
         isOffSync = true;
-        lastBeatBroadcasted = -9999999;
 
         universalBus.levelLoad.subscribe(this, loadMusicInformation);
         universalBus.musicPlayheadUpdate.subscribe(this, updateMusicPlayhead);
         universalBus.pause.subscribe(this, pause);
+        universalBus.rewindLevel.subscribe(this, rewind);
     }
 
     /**
@@ -50,14 +52,8 @@ class TimingSystemTop extends FlxBasic {
     override public function update(elapsed:Float):Void {
         super.update(elapsed);
 
-        var curStamp = haxe.Timer.stamp() * 1000;
-
         if (!isOffSync && prevMusicHeadPlayTime != 0) {
-            var curBeat = (prevMusicHeadPlayTime + ((curStamp) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
-
-            if (curBeat > lastBeatBroadcasted) {
-                beatEventBus.broadcast(new BeatEvent(curBeat));
-            }
+            beatEventBus.broadcast(new BeatEvent(getCurBeat()));
         }
     }
 
@@ -69,5 +65,28 @@ class TimingSystemTop extends FlxBasic {
 
     public function pause(pauseEvent):Void {
         isOffSync = true;
+    }
+
+    public function rewind(event:RewindLevelEvent):Void {
+        var curBeat = getCurBeat();
+        var beatRewindingTo = Math.floor((curBeat ) * 2) / 2 - event.beatsToRewind;
+        var actualBeatsToRewind = curBeat - beatRewindingTo;
+        var milisecondsToRewind = actualBeatsToRewind * milisecondsPerBeat;
+        var milisecondsSinceLastMusicPlayheadUpdate = getTimeStampMilis() - prevMusicTimeStamp;
+
+        isOffSync = true;
+
+        rewindTimingBus.broadcast(new RewindTimingEvent(
+                milisecondsToRewind,
+                milisecondsSinceLastMusicPlayheadUpdate,
+                beatRewindingTo));
+    }
+
+    private static function getTimeStampMilis():Float {
+        return haxe.Timer.stamp() * 1000;
+    }
+
+    private function getCurBeat():Float {
+        return (prevMusicHeadPlayTime + ((getTimeStampMilis()) - prevMusicTimeStamp) - offsetMilis) / milisecondsPerBeat;
     }
 }

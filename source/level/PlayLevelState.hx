@@ -68,10 +68,38 @@ class PlayLevelState extends FlxState {
 
 		add(new ScreenBanner(universalBus, "Bringing the music", 20));
 
+		// Rewind indicators
+		universalBus.sliderRewindHit.subscribe(this, function(e) {
+			var rewindIndicator = new RewindIndicator();
+			FlxTween.globalManager.active = false;
+
+			rewindIndicator.closeCallback = function() {
+				universalBus.unpause.broadcast(true);
+				FlxTween.globalManager.active = true;
+				
+				// Restore pause and unpause menu
+				universalBus.pause.subscribe(this, pauseGame);
+				universalBus.unpause.subscribe(this, unpauseGame);
+			}
+
+			universalBus.rewindLevel.broadcast(e);
+			openSubState(rewindIndicator);
+		});
+
+
 		// Camera
 		FlxG.camera.focusOn(new FlxPoint(0, 0));
 
 		// Pause
+		var escHintText = new FlxText(-310, -240, 0, "ESC: Pause/Options");
+		escHintText.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 15, flixel.util.FlxColor.WHITE);
+		userInterfaceGroup.add(escHintText);
+		FlxTween.tween(escHintText, {alpha : 0}, 1, {
+			startDelay : 10,
+			onComplete : function(tween) {
+				userInterfaceGroup.remove(escHintText);
+			}
+		});
 		universalBus.pause.subscribe(this, pauseGame);
 		universalBus.unpause.subscribe(this, unpauseGame);
 

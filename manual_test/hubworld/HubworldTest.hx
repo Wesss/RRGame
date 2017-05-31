@@ -1,6 +1,7 @@
 package;
 
-import persistent_state.SaveManager;
+import logging.EmptyLogger;
+import persistent_state.LocalStorageManager;
 import flixel.FlxG;
 import hubworld.HubWorldState;
 import flixel.FlxState;
@@ -15,17 +16,15 @@ class HubworldTest extends FlxState {
 		var levelScores = new Map<Int, Float>();
 		// Add level scores here to load into hubworld with said data
 		// ie. levelScores.set(0, 4);
-		levelScores.set(0, 2);
-		levelScores.set(1, 3);
-		levelScores.set(3, 3);
+		levelScores.set(0, 4);
+//		levelScores.set(1, 3);
 
-
-		SaveManager.initializeSaveData();
-		SaveManager.saveProgress(levelScores);
+		LocalStorageManager.initializePersistentState(new EmptyLogger());
+		LocalStorageManager.saveProgress(levelScores);
 
 		FlxG.switchState(new HubWorldState(null, {
-			level: 2,
-			score: 4
+			level: 3,
+			score: 2
 		}));
 	}
 

@@ -39,11 +39,13 @@ class HealthPickup extends FlxSprite implements TrackAction {
     public function triggerBeat(beatIndex:Int):Void {
         revive();
         angularVelocity = 90;
-        universalBus.healthHit.subscribe(this, function(displacement) {
-            if (displacement.equals(position)) {
-                kill();
-            }
-        });
+        universalBus.healthHit.subscribe(this, handleHealthHit);
         universalBus.healthLanded.broadcast(position);
+    }
+
+    public function handleHealthHit(displacement) {
+        if (displacement.equals(position)) {
+            kill();
+        }
     }
 }

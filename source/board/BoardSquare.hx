@@ -1,18 +1,44 @@
 package board;
 
 import bus.UniversalBus;
+import domain.*;
 import flixel.FlxSprite;
+import flixel.group.FlxSpriteGroup;
 import flixel.tweens.*;
 import timing.BeatEvent;
+import persistent_state.LocalStorageManager;
 
-class BoardSquare extends FlxSprite {
+class BoardSquare extends FlxSpriteGroup {
     private var oldBeat : Float;
+    private var crateOnTop : Bool;
+    private var isTutorial : Bool;
+    private var threatTriggered : Bool;
 
-    public function new(x : Float, y : Float, universalBus : UniversalBus) {
-        super(x, y, AssetPaths.BoardSquare__png);
+    public function new(displacement : Displacement, universalBus : UniversalBus) {
+        super(0, 0);
+
+        var square = new FlxSprite();
+        square.loadGraphic(AssetPaths.BoardSquare__png);
+        square.x -= square.width / 2;
+        square.y -= square.height / 2;
+        add(square);
+        x = BoardCoordinates.displacementToX(displacement.horizontalDisplacement);
+        y = BoardCoordinates.displacementToY(displacement.verticalDisplacement);
+
+        crateOnTop = false;
+        isTutorial = false;
+        threatTriggered = false;
 
         if (universalBus != null) {
-            universalBus.beat.subscribe(this, handleBeat);
+            // AB Testing experiment
+            if (LocalStorageManager.isBuildA()) {
+                universalBus.beat.subscribe(this, handleBeat);
+            } else {
+                universalBus.threatKillSquare.subscribe(this, function(_) {
+                    threatTriggered = true;
+                });
+                universalBus.triggerBeats.subscribe(this, handleBeat);
+            }
             universalBus.gameOver.subscribe(this, function(_) {
                 universalBus.beat.unsubscribe(this);
                 FlxTween.tween(scale, {
@@ -23,11 +49,91 @@ class BoardSquare extends FlxSprite {
                 });
                 var explodeScale = 2;
                 FlxTween.tween(this, {
-                    x : (x + width / 2) * explodeScale + x,
-                    y : (y + height / 2) * explodeScale + y
+                    x : x * explodeScale,
+                    y : y * explodeScale
                 }, 0.2, {
                     ease : FlxEase.quadIn
                 });
+            });
+
+            universalBus.crateLanded.subscribe(this, function(landedDisplacement) {
+                if (displacement.equals(landedDisplacement)) {
+                    crateOnTop = true;
+                    if (isTutorial) {
+                        kill();
+                    }
+                }
+            });
+            universalBus.crateDestroyed.subscribe(this, function(landedDisplacement) {
+                if (displacement.equals(landedDisplacement)) {
+                    crateOnTop = false;
+                    if (isTutorial) {
+                        revive();
+                        var targetX = x;
+                        var targetY = y;
+
+                        x = x * 1.4;
+                        y = y * 1.4;
+                        
+                        FlxTween.tween(this, {
+                            x : targetX,
+                            y : targetY
+                        }, 0.5, {
+                            ease : FlxEase.quadOut
+                        });
+
+                        alpha = 0.1;
+                        FlxTween.tween(this, {
+                            alpha : 1
+                        }, 0.3, {
+                            ease : FlxEase.quadIn
+                        });
+                        universalBus.crateDestroyed.unsubscribe(this);
+                    }
+                }
+            });
+            universalBus.tutorialFlag.subscribe(this, function(_) {
+                isTutorial = true;
+                if (crateOnTop) {
+                    kill();
+                }
+                var ghost = new FlxSprite();
+                ghost.loadGraphic(AssetPaths.GhostKeys__png, true, 80, 80);
+                ghost.animation.add("W", [0]);
+                ghost.animation.add("A", [1]);
+                ghost.animation.add("S", [2]);
+                ghost.animation.add("D", [3]);
+                ghost.x -= ghost.width / 2;
+                ghost.y -= ghost.height / 2;
+
+                var hasGhost = false;
+                if (displacement.equals(new Displacement(NONE, UP))) {
+                    ghost.animation.play("W");
+                    hasGhost = true;
+                } else if (displacement.equals(new Displacement(LEFT, NONE))) {
+                    ghost.animation.play("A");
+                    hasGhost = true;
+                } else if (displacement.equals(new Displacement(NONE, DOWN))) {
+                    ghost.animation.play("S");
+                    hasGhost = true;
+                } else if (displacement.equals(new Displacement(RIGHT, NONE))) {
+                    ghost.animation.play("D");
+                    hasGhost = true;
+                }
+                if (hasGhost) {
+                    add(ghost);
+                    universalBus.playerMoved.subscribe(this, function(location) {
+                        if (location.equals(displacement)) {
+                            FlxTween.tween({}, {}, 4).then(FlxTween.tween(ghost, {
+                                alpha : 0
+                            }, 1, {
+                                ease : FlxEase.quadIn
+                            }));
+                            universalBus.playerMoved.unsubscribe(this);
+                        }
+                    });
+                }
+                universalBus.tutorialFlag.unsubscribe(this);
             });
         }
 
@@ -35,7 +141,8 @@ class BoardSquare extends FlxSprite {
     }
 
     public function handleBeat(beat : BeatEvent) {
-        if (Math.round(oldBeat) >= oldBeat && Math.round(beat.beat) <= beat.beat) {
+        if (LocalStorageManager.isBuildA() && Math.round(oldBeat) >= oldBeat && Math.round(beat.beat) <= beat.beat ||
+            !LocalStorageManager.isBuildA() && threatTriggered) {
             scale.x = 1.1;
             scale.y = 1.1;
 
@@ -45,6 +152,7 @@ class BoardSquare extends FlxSprite {
             }, 0.2, {
                 ease : FlxEase.quadOut
             });
+            threatTriggered = false;
         }
         oldBeat = beat.beat;
     }
