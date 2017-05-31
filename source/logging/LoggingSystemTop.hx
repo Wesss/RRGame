@@ -22,6 +22,7 @@ class LoggingSystemTop implements LoggingSystem {
     // action IDs
     private static inline var CONTROLS_ACTION_ID = 0;
     private static inline var PLAYER_HIT_ACTION_ID = 1;
+    private static inline var PLAYER_LOSE_ACTION_ID = 2;
     // non level action IDs
     private static inline var UNFOCUS_STATE_ID = 0;
     private static inline var FOCUS_STATE_ID = 1;
@@ -58,6 +59,7 @@ class LoggingSystemTop implements LoggingSystem {
         universalBus.beat.subscribe(this, updateBeat);
         universalBus.newControlDesire.subscribe(this, logControlsInput);
         universalBus.playerHit.subscribe(this, logPlayerHit);
+        universalBus.playerDie.subscribe(this, logPlayerDie);
     }
 
     private function updateBeat(event:BeatEvent) {
@@ -70,6 +72,10 @@ class LoggingSystemTop implements LoggingSystem {
 
     private function logPlayerHit(event:ThreatLandedEvent) {
         logger.logLevelAction(PLAYER_HIT_ACTION_ID, {displacement : event.position, beat : curBeat});
+    }
+
+    private function logPlayerDie(event:Displacement) {
+        logger.logLevelAction(PLAYER_LOSE_ACTION_ID, {displacement : event, beat : curBeat});
     }
 
     public function endLevel(score:Float) {
