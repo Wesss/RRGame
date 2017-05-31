@@ -165,7 +165,7 @@ class HubWorldState extends FlxState {
         var numWorldLevelsPassed = 0;
         for (j in 0...5) {
             var levelScore = levelScores[i * 5 + j];
-            if (levelScore != null && levelScore >= 0) {
+            if (levelScore != null && levelScore > 0) {
                 numWorldLevelsPassed++;
             }
         }
