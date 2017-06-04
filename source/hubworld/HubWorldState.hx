@@ -91,6 +91,11 @@ class HubWorldState extends FlxState {
         FlxG.camera.follow(cameraTarget);
         FlxG.mouse.visible = true;
 
+        if (FlxG.sound.music != null) {
+            FlxG.sound.music.volume = .5;
+            FlxG.sound.music.persist = false;
+        }
+
         var levelScores = LocalStorageManager.getProgress();
 
         for (i in 0...hubWorldData.worlds.length) {
@@ -160,7 +165,7 @@ class HubWorldState extends FlxState {
         var numWorldLevelsPassed = 0;
         for (j in 0...5) {
             var levelScore = levelScores[i * 5 + j];
-            if (levelScore != null && levelScore >= 0) {
+            if (levelScore != null && levelScore > 0) {
                 numWorldLevelsPassed++;
             }
         }

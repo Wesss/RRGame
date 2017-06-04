@@ -12,7 +12,7 @@ class LoggingSystemTop implements LoggingSystem {
     private static inline var VERSION = 1;
 
     // only to be set to false if hosting on cs.washington.edu or specific distribution sites like kongregate
-    private static inline var IS_DEV = false;
+    private static inline var IS_DEV = true;
 
     // Constants
     private static inline var GAME_ID = 1706;
