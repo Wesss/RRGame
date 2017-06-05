@@ -468,7 +468,7 @@
     <RedSlider id="224" x="32" y="3392" warningTime="4" />
     <RedSlider id="225" x="80" y="3392" warningTime="5" />
     <RedSlider id="226" x="128" y="3392" warningTime="6" />
-    <RedSlider id="228" x="0" y="3360" warningTime="4" />
+    <RedSlider id="228" x="32" y="3360" warningTime="4" />
     <RedSlider id="229" x="80" y="3360" warningTime="5" />
     <RedSlider id="230" x="144" y="3344" warningTime="6" />
     <RedSlider id="231" x="224" y="3344" warningTime="7" />
@@ -479,8 +479,8 @@
     <RedSlider id="237" x="80" y="3472" warningTime="5" />
     <RedSlider id="238" x="128" y="3472" warningTime="6" />
     <RedSlider id="239" x="192" y="3488" warningTime="7" />
-    <RedSlider id="240" x="0" y="3584" warningTime="4" />
-    <RedSlider id="241" x="80" y="3584" warningTime="5" />
+    <RedSlider id="240" x="0" y="3600" warningTime="4" />
+    <RedSlider id="241" x="80" y="3600" warningTime="5" />
     <RedSlider id="242" x="160" y="3600" warningTime="6" />
     <RedSlider id="14" x="224" y="3616" warningTime="7" />
   </Entities>
