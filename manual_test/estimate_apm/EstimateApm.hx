@@ -20,7 +20,7 @@ class EstimateApm extends FlxState {
 	override public function create():Void {
 		super.create();
 		var results = "";
-		results += "\nLevel\tAverage APM";
+		results += "\nLevel\tAverage APM\tEstimated Winrate";
 		for (i in 1...5) {
 			var universalBus = new UniversalBus();
 			var levelData = LevelDataLoader.loadLevelData(LEVEL_ASSET_PREFIX + i + ".oel", universalBus);
@@ -31,7 +31,9 @@ class EstimateApm extends FlxState {
 			} else {
 				levelName = "1-" + (i + 1);
 			}
-			results += "\n" + levelName + "\t" + simulator.getAverageAPM();
+			var apm = simulator.getAverageAPM();
+			var winrate = -0.0094 * apm + 1.0396;
+			results += "\n" + levelName + "\t" + apm + "\t" + winrate;
 		}
 		trace(results);
 	}
