@@ -21,7 +21,7 @@ class EstimateApm extends FlxState {
 		super.create();
 		var results = "";
 		results += "\nLevel\tAverage APM\tEstimated Winrate";
-		for (i in 1...5) {
+		for (i in 1...10) {
 			var universalBus = new UniversalBus();
 			var levelData = LevelDataLoader.loadLevelData(LEVEL_ASSET_PREFIX + i + ".oel", universalBus);
 			var simulator = new Simulator(levelData);
@@ -32,7 +32,7 @@ class EstimateApm extends FlxState {
 				levelName = "1-" + (i + 1);
 			}
 			var apm = simulator.getAverageAPM();
-			var winrate = -0.0094 * apm + 1.0396;
+			var winrate = -0.0185 * apm + 1.1614;
 			results += "\n" + levelName + "\t" + apm + "\t" + winrate;
 		}
 		trace(results);
@@ -63,15 +63,36 @@ class Simulator {
 		for (i in 0...SAMPLES) {
 			var playerPosition = new Displacement(NONE, NONE);
 			var idx = 0;
+			var crates : Array<AbstractCrate>;
+			crates = [];
 			while (idx < actions.length) {
 				var beat = actions[idx].beatOffset;
-				var freeSquares = new FreeSquares();
 
+				// remove expired crates
+				var i = crates.length - 1;
+				while (i >= 0) {
+					if (crates[i].beatExpire >= beat) {
+						crates.splice(i, 1);
+					}
+					i--;
+				}
+
+				// calculate free squares given crates
+				var freeSquares = new FreeSquares();
+				for (crate in crates) {
+					freeSquares.remove(crate.position);
+				}
+
+				// process all threats during this beat, removing free squares as necessary
 				while (idx < actions.length && actions[idx].beatOffset == beat) {
 					var name = Type.getClassName(Type.getClass(actions[idx]));
 					switch (name) {
 						case "track_action.SliderThreat": freeSquares.remove((cast (actions[idx], SliderThreat)).position);
 						case "track_action.SliderThreatHoming": freeSquares.remove(playerPosition);
+						case "track_action.Crate":
+							var position = (cast (actions[idx], SliderThreat)).position;
+							freeSquares.remove(position);
+							crates.push(new AbstractCrate(position, actions[idx].triggerBeats[actions[idx].triggerBeats.length - 1]));
 						default: //trace("Undealt action: " + name);
 					}
 					idx++;
@@ -124,5 +145,15 @@ class FreeSquares {
 
 	public function getRandom() : Displacement {
 		return freeSquares[Std.random(freeSquares.length)];
+	}
+}
+
+class AbstractCrate {
+	public var position : Displacement;
+	public var beatExpire : Float;
+
+	public function new (position : Displacement, beatExpire : Float) {
+		this.position = position;
+		this.beatExpire = beatExpire;
 	}
 }
