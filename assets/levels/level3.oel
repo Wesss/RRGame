@@ -226,7 +226,6 @@
     <Board id="224" x="896" y="1024" />
     <Board id="225" x="960" y="1024" />
     <Board id="148" x="0" y="1088" />
-    <Empty id="149" x="48" y="1088" />
   </BoardDisplayLayer>
   <Entities>
     <RedSlider id="18" x="0" y="224" warningTime="2" />
@@ -493,5 +492,6 @@
     <RedSlider id="261" x="800" y="1056" warningTime="2" />
     <RedSlider id="262" x="784" y="1056" warningTime="2" />
     <RedSlider id="263" x="768" y="1056" warningTime="2" />
+    <Empty id="149" x="48" y="1088" />
   </Entities>
 </level>
