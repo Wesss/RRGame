@@ -151,7 +151,7 @@ class HubWorldState extends FlxState {
         // sound credits
         add(new ScreenTransitionButton(0, Left, "Credits", true, cameraTarget.moveToScreen.bind(-1)));
         add(new ScreenTransitionButton(-1, Right, "World 1", true, cameraTarget.moveToScreen.bind(0)));
-        var soundCredits = new FlxText(0, 0, 0, "Made by Anthony Ha and Wesley Cox" +
+        var soundCredits = new FlxText(0, 0, 0, "Made by Anthony Ha and Wesley Cox\n" +
                                                 "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
                                                 "Music courtesy of the many artists on FreeMusicArchive.org,\n" +
                                                 "Soundcloud, and Youtube.\n" +
