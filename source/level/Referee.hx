@@ -101,7 +101,7 @@ class Referee {
     }
 
     public function handleCrateDestroyed(displacement : Displacement) {
-        trace("Removed? " + crates.remove(displacement));
+        crates.remove(displacement);
     }
 
     public function handleThreatKillingSquare(event : ThreatLandedEvent) {
@@ -120,10 +120,8 @@ class Referee {
     }
 
     public function handlePlayerHit(event : ThreatLandedEvent) {
-        trace("Player hit! : " + crates + "|" + event.position);
         for (crate in crates) {
             if (crate.equals(event.position)) {
-                trace("Manually pushing player");
                 universalBus.controls.broadcast(new Displacement(NONE, NONE));
             }
         }

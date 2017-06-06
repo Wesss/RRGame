@@ -67,7 +67,7 @@ class HubWorldState extends FlxState {
             }
             if (cameraTarget == null) {
                 // this shouldn't happen unless the level was incorrect,
-                trace("Someone initialized HubWorldState with too high of a level #");
+                throw "Someone initialized HubWorldState with too high of a level #" ;
             }
 
             // If level cleared/improved on, show animation
@@ -90,6 +90,11 @@ class HubWorldState extends FlxState {
         add(cameraTarget);
         FlxG.camera.follow(cameraTarget);
         FlxG.mouse.visible = true;
+
+        if (FlxG.sound.music != null) {
+            FlxG.sound.music.volume = .5;
+            FlxG.sound.music.persist = false;
+        }
 
         var levelScores = LocalStorageManager.getProgress();
 
@@ -146,10 +151,11 @@ class HubWorldState extends FlxState {
         // sound credits
         add(new ScreenTransitionButton(0, Left, "Credits", true, cameraTarget.moveToScreen.bind(-1)));
         add(new ScreenTransitionButton(-1, Right, "World 1", true, cameraTarget.moveToScreen.bind(0)));
-        var soundCredits = new FlxText(0, 0, 0, "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
+        var soundCredits = new FlxText(0, 0, 0, "Made by Anthony Ha and Wesley Cox\n" +
+                                                "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
                                                 "Music courtesy of the many artists on FreeMusicArchive.org,\n" +
-                                                "Soundcloud, and Youtube. See the endscreen of each level for\n" +
-                                                "specific track info.");
+                                                "Soundcloud, and Youtube.\n" +
+                                                "See the endscreen of each level for specific track information.");
         soundCredits.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 20, flixel.util.FlxColor.WHITE, CENTER);
         soundCredits.y = FlxG.height / 2 - 40;
         soundCredits.x = -FlxG.width + 10;
@@ -160,7 +166,7 @@ class HubWorldState extends FlxState {
         var numWorldLevelsPassed = 0;
         for (j in 0...5) {
             var levelScore = levelScores[i * 5 + j];
-            if (levelScore != null && levelScore >= 0) {
+            if (levelScore != null && levelScore > 0) {
                 numWorldLevelsPassed++;
             }
         }

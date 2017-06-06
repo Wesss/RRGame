@@ -75,7 +75,7 @@ class LevelDataLoader {
             switch (type) {
                 case "RedSlider": {
                     var displacement = parseDisplacement(boardGrid);
-                    var warnTime = Std.parseInt(data.get("warningTime"));
+                    var warnTime = Std.parseFloat(data.get("warningTime"));
 
                     trackActions.push(new SliderThreat(
                             beatOffset,
@@ -86,7 +86,7 @@ class LevelDataLoader {
                     ));
                 }
                 case "RedSliderHoming": {
-                    var warnTime = Std.parseInt(data.get("warningTime"));
+                    var warnTime = Std.parseFloat(data.get("warningTime"));
 
                     trackActions.push(new SliderThreatHoming(
                         beatOffset,
@@ -97,8 +97,8 @@ class LevelDataLoader {
                 }
                 case "Crate": {
                     var displacement = parseDisplacement(boardGrid);
-                    var warnTime = Std.parseInt(data.get("warningTime"));
-                    var duration = Std.parseInt(data.get("duration"));
+                    var warnTime = Std.parseFloat(data.get("warningTime"));
+                    var duration = Std.parseFloat(data.get("duration"));
 
                     trackActions.push(new Crate(
                         beatOffset,
@@ -123,7 +123,7 @@ class LevelDataLoader {
                 }
                 case "RedSliderRewind": {
                     var displacement = parseDisplacement(boardGrid);
-                    var warnTime = Std.parseInt(data.get("warningTime"));
+                    var warnTime = Std.parseFloat(data.get("warningTime"));
                     var rewindTime = Std.parseFloat(data.get("rewindTime"));
 
                     trackActions.push(new RewindSliderThreat(
@@ -147,7 +147,7 @@ class LevelDataLoader {
                 }
                 case "TutorialCrate": {
                     var displacement = parseDisplacement(boardGrid);
-                    var duration = Std.parseInt(data.get("duration"));
+                    var duration = Std.parseFloat(data.get("duration"));
 
                     trackActions.push(new TutorialCrate(
                         beatOffset,

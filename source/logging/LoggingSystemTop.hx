@@ -7,12 +7,12 @@ import bus.UniversalBus;
 
 class LoggingSystemTop implements LoggingSystem {
 
-    // Change based on release version TODO should we load these from some data or build file?
-    private static inline var CATEGORY_ID = RELEASE4_RELEASE_ID;
+    // Change based on release version
+    private static inline var CATEGORY_ID = DEBUGGING5_CATEGORY_ID;
     private static inline var VERSION = 1;
 
     // only to be set to false if hosting on cs.washington.edu or specific distribution sites like kongregate
-    private static inline var IS_DEV = false;
+    private static inline var IS_DEV = true;
 
     // Constants
     private static inline var GAME_ID = 1706;
@@ -35,7 +35,9 @@ class LoggingSystemTop implements LoggingSystem {
     private static inline var DEBUGGING3_CATEGORY_ID = 5;
     private static inline var RELEASE3_RELEASE_ID = 6; // newgrounds
     private static inline var DEBUGGING4_CATEGORY_ID = 7;
-    private static inline var RELEASE4_RELEASE_ID = 8; // 
+    private static inline var RELEASE4_RELEASE_ID = 8; // game jolt, itch.io
+    private static inline var DEBUGGING5_CATEGORY_ID = 9;
+    private static inline var RELEASE5_CATEGORY_ID = 10; // kongregate
 
     private var logger:CapstoneLogger;
     private var curBeat:Float;
@@ -48,7 +50,6 @@ class LoggingSystemTop implements LoggingSystem {
             logger.setSavedUserId(userID);
         }
 
-        // TODO pass in callback for when session is created and wait on callback before starting a level
         logger.startNewSession(userID, null);
     }
 

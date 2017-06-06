@@ -47,16 +47,14 @@ class AudioSystemTop extends FlxBasic {
 
         // sound playing
         universalBus.playerHit.subscribe(this, function (event) {
-            hitSound.pause();
-            hitSound.time = 0;
-            hitSound.play();
+            hitSound.play(true);
         });
         // purposefully played along with hit sound
         universalBus.playerDie.subscribe(this, function (event) {
             deathSound.play();
         });
         universalBus.healthHit.subscribe(this, function (event) {
-            healthUpSound.play();
+            healthUpSound.play(true);
         });
 
         universalBus.gameOver.subscribe(this, function (event) {
