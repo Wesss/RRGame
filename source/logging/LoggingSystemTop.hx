@@ -8,11 +8,11 @@ import bus.UniversalBus;
 class LoggingSystemTop implements LoggingSystem {
 
     // Change based on release version
-    private static inline var CATEGORY_ID = DEBUGGING5_CATEGORY_ID;
+    private static inline var CATEGORY_ID = DEBUGGING_CATEGORY_ID;
     private static inline var VERSION = 1;
 
     // only to be set to false if hosting on cs.washington.edu or specific distribution sites like kongregate
-    private static inline var IS_DEV = true;
+    private static inline var IS_DEV = false;
 
     // Constants
     private static inline var GAME_ID = 1706;
