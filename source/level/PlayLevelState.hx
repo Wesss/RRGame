@@ -66,7 +66,7 @@ class PlayLevelState extends FlxState {
 		add(juiceGroup);
 		var levelRunner = new LevelRunner(universalBus);
 
-		add(new ScreenBanner(universalBus, "Bringing the music", 20));
+		add(getNewLoadingScreenBanner());
 
 		// Rewind indicators
 		universalBus.sliderRewindHit.subscribe(this, function(e) {
@@ -108,6 +108,11 @@ class PlayLevelState extends FlxState {
 		universalBus.levelOutOfBeats.subscribe(this, handleOutOfBeats);
 
 		levelRunner.runLevel(levelData);
+	}
+
+	private function getNewLoadingScreenBanner():ScreenBanner {
+		var messages = ScreenBanner.MESSAGES;
+		return new ScreenBanner(universalBus, messages[Std.random(messages.length)] + "...          ", 20);
 	}
 
 	override public function update(elapsed:Float):Void {
@@ -193,7 +198,6 @@ class PlayLevelState extends FlxState {
 	override public function onFocus() {
 		super.onFocus();
 		logger.focusGained();
-		// TODO hook focus up to pausing and unpausing?
 	}
 
 	override public function onFocusLost() {
@@ -228,6 +232,17 @@ private class BeatText extends FlxText {
 }
 
 private class ScreenBanner extends FlxSpriteGroup {
+
+	public static var MESSAGES =
+		["Bringing the Music",
+		"Headphones Recomended",
+		"Increasing Difficulty",
+		"Synthesizing more WUBs",
+		"Waking up the DJ",
+		"Inserting Coins into Jukebox",
+		"Putting the Needle on the Record Player",
+		"Teaching Coreography to Enemies"];
+
 	private var texts : Array<FlxText>;
 	private var speed = 200;
 
@@ -286,7 +301,7 @@ private class ScreenBanner extends FlxSpriteGroup {
 		for (i in 0...texts.length) {
 			if (texts[i].x < -texts[i].width - FlxG.width / 2) {
 				var previousIdx = (i + texts.length - 1) % texts.length;
-				texts[i].x = texts[previousIdx].x + (texts[i].width + 10);
+				texts[i].x = texts[previousIdx].x + (texts[i].width + 7);
 			}
 		}
 	}

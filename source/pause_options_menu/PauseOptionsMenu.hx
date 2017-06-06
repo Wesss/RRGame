@@ -13,8 +13,6 @@ import flixel.FlxSprite;
  **/
 class PauseOptionsMenu extends FlxSubState {
 
-    // TODO make pause menu unavailable after level end
-
     private var universalBus:UniversalBus;
     private var logger:LoggingSystem;
     private var levelIndex:Int;

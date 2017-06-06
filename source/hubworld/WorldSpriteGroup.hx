@@ -21,7 +21,6 @@ class WorldSpriteGroup extends FlxSpriteGroup {
         super(FlxG.width * index);
         var world = hubWorldData.worlds[index];
         var tutorialPassed = !world.hasTutorial || (levelScores[index * 5] != null && levelScores[index * 5] >= 1);
-        // TODO : fix this                              constant       ^                                      ^
 
         levels = [];
         for (i in 0...world.levels.length) {
@@ -32,7 +31,6 @@ class WorldSpriteGroup extends FlxSpriteGroup {
                 (index + 1) + "-" + (i + 1),
                 world.levels[i],
                 index * 5 + i,
-                //TODO: ^ and that
                 levelScores[index * 5 + i],
                 logger,
                 !tutorialPassed && i > 0);
@@ -43,14 +41,16 @@ class WorldSpriteGroup extends FlxSpriteGroup {
 
     public function unlockAll() {
         FlxG.camera.shake(0.02, 0.2, function() {
-            group.forEach(function(sprite) {
-                cast (sprite, SelectLevelButton).unlock();
-            });
+            for (i in 1...5) {
+                levels[i].unlock(1.3 + (i * 0.45));
+            }
         });
     }
 }
 
 class SelectLevelButton extends FlxSpriteGroup {
+    private var unlockSound = FlxG.sound.load(AssetPaths.NFFbump__ogg);
+
     private var isLocked : Bool;
     private var levelExists : Bool;
     private var button : FlxButton;
@@ -139,12 +139,13 @@ class SelectLevelButton extends FlxSpriteGroup {
         scoreStars.visible = false;
     }
 
-    public function unlock() {
+    public function unlock(delay:Float) {
         if (!levelExists) {
             return;
         }
-        FlxTween.tween({}, {}, Math.random() / 3 * 2, {
+        FlxTween.tween({}, {}, delay, {
             onComplete: function(tween) {
+                unlockSound.play(true);
                 FlxTween.tween(lockOverlay.scale, {
                     x : 1.2,
                     y : 1.2

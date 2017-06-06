@@ -1,11 +1,14 @@
 package hubworld;
 
+import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.FlxSprite;
 import flixel.tweens.*;
 
 class ScoreStars extends FlxSpriteGroup {
     public static var MAX_STARS(default, null) = 4;
+
+    private var appearSound = FlxG.sound.load(AssetPaths.NFFcoin03__ogg);
 
     public var score(default, null) : Int;
     private var stars : Array<FlxSprite>;
@@ -37,6 +40,8 @@ class ScoreStars extends FlxSpriteGroup {
         for (i in score...score + scoreToAdd) {
             FlxTween.tween({}, {}, 0.4 * (i - score) + 0.1, {
                 onComplete : function(_) {
+                    appearSound.play(true);
+
                     stars[i].scale.x = 1.2;
                     stars[i].scale.y = 1.2;
                     stars[i].animation.play("point");
