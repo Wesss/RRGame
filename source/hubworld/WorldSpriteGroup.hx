@@ -49,6 +49,8 @@ class WorldSpriteGroup extends FlxSpriteGroup {
 }
 
 class SelectLevelButton extends FlxSpriteGroup {
+    private var unlockSound = FlxG.sound.load(AssetPaths.NFFbump__ogg);
+
     private var isLocked : Bool;
     private var levelExists : Bool;
     private var button : FlxButton;
@@ -143,7 +145,7 @@ class SelectLevelButton extends FlxSpriteGroup {
         }
         FlxTween.tween({}, {}, Math.random() / 3 * 2, {
             onComplete: function(tween) {
-                // TODO play sound
+                unlockSound.play(true);
                 FlxTween.tween(lockOverlay.scale, {
                     x : 1.2,
                     y : 1.2
