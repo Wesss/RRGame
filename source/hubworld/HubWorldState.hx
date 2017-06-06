@@ -67,7 +67,7 @@ class HubWorldState extends FlxState {
             }
             if (cameraTarget == null) {
                 // this shouldn't happen unless the level was incorrect,
-                trace("Someone initialized HubWorldState with too high of a level #");
+                throw "Someone initialized HubWorldState with too high of a level #" ;
             }
 
             // If level cleared/improved on, show animation

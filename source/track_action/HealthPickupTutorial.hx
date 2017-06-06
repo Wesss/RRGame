@@ -24,8 +24,6 @@ class HealthPickupTutorial extends HealthPickup {
      * @param beatIndex - The index of the beat triggered within this.triggerBeats
      **/
     override public function triggerBeat(beatIndex:Int):Void {
-        trace(isLanded);
-        trace(isPickedUp);
         if (!isLanded) {
             isLanded = true;
             super.triggerBeat(beatIndex);
