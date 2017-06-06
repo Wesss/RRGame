@@ -7,7 +7,7 @@ import bus.UniversalBus;
 
 class LoggingSystemTop implements LoggingSystem {
 
-    // Change based on release version TODO should we load these from some data or build file?
+    // Change based on release version
     private static inline var CATEGORY_ID = DEBUGGING_CATEGORY_ID;
     private static inline var VERSION = 1;
 
@@ -48,7 +48,6 @@ class LoggingSystemTop implements LoggingSystem {
             logger.setSavedUserId(userID);
         }
 
-        // TODO pass in callback for when session is created and wait on callback before starting a level
         logger.startNewSession(userID, null);
     }
 

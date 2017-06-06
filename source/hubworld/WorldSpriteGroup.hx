@@ -21,7 +21,6 @@ class WorldSpriteGroup extends FlxSpriteGroup {
         super(FlxG.width * index);
         var world = hubWorldData.worlds[index];
         var tutorialPassed = !world.hasTutorial || (levelScores[index * 5] != null && levelScores[index * 5] >= 1);
-        // TODO : fix this                              constant       ^                                      ^
 
         levels = [];
         for (i in 0...world.levels.length) {
@@ -32,7 +31,6 @@ class WorldSpriteGroup extends FlxSpriteGroup {
                 (index + 1) + "-" + (i + 1),
                 world.levels[i],
                 index * 5 + i,
-                //TODO: ^ and that
                 levelScores[index * 5 + i],
                 logger,
                 !tutorialPassed && i > 0);
@@ -145,6 +143,7 @@ class SelectLevelButton extends FlxSpriteGroup {
         }
         FlxTween.tween({}, {}, Math.random() / 3 * 2, {
             onComplete: function(tween) {
+                // TODO play sound
                 FlxTween.tween(lockOverlay.scale, {
                     x : 1.2,
                     y : 1.2

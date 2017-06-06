@@ -37,6 +37,8 @@ class ScoreStars extends FlxSpriteGroup {
         for (i in score...score + scoreToAdd) {
             FlxTween.tween({}, {}, 0.4 * (i - score) + 0.1, {
                 onComplete : function(_) {
+                    // TODO play sound
+
                     stars[i].scale.x = 1.2;
                     stars[i].scale.y = 1.2;
                     stars[i].animation.play("point");

@@ -193,7 +193,6 @@ class PlayLevelState extends FlxState {
 	override public function onFocus() {
 		super.onFocus();
 		logger.focusGained();
-		// TODO hook focus up to pausing and unpausing?
 	}
 
 	override public function onFocusLost() {
