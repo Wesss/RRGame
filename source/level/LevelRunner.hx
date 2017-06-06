@@ -95,11 +95,6 @@ class LevelRunner {
             }
         }
 
-
-        for (trackAction in trackActions) {
-            trackAction.updateBeat(beat.beat);
-        }
-
         if (triggerBeatsTriggered) {
             universalBus.triggerBeats.broadcast(beat);
         }
