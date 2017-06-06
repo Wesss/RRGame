@@ -41,9 +41,9 @@ class WorldSpriteGroup extends FlxSpriteGroup {
 
     public function unlockAll() {
         FlxG.camera.shake(0.02, 0.2, function() {
-            group.forEach(function(sprite) {
-                cast (sprite, SelectLevelButton).unlock();
-            });
+            for (i in 1...5) {
+                levels[i].unlock(1.3 + (i * 0.45));
+            }
         });
     }
 }
@@ -139,11 +139,11 @@ class SelectLevelButton extends FlxSpriteGroup {
         scoreStars.visible = false;
     }
 
-    public function unlock() {
+    public function unlock(delay:Float) {
         if (!levelExists) {
             return;
         }
-        FlxTween.tween({}, {}, Math.random() / 3 * 2, {
+        FlxTween.tween({}, {}, delay, {
             onComplete: function(tween) {
                 unlockSound.play(true);
                 FlxTween.tween(lockOverlay.scale, {
