@@ -169,6 +169,17 @@ class HubWorldState extends FlxState {
         soundCredits.y = FlxG.height / 2 - 30;
         soundCredits.x = -FlxG.width + 3;
         add(soundCredits);
+
+        // title screen
+
+        var title = new FlxText(0, 0, 0,
+            "RRGrid\n" +
+            "Touhou Hijack!"
+        );
+        title.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 27, flixel.util.FlxColor.WHITE, CENTER);
+        title.y = FlxG.height / 2 - 160;
+        title.x = 100;
+        add(title);
     }
 
     private static function getLevelsPassedInWorld(i:Int, levelScores:Map<Int, Float>):Int {
