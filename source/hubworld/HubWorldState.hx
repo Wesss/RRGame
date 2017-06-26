@@ -151,14 +151,23 @@ class HubWorldState extends FlxState {
         // sound credits
         add(new ScreenTransitionButton(0, Left, "Credits", true, cameraTarget.moveToScreen.bind(-1)));
         add(new ScreenTransitionButton(-1, Right, "World 1", true, cameraTarget.moveToScreen.bind(0)));
-        var soundCredits = new FlxText(0, 0, 0, "Made by Anthony Ha and Wesley Cox\n" +
-                                                "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
-                                                "Music courtesy of the many artists on FreeMusicArchive.org,\n" +
-                                                "Soundcloud, and Youtube.\n" +
-                                                "See the endscreen of each level for specific track information.");
-        soundCredits.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 20, flixel.util.FlxColor.WHITE, CENTER);
-        soundCredits.y = FlxG.height / 2 - 40;
-        soundCredits.x = -FlxG.width + 10;
+        var soundCredits = new FlxText(0, 0, 0,
+            "Original Game by Anthony Ha and Wesley Cox\n" +
+            "Touhou Hijack extension by Wesley Cox\n" +
+            "\n" +
+            "Music by various artists;\n" +
+            "See the endscreen of each level for specific track credits and information.\n" +
+            "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
+            "\n" +
+            "All music tracks are used with the permission of their respective owners.\n" +
+            "All music tacks are based on original content from ZUN's Touhou video game series\.n" +
+            "This game and all media within are liscensed under CC BY-NC-SA 3.0, and distributed\n" +
+            "under the terms of use of Touhou. (http://www.geocities.co.jp/Playtown-Yoyo/1736/t-081-2.html)\n" +
+            "see the CC BY-NC-SA 3.0 webpage and touhou wiki's copyright status page for more information."
+        );
+        soundCredits.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 15, flixel.util.FlxColor.WHITE, CENTER);
+        soundCredits.y = FlxG.height / 2 - 30;
+        soundCredits.x = -FlxG.width + 3;
         add(soundCredits);
     }
 
