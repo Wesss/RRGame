@@ -1,4 +1,4 @@
-<level width="512" height="2048" BPM="135" MusicTrack="FalKKonE/Reach_For_The Moon,_Immortal_Smoke_(Remix).ogg" MusicStartOffset="444" BeatsPerPhrase="8">
+<level width="512" height="2048" BPM="160" MusicTrack="FalKKonE/Reach_For_The Moon,_Immortal_Smoke_(Remix).ogg" MusicStartOffset="465" BeatsPerPhrase="8">
   <BoardDisplayLayer>
     <Board id="26" x="0" y="256" />
     <Board id="0" x="0" y="192" />
@@ -88,13 +88,6 @@
     <Board id="128" x="0" y="1856" />
     <Board id="129" x="0" y="1920" />
     <Board id="130" x="0" y="1984" />
-    <Board id="131" x="64" y="1984" />
-    <Board id="132" x="128" y="1984" />
-    <Board id="133" x="192" y="1984" />
-    <Board id="134" x="256" y="1984" />
-    <Board id="135" x="320" y="1984" />
-    <Board id="136" x="384" y="1984" />
-    <Board id="137" x="448" y="1984" />
     <Board id="138" x="64" y="896" />
     <Board id="139" x="128" y="896" />
     <Board id="140" x="192" y="896" />
@@ -172,48 +165,6 @@
     <Board id="212" x="320" y="1536" />
     <Board id="213" x="384" y="1536" />
     <Board id="214" x="448" y="1536" />
-    <Board id="215" x="64" y="1600" />
-    <Board id="216" x="128" y="1600" />
-    <Board id="217" x="192" y="1600" />
-    <Board id="218" x="256" y="1600" />
-    <Board id="219" x="320" y="1600" />
-    <Board id="220" x="384" y="1600" />
-    <Board id="221" x="448" y="1600" />
-    <Board id="264" x="64" y="1664" />
-    <Board id="265" x="128" y="1664" />
-    <Board id="266" x="192" y="1664" />
-    <Board id="267" x="256" y="1664" />
-    <Board id="268" x="320" y="1664" />
-    <Board id="269" x="384" y="1664" />
-    <Board id="270" x="448" y="1664" />
-    <Board id="271" x="64" y="1728" />
-    <Board id="272" x="128" y="1728" />
-    <Board id="273" x="192" y="1728" />
-    <Board id="274" x="256" y="1728" />
-    <Board id="275" x="320" y="1728" />
-    <Board id="276" x="384" y="1728" />
-    <Board id="277" x="448" y="1728" />
-    <Board id="278" x="64" y="1792" />
-    <Board id="279" x="128" y="1792" />
-    <Board id="280" x="192" y="1792" />
-    <Board id="281" x="256" y="1792" />
-    <Board id="282" x="320" y="1792" />
-    <Board id="283" x="384" y="1792" />
-    <Board id="284" x="448" y="1792" />
-    <Board id="285" x="64" y="1856" />
-    <Board id="286" x="128" y="1856" />
-    <Board id="287" x="192" y="1856" />
-    <Board id="288" x="256" y="1856" />
-    <Board id="289" x="320" y="1856" />
-    <Board id="290" x="384" y="1856" />
-    <Board id="291" x="448" y="1856" />
-    <Board id="292" x="64" y="1920" />
-    <Board id="293" x="128" y="1920" />
-    <Board id="294" x="192" y="1920" />
-    <Board id="295" x="256" y="1920" />
-    <Board id="296" x="320" y="1920" />
-    <Board id="297" x="384" y="1920" />
-    <Board id="298" x="448" y="1920" />
     <Board id="65" x="64" y="512" />
     <Board id="66" x="128" y="512" />
     <Board id="67" x="192" y="512" />
@@ -257,5 +208,21 @@
     <Board id="110" x="384" y="832" />
     <Board id="111" x="448" y="832" />
   </BoardDisplayLayer>
-  <Entities />
+  <Entities>
+    <Comment id="0" x="48" y="0" comment="intro" />
+    <Comment id="1" x="48" y="128" comment="drum" />
+    <Comment id="2" x="48" y="256" comment="crazy" />
+    <Comment id="3" x="48" y="512" comment="melody" />
+    <Comment id="4" x="48" y="768" comment="high syncopation" />
+    <Comment id="5" x="48" y="1024" comment="crazy" />
+    <Comment id="6" x="48" y="1536" comment="arpegio buildup" />
+    <Comment id="7" x="304" y="1536" comment="arpegio buildup" />
+    <Empty id="10" x="304" y="1552" />
+    <RedSlider id="8" x="0" y="128" warningTime="2" />
+    <RedSlider id="9" x="16" y="256" warningTime="2" />
+    <RedSlider id="11" x="0" y="512" warningTime="2" />
+    <RedSlider id="12" x="16" y="768" warningTime="2" />
+    <RedSlider id="13" x="0" y="1024" warningTime="2" />
+    <RedSlider id="14" x="16" y="1536" warningTime="2" />
+  </Entities>
 </level>
