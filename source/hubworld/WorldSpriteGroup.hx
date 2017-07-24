@@ -25,10 +25,19 @@ class WorldSpriteGroup extends FlxSpriteGroup {
         levels = [];
         for (i in 0...world.levels.length) {
             var location = hubWorldData.buttonLocations[i];
+            var label = (index + 1) + "-" + (i + 1) + "\n";
+            switch i {
+                case 0: label += "tutorial";
+                case 1: label += "easy";
+                case 2: label += "normal";
+                case 3: label += "hard";
+                case 4: label += "lunatic";
+                default:
+            }
             var button = new SelectLevelButton(
                 location.x,
                 location.y,
-                (index + 1) + "-" + (i + 1),
+                label,
                 world.levels[i],
                 index * 5 + i,
                 levelScores[index * 5 + i],
@@ -95,7 +104,7 @@ class SelectLevelButton extends FlxSpriteGroup {
         button = new FlxButton(0, 0, label);
         button.loadGraphic(AssetPaths.BoardSquare__png);
         button.label.setFormat(AssetPaths.GlacialIndifference_Regular__ttf,
-                50, flixel.util.FlxColor.WHITE, CENTER);
+                25, flixel.util.FlxColor.WHITE, CENTER);
         var centerOffset = new FlxPoint(0, button.height / 2 - button.label.height / 2 - 5);
         button.labelOffsets = [centerOffset, centerOffset, centerOffset];
         button.scrollFactor.x = 1;
