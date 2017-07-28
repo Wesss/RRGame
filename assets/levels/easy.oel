@@ -350,5 +350,12 @@
     <RedSlider id="169" x="144" y="592" warningTime="2" />
     <RedSlider id="170" x="160" y="608" warningTime="2" />
     <RedSlider id="171" x="144" y="608" warningTime="2" />
+    <RedSlider id="96" x="320" y="784" warningTime="2" />
+    <RedSlider id="96" x="400" y="784" warningTime="2" />
+    <RedSlider id="96" x="224" y="848" warningTime="2" />
+    <RedSlider id="96" x="288" y="864" warningTime="2" />
+    <RedSlider id="96" x="336" y="864" warningTime="2" />
+    <RedSlider id="96" x="400" y="848" warningTime="2" />
+    <RedSlider id="96" x="144" y="848" warningTime="2" />
   </Entities>
 </level>
