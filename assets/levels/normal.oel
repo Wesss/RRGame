@@ -1,4 +1,4 @@
-<level width="2048" height="4096" BPM="120" MusicTrack="Ecriss/The_Frantic_Anima.ogg" MusicStartOffset="1025" BeatsPerPhrase="8">
+<level width="2048" height="4096" BPM="120" MusicTrack="Ecriss/The_Frantic_Anima.ogg" MusicStartOffset="1020" BeatsPerPhrase="8">
   <BoardDisplayLayer>
     <Board id="0" x="0" y="0" />
     <Board id="1" x="0" y="64" />

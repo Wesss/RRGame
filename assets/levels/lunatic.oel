@@ -326,7 +326,7 @@
     <Crate id="25" x="288" y="160" warningTime="2" duration="10" />
     <Crate id="26" x="208" y="160" warningTime="2" duration="11" />
     <Crate id="27" x="128" y="160" warningTime="2" duration="12" />
-    <HealthPickup id="28" x="416" y="336" />
+    <HealthPickup id="28" x="992" y="336" />
     <HealthPickup id="29" x="400" y="720" />
     <RedSliderHoming id="35" x="48" y="64" warningTime="2" />
     <RedSliderHoming id="36" x="176" y="64" warningTime="2" />
@@ -489,7 +489,7 @@
     <RedSlider id="212" x="208" y="976" warningTime="2" />
     <RedSlider id="213" x="256" y="976" warningTime="2" />
     <RedSlider id="214" x="288" y="976" warningTime="2" />
-    <RedSlider id="215" x="400" y="992" warningTime="2" />
+    <RedSlider id="215" x="320" y="976" warningTime="2" />
     <RedSlider id="216" x="336" y="976" warningTime="2" />
     <RedSlider id="217" x="416" y="976" warningTime="2" />
     <RedSlider id="218" x="400" y="976" warningTime="2" />
