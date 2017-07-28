@@ -1,0 +1,835 @@
+<level width="1024" height="2048" BPM="160" MusicTrack="FalKKonE/Reach_For_The Moon,_Immortal_Smoke_(Remix).ogg" MusicStartOffset="465" BeatsPerPhrase="8">
+  <BoardDisplayLayer>
+    <Board id="26" x="0" y="256" />
+    <Board id="0" x="0" y="192" />
+    <Board id="13" x="0" y="64" />
+    <Board id="14" x="0" y="128" />
+    <Board id="1" x="0" y="0" />
+    <Board id="2" x="64" y="64" />
+    <Board id="3" x="128" y="64" />
+    <Board id="4" x="192" y="64" />
+    <Board id="6" x="64" y="128" />
+    <Board id="7" x="128" y="128" />
+    <Board id="8" x="192" y="128" />
+    <Board id="5" x="64" y="192" />
+    <Board id="9" x="128" y="192" />
+    <Board id="10" x="192" y="192" />
+    <Board id="11" x="64" y="256" />
+    <Board id="12" x="128" y="256" />
+    <Board id="15" x="192" y="256" />
+    <Board id="16" x="64" y="0" />
+    <Board id="17" x="128" y="0" />
+    <Board id="18" x="192" y="0" />
+    <Board id="19" x="256" y="0" />
+    <Board id="20" x="320" y="0" />
+    <Board id="21" x="384" y="0" />
+    <Board id="22" x="448" y="0" />
+    <Board id="23" x="256" y="64" />
+    <Board id="24" x="320" y="64" />
+    <Board id="25" x="384" y="64" />
+    <Board id="27" x="448" y="64" />
+    <Board id="28" x="256" y="128" />
+    <Board id="29" x="320" y="128" />
+    <Board id="30" x="384" y="128" />
+    <Board id="31" x="448" y="128" />
+    <Board id="32" x="256" y="192" />
+    <Board id="33" x="320" y="192" />
+    <Board id="34" x="384" y="192" />
+    <Board id="35" x="448" y="192" />
+    <Board id="36" x="256" y="256" />
+    <Board id="37" x="320" y="256" />
+    <Board id="38" x="384" y="256" />
+    <Board id="39" x="448" y="256" />
+    <Board id="40" x="0" y="320" />
+    <Board id="41" x="64" y="320" />
+    <Board id="42" x="128" y="320" />
+    <Board id="43" x="192" y="320" />
+    <Board id="44" x="256" y="320" />
+    <Board id="45" x="320" y="320" />
+    <Board id="46" x="384" y="320" />
+    <Board id="47" x="448" y="320" />
+    <Board id="48" x="0" y="384" />
+    <Board id="49" x="64" y="384" />
+    <Board id="50" x="128" y="384" />
+    <Board id="51" x="192" y="384" />
+    <Board id="52" x="256" y="384" />
+    <Board id="53" x="320" y="384" />
+    <Board id="54" x="384" y="384" />
+    <Board id="55" x="448" y="384" />
+    <Board id="56" x="0" y="448" />
+    <Board id="57" x="64" y="448" />
+    <Board id="58" x="128" y="448" />
+    <Board id="59" x="192" y="448" />
+    <Board id="60" x="256" y="448" />
+    <Board id="61" x="320" y="448" />
+    <Board id="62" x="384" y="448" />
+    <Board id="63" x="448" y="448" />
+    <Board id="64" x="0" y="512" />
+    <Board id="72" x="0" y="576" />
+    <Board id="80" x="0" y="640" />
+    <Board id="88" x="0" y="704" />
+    <Board id="96" x="0" y="768" />
+    <Board id="104" x="0" y="832" />
+    <Board id="113" x="0" y="896" />
+    <Board id="114" x="0" y="960" />
+    <Board id="115" x="0" y="1024" />
+    <Board id="116" x="0" y="1088" />
+    <Board id="117" x="0" y="1152" />
+    <Board id="118" x="0" y="1216" />
+    <Board id="119" x="0" y="1280" />
+    <Board id="120" x="0" y="1344" />
+    <Board id="121" x="0" y="1408" />
+    <Board id="122" x="0" y="1472" />
+    <Board id="123" x="0" y="1536" />
+    <Board id="124" x="0" y="1600" />
+    <Board id="125" x="0" y="1664" />
+    <Board id="126" x="0" y="1728" />
+    <Board id="127" x="0" y="1792" />
+    <Board id="128" x="0" y="1856" />
+    <Board id="129" x="0" y="1920" />
+    <Board id="130" x="0" y="1984" />
+    <Board id="138" x="64" y="896" />
+    <Board id="139" x="128" y="896" />
+    <Board id="140" x="192" y="896" />
+    <Board id="141" x="256" y="896" />
+    <Board id="142" x="320" y="896" />
+    <Board id="143" x="384" y="896" />
+    <Board id="144" x="448" y="896" />
+    <Board id="145" x="64" y="960" />
+    <Board id="146" x="128" y="960" />
+    <Board id="147" x="192" y="960" />
+    <Board id="148" x="256" y="960" />
+    <Board id="149" x="320" y="960" />
+    <Board id="150" x="384" y="960" />
+    <Board id="151" x="448" y="960" />
+    <Board id="152" x="64" y="1024" />
+    <Board id="153" x="128" y="1024" />
+    <Board id="154" x="192" y="1024" />
+    <Board id="155" x="256" y="1024" />
+    <Board id="156" x="320" y="1024" />
+    <Board id="157" x="384" y="1024" />
+    <Board id="158" x="448" y="1024" />
+    <Board id="159" x="64" y="1088" />
+    <Board id="160" x="128" y="1088" />
+    <Board id="161" x="192" y="1088" />
+    <Board id="162" x="256" y="1088" />
+    <Board id="163" x="320" y="1088" />
+    <Board id="164" x="384" y="1088" />
+    <Board id="165" x="448" y="1088" />
+    <Board id="166" x="64" y="1152" />
+    <Board id="167" x="128" y="1152" />
+    <Board id="168" x="192" y="1152" />
+    <Board id="169" x="256" y="1152" />
+    <Board id="170" x="320" y="1152" />
+    <Board id="171" x="384" y="1152" />
+    <Board id="172" x="448" y="1152" />
+    <Board id="173" x="64" y="1216" />
+    <Board id="174" x="128" y="1216" />
+    <Board id="175" x="192" y="1216" />
+    <Board id="176" x="256" y="1216" />
+    <Board id="177" x="320" y="1216" />
+    <Board id="178" x="384" y="1216" />
+    <Board id="179" x="448" y="1216" />
+    <Board id="180" x="64" y="1280" />
+    <Board id="181" x="128" y="1280" />
+    <Board id="182" x="192" y="1280" />
+    <Board id="183" x="256" y="1280" />
+    <Board id="184" x="320" y="1280" />
+    <Board id="185" x="384" y="1280" />
+    <Board id="186" x="448" y="1280" />
+    <Board id="187" x="64" y="1344" />
+    <Board id="188" x="128" y="1344" />
+    <Board id="189" x="192" y="1344" />
+    <Board id="190" x="256" y="1344" />
+    <Board id="191" x="320" y="1344" />
+    <Board id="192" x="384" y="1344" />
+    <Board id="193" x="448" y="1344" />
+    <Board id="194" x="64" y="1408" />
+    <Board id="195" x="128" y="1408" />
+    <Board id="196" x="192" y="1408" />
+    <Board id="197" x="256" y="1408" />
+    <Board id="198" x="320" y="1408" />
+    <Board id="199" x="384" y="1408" />
+    <Board id="200" x="448" y="1408" />
+    <Board id="201" x="64" y="1472" />
+    <Board id="202" x="128" y="1472" />
+    <Board id="203" x="192" y="1472" />
+    <Board id="204" x="256" y="1472" />
+    <Board id="205" x="320" y="1472" />
+    <Board id="206" x="384" y="1472" />
+    <Board id="207" x="448" y="1472" />
+    <Board id="208" x="64" y="1536" />
+    <Board id="209" x="128" y="1536" />
+    <Board id="210" x="192" y="1536" />
+    <Board id="211" x="256" y="1536" />
+    <Board id="212" x="320" y="1536" />
+    <Board id="213" x="384" y="1536" />
+    <Board id="214" x="448" y="1536" />
+    <Board id="65" x="64" y="512" />
+    <Board id="66" x="128" y="512" />
+    <Board id="67" x="192" y="512" />
+    <Board id="68" x="64" y="576" />
+    <Board id="69" x="128" y="576" />
+    <Board id="70" x="192" y="576" />
+    <Board id="71" x="64" y="640" />
+    <Board id="73" x="128" y="640" />
+    <Board id="74" x="192" y="640" />
+    <Board id="75" x="256" y="512" />
+    <Board id="76" x="320" y="512" />
+    <Board id="77" x="384" y="512" />
+    <Board id="78" x="448" y="512" />
+    <Board id="79" x="256" y="576" />
+    <Board id="81" x="320" y="576" />
+    <Board id="82" x="384" y="576" />
+    <Board id="83" x="448" y="576" />
+    <Board id="84" x="256" y="640" />
+    <Board id="85" x="320" y="640" />
+    <Board id="86" x="384" y="640" />
+    <Board id="87" x="448" y="640" />
+    <Board id="89" x="64" y="704" />
+    <Board id="90" x="128" y="704" />
+    <Board id="91" x="192" y="704" />
+    <Board id="92" x="256" y="704" />
+    <Board id="93" x="320" y="704" />
+    <Board id="94" x="384" y="704" />
+    <Board id="95" x="448" y="704" />
+    <Board id="97" x="64" y="768" />
+    <Board id="98" x="128" y="768" />
+    <Board id="99" x="192" y="768" />
+    <Board id="100" x="256" y="768" />
+    <Board id="101" x="320" y="768" />
+    <Board id="102" x="384" y="768" />
+    <Board id="103" x="448" y="768" />
+    <Board id="105" x="64" y="832" />
+    <Board id="106" x="128" y="832" />
+    <Board id="107" x="192" y="832" />
+    <Board id="108" x="256" y="832" />
+    <Board id="109" x="320" y="832" />
+    <Board id="110" x="384" y="832" />
+    <Board id="111" x="448" y="832" />
+    <Board id="112" x="512" y="1024" />
+    <Board id="131" x="512" y="1088" />
+    <Board id="132" x="512" y="1152" />
+    <Board id="133" x="512" y="1216" />
+    <Board id="134" x="512" y="1280" />
+    <Board id="135" x="512" y="1344" />
+    <Board id="136" x="512" y="1408" />
+    <Board id="137" x="512" y="1472" />
+    <Board id="216" x="576" y="1024" />
+    <Board id="217" x="640" y="1024" />
+    <Board id="218" x="704" y="1024" />
+    <Board id="219" x="768" y="1024" />
+    <Board id="220" x="832" y="1024" />
+    <Board id="221" x="896" y="1024" />
+    <Board id="222" x="960" y="1024" />
+    <Board id="223" x="576" y="1088" />
+    <Board id="224" x="640" y="1088" />
+    <Board id="225" x="704" y="1088" />
+    <Board id="226" x="768" y="1088" />
+    <Board id="227" x="832" y="1088" />
+    <Board id="228" x="896" y="1088" />
+    <Board id="229" x="960" y="1088" />
+    <Board id="230" x="576" y="1152" />
+    <Board id="231" x="640" y="1152" />
+    <Board id="232" x="704" y="1152" />
+    <Board id="233" x="768" y="1152" />
+    <Board id="234" x="832" y="1152" />
+    <Board id="235" x="896" y="1152" />
+    <Board id="236" x="960" y="1152" />
+    <Board id="237" x="576" y="1216" />
+    <Board id="238" x="640" y="1216" />
+    <Board id="239" x="704" y="1216" />
+    <Board id="240" x="768" y="1216" />
+    <Board id="241" x="832" y="1216" />
+    <Board id="242" x="896" y="1216" />
+    <Board id="243" x="960" y="1216" />
+    <Board id="244" x="576" y="1280" />
+    <Board id="245" x="640" y="1280" />
+    <Board id="246" x="704" y="1280" />
+    <Board id="247" x="768" y="1280" />
+    <Board id="248" x="832" y="1280" />
+    <Board id="249" x="896" y="1280" />
+    <Board id="250" x="960" y="1280" />
+    <Board id="251" x="576" y="1344" />
+    <Board id="252" x="640" y="1344" />
+    <Board id="253" x="704" y="1344" />
+    <Board id="254" x="768" y="1344" />
+    <Board id="255" x="832" y="1344" />
+    <Board id="256" x="896" y="1344" />
+    <Board id="257" x="960" y="1344" />
+    <Board id="258" x="576" y="1408" />
+    <Board id="259" x="640" y="1408" />
+    <Board id="260" x="704" y="1408" />
+    <Board id="261" x="768" y="1408" />
+    <Board id="262" x="832" y="1408" />
+    <Board id="263" x="896" y="1408" />
+    <Board id="264" x="960" y="1408" />
+    <Board id="265" x="576" y="1472" />
+    <Board id="266" x="640" y="1472" />
+    <Board id="267" x="704" y="1472" />
+    <Board id="268" x="768" y="1472" />
+    <Board id="269" x="832" y="1472" />
+    <Board id="270" x="896" y="1472" />
+    <Board id="271" x="960" y="1472" />
+    <Board id="279" x="512" y="256" />
+    <Board id="280" x="512" y="320" />
+    <Board id="281" x="512" y="384" />
+    <Board id="282" x="512" y="448" />
+    <Board id="288" x="576" y="256" />
+    <Board id="289" x="640" y="256" />
+    <Board id="290" x="704" y="256" />
+    <Board id="291" x="768" y="256" />
+    <Board id="292" x="832" y="256" />
+    <Board id="293" x="896" y="256" />
+    <Board id="294" x="960" y="256" />
+    <Board id="295" x="576" y="320" />
+    <Board id="296" x="640" y="320" />
+    <Board id="297" x="704" y="320" />
+    <Board id="298" x="768" y="320" />
+    <Board id="299" x="832" y="320" />
+    <Board id="300" x="896" y="320" />
+    <Board id="301" x="960" y="320" />
+    <Board id="302" x="576" y="384" />
+    <Board id="303" x="640" y="384" />
+    <Board id="304" x="704" y="384" />
+    <Board id="305" x="768" y="384" />
+    <Board id="306" x="832" y="384" />
+    <Board id="307" x="896" y="384" />
+    <Board id="308" x="960" y="384" />
+    <Board id="309" x="576" y="448" />
+    <Board id="310" x="640" y="448" />
+    <Board id="311" x="704" y="448" />
+    <Board id="312" x="768" y="448" />
+    <Board id="313" x="832" y="448" />
+    <Board id="314" x="896" y="448" />
+    <Board id="315" x="960" y="448" />
+  </BoardDisplayLayer>
+  <Entities>
+    <Comment id="0" x="48" y="0" comment="intro" />
+    <Comment id="1" x="48" y="128" comment="drum" />
+    <Comment id="2" x="48" y="256" comment="crazy" />
+    <Comment id="3" x="48" y="512" comment="melody" />
+    <Comment id="4" x="48" y="768" comment="high syncopation" />
+    <Comment id="5" x="48" y="1024" comment="crazy" />
+    <Comment id="6" x="48" y="1536" comment="arpegio buildup" />
+    <Comment id="7" x="304" y="1536" comment="arpegio buildup" />
+    <Empty id="10" x="304" y="1552" />
+    <RedSlider id="13" x="0" y="256" warningTime="2" />
+    <RedSlider id="18" x="16" y="208" warningTime="2" />
+    <RedSlider id="19" x="144" y="208" warningTime="2" />
+    <RedSlider id="20" x="272" y="208" warningTime="2" />
+    <Crate id="8" x="0" y="128" warningTime="2" duration="14" />
+    <Crate id="21" x="80" y="128" warningTime="2" duration="13" />
+    <Crate id="22" x="64" y="144" warningTime="2" duration="13" />
+    <Crate id="23" x="160" y="128" warningTime="2" duration="12" />
+    <Crate id="24" x="224" y="144" warningTime="2" duration="11" />
+    <Crate id="25" x="288" y="160" warningTime="2" duration="10" />
+    <Crate id="26" x="208" y="160" warningTime="2" duration="11" />
+    <Crate id="27" x="128" y="160" warningTime="2" duration="12" />
+    <HealthPickup id="28" x="992" y="336" />
+    <HealthPickup id="29" x="400" y="720" />
+    <RedSliderHoming id="35" x="48" y="64" warningTime="2" />
+    <RedSliderHoming id="36" x="176" y="64" warningTime="2" />
+    <RedSliderHoming id="37" x="304" y="64" warningTime="2" />
+    <RedSlider id="9" x="0" y="512" warningTime="2" />
+    <RedSlider id="11" x="0" y="528" warningTime="2" />
+    <RedSlider id="12" x="0" y="544" warningTime="2" />
+    <RedSlider id="45" x="144" y="512" warningTime="2" />
+    <RedSlider id="46" x="144" y="544" warningTime="2" />
+    <RedSlider id="47" x="144" y="528" warningTime="2" />
+    <RedSlider id="48" x="288" y="512" warningTime="2" />
+    <RedSlider id="49" x="288" y="528" warningTime="2" />
+    <RedSlider id="50" x="288" y="544" warningTime="2" />
+    <RedSlider id="56" x="16" y="576" warningTime="2" />
+    <RedSlider id="57" x="16" y="592" warningTime="2" />
+    <RedSlider id="58" x="0" y="592" warningTime="2" />
+    <RedSlider id="59" x="0" y="576" warningTime="2" />
+    <RedSlider id="60" x="96" y="576" warningTime="2" />
+    <RedSlider id="61" x="96" y="592" warningTime="2" />
+    <RedSlider id="62" x="96" y="608" warningTime="2" />
+    <RedSlider id="63" x="80" y="608" warningTime="2" />
+    <RedSlider id="64" x="64" y="608" warningTime="2" />
+    <RedSlider id="65" x="160" y="592" warningTime="2" />
+    <RedSlider id="66" x="160" y="576" warningTime="2" />
+    <RedSlider id="67" x="144" y="576" warningTime="2" />
+    <RedSlider id="68" x="144" y="592" warningTime="2" />
+    <RedSlider id="69" x="192" y="576" warningTime="2" />
+    <RedSlider id="70" x="192" y="592" warningTime="2" />
+    <RedSlider id="71" x="192" y="608" warningTime="2" />
+    <RedSlider id="72" x="208" y="608" warningTime="2" />
+    <RedSlider id="73" x="224" y="608" warningTime="2" />
+    <RedSlider id="74" x="272" y="576" warningTime="2" />
+    <RedSlider id="75" x="272" y="592" warningTime="2" />
+    <RedSlider id="76" x="256" y="592" warningTime="2" />
+    <RedSlider id="77" x="256" y="576" warningTime="2" />
+    <RedSlider id="78" x="16" y="640" warningTime="2" />
+    <RedSlider id="79" x="16" y="656" warningTime="2" />
+    <RedSlider id="80" x="32" y="656" warningTime="2" />
+    <RedSlider id="81" x="32" y="672" warningTime="2" />
+    <RedSlider id="82" x="16" y="672" warningTime="2" />
+    <RedSlider id="83" x="0" y="672" warningTime="2" />
+    <RedSlider id="84" x="0" y="656" warningTime="2" />
+    <RedSlider id="85" x="0" y="640" warningTime="2" />
+    <RedSlider id="86" x="128" y="640" warningTime="2" />
+    <RedSlider id="87" x="144" y="640" warningTime="2" />
+    <RedSlider id="88" x="160" y="640" warningTime="2" />
+    <RedSlider id="89" x="144" y="656" warningTime="2" />
+    <RedSlider id="90" x="128" y="656" warningTime="2" />
+    <RedSlider id="91" x="128" y="672" warningTime="2" />
+    <RedSlider id="92" x="144" y="672" warningTime="2" />
+    <RedSlider id="93" x="160" y="656" warningTime="2" />
+    <RedSlider id="94" x="256" y="656" warningTime="2" />
+    <RedSlider id="95" x="272" y="656" warningTime="2" />
+    <RedSlider id="96" x="272" y="672" warningTime="2" />
+    <RedSlider id="97" x="288" y="672" warningTime="2" />
+    <RedSlider id="98" x="288" y="656" warningTime="2" />
+    <RedSlider id="99" x="288" y="640" warningTime="2" />
+    <RedSlider id="100" x="272" y="640" warningTime="2" />
+    <RedSlider id="101" x="256" y="640" warningTime="2" />
+    <RedSlider id="102" x="384" y="656" warningTime="2" />
+    <RedSlider id="103" x="384" y="672" warningTime="2" />
+    <RedSlider id="104" x="400" y="672" warningTime="2" />
+    <RedSlider id="105" x="416" y="672" warningTime="2" />
+    <RedSlider id="106" x="416" y="656" warningTime="2" />
+    <RedSlider id="107" x="416" y="640" warningTime="2" />
+    <RedSlider id="108" x="400" y="640" warningTime="2" />
+    <RedSlider id="109" x="400" y="656" warningTime="2" />
+    <RedSlider id="110" x="0" y="704" warningTime="2" />
+    <RedSlider id="111" x="0" y="720" warningTime="2" />
+    <RedSlider id="112" x="0" y="736" warningTime="2" />
+    <RedSlider id="113" x="80" y="704" warningTime="2" />
+    <RedSlider id="114" x="80" y="720" warningTime="2" />
+    <RedSlider id="115" x="96" y="720" warningTime="2" />
+    <RedSlider id="116" x="96" y="736" warningTime="2" />
+    <RedSlider id="117" x="160" y="720" warningTime="2" />
+    <RedSlider id="118" x="144" y="720" warningTime="2" />
+    <RedSlider id="119" x="144" y="736" warningTime="2" />
+    <RedSlider id="120" x="128" y="720" warningTime="2" />
+    <RedSlider id="121" x="128" y="704" warningTime="2" />
+    <RedSlider id="122" x="208" y="704" warningTime="2" />
+    <RedSlider id="123" x="224" y="736" warningTime="2" />
+    <RedSlider id="124" x="192" y="720" warningTime="2" />
+    <RedSlider id="125" x="192" y="704" warningTime="2" />
+    <RedSlider id="126" x="192" y="736" warningTime="2" />
+    <RedSlider id="127" x="288" y="704" warningTime="2" />
+    <RedSlider id="128" x="272" y="720" warningTime="2" />
+    <RedSlider id="129" x="272" y="736" warningTime="2" />
+    <RedSlider id="130" x="288" y="736" warningTime="2" />
+    <RedSlider id="131" x="256" y="736" warningTime="2" />
+    <RedSlider id="132" x="336" y="704" warningTime="2" />
+    <RedSlider id="134" x="320" y="720" warningTime="2" />
+    <RedSlider id="135" x="352" y="720" warningTime="2" />
+    <RedSlider id="136" x="336" y="736" warningTime="2" />
+    <RedSlider id="137" x="384" y="704" warningTime="2" />
+    <RedSlider id="138" x="416" y="704" warningTime="2" />
+    <RedSlider id="139" x="416" y="736" warningTime="2" />
+    <RedSlider id="140" x="384" y="736" warningTime="2" />
+    <RedSlider id="141" x="400" y="720" warningTime="2" />
+    <Crate id="133" x="32" y="768" warningTime="2" duration="7" />
+    <Crate id="142" x="0" y="832" warningTime="2" duration="7" />
+    <Crate id="143" x="16" y="832" warningTime="2" duration="7" />
+    <Crate id="144" x="0" y="848" warningTime="2" duration="7" />
+    <Crate id="145" x="0" y="928" warningTime="2" duration="7" />
+    <Crate id="146" x="16" y="928" warningTime="2" duration="7" />
+    <Crate id="147" x="32" y="928" warningTime="2" duration="7" />
+    <Crate id="148" x="32" y="912" warningTime="2" duration="7" />
+    <Crate id="149" x="32" y="896" warningTime="2" duration="7" />
+    <Crate id="150" x="0" y="960" warningTime="2" duration="7" />
+    <Crate id="151" x="16" y="960" warningTime="2" duration="7" />
+    <Crate id="152" x="32" y="960" warningTime="2" duration="7" />
+    <Crate id="153" x="0" y="992" warningTime="2" duration="7" />
+    <Crate id="154" x="16" y="992" warningTime="2" duration="7" />
+    <Crate id="155" x="32" y="992" warningTime="2" duration="7" />
+    <RedSlider id="156" x="0" y="768" warningTime="2" />
+    <RedSlider id="157" x="0" y="784" warningTime="2" />
+    <RedSlider id="158" x="0" y="800" warningTime="2" />
+    <RedSlider id="159" x="96" y="784" warningTime="2" />
+    <RedSlider id="160" x="80" y="784" warningTime="2" />
+    <RedSlider id="161" x="80" y="768" warningTime="2" />
+    <RedSlider id="162" x="128" y="800" warningTime="2" />
+    <RedSlider id="163" x="144" y="800" warningTime="2" />
+    <RedSlider id="164" x="160" y="800" warningTime="2" />
+    <RedSlider id="169" x="288" y="784" warningTime="2" />
+    <RedSlider id="170" x="272" y="784" warningTime="2" />
+    <RedSlider id="171" x="272" y="800" warningTime="2" />
+    <RedSlider id="172" x="288" y="800" warningTime="2" />
+    <RedSlider id="165" x="320" y="768" warningTime="2" />
+    <RedSlider id="166" x="320" y="784" warningTime="2" />
+    <RedSlider id="167" x="336" y="784" warningTime="2" />
+    <RedSlider id="168" x="336" y="768" warningTime="2" />
+    <RedSlider id="173" x="400" y="800" warningTime="2" />
+    <RedSlider id="174" x="400" y="784" warningTime="2" />
+    <RedSlider id="175" x="384" y="784" warningTime="2" />
+    <RedSlider id="176" x="384" y="800" warningTime="2" />
+    <RedSlider id="178" x="0" y="864" warningTime="2" />
+    <RedSlider id="179" x="96" y="864" warningTime="2" />
+    <RedSlider id="180" x="144" y="864" warningTime="2" />
+    <RedSlider id="181" x="144" y="848" warningTime="2" />
+    <RedSlider id="182" x="160" y="848" warningTime="2" />
+    <RedSlider id="183" x="160" y="864" warningTime="2" />
+    <RedSlider id="184" x="96" y="832" warningTime="2" />
+    <RedSlider id="185" x="64" y="864" warningTime="2" />
+    <RedSlider id="186" x="224" y="832" warningTime="2" />
+    <RedSlider id="187" x="192" y="864" warningTime="2" />
+    <RedSlider id="197" x="0" y="896" warningTime="2" />
+    <RedSlider id="198" x="80" y="896" warningTime="2" />
+    <RedSlider id="199" x="80" y="912" warningTime="2" />
+    <RedSlider id="200" x="128" y="912" warningTime="2" />
+    <RedSlider id="201" x="208" y="896" warningTime="2" />
+    <RedSlider id="202" x="208" y="912" warningTime="2" />
+    <RedSlider id="203" x="256" y="896" warningTime="2" />
+    <RedSlider id="204" x="256" y="912" warningTime="2" />
+    <RedSlider id="205" x="336" y="896" warningTime="2" />
+    <RedSlider id="206" x="384" y="896" warningTime="2" />
+    <RedSlider id="207" x="384" y="912" warningTime="2" />
+    <RedSlider id="208" x="464" y="912" warningTime="2" />
+    <RedSlider id="209" x="0" y="976" warningTime="2" />
+    <RedSlider id="210" x="80" y="976" warningTime="2" />
+    <RedSlider id="211" x="160" y="976" warningTime="2" />
+    <RedSlider id="212" x="208" y="976" warningTime="2" />
+    <RedSlider id="213" x="256" y="976" warningTime="2" />
+    <RedSlider id="214" x="288" y="976" warningTime="2" />
+    <RedSlider id="215" x="320" y="976" warningTime="2" />
+    <RedSlider id="216" x="336" y="976" warningTime="2" />
+    <RedSlider id="217" x="416" y="976" warningTime="2" />
+    <RedSlider id="218" x="400" y="976" warningTime="2" />
+    <RedSlider id="16" x="0" y="64" warningTime="2" />
+    <RedSlider id="17" x="0" y="80" warningTime="2" />
+    <RedSlider id="30" x="0" y="96" warningTime="2" />
+    <RedSlider id="32" x="128" y="96" warningTime="2" />
+    <RedSlider id="34" x="144" y="96" warningTime="2" />
+    <RedSlider id="38" x="160" y="96" warningTime="2" />
+    <RedSlider id="39" x="288" y="64" warningTime="2" />
+    <RedSlider id="40" x="288" y="80" warningTime="2" />
+    <RedSlider id="42" x="64" y="272" warningTime="2" />
+    <RedSlider id="43" x="128" y="288" warningTime="2" />
+    <RedSlider id="41" x="288" y="96" warningTime="2" />
+    <RedSlider id="15" x="128" y="0" warningTime="2" />
+    <RedSlider id="33" x="144" y="0" warningTime="2" />
+    <RedSlider id="276" x="160" y="0" warningTime="2" />
+    <RedSlider id="277" x="288" y="0" warningTime="2" />
+    <RedSlider id="278" x="288" y="16" warningTime="2" />
+    <RedSlider id="279" x="288" y="32" warningTime="2" />
+    <RedSlider id="243" x="32" y="352" warningTime="2" />
+    <RedSlider id="224" x="352" y="272" warningTime="2" />
+    <RedSlider id="225" x="416" y="288" warningTime="2" />
+    <RedSlider id="226" x="288" y="256" warningTime="2" />
+    <RedSlider id="227" x="528" y="272" warningTime="2" />
+    <RedSlider id="228" x="592" y="288" warningTime="2" />
+    <RedSlider id="229" x="464" y="256" warningTime="2" />
+    <RedSlider id="230" x="704" y="272" warningTime="2" />
+    <RedSlider id="231" x="768" y="288" warningTime="2" />
+    <RedSlider id="232" x="640" y="256" warningTime="2" />
+    <RedSlider id="233" x="848" y="272" warningTime="2" />
+    <RedSlider id="234" x="912" y="288" warningTime="2" />
+    <RedSlider id="235" x="784" y="256" warningTime="2" />
+    <RedSlider id="239" x="992" y="272" warningTime="2" />
+    <RedSlider id="241" x="928" y="256" warningTime="2" />
+    <RedSlider id="31" x="16" y="272" warningTime="4" />
+    <RedSlider id="240" x="80" y="320" warningTime="2" />
+    <RedSlider id="246" x="144" y="336" warningTime="2" />
+    <RedSlider id="247" x="208" y="352" warningTime="2" />
+    <RedSlider id="251" x="288" y="320" warningTime="2" />
+    <RedSlider id="252" x="352" y="336" warningTime="2" />
+    <RedSlider id="253" x="416" y="352" warningTime="2" />
+    <HealthPickup id="254" x="400" y="992" />
+    <RedSlider id="255" x="400" y="320" warningTime="2" />
+    <RedSlider id="256" x="464" y="336" warningTime="2" />
+    <RedSlider id="257" x="528" y="352" warningTime="2" />
+    <RedSlider id="258" x="544" y="320" warningTime="2" />
+    <RedSlider id="259" x="608" y="336" warningTime="2" />
+    <RedSlider id="260" x="672" y="352" warningTime="2" />
+    <RedSlider id="261" x="640" y="320" warningTime="2" />
+    <RedSlider id="262" x="704" y="336" warningTime="2" />
+    <RedSlider id="263" x="768" y="352" warningTime="2" />
+    <RedSlider id="264" x="784" y="320" warningTime="2" />
+    <RedSlider id="265" x="848" y="336" warningTime="2" />
+    <RedSlider id="266" x="912" y="352" warningTime="2" />
+    <RedSlider id="267" x="864" y="320" warningTime="2" />
+    <RedSlider id="268" x="928" y="336" warningTime="2" />
+    <RedSlider id="269" x="992" y="352" warningTime="2" />
+    <RedSlider id="270" x="960" y="320" warningTime="2" />
+    <RedSlider id="271" x="0" y="1024" warningTime="2" />
+    <RedSlider id="272" x="64" y="1040" warningTime="2" />
+    <RedSlider id="280" x="288" y="1024" warningTime="2" />
+    <RedSlider id="281" x="352" y="1040" warningTime="2" />
+    <RedSlider id="282" x="416" y="1056" warningTime="2" />
+    <RedSlider id="283" x="272" y="1024" warningTime="2" />
+    <RedSlider id="284" x="336" y="1040" warningTime="2" />
+    <RedSlider id="285" x="400" y="1056" warningTime="2" />
+    <RedSlider id="286" x="384" y="1024" warningTime="2" />
+    <RedSlider id="287" x="448" y="1040" warningTime="2" />
+    <RedSlider id="288" x="512" y="1056" warningTime="2" />
+    <RedSlider id="289" x="544" y="1024" warningTime="2" />
+    <RedSlider id="290" x="608" y="1040" warningTime="2" />
+    <RedSlider id="291" x="672" y="1056" warningTime="2" />
+    <RedSlider id="292" x="656" y="1024" warningTime="2" />
+    <RedSlider id="293" x="720" y="1040" warningTime="2" />
+    <RedSlider id="294" x="784" y="1056" warningTime="2" />
+    <RedSlider id="295" x="768" y="1024" warningTime="2" />
+    <RedSlider id="296" x="832" y="1040" warningTime="2" />
+    <RedSlider id="297" x="896" y="1056" warningTime="2" />
+    <RedSlider id="298" x="928" y="1024" warningTime="2" />
+    <RedSlider id="299" x="992" y="1040" warningTime="2" />
+    <RedSlider id="300" x="32" y="1120" warningTime="2" />
+    <RedSlider id="301" x="976" y="1024" warningTime="2" />
+    <RedSlider id="302" x="16" y="1104" warningTime="2" />
+    <RedSlider id="304" x="16" y="1088" warningTime="2" />
+    <RedSlider id="305" x="80" y="1104" warningTime="2" />
+    <RedSlider id="306" x="144" y="1120" warningTime="2" />
+    <RedSlider id="307" x="128" y="1088" warningTime="2" />
+    <RedSlider id="308" x="192" y="1104" warningTime="2" />
+    <RedSlider id="309" x="256" y="1120" warningTime="2" />
+    <RedSlider id="310" x="224" y="1088" warningTime="2" />
+    <RedSlider id="311" x="288" y="1104" warningTime="2" />
+    <RedSlider id="312" x="352" y="1120" warningTime="2" />
+    <RedSlider id="313" x="320" y="1088" warningTime="2" />
+    <RedSlider id="314" x="384" y="1104" warningTime="2" />
+    <RedSlider id="315" x="448" y="1120" warningTime="2" />
+    <RedSlider id="316" x="464" y="1088" warningTime="2" />
+    <RedSlider id="317" x="528" y="1104" warningTime="2" />
+    <RedSlider id="318" x="592" y="1120" warningTime="2" />
+    <RedSlider id="319" x="608" y="1088" warningTime="2" />
+    <RedSlider id="320" x="672" y="1104" warningTime="2" />
+    <RedSlider id="321" x="736" y="1120" warningTime="2" />
+    <RedSlider id="322" x="720" y="1088" warningTime="2" />
+    <RedSlider id="323" x="784" y="1104" warningTime="2" />
+    <RedSlider id="324" x="848" y="1120" warningTime="2" />
+    <RedSlider id="325" x="832" y="1088" warningTime="2" />
+    <RedSlider id="326" x="896" y="1104" warningTime="2" />
+    <RedSlider id="327" x="960" y="1120" warningTime="2" />
+    <RedSlider id="177" x="32" y="832" warningTime="2" />
+    <RedSlider id="51" x="288" y="848" warningTime="2" />
+    <RedSlider id="52" x="288" y="864" warningTime="2" />
+    <RedSlider id="53" x="272" y="864" warningTime="2" />
+    <RedSlider id="54" x="32" y="1408" warningTime="2" />
+    <RedSlider id="55" x="80" y="1408" warningTime="2" />
+    <RedSlider id="188" x="128" y="1408" warningTime="2" />
+    <RedSlider id="189" x="80" y="1424" warningTime="2" />
+    <RedSlider id="190" x="128" y="1424" warningTime="2" />
+    <RedSlider id="191" x="32" y="1424" warningTime="2" />
+    <RedSlider id="195" x="272" y="1440" warningTime="2" />
+    <RedSlider id="196" x="320" y="1440" warningTime="2" />
+    <RedSlider id="328" x="224" y="1440" warningTime="2" />
+    <RedSlider id="332" x="336" y="1424" warningTime="2" />
+    <RedSlider id="333" x="384" y="1424" warningTime="2" />
+    <RedSlider id="334" x="288" y="1424" warningTime="2" />
+    <RedSlider id="336" x="448" y="1424" warningTime="2" />
+    <RedSlider id="338" x="528" y="1408" warningTime="2" />
+    <RedSlider id="339" x="576" y="1408" warningTime="2" />
+    <RedSlider id="340" x="480" y="1408" warningTime="2" />
+    <RedSlider id="341" x="592" y="1440" warningTime="2" />
+    <RedSlider id="342" x="640" y="1440" warningTime="2" />
+    <RedSlider id="343" x="544" y="1440" warningTime="2" />
+    <RedSlider id="347" x="720" y="1424" warningTime="2" />
+    <RedSlider id="348" x="768" y="1424" warningTime="2" />
+    <RedSlider id="349" x="672" y="1424" warningTime="2" />
+    <RedSlider id="350" x="784" y="1408" warningTime="2" />
+    <RedSlider id="351" x="832" y="1408" warningTime="2" />
+    <RedSlider id="352" x="736" y="1408" warningTime="2" />
+    <RedSlider id="356" x="912" y="1440" warningTime="2" />
+    <RedSlider id="357" x="960" y="1440" warningTime="2" />
+    <RedSlider id="358" x="864" y="1440" warningTime="2" />
+    <RedSlider id="359" x="16" y="1488" warningTime="2" />
+    <RedSlider id="360" x="64" y="1488" warningTime="2" />
+    <RedSlider id="361" x="992" y="1424" warningTime="2" />
+    <RedSlider id="303" x="80" y="1120" warningTime="2" />
+    <RedSlider id="362" x="128" y="1056" warningTime="2" />
+    <RedSlider id="363" x="32" y="1472" warningTime="2" />
+    <RedSlider id="364" x="80" y="1472" warningTime="2" />
+    <RedSlider id="365" x="128" y="1472" warningTime="2" />
+    <RedSlider id="366" x="96" y="1504" warningTime="2" />
+    <RedSlider id="367" x="144" y="1504" warningTime="2" />
+    <RedSlider id="368" x="192" y="1504" warningTime="2" />
+    <RedSlider id="369" x="224" y="1488" warningTime="2" />
+    <RedSlider id="370" x="272" y="1488" warningTime="2" />
+    <RedSlider id="371" x="320" y="1488" warningTime="2" />
+    <RedSlider id="372" x="352" y="1472" warningTime="2" />
+    <RedSlider id="373" x="400" y="1472" warningTime="2" />
+    <RedSlider id="374" x="448" y="1472" warningTime="2" />
+    <RedSlider id="375" x="416" y="1504" warningTime="2" />
+    <RedSlider id="376" x="464" y="1504" warningTime="2" />
+    <RedSlider id="377" x="512" y="1504" warningTime="2" />
+    <RedSlider id="378" x="544" y="1488" warningTime="2" />
+    <RedSlider id="379" x="592" y="1488" warningTime="2" />
+    <RedSlider id="380" x="640" y="1488" warningTime="2" />
+    <RedSlider id="381" x="608" y="1472" warningTime="2" />
+    <RedSlider id="382" x="656" y="1472" warningTime="2" />
+    <RedSlider id="383" x="704" y="1472" warningTime="2" />
+    <RedSlider id="387" x="736" y="1504" warningTime="2" />
+    <RedSlider id="388" x="784" y="1504" warningTime="2" />
+    <RedSlider id="389" x="832" y="1504" warningTime="2" />
+    <RedSlider id="390" x="736" y="1488" warningTime="2" />
+    <RedSlider id="391" x="784" y="1488" warningTime="2" />
+    <RedSlider id="392" x="832" y="1488" warningTime="2" />
+    <RedSlider id="393" x="928" y="1472" warningTime="2" />
+    <RedSlider id="394" x="976" y="1472" warningTime="2" />
+    <RedSlider id="395" x="0" y="1536" warningTime="2" />
+    <RedSlider id="399" x="928" y="1504" warningTime="2" />
+    <RedSlider id="400" x="976" y="1504" warningTime="2" />
+    <RedSlider id="401" x="0" y="1568" warningTime="2" />
+    <RedSlider id="402" x="928" y="1488" warningTime="2" />
+    <RedSlider id="403" x="976" y="1488" warningTime="2" />
+    <RedSlider id="404" x="0" y="1552" warningTime="2" />
+    <RedSlider id="405" x="976" y="1088" warningTime="2" />
+    <RedSlider id="406" x="16" y="1168" warningTime="2" />
+    <RedSlider id="407" x="80" y="1184" warningTime="2" />
+    <RedSlider id="408" x="0" y="400" warningTime="2" />
+    <RedSlider id="409" x="64" y="416" warningTime="2" />
+    <RedSlider id="410" x="800" y="1088" warningTime="2" />
+    <RedSlider id="411" x="864" y="1104" warningTime="2" />
+    <RedSlider id="412" x="928" y="1120" warningTime="2" />
+    <RedSlider id="413" x="128" y="384" warningTime="2" />
+    <RedSlider id="414" x="208" y="384" warningTime="2" />
+    <RedSlider id="415" x="288" y="384" warningTime="2" />
+    <RedSlider id="416" x="384" y="416" warningTime="2" />
+    <RedSlider id="417" x="464" y="416" warningTime="2" />
+    <RedSlider id="418" x="544" y="416" warningTime="2" />
+    <RedSlider id="419" x="576" y="384" warningTime="2" />
+    <RedSlider id="420" x="656" y="384" warningTime="2" />
+    <RedSlider id="421" x="736" y="384" warningTime="2" />
+    <RedSlider id="422" x="704" y="400" warningTime="2" />
+    <RedSlider id="423" x="784" y="400" warningTime="2" />
+    <RedSlider id="424" x="864" y="400" warningTime="2" />
+    <RedSlider id="425" x="832" y="384" warningTime="2" />
+    <RedSlider id="426" x="912" y="384" warningTime="2" />
+    <RedSlider id="427" x="992" y="384" warningTime="2" />
+    <RedSlider id="428" x="896" y="416" warningTime="2" />
+    <RedSlider id="429" x="976" y="416" warningTime="2" />
+    <RedSlider id="430" x="32" y="480" warningTime="2" />
+    <RedSlider id="431" x="0" y="448" warningTime="2" />
+    <RedSlider id="432" x="80" y="448" warningTime="2" />
+    <RedSlider id="433" x="160" y="448" warningTime="2" />
+    <RedSlider id="434" x="128" y="464" warningTime="2" />
+    <RedSlider id="435" x="208" y="464" warningTime="2" />
+    <RedSlider id="436" x="288" y="464" warningTime="2" />
+    <RedSlider id="437" x="256" y="480" warningTime="2" />
+    <RedSlider id="438" x="336" y="480" warningTime="2" />
+    <RedSlider id="439" x="416" y="480" warningTime="2" />
+    <RedSlider id="440" x="320" y="464" warningTime="2" />
+    <RedSlider id="441" x="400" y="464" warningTime="2" />
+    <RedSlider id="442" x="480" y="464" warningTime="2" />
+    <RedSlider id="443" x="448" y="448" warningTime="2" />
+    <RedSlider id="444" x="528" y="448" warningTime="2" />
+    <RedSlider id="445" x="608" y="448" warningTime="2" />
+    <RedSlider id="446" x="512" y="464" warningTime="2" />
+    <RedSlider id="447" x="592" y="464" warningTime="2" />
+    <RedSlider id="448" x="672" y="464" warningTime="2" />
+    <RedSlider id="449" x="640" y="480" warningTime="2" />
+    <RedSlider id="450" x="720" y="480" warningTime="2" />
+    <RedSlider id="451" x="800" y="480" warningTime="2" />
+    <RedSlider id="452" x="768" y="448" warningTime="2" />
+    <RedSlider id="454" x="848" y="448" warningTime="2" />
+    <RedSlider id="455" x="928" y="448" warningTime="2" />
+    <RedSlider id="456" x="896" y="464" warningTime="2" />
+    <RedSlider id="457" x="976" y="464" warningTime="2" />
+    <RedSlider id="458" x="32" y="528" warningTime="2" />
+    <RedSlider id="14" x="224" y="1184" warningTime="2" />
+    <RedSlider id="459" x="288" y="1168" warningTime="2" />
+    <RedSlider id="460" x="352" y="1152" warningTime="2" />
+    <RedSlider id="461" x="448" y="1184" warningTime="2" />
+    <RedSlider id="462" x="512" y="1168" warningTime="2" />
+    <RedSlider id="463" x="576" y="1152" warningTime="2" />
+    <RedSlider id="464" x="592" y="1184" warningTime="2" />
+    <RedSlider id="465" x="656" y="1168" warningTime="2" />
+    <RedSlider id="466" x="720" y="1152" warningTime="2" />
+    <RedSlider id="467" x="736" y="1184" warningTime="2" />
+    <RedSlider id="468" x="800" y="1168" warningTime="2" />
+    <RedSlider id="469" x="864" y="1152" warningTime="2" />
+    <RedSlider id="470" x="784" y="1184" warningTime="2" />
+    <RedSlider id="471" x="848" y="1168" warningTime="2" />
+    <RedSlider id="472" x="912" y="1152" warningTime="2" />
+    <RedSlider id="473" x="960" y="1184" warningTime="2" />
+    <RedSlider id="474" x="0" y="1232" warningTime="2" />
+    <RedSlider id="475" x="64" y="1216" warningTime="2" />
+    <RedSlider id="476" x="80" y="1248" warningTime="2" />
+    <RedSlider id="477" x="144" y="1232" warningTime="2" />
+    <RedSlider id="478" x="208" y="1216" warningTime="2" />
+    <RedSlider id="479" x="224" y="1248" warningTime="2" />
+    <RedSlider id="480" x="288" y="1232" warningTime="2" />
+    <RedSlider id="481" x="352" y="1216" warningTime="2" />
+    <RedSlider id="482" x="320" y="1248" warningTime="2" />
+    <RedSlider id="483" x="384" y="1232" warningTime="2" />
+    <RedSlider id="484" x="448" y="1216" warningTime="2" />
+    <RedSlider id="485" x="480" y="1248" warningTime="2" />
+    <RedSlider id="486" x="544" y="1232" warningTime="2" />
+    <RedSlider id="487" x="608" y="1216" warningTime="2" />
+    <RedSlider id="488" x="528" y="1248" warningTime="2" />
+    <RedSlider id="489" x="592" y="1232" warningTime="2" />
+    <RedSlider id="490" x="656" y="1216" warningTime="2" />
+    <RedSlider id="491" x="704" y="1248" warningTime="2" />
+    <RedSlider id="492" x="768" y="1232" warningTime="2" />
+    <RedSlider id="493" x="832" y="1216" warningTime="2" />
+    <RedSlider id="494" x="800" y="1248" warningTime="2" />
+    <RedSlider id="495" x="864" y="1232" warningTime="2" />
+    <RedSlider id="496" x="928" y="1216" warningTime="2" />
+    <RedSlider id="497" x="848" y="1248" warningTime="2" />
+    <RedSlider id="498" x="912" y="1232" warningTime="2" />
+    <RedSlider id="499" x="976" y="1216" warningTime="2" />
+    <RedSlider id="500" x="896" y="1248" warningTime="2" />
+    <RedSlider id="501" x="960" y="1232" warningTime="2" />
+    <RedSlider id="502" x="0" y="1280" warningTime="2" />
+    <RedSlider id="503" x="32" y="1312" warningTime="2" />
+    <RedSlider id="504" x="96" y="1296" warningTime="2" />
+    <RedSlider id="505" x="160" y="1280" warningTime="2" />
+    <RedSlider id="506" x="128" y="1312" warningTime="2" />
+    <RedSlider id="507" x="192" y="1296" warningTime="2" />
+    <RedSlider id="508" x="256" y="1280" warningTime="2" />
+    <RedSlider id="509" x="288" y="1312" warningTime="2" />
+    <RedSlider id="510" x="352" y="1296" warningTime="2" />
+    <RedSlider id="511" x="416" y="1280" warningTime="2" />
+    <RedSlider id="512" x="400" y="1312" warningTime="2" />
+    <RedSlider id="513" x="464" y="1296" warningTime="2" />
+    <RedSlider id="514" x="528" y="1280" warningTime="2" />
+    <RedSlider id="515" x="512" y="1312" warningTime="2" />
+    <RedSlider id="516" x="576" y="1296" warningTime="2" />
+    <RedSlider id="517" x="640" y="1280" warningTime="2" />
+    <RedSlider id="518" x="672" y="1312" warningTime="2" />
+    <RedSlider id="519" x="736" y="1296" warningTime="2" />
+    <RedSlider id="520" x="800" y="1280" warningTime="2" />
+    <RedSlider id="521" x="784" y="1312" warningTime="2" />
+    <RedSlider id="522" x="848" y="1296" warningTime="2" />
+    <RedSlider id="523" x="912" y="1280" warningTime="2" />
+    <RedSlider id="524" x="864" y="1312" warningTime="2" />
+    <RedSlider id="525" x="928" y="1296" warningTime="2" />
+    <RedSlider id="526" x="992" y="1280" warningTime="2" />
+    <RedSlider id="527" x="960" y="1312" warningTime="2" />
+    <RedSlider id="528" x="0" y="1360" warningTime="2" />
+    <RedSlider id="529" x="64" y="1344" warningTime="2" />
+    <RedSlider id="530" x="0" y="1376" warningTime="2" />
+    <RedSlider id="531" x="64" y="1360" warningTime="2" />
+    <RedSlider id="532" x="128" y="1344" warningTime="2" />
+    <RedSlider id="533" x="160" y="1376" warningTime="2" />
+    <RedSlider id="534" x="224" y="1360" warningTime="2" />
+    <RedSlider id="535" x="288" y="1344" warningTime="2" />
+    <RedSlider id="536" x="272" y="1376" warningTime="2" />
+    <RedSlider id="537" x="336" y="1360" warningTime="2" />
+    <RedSlider id="538" x="400" y="1344" warningTime="2" />
+    <RedSlider id="539" x="480" y="1376" warningTime="2" />
+    <RedSlider id="540" x="544" y="1360" warningTime="2" />
+    <RedSlider id="541" x="608" y="1344" warningTime="2" />
+    <RedSlider id="542" x="448" y="1376" warningTime="2" />
+    <RedSlider id="543" x="512" y="1360" warningTime="2" />
+    <RedSlider id="544" x="576" y="1344" warningTime="2" />
+    <RedSlider id="545" x="656" y="1376" warningTime="2" />
+    <RedSlider id="546" x="720" y="1360" warningTime="2" />
+    <RedSlider id="547" x="784" y="1344" warningTime="2" />
+    <RedSlider id="548" x="640" y="1376" warningTime="2" />
+    <RedSlider id="549" x="704" y="1360" warningTime="2" />
+    <RedSlider id="550" x="768" y="1344" warningTime="2" />
+    <RedSlider id="551" x="864" y="1376" warningTime="2" />
+    <RedSlider id="552" x="928" y="1360" warningTime="2" />
+    <RedSlider id="553" x="992" y="1344" warningTime="2" />
+    <RedSlider id="554" x="848" y="1376" warningTime="2" />
+    <RedSlider id="555" x="912" y="1360" warningTime="2" />
+    <RedSlider id="556" x="976" y="1344" warningTime="2" />
+    <Text id="396" x="432" y="192" text="&gt;&gt;&gt; DOWN &lt;&lt;&lt;" beatDuration="16" xPos="0" yPos="53" />
+    <Text id="397" x="1008" y="320" text="&gt;&gt;&gt; RIGHT &lt;&lt;&lt;" beatDuration="16" xPos="0" yPos="53" />
+    <RedSlider id="250" x="320" y="352" warningTime="2" />
+    <RedSlider id="249" x="256" y="336" warningTime="2" />
+    <RedSlider id="248" x="192" y="320" warningTime="2" />
+    <Text id="44" x="432" y="960" text="&gt;&gt;&gt; DOWN &lt;&lt;&lt;" beatDuration="16" xPos="0" yPos="53" />
+    <Text id="219" x="880" y="1344" text="&gt;&gt;&gt; LEFT &lt;&lt;&lt;" beatDuration="16" xPos="0" yPos="53" />
+    <Text id="220" x="48" y="1152" text="&gt;&gt;&gt; UP &lt;&lt;&lt;" beatDuration="16" xPos="0" yPos="53" />
+  </Entities>
+</level>

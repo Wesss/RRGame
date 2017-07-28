@@ -154,7 +154,7 @@ class PlayLevelState extends FlxState {
 		add(instructions);
 
 		// Music Track Credits
-		var attribution = levelData.title + ", by " + levelData.composer + " (" + levelData.composerWebpage +")";
+		var attribution = levelData.title + ", by " + levelData.composer + "\n(" + levelData.composerWebpage +")";
 		var attributionText = new BeatText(universalBus, attribution, 15, 1.05);
 		attributionText.x = -attributionText.width / 2;
 		attributionText.y = 150;

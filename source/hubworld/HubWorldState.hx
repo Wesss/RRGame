@@ -151,15 +151,36 @@ class HubWorldState extends FlxState {
         // sound credits
         add(new ScreenTransitionButton(0, Left, "Credits", true, cameraTarget.moveToScreen.bind(-1)));
         add(new ScreenTransitionButton(-1, Right, "World 1", true, cameraTarget.moveToScreen.bind(0)));
-        var soundCredits = new FlxText(0, 0, 0, "Made by Anthony Ha and Wesley Cox\n" +
-                                                "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
-                                                "Music courtesy of the many artists on FreeMusicArchive.org,\n" +
-                                                "Soundcloud, and Youtube.\n" +
-                                                "See the endscreen of each level for specific track information.");
-        soundCredits.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 20, flixel.util.FlxColor.WHITE, CENTER);
-        soundCredits.y = FlxG.height / 2 - 40;
-        soundCredits.x = -FlxG.width + 10;
+        var soundCredits = new FlxText(0, 0, 0,
+            "Original Game by Anthony Ha and Wesley Cox\n" +
+            "Touhou Hijack extension by Wesley Cox\n" +
+            "\n" +
+            "Music by various artists;\n" +
+            "See the endscreen of each level for specific track credits and information.\n" +
+            "Sound courtesy of NoiseForFun: http://www.noiseforfun.com/\n" +
+            "\n" +
+            "All music tracks are used with the permission of their respective owners.\n" +
+            "All music tacks are based on original content from ZUN's Touhou video game series.\n" +
+            "This game and all media within are liscensed under CC BY-NC-SA 3.0, and distributed\n" +
+            "under the terms of use for Doujin works of Touhou\n" +
+            "(http://www.geocities.co.jp/Playtown-Yoyo/1736/t-081-2.html).\n" +
+            "see the CC BY-NC-SA 3.0 webpage and touhou wiki's copyright status page for more information."
+        );
+        soundCredits.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 15, flixel.util.FlxColor.WHITE, CENTER);
+        soundCredits.y = FlxG.height / 2 - 30;
+        soundCredits.x = -FlxG.width + 3;
         add(soundCredits);
+
+        // title screen
+
+        var title = new FlxText(0, 0, 0,
+            "RRGrid\n" +
+            "Touhou Hijack!"
+        );
+        title.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 35, flixel.util.FlxColor.WHITE, CENTER);
+        title.y = FlxG.height / 2 - 160;
+        title.x = 100;
+        add(title);
     }
 
     private static function getLevelsPassedInWorld(i:Int, levelScores:Map<Int, Float>):Int {
@@ -228,29 +249,29 @@ private class ScreenTransitionButton extends FlxGroup {
 
     public function new(screen : Int, direction : Direction, text : String, isEnabled : Bool, callback : Void -> Void) {
         super();
-            button = new FlxButton();
-            button.loadGraphic(AssetPaths.RightArrowButton__png);
-            switch (direction) {
-                case Left  : button.x = FlxG.width * screen + MARGIN;
-                case Right : button.x = FlxG.width * (screen + 1) - button.width - MARGIN;
-            }
-            button.y = (FlxG.height - button.height) / 2;
-            button.scrollFactor.x = 1;
-            button.flipX = direction == Left;
-            if (isEnabled) {
-                button.onUp.callback = callback;
-            } else {
-                button.alpha = 0.25;
-            }
+        button = new FlxButton();
+        button.loadGraphic(AssetPaths.RightArrowButton__png);
+        switch (direction) {
+            case Left  : button.x = FlxG.width * screen + MARGIN;
+            case Right : button.x = FlxG.width * (screen + 1) - button.width - MARGIN;
+        }
+        button.y = (FlxG.height - button.height) / 2;
+        button.scrollFactor.x = 1;
+        button.flipX = direction == Left;
+        if (isEnabled) {
+            button.onUp.callback = callback;
+        } else {
+            button.alpha = 0.25;
+        }
 
-            buttonText = new FlxText();
-            if (isEnabled) {
-                buttonText.text = text;
-            } else {
-                buttonText.text = "Beat 3 levels";
-            }
-            buttonText.y = button.y - 18;
-            buttonText.x = button.x + (button.width / 2) - (buttonText.width * 5 / 7);
+        buttonText = new FlxText();
+        if (isEnabled) {
+            buttonText.text = text;
+        } else {
+            buttonText.text = "Beat 3 levels";
+        }
+        buttonText.y = button.y - 18;
+        buttonText.x = button.x + (button.width / 2) - (buttonText.width * 5 / 7);
         add(button);
         buttonText.setFormat(AssetPaths.GlacialIndifference_Regular__ttf, 16, flixel.util.FlxColor.WHITE, CENTER);
         add(buttonText);
