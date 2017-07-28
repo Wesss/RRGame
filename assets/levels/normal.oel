@@ -646,8 +646,6 @@
     <RedSlider id="303" x="128" y="1248" warningTime="2" />
     <RedSlider id="304" x="144" y="1248" warningTime="2" />
     <RedSlider id="305" x="160" y="1248" warningTime="2" />
-    <RedSlider id="310" x="336" y="1632" warningTime="2" />
-    <RedSlider id="311" x="400" y="1600" warningTime="2" />
     <RedSlider id="312" x="96" y="1664" warningTime="2" />
     <RedSlider id="313" x="192" y="1664" warningTime="2" />
     <RedSlider id="314" x="320" y="1696" warningTime="2" />
